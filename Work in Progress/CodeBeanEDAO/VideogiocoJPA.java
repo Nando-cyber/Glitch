@@ -12,7 +12,7 @@ import javax.persistence.TypedQuery;
 @WebService
 @Stateless
 @LocalBean
-public class VideoDAO implements VideogiocoRemote{
+public class VideogiocoJPA implements VideogiocoDAO{
 
 	@Inject
 	private EntityManager em;
@@ -47,7 +47,17 @@ public class VideoDAO implements VideogiocoRemote{
         TypedQuery<Videogioco> query = em.createNamedQuery(Videogioco.FIND_BYID, Videogioco.class);
         query.setParameter("id", id); //parameters by name 
         return query.getSingleResult();
-        
     }
+    
+    //Restituisce una lista di videogiochi compresi tra i valori "min" e "max" passati come parametri
+    public List<Videogioco> doRetriveVideogiocoAllRange(int min, int max)
+    {
+    	TypedQuery<Videogioco> query = em.createNamedQuery(Videogioco.FIND_ALL, Videogioco.class);
+    	query.setFirstResult(min);
+    	query.setMaxResults(max);
+        return query.getResultList();
+    }
+    
+    
 	
 }

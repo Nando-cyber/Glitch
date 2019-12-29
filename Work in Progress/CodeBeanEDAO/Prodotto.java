@@ -3,6 +3,7 @@ package com.example.demo;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import static com.example.demo.Prodotto.FIND_ALL;
 import static com.example.demo.Prodotto.FIND_BYID;
@@ -22,7 +23,7 @@ public class Prodotto implements Serializable{
     public static final String FIND_BYID = "com.example.demo.Prodotto.FINDBYID";
 	
 	
-	@Id
+	@Id @GeneratedValue
 	private Integer id;
 	private String immagine;
 	private double prezzo;
@@ -33,9 +34,8 @@ public class Prodotto implements Serializable{
 	public Prodotto() {
 	}
 	
-	public Prodotto(int id,String immagine, double prezzo, String descrizione, int codiceOfferta)
+	public Prodotto(String immagine, double prezzo, String descrizione, int codiceOfferta)
 	{
-		this.id=id;
 		this.immagine=immagine;
 		this.prezzo=prezzo;
 		this.descrizione=descrizione;
