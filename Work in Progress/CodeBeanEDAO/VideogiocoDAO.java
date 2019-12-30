@@ -1,18 +1,15 @@
-package com.example.demo;
+package model;
 
 import java.util.List;
 
 import javax.ejb.Remote;
 
 @Remote
-public interface VideogiocoDAO {
-
-	void addVideogioco(Videogioco l);
-	void removeVideogioco(Videogioco l);
-	void updateVideogioco(Videogioco l);
+public interface VideogiocoDAO extends ProdottoDAO{
+	
 	List<Videogioco> findAllVideogioco();
 	List<Videogioco> doRetriveVideogiocoAllRange(int min, int max);
-	Videogioco findVideogiocoById(int id);
+	
 	
 	
 }

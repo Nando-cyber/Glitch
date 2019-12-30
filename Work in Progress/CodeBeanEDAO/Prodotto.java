@@ -1,12 +1,12 @@
-package com.example.demo;
+package model;
 
 import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import static com.example.demo.Prodotto.FIND_ALL;
-import static com.example.demo.Prodotto.FIND_BYID;
+import static model.Prodotto.FIND_ALL;
+import static model.Prodotto.FIND_BYID;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -19,8 +19,8 @@ public class Prodotto implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	public static final String FIND_ALL = "com.example.demo.Prodotto.FIND_ALL";
-    public static final String FIND_BYID = "com.example.demo.Prodotto.FINDBYID";
+	public static final String FIND_ALL = "model.Prodotto.FIND_ALL";
+    public static final String FIND_BYID = "model.Prodotto.FINDBYID";
 	
 	
 	@Id @GeneratedValue
@@ -28,18 +28,16 @@ public class Prodotto implements Serializable{
 	private String immagine;
 	private double prezzo;
 	private String descrizione;
-	private Integer codiceOfferta;
 	
 	
 	public Prodotto() {
 	}
 	
-	public Prodotto(String immagine, double prezzo, String descrizione, int codiceOfferta)
+	public Prodotto(String immagine, double prezzo, String descrizione)
 	{
 		this.immagine=immagine;
 		this.prezzo=prezzo;
 		this.descrizione=descrizione;
-		this.codiceOfferta=codiceOfferta;
 	}
 	
 	
@@ -65,14 +63,6 @@ public class Prodotto implements Serializable{
 	
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
-	}
-	
-	public Integer getCodiceOfferta() {
-		return codiceOfferta;
-	}
-	
-	public void setCodiceOfferta(Integer codiceOfferta) {
-		this.codiceOfferta = codiceOfferta;
 	}
 	
 	
