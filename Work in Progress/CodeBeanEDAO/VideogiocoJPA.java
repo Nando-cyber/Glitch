@@ -1,39 +1,20 @@
-package com.example.demo;
+package model;
 
 import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-@WebService
+
 @Stateless
 @LocalBean
-public class VideogiocoJPA implements VideogiocoDAO{
+public class VideogiocoJPA extends ProdottoJPA implements VideogiocoDAO {
 
 	@Inject
 	private EntityManager em;
-	
-	
-	//Aggiunge un videogioco (passato come parametro) al database
-	public void addVideogioco(Videogioco l)
-	{
-		em.persist(l);
-	}
-	
-	//Rimuove un videogioco (passato come parametro) dal database
-	public void removeVideogioco(Videogioco l)
-	{
-		em.remove(em.merge(l));
-	}
-	
-	//Aggiorna le informazioni di un videogioco (passato come parametro) nel database
-    public void updateVideogioco(Videogioco l) {
-        em.merge(l); 
-    }
 
 
     //Restituisce una lista di tutti i videogiochi presenti nel database

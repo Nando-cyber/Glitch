@@ -1,4 +1,4 @@
-package com.example.demo;
+package model;
 
 import javax.security.enterprise.credential.Password;
 
@@ -11,14 +11,14 @@ public class Utente {
 	private String cognome;
 	private String provincia;
 	private int cap;
-	private String città;
+	private String citta;
 	private String via;
 	private int numero;
 	private String ruolo=null;
 	
 	public Utente() {}
 	
-	public Utente(String username, String email, Password password, String nome, String cognome, String provincia, int cap,String città, String via, int numero)
+	public Utente(String username, String email, Password password, String nome, String cognome, String provincia, int cap,String citta, String via, int numero)
 	{
 		this.setUsername(username);
 		this.setEmail(email);
@@ -27,7 +27,7 @@ public class Utente {
 		this.setCognome(cognome);
 		this.setProvincia(provincia);
 		this.setCap(cap);
-		this.setCittà(città);
+		this.setCitta(citta);
 		this.setVia(via);
 		this.setNumero(numero);
 	}
@@ -97,12 +97,12 @@ public class Utente {
 		this.numero = numero;
 	}
 
-	public String getCittà() {
-		return città;
+	public String getCitta() {
+		return citta;
 	}
 
-	public void setCittà(String città) {
-		this.città = città;
+	public void setCitta (String citta) {
+		this.citta = citta;
 	}
 
 	public String getVia() {

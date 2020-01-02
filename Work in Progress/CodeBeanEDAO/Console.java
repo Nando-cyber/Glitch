@@ -1,10 +1,8 @@
-package com.example.demo;
+package model;
 
-import static com.example.demo.Console.FIND_ALL;
-import static com.example.demo.Console.FIND_BYID;
-
+import static model.Console.FIND_ALL;
+import static model.Console.FIND_BYID;
 import javax.persistence.Entity;
-
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -18,8 +16,8 @@ public class Console extends Prodotto{
 
 	private static final long serialVersionUID = 4476139777432739883L;
 	
-	public static final String FIND_ALL = "com.example.demo.Console.FIND_ALL";
-    public static final String FIND_BYID = "com.example.demo.Console.FIND_BYID";
+	public static final String FIND_ALL = "model.Console.FIND_ALL";
+    public static final String FIND_BYID = "model.Console.FIND_BYID";
 	
 	
 	private String modello;
@@ -27,9 +25,9 @@ public class Console extends Prodotto{
 	
 	public Console() {}
 	
-	public Console(String immagine, double prezzo, String descrizione, int codiceOfferta,String modello, String casaProduttrice)
+	public Console(String immagine, double prezzo, String descrizione, String modello, String casaProduttrice)
 	{
-		super(immagine,prezzo,descrizione,codiceOfferta);
+		super(immagine,prezzo,descrizione);
 		this.setModello(modello);
 		this.setCasaProduttrice(casaProduttrice);
 	}

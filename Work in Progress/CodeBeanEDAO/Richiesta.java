@@ -1,4 +1,4 @@
-package com.example.demo;
+package model;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

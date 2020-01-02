@@ -1,7 +1,7 @@
-package com.example.demo;
+package model;
 
-import static com.example.demo.Videogioco.FIND_ALL;
-import static com.example.demo.Videogioco.FIND_BYID;
+import static model.Videogioco.FIND_ALL;
+import static model.Videogioco.FIND_BYID;
 
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
@@ -18,8 +18,8 @@ public class Videogioco extends Prodotto{
 
 	private static final long serialVersionUID = -6046814043777851758L;
 	
-	public static final String FIND_ALL = "com.example.demo.Videogioco.FIND_ALL";
-    public static final String FIND_BYID = "com.example.demo.Videogioco.FIND_BYID";
+	public static final String FIND_ALL = "model.Videogioco.FIND_ALL";
+    public static final String FIND_BYID = "model.Videogioco.FIND_BYID";
     
 	
 	private String nome;
@@ -28,9 +28,9 @@ public class Videogioco extends Prodotto{
 	
 	public Videogioco() {}
 	
-	public Videogioco(String immagine, double prezzo, String descrizione, int codiceOfferta,String nome, String genere, String piattaforma)
+	public Videogioco(String immagine, double prezzo, String descrizione, String nome, String genere, String piattaforma)
 	{
-		super(immagine,prezzo,descrizione,codiceOfferta);
+		super(immagine,prezzo,descrizione);
 		this.setNome(nome);
 		this.setGenere(genere);
 		this.setPiattaforma(piattaforma);
