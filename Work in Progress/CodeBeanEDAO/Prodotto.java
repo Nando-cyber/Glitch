@@ -40,6 +40,10 @@ public class Prodotto implements Serializable{
 		this.descrizione=descrizione;
 	}
 	
+	public int getId()
+	{
+		return id;
+	}
 	
 	public String getImmagine() {
 		return immagine;

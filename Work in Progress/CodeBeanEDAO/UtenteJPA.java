@@ -13,25 +13,27 @@ public class UtenteJPA implements UtenteDAO{
 	@Inject
 	private EntityManager em;
 
-	
+	//Rende persistente l'utente "u" passato come argomento
 	public void createUtente(Utente u)
 	{
 		em.persist(u);
 	}
 	
+	//Rimuove l'utente, avente come username la stringa passata come argomento, dal database
 	public void deleteUtente(String user)
 	{
 		Utente daCanc=retriveByUsername(user);
 		em.remove(em.merge(daCanc));
 	}
 	
+	//Aggiorna l'utente "u" nel database
 	public Utente updateUtente(Utente u)
 	{
 		em.merge(u);
 		return u;
 	}
 	
-	//permette di cercare un prodotto per id
+	//Restituisce l'utente avente come username la stringa passata come argomento
 	public Utente retriveByUsername(String user) {
 		
 		TypedQuery<Utente> query = em.createNamedQuery(Utente.FIND_BY_User, Utente.class);
@@ -39,6 +41,7 @@ public class UtenteJPA implements UtenteDAO{
         return query.getSingleResult();
 	}
 	
+	//Restituisce l'utente avete come email la stringa passata come argomento
 	public Utente retriveByEmail(String email) {
 		
 		TypedQuery<Utente> query = em.createNamedQuery(Utente.FIND_BY_Email, Utente.class);

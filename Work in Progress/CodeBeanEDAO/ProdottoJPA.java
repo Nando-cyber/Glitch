@@ -13,24 +13,21 @@ public class ProdottoJPA implements ProdottoDAO{
 	@Inject
 	private EntityManager em;
 	
-	//permette di aggiungere un prodotto al DB
-	@Override
-	public void createProdotto(Prodotto l) {
+	//Rende persistente un prodotto "pr" passato come argomento
+	public void createProdotto(Prodotto pr) {
 		
-		em.persist(l);
-		
-	}
-	
-	//permette di rimuovere un prodotto da DB
-	@Override
-	public void removeProdotto(Prodotto l) {
-		
-		em.remove(em.merge(l));
+		em.persist(pr);
 		
 	}
 	
-	//permette di cercare un prodotto per id
-	@Override
+	//Rimuove un prodotto "pr" dal database
+	public void removeProdotto(Prodotto pr) {
+		
+		em.remove(em.merge(pr));
+		
+	}
+	
+	//Restituisce un prodotto avente come id l'intero passato come argomento
 	public Prodotto findProdottoById(int id) {
 		
 		TypedQuery<Prodotto> query = em.createNamedQuery(Prodotto.FIND_BY_ID, Prodotto.class);
