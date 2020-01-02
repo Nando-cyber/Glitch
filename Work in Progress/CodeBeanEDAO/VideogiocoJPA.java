@@ -39,6 +39,22 @@ public class VideogiocoJPA extends ProdottoJPA implements VideogiocoDAO {
         return query.getResultList();
     }
     
+    public List<Videogioco> retriveByNome(String nome) {
+        TypedQuery<Videogioco> query = em.createNamedQuery(Videogioco.FIND_BY_NOME, Videogioco.class);
+        query.setParameter("nome", nome); //parameters by name 
+        return query.getResultList();
+    }
     
+    public List<Videogioco> retriveByGenere(String genere) {
+        TypedQuery<Videogioco> query = em.createNamedQuery(Videogioco.FIND_BY_GENERE, Videogioco.class);
+        query.setParameter("genere", genere); //parameters by name 
+        return query.getResultList();
+    }
+    
+    public List<Videogioco> retriveByPiattaforma(String piattaforma) {
+        TypedQuery<Videogioco> query = em.createNamedQuery(Videogioco.FIND_BY_PIATTAFORMA, Videogioco.class);
+        query.setParameter("piattaforma", piattaforma); //parameters by name 
+        return query.getResultList();
+    }
 	
 }

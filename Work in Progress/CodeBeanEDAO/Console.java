@@ -1,7 +1,10 @@
 package model;
 
 import static model.Console.FIND_ALL;
-import static model.Console.FIND_BYID;
+import static model.Console.FIND_BY_ID;
+import static model.Console.FIND_BY_MODELLO;
+import static model.Console.FIND_BY_CASAPRODUTTRICE;
+
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -10,15 +13,18 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
         @NamedQuery(name = FIND_ALL, query = "SELECT x FROM Console b"),
-        @NamedQuery(name = FIND_BYID, query = "SELECT b FROM Console b WHERE b.id = :id")
+        @NamedQuery(name = FIND_BY_ID, query = "SELECT b FROM Console b WHERE b.id = :id"),
+        @NamedQuery(name = FIND_BY_MODELLO, query = "SELECT b FROM Console b WHERE b.modello = :modello"),
+        @NamedQuery(name = FIND_BY_CASAPRODUTTRICE, query = "SELECT b FROM Console b WHERE b.casaProduttrice = :casaProduttrice")
 })
 public class Console extends Prodotto{
 
 	private static final long serialVersionUID = 4476139777432739883L;
 	
 	public static final String FIND_ALL = "model.Console.FIND_ALL";
-    public static final String FIND_BYID = "model.Console.FIND_BYID";
-	
+    public static final String FIND_BY_ID = "model.Console.FIND_BYID";
+    public static final String FIND_BY_MODELLO = "model.Console.FIND_BY_MODELLO";
+    public static final String FIND_BY_CASAPRODUTTRICE = "model.Console.FIND_BY_CASAPRODUTTRICE";
 	
 	private String modello;
 	private String casaProduttrice;

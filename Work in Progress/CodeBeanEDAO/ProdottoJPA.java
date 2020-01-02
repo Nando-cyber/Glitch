@@ -15,7 +15,7 @@ public class ProdottoJPA implements ProdottoDAO{
 	
 	//permette di aggiungere un prodotto al DB
 	@Override
-	public void addProdotto(Prodotto l) {
+	public void createProdotto(Prodotto l) {
 		
 		em.persist(l);
 		
@@ -33,7 +33,7 @@ public class ProdottoJPA implements ProdottoDAO{
 	@Override
 	public Prodotto findProdottoById(int id) {
 		
-		TypedQuery<Prodotto> query = em.createNamedQuery(Prodotto.FIND_BYID, Prodotto.class);
+		TypedQuery<Prodotto> query = em.createNamedQuery(Prodotto.FIND_BY_ID, Prodotto.class);
         query.setParameter("id", id); //parameters by name 
         return query.getSingleResult();
 	}

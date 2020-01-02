@@ -1,9 +1,27 @@
 package model;
 
+import static model.Utente.FIND_ALL;
+import static model.Utente.FIND_BY_User;
+import static model.Utente.FIND_BY_Email;
+
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.security.enterprise.credential.Password;
 
+
+@Entity
+@NamedQueries({
+        @NamedQuery(name = FIND_ALL, query = "SELECT x FROM Utente b"),
+        @NamedQuery(name = FIND_BY_User, query = "SELECT b FROM Utente b WHERE b.username = :username"),
+        @NamedQuery(name = FIND_BY_Email, query = "SELECT b FROM Utente b WHERE b.email = :email")
+})
 public class Utente {
 
+	
+	public static final String FIND_ALL = "model.Utente.FIND_ALL";
+    public static final String FIND_BY_User = "model.Utente.FIND_BY_User";
+    public static final String FIND_BY_Email = "model.Utente.FIND_BY_Email";
 	private String username;
 	private String email;
 	private Password password;

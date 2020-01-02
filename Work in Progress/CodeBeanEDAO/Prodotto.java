@@ -6,21 +6,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import static model.Prodotto.FIND_ALL;
-import static model.Prodotto.FIND_BYID;
+import static model.Prodotto.FIND_BY_ID;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
         @NamedQuery(name = FIND_ALL, query = "SELECT b FROM Prodotto b"),
-        @NamedQuery(name = FIND_BYID, query = "SELECT b FROM Libro b WHERE b.id = :id")
+        @NamedQuery(name = FIND_BY_ID, query = "SELECT b FROM Libro b WHERE b.id = :id")
 })
 public class Prodotto implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	public static final String FIND_ALL = "model.Prodotto.FIND_ALL";
-    public static final String FIND_BYID = "model.Prodotto.FINDBYID";
+    public static final String FIND_BY_ID = "model.Prodotto.FINDBYID";
 	
 	
 	@Id @GeneratedValue

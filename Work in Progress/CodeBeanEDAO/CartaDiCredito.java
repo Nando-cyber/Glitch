@@ -1,11 +1,28 @@
 package model;
 
+import static model.CartaDiCredito.FIND_BY_NUMCARTA;
+import static model.CartaDiCredito.FIND_BY_UTENTE;
+
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
+
+@Entity
+@NamedQueries({
+        @NamedQuery(name = FIND_BY_NUMCARTA, query = "SELECT b FROM CartaDiCredito b WHERE b.numeroCarta = :numeroCarta"),
+        @NamedQuery(name = FIND_BY_UTENTE, query = "SELECT b FROM CartaDiCredito b WHERE b.utenteUsername = :user")
+      
+})
 public class CartaDiCredito {
 
+	public static final String FIND_BY_NUMCARTA = "model.CartaDiCredito.FIND_BY_NUMCARTA";
+	public static final String FIND_BY_UTENTE = "model.CartaDiCredito.FIND_BY_UTENTE";
+	
+	
 	@Id
 	private int numeroCarta;
 	private String utenteUsername;

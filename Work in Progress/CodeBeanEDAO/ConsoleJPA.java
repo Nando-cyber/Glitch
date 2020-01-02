@@ -26,9 +26,21 @@ public class ConsoleJPA extends ProdottoJPA implements ConsoleDAO{
 
     //restituisce il videogioco che ha come id l'intero passato come parametro
     public Console findConsoleById(int id) {
-        TypedQuery<Console> query = em.createNamedQuery(Console.FIND_BYID, Console.class);
+        TypedQuery<Console> query = em.createNamedQuery(Console.FIND_BY_ID, Console.class);
         query.setParameter("id", id); //parameters by name 
         return query.getSingleResult();
+    }
+    
+    public Console retriveByModello(String modello) {
+        TypedQuery<Console> query = em.createNamedQuery(Console.FIND_BY_MODELLO, Console.class);
+        query.setParameter("modello", modello); //parameters by name 
+        return query.getSingleResult();
+    }
+    
+    public List<Console> retriveByCasaProduttrice(String casaProduttrice) {
+        TypedQuery<Console> query = em.createNamedQuery(Console.FIND_BY_CASAPRODUTTRICE, Console.class);
+        query.setParameter("casaProduttrice", casaProduttrice); //parameters by name 
+        return query.getResultList();
     }
     
     //Restituisce una lista di videogiochi compresi tra i valori "min" e "max" passati come parametri
