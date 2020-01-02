@@ -22,8 +22,8 @@ import model.UtenteBeanDAO;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private final UtenteDAO utenteDAO = new UtenteDAO();
-	private CarrelloDAO carDAO = new CarrelloDAO();
+	private final UtenteDAO utenteDAO = new UtenteJPA();
+	private CarrelloDAO carDAO = new CarrelloJPA();
        
     /**
      * @see HttpServlet#HttpServlet()

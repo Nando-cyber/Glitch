@@ -16,7 +16,7 @@ import model.CarrelloDAO;
 @WebServlet("/Logout")
 public class LogoutServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	private CarrelloDAO carDAO = new CarrelloDAO();
+	private CarrelloDAO carDAO = new CarrelloJPA();
 	
 	
 	/**

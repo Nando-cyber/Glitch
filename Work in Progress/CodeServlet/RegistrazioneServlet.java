@@ -18,7 +18,7 @@ import model.Carrello;
 @WebServlet("/RegistrazioneServlet")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UtenteDAO utenteDAO = new UtenteDAO();
+	private UtenteDAO utenteDAO = new UtenteJPA();
 	private ValidazioneUtente vu = new ValidazioneUtente();
 	/**
 	 * @see HttpServlet#HttpServlet()

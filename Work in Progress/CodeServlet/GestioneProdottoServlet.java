@@ -44,7 +44,7 @@ public class GestioneProdottoServlet extends HttpServlet {
 		if(caso.equalsIgnoreCase("inserimento")) {
 			
 			//se l'equalsIgnoreCase() restituisce true si procede all'inserimento 
-			//di un prodotto i DB
+			//di un prodotto in DB
 			
 			String prod = request.getParameter("Videogioco");
 			String prod1 = request.getParameter("Console");
