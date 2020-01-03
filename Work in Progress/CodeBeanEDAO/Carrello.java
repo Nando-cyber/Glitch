@@ -20,32 +20,6 @@ public class Carrello {
 	@Id
 	private String username;
 	
-	public static class ProdottoQuantita {
-		private Prodotto prodotto;
-		private int quantita;
-
-		private ProdottoQuantita(Prodotto prodotto, int quantita) {
-			this.prodotto = prodotto;
-			this.quantita = quantita;
-		}
-
-		public int getQuantita() {
-			return quantita;
-		}
-
-		public void setQuantita(int quantita) {
-			this.quantita = quantita;
-		}
-
-		public Prodotto getProdotto() {
-			return prodotto;
-		}
-
-		public double getPrezzoTot() {
-			return quantita * prodotto.getPrezzo();
-		}
-
-	}
 	
 	private LinkedHashMap<Integer, ProdottoQuantita> prodotti = new LinkedHashMap<>();
 
@@ -79,13 +53,10 @@ public class Carrello {
 	}
 	
 	
-	
 	public String getUsername() {
 		return username;
 	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	
 	
 	
 	
