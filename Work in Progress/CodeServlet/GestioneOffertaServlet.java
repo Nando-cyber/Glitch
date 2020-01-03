@@ -14,6 +14,8 @@ import model.Console;
 import model.ConsoleDAO;
 import model.ConsoleJPA;
 import model.Offerta;
+import model.OffertaDAO;
+import model.OffertaJPA;
 import model.Videogioco;
 import model.VideogiocoDAO;
 import model.VideogiocoJPA;
@@ -60,7 +62,7 @@ public class GestioneOffertaServlet extends HttpServlet {
 			offerta.setCategoria(categoria);
 
 			//si salva il bean in DB
-			oDAO.addOfferta(offerta); //si inserisce in DB
+			oDAO.createOfferta(offerta); //si inserisce in DB
 
 			//ora aggiungiamo l'offerta alla categoria a cui si riferisce
 
@@ -98,70 +100,68 @@ public class GestioneOffertaServlet extends HttpServlet {
 
 				}
 			}
-		}
-
-
-	}else {
-		//in questo caso il parametro "operazione" contiene "rimozione"
-		//e quindi si procede alla rimozione dell'offerta
-
-		//si prende dalla request l'id dell'offerta da eliminare
-		int code = Integer.parseInt( request.getParameter("offId") );
-
-		//si prende da DB l'offerta con quell'id
-		Offerta o = oDAO.findOffertaById(code);
-
-		//si rimuove da DB il prodotto
-		oDAO.removeOfferta(o);		
-
-		//ora eliminiamo l'offerta alla categoria a cui si riferiva
-		if( (o.getCategoria()).equalsIgnoreCase("Console")) {
-
-			//se si riferisce ad una console, le prendo tutte da DB ed elimino loro lo
-			//sconto 
-			List<Console> console = cDAO.findAllConsole();
-
-			for( Console c: console) {
-
-				int sconto = o.getSconto();
-				double prezzo = c.getPrezzo();
-
-				double elimSconto = (prezzo * sconto)/100;
-				prezzo = prezzo + elimSconto;
-				c.setPrezzo(prezzo);
-
-			}
-
 		}else {
-			//se si riferisce ad un videogioco, li prendo tutti da DB ed elimino loro lo
-			//sconto 
-			List<Videogioco> videogioco = vDAO.findAllVideogioco();
+			//in questo caso il parametro "operazione" contiene "rimozione"
+			//e quindi si procede alla rimozione dell'offerta
+
+			//si prende dalla request l'id dell'offerta da eliminare
+			int code = Integer.parseInt( request.getParameter("offId") );
+
+			//si prende da DB l'offerta con quell'id
+			Offerta o = oDAO.retriveOffertaById(code);
+
+			//si rimuove da DB il prodotto
+			oDAO.deleteOfferta(code);	
+
+			//ora eliminiamo l'offerta alla categoria a cui si riferiva
+			if( (o.getCategoria()).equalsIgnoreCase("Console")) {
+
+				//se si riferisce ad una console, le prendo tutte da DB ed elimino loro lo
+				//sconto 
+				List<Console> console = cDAO.findAllConsole();
+
+				for( Console c: console) {
+
+					int sconto = o.getSconto();
+					double prezzo = c.getPrezzo();
+
+					double elimSconto = (prezzo * sconto)/100;
+					prezzo = prezzo + elimSconto;
+					c.setPrezzo(prezzo);
+
+				}
+
+			}else {
+				//se si riferisce ad un videogioco, li prendo tutti da DB ed elimino loro lo
+				//sconto 
+				List<Videogioco> videogioco = vDAO.findAllVideogioco();
 
 
-			for( Videogioco v : videogioco) {
+				for( Videogioco v : videogioco) {
 
-				int sconto = o.getSconto();
-				double prezzo = v.getPrezzo();
+					int sconto = o.getSconto();
+					double prezzo = v.getPrezzo();
 
-				double elimSconto = (prezzo * sconto)/100;
-				prezzo = prezzo + elimSconto;
-				v.setPrezzo(prezzo);
+					double elimSconto = (prezzo * sconto)/100;
+					prezzo = prezzo + elimSconto;
+					v.setPrezzo(prezzo);
 
+				}
 			}
 		}
 	}
 
-}
 
 
 
 
-/**
- * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
- */
-protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	doGet(request, response);
-}
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		doGet(request, response);
+	}
 
 }

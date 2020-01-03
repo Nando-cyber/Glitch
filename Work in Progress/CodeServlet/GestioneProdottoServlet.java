@@ -73,7 +73,7 @@ public class GestioneProdottoServlet extends HttpServlet {
 				vid.setDescrizione(descrizione);
 				vid.setPrezzo(prezzo);
 				vid.setPiattaforma(piattaforma);
-				vDAO.addProdotto(vid); //si inserisce in DB
+				vDAO.createProdotto(vid); //si inserisce in DB
 
 			}else {
 
@@ -90,7 +90,7 @@ public class GestioneProdottoServlet extends HttpServlet {
 				cons.setImmagine(imm);
 				cons.setDescrizione(descrizione);
 				cons.setPrezzo(prezzo);
-				cDAO.addProdotto(cons); //si inserisce in DB 
+				cDAO.createProdotto(cons); //si inserisce in DB 
 
 			}
 

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Carrello;
 import model.CarrelloDAO;
+import model.CarrelloJPA;
 
 
 /* LogoutServlet effettua la disconnessione dell'utente e il salvataggio dei suoi dati
@@ -35,7 +36,7 @@ public class LogoutServlet extends BaseServlet {
 		request.getSession().removeAttribute("carrello");
 		
 		//Si aggiorna il bean Carrello in DB nel caso ci siano state eventuali modifiche
-		carDAO.doSave(car);
+		carDAO.createCarrello(car);
 		
 		//Si ritorna alla pagina iniziale del sito, disconnessi
 		String dest = request.getHeader("referer");
