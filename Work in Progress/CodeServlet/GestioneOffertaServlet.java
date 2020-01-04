@@ -16,6 +16,7 @@ import model.ConsoleJPA;
 import model.Offerta;
 import model.OffertaDAO;
 import model.OffertaJPA;
+import model.ValidazioneOfferta;
 import model.Videogioco;
 import model.VideogiocoDAO;
 import model.VideogiocoJPA;
@@ -47,37 +48,46 @@ public class GestioneOffertaServlet extends HttpServlet {
 		String caso = request.getParameter("operazione");
 		if(caso.equalsIgnoreCase("inserimento")) {
 
-			//se l'equalsIgnoreCase() restituisce true si procede all'inserimento 
-			//di una offerta in DB
+			//se l'equalsIgnoreCase() restituisce true si rende persistente l'offerta in DB
 
-
-			int sconto = Integer.parseInt(request.getParameter("sconto"));
+			String nome = request.getParameter("nome");
+			String sconto = request.getParameter("sconto");
 			String categoria =  request.getParameter("categoria");
-
-
+			if(!ValidazioneOfferta.checkNome(nome)) {
+				throw new MyServletException("Nome offerta non corretta.");
+			}			
+			if(!ValidazioneOfferta.checkPercentualeSconto(sconto)) {
+				throw new MyServletException("Percentuale sconto non corretta.");
+			}
+			if(!ValidazioneOfferta.checkCategoria(categoria)) {
+				throw new MyServletException("Categoria offerta non corretta.");
+			}
+			
 			//si crea il bean Offerta e si settano i dati
 			Offerta offerta = new Offerta();
-
-			offerta.setSconto(sconto);
+			
+			offerta.setNome(nome);
+			offerta.setSconto(Integer.parseInt(sconto));
 			offerta.setCategoria(categoria);
 
-			//si salva il bean in DB
-			oDAO.createOfferta(offerta); //si inserisce in DB
+			//si salva in DB
+			oDAO.createOfferta(offerta);
 
 			//ora aggiungiamo l'offerta alla categoria a cui si riferisce
-
+			int percSconto;
+			
 			if( (offerta.getCategoria()).equalsIgnoreCase("Console")) {
 
 				//se si riferisce ad una console, le prendo tutte da DB ed applico loro lo
 				//sconto sul prezzo
 				List<Console> console = cDAO.findAllConsole();
-
+				
 				for( Console c: console) {
 
-					sconto = offerta.getSconto();
+					percSconto = offerta.getSconto();
 					double prezzo = c.getPrezzo();
 
-					double elimSconto = (prezzo * sconto)/100;
+					double elimSconto = (prezzo * percSconto)/100;
 					prezzo = prezzo - elimSconto;
 					c.setPrezzo(prezzo);
 
@@ -91,10 +101,10 @@ public class GestioneOffertaServlet extends HttpServlet {
 
 				for( Videogioco v : videogioco) {
 
-					sconto = offerta.getSconto();
+					percSconto = offerta.getSconto();
 					double prezzo = v.getPrezzo();
 
-					double elimSconto = (prezzo * sconto)/100;
+					double elimSconto = (prezzo * percSconto)/100;
 					prezzo = prezzo - elimSconto;
 					v.setPrezzo(prezzo);
 

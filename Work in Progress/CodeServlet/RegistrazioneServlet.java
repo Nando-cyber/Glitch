@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.security.enterprise.credential.Password;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Carrello;
+import model.Utente;
+import model.UtenteDAO;
+import model.UtenteJPA;
+import model.ValidazioneUtente;
+
 
 /* RegistrazioneServlet permette di gestire i dati riguardanti la registrazione di un utente. 
  * Verifica la loro correttezza ed esegue l'accesso all'interfaccia utente
@@ -19,7 +25,6 @@ import model.Carrello;
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UtenteDAO utenteDAO = new UtenteJPA();
-	private ValidazioneUtente vu = new ValidazioneUtente();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -36,74 +41,76 @@ public class RegistrazioneServlet extends HttpServlet {
 		//verifico il formato dei dati utente, in caso di errore, lancio un'eccezione
 
 		String username = request.getParameter("username");
-		if ( !vu.checkUsername(username)) {
-			throw new MyServletException("Username Errato.");
+		if ( !ValidazioneUtente.checkUsername(username)) {
+			throw new MyServletException("Formato Username Errato.");
 		}
 
 		String password = request.getParameter("password");
-		if ( !vu.checkPassword(password)) {
-			throw new MyServletException("Password Errata.");
+		if ( !ValidazioneUtente.checkPassword(password)) {
+			throw new MyServletException("Formato Password Errata.");
 		}
 
 		String nome = request.getParameter("nome");
-		if ( !vu.checkNome(nome)) {
-			throw new MyServletException("Nome Errato.");
+		if ( !ValidazioneUtente.checkNome(nome)) {
+			throw new MyServletException("Formato Nome Errato.");
 		}
 
 		String cognome = request.getParameter("cognome");
-		if ( !vu.checkCognome(cognome)) {
-			throw new MyServletException("Cognome Errato.");
+		if ( !ValidazioneUtente.checkCognome(cognome)) {
+			throw new MyServletException("Formato Cognome Errato.");
 		}
 
 		String email = request.getParameter("email");
-		if ( !vu.checkEmail(email)) {
-			throw new MyServletException("E-Mail Errata.");
+		if ( !ValidazioneUtente.checkEmail(email)) {
+			throw new MyServletException("Formato E-Mail Errata.");
 		}
 
 		String provincia = request.getParameter("provincia");
-		if ( !vu.checkProvincia(provincia)) {
-			throw new MyServletException("Provincia Errata.");
+		if ( !ValidazioneUtente.checkProvincia(provincia)) {
+			throw new MyServletException("Formato Provincia Errata.");
 		}
 
 		String CAP = request.getParameter("CAP");
-		if ( !vu.checkCAP(CAP)) {
-			throw new MyServletException("CAP Errato.");
+		if ( !ValidazioneUtente.checkCap(CAP)) {
+			throw new MyServletException("Formato CAP Errato.");
 		}
 
 		String citta = request.getParameter("citta");
-		if ( !vu.checkCitta(citta)) {
-			throw new MyServletException("Città Errata.");
+		if ( !ValidazioneUtente.checkCitta(citta)) {
+			throw new MyServletException("Formato Città Errata.");
 		}
 
 		String strada = request.getParameter("strada");
-		if ( !vu.checkStrada(strada)) {
-			throw new MyServletException("Strada Errata.");
+		if ( !ValidazioneUtente.checkVia(strada)) {
+			throw new MyServletException("Formato Strada Errata.");
 		}
 
 		String numero = request.getParameter("numero");
-		if ( !vu.checkNumero(numero)) {
-			throw new MyServletException("Numero Errato.");
+		if ( !ValidazioneUtente.checkNumero(numero)) {
+			throw new MyServletException("Formato Numero Errato.");
 		}
 
-		//creo il bean Utente e verifico se è già presente in DB
+		int cap = Integer.parseInt(CAP);
+		int num = Integer.parseInt(numero);
+		Password pass = new Password(password);
+				//creo il bean Utente e verifico se è già presente in DB
 
-		Utente u = new Utente(nome, cognome, username, password, email, provincia, CAP, citta, strada, numero);
+		Utente u = new Utente( username, email,  pass, nome, cognome, provincia, cap, citta, strada, num);
 
-		if(utenteDAO.doRetriveByUsername(username) == null &&
-				utenteDAO.doRetriveByEmail(email) == null) {
+		if(utenteDAO.retriveByUsername(username) == null &&
+				utenteDAO.retriveByEmail(email) == null) {
 			
 			//Poichè non è presente, lo aggiungo in DB e alla sessione
 			
-			utenteDAO.addUtente(u);
+			utenteDAO.createUtente(u);
 			request.getSession().setAttribute("utente", u);
 			
 			//Creo il bean Carrello per il nuovo utente e lo aggiungo alla sessione
 			
 			Carrello carrello = new Carrello();
 
-			carrello.setUsername(utente.getUsername());
-			carrello.setEmail(utente.getEmail());
-
+			carrello.setUsername(u.getUsername());
+			
 			request.getSession().setAttribute("carrello", carrello);
 			
 			//Conclusa la registrazione, ritorno a Registrazione.jsp 
@@ -115,7 +122,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		}
 		else {
 
-			throw new MyServletException("Username o email già presenti.")
+			throw new MyServletException("Username o email già presenti.");
 
 		}
 

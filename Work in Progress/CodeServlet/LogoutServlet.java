@@ -36,7 +36,7 @@ public class LogoutServlet extends BaseServlet {
 		request.getSession().removeAttribute("carrello");
 		
 		//Si aggiorna il bean Carrello in DB nel caso ci siano state eventuali modifiche
-		carDAO.createCarrello(car);
+		carDAO.updateCarrello(car);
 		
 		//Si ritorna alla pagina iniziale del sito, disconnessi
 		String dest = request.getHeader("referer");

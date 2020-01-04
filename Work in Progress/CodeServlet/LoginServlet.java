@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Carrello;
 import model.CarrelloDAO;
-import model.UtenteBean;
-import model.UtenteBeanDAO;
+import model.CarrelloJPA;
+import model.Utente;
+import model.UtenteDAO;
+import model.UtenteJPA;
 
 
 /* LoginServlet gestisce l'accesso al sito. 
@@ -46,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 		//Se questi non sono nulli, si verifica la sua presenza in DB
 		
 		if (username != null && password != null) {
-			utente = utenteDAO.doRetrieveByUsername(username);
+			utente = utenteDAO.retriveByUsername(username);
 		}
 		
 		//Se non è presente, si lancia un'eccezione
@@ -58,12 +60,11 @@ public class LoginServlet extends HttpServlet {
 		request.getSession().setAttribute("utente", utente);
 		
 		//Si fa restituire il carrello dell'utente che vuole effettuare l'accesso
-		Carrello carrello = carDAO.doRetrieveAll(utente.getLogin(), utente.getEmail());
+		Carrello carrello = carDAO.retriveByUtente(utente.getUsername());
 		
 		//Se il carello è vuoto, lo si crea settandogli i dati dell'Utente a cui è connesso
 		if(carrello.isEmpty()) {
-			carrello.setUsername(utente.getLogin());
-			carrello.setEmail(utente.getEmail());
+			carrello.setUsername(utente.getUsername());
 		}
 		
 		//E si setta il bean Carrello nella Sessione
