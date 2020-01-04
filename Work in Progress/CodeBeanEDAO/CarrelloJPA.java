@@ -33,5 +33,11 @@ public class CarrelloJPA implements CarrelloDAO{
         query.setParameter("username", user); //parameters by name 
         return query.getSingleResult();
 	}
+
+	@Override
+	public void updateCarrello(Carrello cart) {
+		em.merge(cart);
+		
+	}
 	
 }

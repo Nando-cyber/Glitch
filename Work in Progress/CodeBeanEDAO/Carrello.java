@@ -56,6 +56,13 @@ public class Carrello {
 	public ProdottoQuantita get(int prodId) {
 		return prodotti.get(prodId);
 	}
+	
+	public void updateQuantita(int prodId , int quantita) {
+		ProdottoQuantita pr = prodotti.get(prodId);
+		pr.setQuantita(quantita);
+		prodotti.replace(prodId, pr);
+		
+	}
 
 	public void put(Prodotto prodotto, int quantita) {
 		prodotti.put(prodotto.getId(), new ProdottoQuantita(prodotto, quantita));
@@ -87,7 +94,12 @@ public class Carrello {
 		this.username = username;
 	}
 	
-	
+	public boolean isEmpty() {
+		if(username.isEmpty()) {
+			return true;
+		}
+		else return false;
+	}
 	
 	
 	

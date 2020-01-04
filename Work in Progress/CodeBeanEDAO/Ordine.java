@@ -34,7 +34,7 @@ public class Ordine {
 	{
 		this.username=username;
 		this.email=email;
-		this.setCart(cart);
+		this.cart = cart;
 	}
 
 	public static Date getDataOrdinazione() {

@@ -27,6 +27,7 @@ public class Utente {
 	private Password password;
 	private String nome;
 	private String cognome;
+	private CartaDiCredito carta;
 	private String provincia;
 	private int cap;
 	private String citta;
@@ -137,6 +138,14 @@ public class Utente {
 
 	public void setRuolo(String ruolo) {
 		this.ruolo = ruolo;
+	}
+
+	public CartaDiCredito getCarta() {
+		return carta;
+	}
+
+	public void setCarta(CartaDiCredito carta) {
+		this.carta = carta;
 	}
 	
 }
