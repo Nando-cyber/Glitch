@@ -18,20 +18,34 @@ public class ConsoleJPA extends ProdottoJPA implements ConsoleDAO{
 	private EntityManager em;
 	
 
-    //Restituisce una lista di tutti i videogiochi presenti nel database
+    //Restituisce una lista di tutte le console presenti nel database
     public List<Console> findAllConsole() {
         TypedQuery<Console> query = em.createNamedQuery(Console.FIND_ALL, Console.class);
         return query.getResultList();
     }
 
-    //restituisce il videogioco che ha come id l'intero passato come parametro
+    //Restituisce la console che ha come id l'intero passato come argomento
     public Console findConsoleById(int id) {
-        TypedQuery<Console> query = em.createNamedQuery(Console.FIND_BYID, Console.class);
+        TypedQuery<Console> query = em.createNamedQuery(Console.FIND_BY_ID, Console.class);
         query.setParameter("id", id); //parameters by name 
         return query.getSingleResult();
     }
     
-    //Restituisce una lista di videogiochi compresi tra i valori "min" e "max" passati come parametri
+    //Restituisce la console avente come modello la stringa passata come argomento
+    public Console retriveByModello(String modello) {
+        TypedQuery<Console> query = em.createNamedQuery(Console.FIND_BY_MODELLO, Console.class);
+        query.setParameter("modello", modello); //parameters by name 
+        return query.getSingleResult();
+    }
+    
+    //Restituisce la lista di console aventi come casa produttrice la stringa passata come argomento
+    public List<Console> retriveByCasaProduttrice(String casaProduttrice) {
+        TypedQuery<Console> query = em.createNamedQuery(Console.FIND_BY_CASAPRODUTTRICE, Console.class);
+        query.setParameter("casaProduttrice", casaProduttrice); //parameters by name 
+        return query.getResultList();
+    }
+    
+    //Restituisce una lista limitata di console comprese tra i valori "min" e "max" passati come argomento
     public List<Console> doRetriveConsoleAllRange(int min, int max)
     {
     	TypedQuery<Console> query = em.createNamedQuery(Console.FIND_ALL, Console.class);

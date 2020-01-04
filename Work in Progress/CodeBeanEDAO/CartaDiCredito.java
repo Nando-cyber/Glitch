@@ -55,8 +55,11 @@ public class CartaDiCredito {
 	public String getUtenteUsername() {
 		return utenteUsername;
 	}
-
-	//Restituisce il nome dell'utente associato alla carta di credito
+	//Modifica l'username dell'utente che ha inserito la carta
+	public void setUtenteUsername(String username) {
+		 this.utenteUsername = username;
+	}
+	//Restituisce il nome dell'utente che ha associato alla carta di credito
 	public String getNome() {
 		return nome;
 	}
@@ -99,6 +102,11 @@ public class CartaDiCredito {
 	//Restituisce l'email dell'utente associato alla carta di credito
 	public String getUtenteEmail() {
 		return utenteEmail;
+	}
+	
+	//Modifica l'email dell'utente che ha associato alla carta di credito
+	public void setUtenteEmail(String email) {
+		this.utenteEmail = email;
 	}
 
 }

@@ -74,6 +74,17 @@ public class Carrello {
 		return utenteUsername;
 	}
 	
+
+	//inserisce la username utente nel carrello
+	public void setUsername(String utenteUsername) {
+		this.utenteUsername = utenteUsername;
+	}
+	
+	//inserisce l'email utente nel carrello
+	public void setUtenteEmail(String utenteEmail) {
+		this.utenteEmail = utenteEmail;
+	}
+
 	//Restiuisce l'email dell'utente a cui è associato il carrello
 	public String getUtenteEmail() {
 		return utenteEmail;

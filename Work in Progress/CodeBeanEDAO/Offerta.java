@@ -26,6 +26,7 @@ public class Offerta {
     
     @Id @GeneratedValue
 	private int codice;
+    private String nome;
 	private int sconto;
 	private String categoria;
 	
@@ -42,6 +43,14 @@ public class Offerta {
 	//Restituisce il codice identificativo dell'offerta
 	public int getCodice() {
 		return codice;
+	}
+	//restituisce il nome dell'offerta
+	public String getNome() {
+		return nome;
+	}
+	//Inserisce il nome dell'offerta
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	//Restituisce il valore dello sconto

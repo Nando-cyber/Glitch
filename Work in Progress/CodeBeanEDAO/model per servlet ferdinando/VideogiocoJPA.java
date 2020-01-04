@@ -30,7 +30,7 @@ public class VideogiocoJPA extends ProdottoJPA implements VideogiocoDAO {
         return query.getSingleResult();
     }
     
-    //Restituisce una lista di videogiochi compresi tra i valori "min" e "max" passati come parametri
+    //Restituisce una lista limitata di videogiochi compresi tra i valori "min" e "max" passati come parametri
     public List<Videogioco> doRetriveVideogiocoAllRange(int min, int max)
     {
     	TypedQuery<Videogioco> query = em.createNamedQuery(Videogioco.FIND_ALL, Videogioco.class);
@@ -39,6 +39,25 @@ public class VideogiocoJPA extends ProdottoJPA implements VideogiocoDAO {
         return query.getResultList();
     }
     
+    //Restitusce una lista di videogiochi avente come nome la stringa passata come argomento
+    public List<Videogioco> retriveByNome(String nome) {
+        TypedQuery<Videogioco> query = em.createNamedQuery(Videogioco.FIND_BY_NOME, Videogioco.class);
+        query.setParameter("nome", nome); //parameters by name 
+        return query.getResultList();
+    }
     
+    //Restitusce una lista di videogiochi avente come genere la stringa passata come argomento
+    public List<Videogioco> retriveByGenere(String genere) {
+        TypedQuery<Videogioco> query = em.createNamedQuery(Videogioco.FIND_BY_GENERE, Videogioco.class);
+        query.setParameter("genere", genere); //parameters by name 
+        return query.getResultList();
+    }
+    
+    //Restitusce una lista di videogiochi avente come piattaforma la stringa passata come argomento
+    public List<Videogioco> retriveByPiattaforma(String piattaforma) {
+        TypedQuery<Videogioco> query = em.createNamedQuery(Videogioco.FIND_BY_PIATTAFORMA, Videogioco.class);
+        query.setParameter("piattaforma", piattaforma); //parameters by name 
+        return query.getResultList();
+    }
 	
 }
