@@ -24,15 +24,30 @@ public class ValidazioneCartaDiCredito {
 			return Pattern.matches("[0-9]+",nI);
 	}
 	
-	//Controlla che sia rispettata la sintassi (Deve contenere 4 caratteri numerici nel formato “MMAA”) di "date" (Scadenza)
-	public static boolean checkScadenza(String date)
+	//Controlla che sia rispettata la sintassi (Deve contenere 2 caratteri numerici nel formato “MM”) di "meseScadenza" (Scadenza)
+	public static boolean checkMeseScadenza(String meseScadenza)
 	{
-		if(date.length()!=4)
+		if(meseScadenza.length()!=2)
 			return false;
-		int mese=Integer.parseInt(date.substring(0,2));
-		int anno=Integer.parseInt(date.substring(2,4));
 		
-		if(mese>0 && mese<=12 && anno>=20)
+		int mese=Integer.parseInt(meseScadenza);
+		
+		if(mese>0 && mese<=12)
+		{
+			return true;
+		}
+		else
+			return false;	
+	}
+	
+	//Controlla che sia rispettata la sintassi (Deve contenere 2 caratteri numerici nel formato “AA”) di "annoScadenza" (Scadenza)
+	public static boolean checkAnnoScadenza(String annoScadenza)
+	{
+		if(annoScadenza.length()!=2)
+			return false;
+		
+		int anno=Integer.parseInt(annoScadenza);
+		if(anno>=20)
 		{
 			return true;
 		}

@@ -4,11 +4,10 @@ package model;
 import static model.Ordine.FIND_BY_USERNAME;
 import static model.Ordine.FIND_BY_ID;
 
-import java.sql.Date;
-import java.util.Calendar;
+
 import java.util.Collection;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.GregorianCalendar;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +33,7 @@ public class Ordine {
 	private String username;
 	@Id
 	private String email;
-	private Date dataOrdinazione= (Date) Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY).getTime();
+	private GregorianCalendar dataOrdinazione;
 	private Collection<ProdottoQuantita> prodottiAcquistati;
 	
 	//Costruttore vuoto
@@ -59,12 +58,12 @@ public class Ordine {
 	}
 
 	//Restituisce la data dell'ordine effettuato
-	public Date getDataOrdinazione() {
+	public GregorianCalendar getDataOrdinazione() {
 		return dataOrdinazione;
 	}
 
 	//Modifica la data dell'ordine effettuato
-	public void setDataOrdinazione(Date dataOrdinazione) {
+	public void setDataOrdinazione(GregorianCalendar dataOrdinazione) {
 		this.dataOrdinazione = dataOrdinazione;
 	}
 
