@@ -25,7 +25,7 @@ public class Ordine {
 	private String username;
 	@Id
 	private String email;
-	private static Date dataOrdinazione= (Date) Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY).getTime();
+	private Date dataOrdinazione= (Date) Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY).getTime();
 	private Collection<ProdottoQuantita> prodottiAcquistati;
 	
 	public Ordine() {
@@ -35,19 +35,16 @@ public class Ordine {
 	{
 		this.username=username;
 		this.email=email;
-<<<<<<< HEAD
-		this.cart = cart;
-=======
 		this.setProdottiAcquistati(cart.getProdotti());
->>>>>>> 9d53bb6ce5b409a29ffeaed052addcaa6aeb2c24
+
 	}
 
-	public static Date getDataOrdinazione() {
+	public Date getDataOrdinazione() {
 		return dataOrdinazione;
 	}
 
-	public static void setDataOrdinazione(Date dataOrdinazione) {
-		Ordine.dataOrdinazione = dataOrdinazione;
+	public void setDataOrdinazione(Date dataOrdinazione) {
+		this.dataOrdinazione = dataOrdinazione;
 	}
 
 	public Collection<ProdottoQuantita> getProdottiAcquistati() {

@@ -25,8 +25,10 @@ public class CartaDiCredito {
 	
 	@Id
 	private int numeroCarta;
+	@Id
 	private String utenteUsername;
-	private String email;
+	@Id
+	private String utenteEmail;
 	private String nome;
 	private String cognome;
 	private Date scadenza;
@@ -35,11 +37,11 @@ public class CartaDiCredito {
 	public CartaDiCredito() {
 	}
 	
-	public CartaDiCredito(int numeroCarta,String utenteUsername,String email, String nome, String cognome, Date scadenza, int cvv)
+	public CartaDiCredito(int numeroCarta,String utenteUsername,String utenteEmail, String nome, String cognome, Date scadenza, int cvv)
 	{
 		this.numeroCarta=numeroCarta;
 		this.utenteUsername=utenteUsername;
-		this.email=email;
+		this.setUtenteEmail(utenteEmail);
 		this.nome=nome;
 		this.cognome=cognome;
 		this.scadenza=scadenza;
@@ -56,13 +58,7 @@ public class CartaDiCredito {
 		this.utenteUsername = utenteUsername;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	
 
 	public String getNome() {
 		return nome;
@@ -94,5 +90,13 @@ public class CartaDiCredito {
 
 	public void setCvv(int cvv) {
 		this.cvv = cvv;
+	}
+
+	public String getUtenteEmail() {
+		return utenteEmail;
+	}
+
+	public void setUtenteEmail(String utenteEmail) {
+		this.utenteEmail = utenteEmail;
 	}
 }

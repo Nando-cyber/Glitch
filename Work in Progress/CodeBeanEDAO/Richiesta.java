@@ -22,6 +22,7 @@ public class Richiesta {
 	
 	@Id @GeneratedValue
 	private int id;
+	@Id
 	private String utenteEmail;
 	private String utenteUsername;
 	private String destinatario;

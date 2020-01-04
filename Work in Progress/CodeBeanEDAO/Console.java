@@ -26,6 +26,7 @@ public class Console extends Prodotto{
     public static final String FIND_BY_MODELLO = "model.Console.FIND_BY_MODELLO";
     public static final String FIND_BY_CASAPRODUTTRICE = "model.Console.FIND_BY_CASAPRODUTTRICE";
 	
+    
 	private String modello;
 	private String casaProduttrice;
 	

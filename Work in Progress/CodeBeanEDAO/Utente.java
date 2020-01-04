@@ -5,6 +5,7 @@ import static model.Utente.FIND_BY_User;
 import static model.Utente.FIND_BY_Email;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.security.enterprise.credential.Password;
@@ -22,12 +23,15 @@ public class Utente {
 	public static final String FIND_ALL = "model.Utente.FIND_ALL";
     public static final String FIND_BY_User = "model.Utente.FIND_BY_User";
     public static final String FIND_BY_Email = "model.Utente.FIND_BY_Email";
+    @Id
 	private String username;
+    @Id
 	private String email;
+    private CartaDiCredito cartaDiCredito;
 	private Password password;
 	private String nome;
 	private String cognome;
-	private CartaDiCredito carta;
+
 	private String provincia;
 	private int cap;
 	private String citta;
@@ -140,12 +144,14 @@ public class Utente {
 		this.ruolo = ruolo;
 	}
 
-	public CartaDiCredito getCarta() {
-		return carta;
+	
+
+	public CartaDiCredito getCartaDiCredito() {
+		return cartaDiCredito;
 	}
 
-	public void setCarta(CartaDiCredito carta) {
-		this.carta = carta;
+	public void setCartaDiCredito(CartaDiCredito cartaDiCredito) {
+		this.cartaDiCredito = cartaDiCredito;
 	}
 	
 }

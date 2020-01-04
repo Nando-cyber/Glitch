@@ -11,14 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name = FIND_BY_UTENTE, query = "SELECT b FROM Carrello b WHERE b.username = :username")
+@NamedQuery(name = FIND_BY_UTENTE, query = "SELECT b FROM Carrello b WHERE b.utenteUsername = :utenteUsername")
 
 public class Carrello {
 
 	public static final String FIND_BY_UTENTE = "model.Carrello.FIND_BY_UTENTE";
 	
 	@Id
-	private String username;
+	private String utenteUsername;
+	@Id
+	private String utenteEmail;
 	
 	
 	private LinkedHashMap<Integer, ProdottoQuantita> prodotti = new LinkedHashMap<>();
@@ -53,20 +55,20 @@ public class Carrello {
 		
 	public Carrello() {}
 	
-	public Carrello(String username)
+	public Carrello(String utenteUsername)
 	{
-		this.username=username;
+		this.utenteUsername=utenteUsername;
 		
 	}
 	
 	
 	public String getUsername() {
-		return username;
+		return utenteUsername;
 	}
 	
-	
+	//Controlla se un corrello esiste
 	public boolean isEmpty() {
-		if(username.isEmpty()) {
+		if(utenteUsername.isEmpty()) {
 			return true;
 		}
 		else return false;

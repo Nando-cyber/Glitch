@@ -30,7 +30,7 @@ public class CarrelloJPA implements CarrelloDAO{
 	//Restituisce il carrello del utente con l'username "user"
 	public Carrello retriveByUtente(String user) {
 		TypedQuery<Carrello> query = em.createNamedQuery(Carrello.FIND_BY_UTENTE, Carrello.class);
-        query.setParameter("username", user); //parameters by name 
+        query.setParameter("utenteUsername", user); //parameters by name 
         return query.getSingleResult();
 	}
 
