@@ -5,6 +5,7 @@ import static model.Ordine.FIND_BY_USERNAME;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -24,8 +25,8 @@ public class Ordine {
 	private String username;
 	@Id
 	private String email;
-	private Carrello cart;
 	private static Date dataOrdinazione= (Date) Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY).getTime();
+	private Collection<ProdottoQuantita> prodottiAcquistati;
 	
 	public Ordine() {
 	}
@@ -34,7 +35,11 @@ public class Ordine {
 	{
 		this.username=username;
 		this.email=email;
+<<<<<<< HEAD
 		this.cart = cart;
+=======
+		this.setProdottiAcquistati(cart.getProdotti());
+>>>>>>> 9d53bb6ce5b409a29ffeaed052addcaa6aeb2c24
 	}
 
 	public static Date getDataOrdinazione() {
@@ -45,13 +50,15 @@ public class Ordine {
 		Ordine.dataOrdinazione = dataOrdinazione;
 	}
 
-	public Carrello getCart() {
-		return cart;
+	public Collection<ProdottoQuantita> getProdottiAcquistati() {
+		return prodottiAcquistati;
 	}
 
-	public void setCart(Carrello cart) {
-		this.cart = cart;
+	public void setProdottiAcquistati(Collection<ProdottoQuantita> prodottiAcquistati) {
+		this.prodottiAcquistati = prodottiAcquistati;
 	}
+
+	
 
 
 }
