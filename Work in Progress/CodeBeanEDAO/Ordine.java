@@ -7,7 +7,7 @@ import static model.Ordine.FIND_BY_ID;
 
 import java.util.Collection;
 import java.util.GregorianCalendar;
-
+import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +33,7 @@ public class Ordine {
 	private String username;
 	@Id
 	private String email;
-	private GregorianCalendar dataOrdinazione;
+	private GregorianCalendar dataOrdinazione=new GregorianCalendar(new Locale("it", "IT"));
 	private Collection<ProdottoQuantita> prodottiAcquistati;
 	
 	//Costruttore vuoto
