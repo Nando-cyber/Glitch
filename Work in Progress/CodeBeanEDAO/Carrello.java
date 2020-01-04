@@ -25,14 +25,17 @@ public class Carrello {
 	
 	private LinkedHashMap<Integer, ProdottoQuantita> prodotti = new LinkedHashMap<>();
 
+	//Restituisce la Collection di prodotti nel carrello
 	public Collection<ProdottoQuantita> getProdotti() {
 		return prodotti.values();
 	}
 
+	//Restituisce un "prodottoQuantita" avente come id del prodotto "prodId" 
 	public ProdottoQuantita get(int prodId) {
 		return prodotti.get(prodId);
 	}
 	
+	//Aggiorna la quantità del prodotto nel carrello
 	public void updateQuantita(int prodId , int quantita) {
 		ProdottoQuantita pr = prodotti.get(prodId);
 		pr.setQuantita(quantita);
@@ -40,33 +43,43 @@ public class Carrello {
 		
 	}
 
+	//Inserisce un prodotto e la sua quantità nel carrello
 	public void put(Prodotto prodotto, int quantita) {
 		prodotti.put(prodotto.getId(), new ProdottoQuantita(prodotto, quantita));
 	}
 
+	//Rimuove un prodotto avente "prodId" come id dal carrello
 	public ProdottoQuantita remove(int prodId) {
 		return prodotti.remove(prodId);
 	}
 
+	//Restituisce il prezzo totale(derivato dalla somma del prezzo del singolo prodotto moltiplicato per la sua quantità) dei prodotti nella collection 
 	public String getPrezzoTotProdotti() {
 		return String.format("%.2f", prodotti.values().stream().mapToDouble(p -> p.getPrezzoTot()).sum());
 	}
 	
-		
+	//Costruttore vuoto	
 	public Carrello() {}
 	
-	public Carrello(String utenteUsername)
+	//Costruisce un carrello passando l'username e l'email dell'utente
+	public Carrello(String utenteUsername,String utenteEmail)
 	{
 		this.utenteUsername=utenteUsername;
+		this.utenteEmail=utenteEmail;
 		
 	}
 	
-	
+	//Restiuisce l'username dell'utente a cui è associato il carrello
 	public String getUsername() {
 		return utenteUsername;
 	}
 	
-	//Controlla se un corrello esiste
+	//Restiuisce l'email dell'utente a cui è associato il carrello
+	public String getUtenteEmail() {
+		return utenteEmail;
+	}
+	
+	//Controlla se il corrello esiste
 	public boolean isEmpty() {
 		if(utenteUsername.isEmpty()) {
 			return true;

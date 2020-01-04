@@ -1,23 +1,25 @@
 package model;
 
+import java.util.regex.Pattern;
+
 public class ValidazioneOfferta {
 
-	public static boolean checkPercentualeSconto(String sconto)
+	
+	//Controlla che sia rispettata la sintassi (Deve avere caratteri alfanumerici) di "nome"
+	public static boolean checkNome(String Nome)
 	{
-		try {
-			int numSconto=Integer.parseInt(sconto);
-			if(numSconto>0 && numSconto<=100)
-				return true;
-		}catch(Exception e) {}
-		
-		return false;
+		return Pattern.matches("[A-Za-z0-9]+",Nome);
 	}
 	
+	//Controlla che sia rispettata la sintassi (Deve avere caratteri numerici interi) di "sconto"
+	public static boolean checkPercentualeSconto(String sconto)
+	{
+		return Pattern.matches("[0-9]+",sconto);
+	}
+	
+	//Controlla che sia rispettata la sintassi (Deve avere caratteri alfabetici) di "categoria"
 	public static boolean checkCategoria(String categoria)
 	{
-		if(categoria.equals("Videogioco") || categoria.equals("Console"))
-			return true;
-		else 
-			return false;
+		return Pattern.matches("[A-Za-z]+",categoria);
 	}
 }

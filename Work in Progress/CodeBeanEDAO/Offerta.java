@@ -6,6 +6,8 @@ import static model.Offerta.FIND_BY_CATEGORIA;
 
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -22,39 +24,42 @@ public class Offerta {
     public static final String FIND_BY_CODICE = "model.Offerta.FIND_BY_CODICE";
     public static final String FIND_BY_CATEGORIA = "model.Offerta.FIND_BY_CATEGORIA";
     
+    @Id @GeneratedValue
 	private int codice;
 	private int sconto;
 	private String categoria;
 	
+	//Costruttore vuoto
 	public Offerta() {}
 	
-	public Offerta(int codice, int sconto,String categoria)
+	//Costruisce un oggetto "offerta" passando come argomento il suo codice, lo sconto e la categoria
+	public Offerta(int sconto,String categoria)
 	{
-		this.setCodice(codice);
-		this.setSconto(sconto);
-		this.setCategoria(categoria);
+		this.sconto=sconto;
+		this.categoria=categoria;
 	}
 
+	//Restituisce il codice identificativo dell'offerta
 	public int getCodice() {
 		return codice;
 	}
 
-	public void setCodice(int codice) {
-		this.codice = codice;
-	}
-
+	//Restituisce il valore dello sconto
 	public int getSconto() {
 		return sconto;
 	}
 
+	//Modifica il valore dello sconto
 	public void setSconto(int sconto) {
 		this.sconto = sconto;
 	}
 
+	//Restituisce la categoria a cui è applicato lo sconto
 	public String getCategoria() {
 		return categoria;
 	}
 
+	//Modifica la categoria a cui è applicato lo sconto
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}

@@ -22,6 +22,14 @@ public class OrdineJPA implements OrdineDAO{
 		em.persist(ord);
 		
 	}
+	
+	//Restituisce l'ordine avente per id l'intero passato come argomento
+	public Ordine retriveById(long id)
+	{
+		TypedQuery<Ordine> query = em.createNamedQuery(Ordine.FIND_BY_ID, Ordine.class);
+        query.setParameter("id", id); //parameters by name 
+        return query.getSingleResult();
+	}
 
 	//Restituisce la lista di ordini effettuati dall'utente avente come username la stringa passata come argomento
 	public List<Ordine> retriveByUtente(String user) {

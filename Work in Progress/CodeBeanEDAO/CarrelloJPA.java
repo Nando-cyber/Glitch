@@ -20,21 +20,21 @@ public class CarrelloJPA implements CarrelloDAO{
 		
 	}
 	
-	//Rimuove il carrello dell'utente con username "user" dal DB
+	//Rimuove il carrello dell'utente con username "user" dal DataBase
 	public void removeCarrello(String user) {
 		
 		em.remove(em.merge(retriveByUtente(user)));
 		
 	}
 	
-	//Restituisce il carrello del utente con l'username "user"
+	//Restituisce il carrello del utente avente come username "user"
 	public Carrello retriveByUtente(String user) {
 		TypedQuery<Carrello> query = em.createNamedQuery(Carrello.FIND_BY_UTENTE, Carrello.class);
         query.setParameter("utenteUsername", user); //parameters by name 
         return query.getSingleResult();
 	}
 
-	@Override
+	//Rende persistenti gli aggiornamenti sul carrello
 	public void updateCarrello(Carrello cart) {
 		em.merge(cart);
 		

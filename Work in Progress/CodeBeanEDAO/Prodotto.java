@@ -30,9 +30,11 @@ public class Prodotto implements Serializable{
 	private String descrizione;
 	
 	
+	//Costruttore vuoto
 	public Prodotto() {
 	}
 	
+	//Costruisce un "Prodotto" passando come argomento il path dell'immagine, il prezzo e la descrizione
 	public Prodotto(String immagine, double prezzo, String descrizione)
 	{
 		this.immagine=immagine;
@@ -40,31 +42,38 @@ public class Prodotto implements Serializable{
 		this.descrizione=descrizione;
 	}
 	
+	//Restituisce l'id del prodotto
 	public int getId()
 	{
 		return id;
 	}
 	
+	//Restituisce il path dell'immagine 
 	public String getImmagine() {
 		return immagine;
 	}
 	
+	//Modifica il path dell'immagine
 	public void setImmagine(String immagine) {
 		this.immagine = immagine;
 	}
 	
+	//Restituisce la descrizione del prodotto
 	public String getDescrizione() {
 		return descrizione;
 	}
 	
+	//Modifica la descrizione del prodotto
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
 	
+	//Restituisce il prezzo del prodotto
 	public double getPrezzo() {
 		return prezzo;
 	}
 	
+	//Modifica il prezzo del prodotto
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
 	}

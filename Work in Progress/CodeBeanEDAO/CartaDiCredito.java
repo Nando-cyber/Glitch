@@ -34,69 +34,71 @@ public class CartaDiCredito {
 	private Date scadenza;
 	private int cvv;
 	
+	//Costruttore vuoto
 	public CartaDiCredito() {
 	}
 	
+	//Costruisce una carta di credito passando come argomento il numero della carta, 
+	//l'username dell'utente, l'email, nome, cognome, la scadenza e il cvv della carta di credito
 	public CartaDiCredito(int numeroCarta,String utenteUsername,String utenteEmail, String nome, String cognome, Date scadenza, int cvv)
 	{
 		this.numeroCarta=numeroCarta;
 		this.utenteUsername=utenteUsername;
-		this.setUtenteEmail(utenteEmail);
+		this.utenteEmail=utenteEmail;
 		this.nome=nome;
 		this.cognome=cognome;
 		this.scadenza=scadenza;
 		this.cvv=cvv;
-		
-		
 	}
 
+	//Restituisce l'username dell'utente associato alla carta di credito
 	public String getUtenteUsername() {
 		return utenteUsername;
 	}
 
-	public void setUtenteUsername(String utenteUsername) {
-		this.utenteUsername = utenteUsername;
-	}
-
-	
-
+	//Restituisce il nome dell'utente associato alla carta di credito
 	public String getNome() {
 		return nome;
 	}
 
+	//Modfifica il nome dell'utente associato alla carta
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	//Restituisce la scadenza della carta di credito
 	public Date getScadenza() {
 		return scadenza;
 	}
 
+	//Modfifica la scadenza della carta di credito
 	public void setScadenza(Date scadenza) {
 		this.scadenza = scadenza;
 	}
 
+	//Restituisce il nome dell'utente associato alla carta di credito
 	public String getCognome() {
 		return cognome;
 	}
 
+	//Modfifica il cognome dell'utente associato alla carta di credito
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
 
+	//Restituisce il CVV della carta di credito
 	public int getCvv() {
 		return cvv;
 	}
 
+	//Modifica il CVV della carta di credito
 	public void setCvv(int cvv) {
 		this.cvv = cvv;
 	}
 
+	//Restituisce l'email dell'utente associato alla carta di credito
 	public String getUtenteEmail() {
 		return utenteEmail;
 	}
 
-	public void setUtenteEmail(String utenteEmail) {
-		this.utenteEmail = utenteEmail;
-	}
 }

@@ -1,59 +1,52 @@
 package model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import java.util.Date;
-
 import java.util.regex.Pattern;
 
 public class ValidazioneCartaDiCredito {
 
+	//Controlla che sia rispettata la sintassi (caratteri alfabetici e prima lettera maiuscola) di "nome"
 	public static boolean checkNome(String nome){
-		return Pattern.matches("[A-Za-z]+",nome) && Pattern.matches("[A-Z]+",nome.subSequence(0, 1));
+		return Pattern.matches("[A-Za-z\\s]+",nome) && Pattern.matches("[A-Z]+",nome.subSequence(0, 1));
 	}
 	
+	//Controlla che sia rispettata la sintassi (caratteri alfabetici e prima lettera maiuscola) di "cognome"
 	public static boolean checkCognome(String cognome)
 	{
-		return Pattern.matches("[A-Za-z]+",cognome) && Pattern.matches("[A-Z]+",cognome.subSequence(0, 1));
+		return Pattern.matches("[A-Za-z\\s]+",cognome) && Pattern.matches("[A-Z]+",cognome.subSequence(0, 1));
 	}
 	
+	//Controlla che sia rispettata la sintassi (Deve essere formato da 16 cifre numeriche) di "nI" (Numero identificativo)
 	public static boolean checkNumeroIdentificativo(String nI)
 	{
-		Long num=Long.parseLong(nI);
-		
-		if(num!=null && num>=1000000000000000L && num<10000000000000000L)
-			return true;
-		else
+		if(nI.length()!=16)
 			return false;
+		else
+			return Pattern.matches("[0-9]+",nI);
 	}
 	
-	//da verificare
+	//Controlla che sia rispettata la sintassi (Deve contenere 4 caratteri numerici nel formato “MMAA”) di "date" (Scadenza)
 	public static boolean checkScadenza(String date)
 	{
-		SimpleDateFormat formatter = new SimpleDateFormat("MM-yy");
-		Date scadenza;
-		try {
-			scadenza = formatter.parse(date);
-			return true;
-		} catch (ParseException e) {
-			
-			e.printStackTrace();
+		if(date.length()!=4)
 			return false;
+		int mese=Integer.parseInt(date.substring(0,2));
+		int anno=Integer.parseInt(date.substring(2,4));
+		
+		if(mese>0 && mese<=12 && anno>=20)
+		{
+			return true;
 		}
-	
+		else
+			return false;	
 	}
 	
-	
+	//Controlla che sia rispettata la sintassi (Deve essere formato da 3 caratteri numerici) di "cVV"
 	public static boolean checkCVV(String cVV)
 	{
-		try {
-			int numCvv=Integer.parseInt(cVV);
-			if(numCvv>99 && numCvv<1000)
-				return true;
-		}catch(Exception e) {}
-		
-		return false;
+		if(cVV.length()!=3)
+			return false;
+		else
+			return Pattern.matches("[0-9]+",cVV);
 		
 	}
 	

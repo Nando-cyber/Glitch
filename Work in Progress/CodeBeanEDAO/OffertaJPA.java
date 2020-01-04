@@ -15,7 +15,7 @@ public class OffertaJPA implements OffertaDAO{
 	@Inject
 	private EntityManager em;
 
-	//Rende l'offerta "off" passata come parametro persistente
+	//Rende l'offerta "off" (passata come parametro) persistente
 	public void createOfferta(Offerta off) {
 		
 		em.persist(off);

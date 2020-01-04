@@ -35,8 +35,10 @@ public class Videogioco extends Prodotto{
 	private String genere;
 	private String piattaforma;
 	
+	//Costruttore vuoto
 	public Videogioco() {}
 	
+	//Costruisce un obj "Videogioco" passando come argomento il path dell'immagine, il prezzo, la descrizione, il nome, il genere e la piattaforma
 	public Videogioco(String immagine, double prezzo, String descrizione, String nome, String genere, String piattaforma)
 	{
 		super(immagine,prezzo,descrizione);
@@ -45,27 +47,32 @@ public class Videogioco extends Prodotto{
 		this.setPiattaforma(piattaforma);
 	}
 
-	
+	//Restituisce la piattaforma del videogioco
 	public String getPiattaforma() {
 		return piattaforma;
 	}
 
+	//Modifica la piattaforma del videogioco
 	public void setPiattaforma(String piattaforma) {
 		this.piattaforma = piattaforma;
 	}
 
+	//Restituisce il nome del videogioco
 	public String getNome() {
 		return nome;
 	}
 
+	//Modifica il nome del videogioco
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	//Restituisce il genere del videogioco
 	public String getGenere() {
 		return genere;
 	}
 
+	//Modifica il nome del videogioco
 	public void setGenere(String genere) {
 		this.genere = genere;
 	}
