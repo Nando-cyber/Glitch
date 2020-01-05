@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 
 import static model.Carrello.FIND_BY_UTENTE;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
@@ -17,12 +19,13 @@ public class Carrello {
 
 	public static final String FIND_BY_UTENTE = "model.Carrello.FIND_BY_UTENTE";
 	
+	
 	@Id
 	private String utenteUsername;
 	@Id
 	private String utenteEmail;
 	
-	
+	@ElementCollection
 	private LinkedHashMap<Integer, ProdottoQuantita> prodotti = new LinkedHashMap<>();
 
 	//Restituisce la Collection di prodotti nel carrello

@@ -68,5 +68,11 @@ public class ValidazioneUtente {
 		
 	}
 	
+	//Controlla che sia rispettata la sintassi (Deve contenere caratteri alfabetici e la prima lettera deve essere in maiuscolo) di "ruolo"
+	public static boolean checkRuolo(String ruolo)
+	{
+		return Pattern.matches("[A-Za-z]+",ruolo) && Pattern.matches("[A-Z]+",ruolo.subSequence(0, 1));
+		
+	}
 	
 }

@@ -3,7 +3,7 @@ package model;
 import static model.CartaDiCredito.FIND_BY_NUMCARTA;
 import static model.CartaDiCredito.FIND_BY_UTENTE;
 
-import java.util.Date;
+
 import java.util.GregorianCalendar;
 
 import javax.persistence.Entity;
