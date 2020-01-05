@@ -16,7 +16,7 @@ import model.RichiestaJPA;
 import model.Utente;
 
 /**
- * Servlet implementation class AcquistoServlet
+ *AcquistoServlet permette la gestione dell'acuisto dei prodotti inseriti nel carrello
  */
 @WebServlet("/AcquistoServlet")
 public class AcquistoServlet extends HttpServlet {
@@ -35,17 +35,24 @@ public class AcquistoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		//Si prendono dalla Session Utente e Ordine
 		Utente u  = (Utente) request.getSession().getAttribute("utente");
 		Ordine o = (Ordine) request.getSession().getAttribute("ordine");
+		//Si verifica che l'Utente abbia una carta di credito
 		if(u.getCartaDiCredito() == null) {
 			
+			//In caso di assenza si esegue la forword alla pagina InserimentoCarta
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/InserimentoCarta.jsp");
 			requestDispatcher.forward(request, response);
 		}
 		
 		else {
 			
+			//Altrimenti si procede alla compilazione automatica di una mail di conferma ordine
 			Richiesta mail = new Richiesta();
+			
+			//Si settano i dati relativi alla Richiesta
 			mail.setDestinatario(u.getEmail());
 			mail.setStato(false);
 			mail.setUtenteEmail("generatedAutomaticMailOrder@live.com");
@@ -55,9 +62,13 @@ public class AcquistoServlet extends HttpServlet {
 					+ " Verrà avvisato della spedizione il prima possibile."
 					+ "/n Grazie di aver scelto GLITCH!"  );
 			
+			//Si rende il bean persistente
 			rDAO.createRichiesta(mail);
 			
+			//Si setta un attributo "email" a true nella request per mostrare un pop up di invio email
 			request.setAttribute("email", true);
+			
+			//Si esegue la forward alla pagina Home del sito
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/home.jsp");
 			requestDispatcher.forward(request, response);
 		}

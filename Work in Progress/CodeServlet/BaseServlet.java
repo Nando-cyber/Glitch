@@ -46,7 +46,7 @@ public class BaseServlet extends HttpServlet {
 		List<Console> console = consoleDAO.doRetriveConsoleAllRange(0, 20);
 		request.setAttribute("console", console);
 		
-		//Si passano la request con i dati precedentemente settati e la response
+		//Si esegue la forward  con i dati precedentemente settati nella request 
 		//alla home.jsp che provvederà a mostrare i prodotti
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/home.jsp");

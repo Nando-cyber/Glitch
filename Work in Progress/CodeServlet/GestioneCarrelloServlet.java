@@ -95,8 +95,10 @@ public class GestioneCarrelloServlet extends HttpServlet {
 			//si aggiorna il carrello in DB
 			cDAO.updateCarrello(car);
 
-			//si setta il carrello modificato nella sessione e si ritorna alla pagina carrello
+			//si setta il carrello modificato nella sessione 
 			request.getSession().setAttribute("carrello", car );
+			
+			//Si esegue la forward alla pagina Carrello del sito
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/Carrello.jsp");
 			requestDispatcher.forward(request, response);
 

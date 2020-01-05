@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -162,6 +164,9 @@ public class GestioneProdottoServlet extends HttpServlet {
 			//si rimuove da DB il prodotto
 			pDAO.removeProdotto(p);			
 		}
+		//Si esegue la forward alla pagina GestioneProdotti del sito
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/GestioneProdotti.jsp");
+		requestDispatcher.forward(request, response);
 
 	}
 

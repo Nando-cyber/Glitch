@@ -20,7 +20,8 @@ import model.ValidazioneCartaDiCredito;
 import model.ValidazioneUtente;
 
 /**
- * 
+ * InserimentoCartaServlet permette di gestire l'inserimento 
+ * di una carta di credito da parte dell'utente
  */
 @WebServlet("/InserimentoCartaServlet")
 public class InserimentoCartaServlet extends HttpServlet {
@@ -39,9 +40,10 @@ public class InserimentoCartaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//Si prende l'Utente dalla Sessione
 		Utente u = (Utente) request.getSession().getAttribute("utente");
 		
+		//Si prendono dalla request tutti i dati della Carta di Credito
 		String numero = request.getParameter("numero");
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
@@ -49,6 +51,8 @@ public class InserimentoCartaServlet extends HttpServlet {
 		String scadenzaAnno = request.getParameter("scadenzaAnno");
 		String CVV = request.getParameter("cvv");
 		
+		//Si verifica la loro correttezza del formato, 
+		//in caso di errore si lancia un'eccezione con relativo messaggio di errore 
 		if ( !ValidazioneCartaDiCredito.checkNumeroIdentificativo(numero)) {
 			throw new MyServletException("Formato Numero Identificativo Carta Errato.");
 		}
@@ -58,17 +62,18 @@ public class InserimentoCartaServlet extends HttpServlet {
 		if ( !ValidazioneCartaDiCredito.checkCognome(cognome)) {
 			throw new MyServletException("FormatoCognome Intestatario Carta Errato.");
 		}
-		if ( !ValidazioneCartaDiCredito.checkScadenzaMese(scadenzaMese)) {
+		if ( !ValidazioneCartaDiCredito.checkMeseScadenza(scadenzaMese)) {
 			throw new MyServletException("Formato Scadenza Carta Errato.");
 		}
-		if ( !ValidazioneCartaDiCredito.checkScadenzaAnno(scadenzaAnno)) {
+		if ( !ValidazioneCartaDiCredito.checkAnnoScadenza(scadenzaAnno)) {
 			throw new MyServletException("Formato Scadenza Carta Errato.");
 		}
 		if ( !ValidazioneCartaDiCredito.checkCVV(CVV)) {
 			throw new MyServletException("Formato CVV Carta Errato.");
 		}
 		
-		CartaDiCredito carta = new CartaDiCredito();
+		//Si crea il bean CartaDiCredito e si settano i dati
+		CartaDiCredito carta = new CartaDiCredito(); 
 		
 		carta.setUtenteUsername(u.getUsername());
 		carta.setUtenteEmail(u.getEmail());
@@ -81,14 +86,17 @@ public class InserimentoCartaServlet extends HttpServlet {
 		
 		carta.setCvv(Integer.parseInt(CVV));
 		
+		//Si rende persistente il bean CartaDiCredito
 		cartaDAO.createCartaDiCredito(carta);
 		
+		//Si setta la Carta nel bean Utente e si aggiorna quest'ultimo in DB
 		u.setCartaDiCredito(carta);
 		uDAO.updateUtente(u);
 		
+		//Si inserisce l'utente aggiornato nella Sessione
 		request.getSession().setAttribute("utente", u);
 		
-
+		//Si esegue il forward alla pagina RiepilogoOrdine
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/RiepilogoOrdine.jsp");
 		requestDispatcher.forward(request, response);
 	}

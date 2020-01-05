@@ -57,6 +57,7 @@ public class RiepilogoOrdineServlet extends HttpServlet {
 			request.getSession().setAttribute("ordine", ordine);
 			request.getSession().setAttribute("carrello", car );
 			
+			//Si esegue la forward alla pagina RiepilogoOrdine del sito
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/RiepilogoOrdine.jsp");
 			requestDispatcher.forward(request, response);
 	}

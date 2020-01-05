@@ -113,7 +113,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			
 			request.getSession().setAttribute("carrello", carrello);
 			
-			//Conclusa la registrazione, ritorno a Registrazione.jsp 
+			//Conclusa la registrazione, si fa la forward alla pagina Registrazionedel sito
 			//mostrando un messaggio di avvenuto successo
 			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/Registrazione.jsp");

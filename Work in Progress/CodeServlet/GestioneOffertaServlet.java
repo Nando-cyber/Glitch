@@ -4,6 +4,7 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -159,6 +160,9 @@ public class GestioneOffertaServlet extends HttpServlet {
 				}
 			}
 		}
+		//Si esegue la forward alla pagina GestioneOfferte del sito
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/GestioneOfferte.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 
