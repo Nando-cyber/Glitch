@@ -7,10 +7,11 @@ import java.util.LinkedHashMap;
 
 import static model.Carrello.FIND_BY_UTENTE;
 
-import javax.persistence.ElementCollection;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQuery(name = FIND_BY_UTENTE, query = "SELECT b FROM Carrello b WHERE b.utenteUsername = :utenteUsername")
@@ -25,7 +26,8 @@ public class Carrello {
 	@Id
 	private String utenteEmail;
 	
-	@ElementCollection
+	//Fonte: Java Persistence/OneToMany Wikipedia en
+	@OneToMany(mappedBy="utenteUsername")
 	private LinkedHashMap<Integer, ProdottoQuantita> prodotti = new LinkedHashMap<>();
 
 	//Restituisce la Collection di prodotti nel carrello
@@ -48,7 +50,7 @@ public class Carrello {
 
 	//Inserisce un prodotto e la sua quantità nel carrello
 	public void put(Prodotto prodotto, int quantita) {
-		prodotti.put(prodotto.getId(), new ProdottoQuantita(prodotto, quantita));
+		prodotti.put(prodotto.getId(), new ProdottoQuantita(prodotto, quantita,utenteUsername));
 	}
 
 	//Rimuove un prodotto avente "prodId" come id dal carrello
