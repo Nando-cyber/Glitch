@@ -35,6 +35,7 @@ public class Ordine {
 	private String email;
 	private GregorianCalendar dataOrdinazione=new GregorianCalendar(new Locale("it", "IT"));
 	private Collection<ProdottoQuantita> prodottiAcquistati;
+	private float prezzoTot;
 	
 	//Costruttore vuoto
 	public Ordine() {
@@ -48,7 +49,8 @@ public class Ordine {
 		
 		//Estrae i prodotti dal carrello e li memorizza nella collection "prodottiAcquistati"
 		this.setProdottiAcquistati(cart.getProdotti());
-
+		
+		this.prezzoTot = Float.parseFloat(cart.getPrezzoTotProdotti());
 	}
 	
 	//Restituisce l'id dell'ordine
@@ -77,7 +79,9 @@ public class Ordine {
 		this.prodottiAcquistati = prodottiAcquistati;
 	}
 
-	
+	public float getPrezzoTot() {
+		return this.prezzoTot;
+	}
 
 
 }

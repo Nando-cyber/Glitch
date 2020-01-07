@@ -18,4 +18,7 @@ public interface RichiestaDAO{
 	
 	//Restituisce una richiesta avente per id l'intero passato come argomento
 	Richiesta retriveById(int id);
+	
+	//Restituisce una lista di richieste avente per destinatario la stringa passata come argomento
+	List<Richiesta> retriveByDestinatario(String email);
 }

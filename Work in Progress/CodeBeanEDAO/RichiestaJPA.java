@@ -43,5 +43,14 @@ public class RichiestaJPA implements RichiestaDAO{
         query.setParameter("id", id); //parameters by name 
         return query.getSingleResult();
 	}
+
+	@Override
+	public List<Richiesta> retriveByDestinatario(String email) {
+		TypedQuery<Richiesta> query = em.createNamedQuery(Richiesta.FIND_BY_DESTINATARIO, Richiesta.class);
+        query.setParameter("destinatario", email); //parameters by name 
+        return query.getResultList();
+		
+		
+	}
 	
 }
