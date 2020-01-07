@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -47,6 +49,13 @@ public class UtenteJPA implements UtenteDAO{
 		TypedQuery<Utente> query = em.createNamedQuery(Utente.FIND_BY_Email, Utente.class);
         query.setParameter("email", email); //parameters by name 
         return query.getSingleResult();
+	}
+	
+	//Restituisce la lista degli utenti presenti nel database
+	public List<Utente> retriveAllUtenti()
+	{
+		TypedQuery<Utente> query = em.createNamedQuery(Utente.FIND_ALL, Utente.class);
+        return query.getResultList();
 	}
 	
 }

@@ -1,6 +1,7 @@
 package model;
 
 import static model.Richiesta.FIND_BY_EMAIL_MITTENTE;
+import static model.Richiesta.FIND_BY_DESTINATARIO;
 import static model.Richiesta.FIND_BY_ID;
 
 import javax.persistence.Entity;
@@ -13,12 +14,14 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
         @NamedQuery(name = FIND_BY_EMAIL_MITTENTE, query = "SELECT b FROM Richiesta b WHERE b.utenteEmail = :email"),
-        @NamedQuery(name = FIND_BY_ID, query = "SELECT b FROM Richiesta b WHERE b.id = :id")
+        @NamedQuery(name = FIND_BY_ID, query = "SELECT b FROM Richiesta b WHERE b.id = :id"),
+        @NamedQuery(name = FIND_BY_DESTINATARIO, query = "SELECT b FROM Richiesta b WHERE b.destinatario = :destinatario")
 })
 public class Richiesta {
 
 	public static final String FIND_BY_EMAIL_MITTENTE = "model.Richiesta.FIND_BY_EMAIL_MITTENTE";
 	public static final String FIND_BY_ID = "model.Richiesta.FIND_BY_ID";
+	public static final String FIND_BY_DESTINATARIO = "model.Richiesta.FIND_BY_DESTINATARIO";
 	
 	@Id @GeneratedValue
 	private int id;

@@ -4,11 +4,10 @@ package model;
 import static model.Ordine.FIND_BY_USERNAME;
 import static model.Ordine.FIND_BY_ID;
 
-import java.sql.Date;
-import java.util.Calendar;
+
 import java.util.Collection;
+import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.TimeZone;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,8 +33,9 @@ public class Ordine {
 	private String username;
 	@Id
 	private String email;
-	private Date dataOrdinazione= (Date) Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY).getTime();
+	private GregorianCalendar dataOrdinazione=new GregorianCalendar(new Locale("it", "IT"));
 	private Collection<ProdottoQuantita> prodottiAcquistati;
+	private float prezzoTot;
 	
 	//Costruttore vuoto
 	public Ordine() {
@@ -49,7 +49,8 @@ public class Ordine {
 		
 		//Estrae i prodotti dal carrello e li memorizza nella collection "prodottiAcquistati"
 		this.setProdottiAcquistati(cart.getProdotti());
-
+		
+		this.prezzoTot = Float.parseFloat(cart.getPrezzoTotProdotti());
 	}
 	
 	//Restituisce l'id dell'ordine
@@ -59,12 +60,12 @@ public class Ordine {
 	}
 
 	//Restituisce la data dell'ordine effettuato
-	public Date getDataOrdinazione() {
+	public GregorianCalendar getDataOrdinazione() {
 		return dataOrdinazione;
 	}
 
 	//Modifica la data dell'ordine effettuato
-	public void setDataOrdinazione(Date dataOrdinazione) {
+	public void setDataOrdinazione(GregorianCalendar dataOrdinazione) {
 		this.dataOrdinazione = dataOrdinazione;
 	}
 
@@ -78,7 +79,9 @@ public class Ordine {
 		this.prodottiAcquistati = prodottiAcquistati;
 	}
 
-	
+	public float getPrezzoTot() {
+		return this.prezzoTot;
+	}
 
 
 }

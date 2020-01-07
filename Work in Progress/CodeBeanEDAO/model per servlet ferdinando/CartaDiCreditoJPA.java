@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 
 @Stateless
 @LocalBean
-public class CartaDiCreditoJPA {
+public class CartaDiCreditoJPA implements CartaDiCreditoDAO{
 
 	@Inject
 	private EntityManager em;

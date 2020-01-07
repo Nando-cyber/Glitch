@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 @Remote
@@ -19,4 +21,7 @@ public interface UtenteDAO {
 	
 	//Restituisce l'utente avete come email la stringa passata come argomento
 	Utente retriveByEmail(String email);
+	
+	//Restituisce la lista degli utenti presenti nel database
+	List<Utente> retriveAllUtenti();
 }

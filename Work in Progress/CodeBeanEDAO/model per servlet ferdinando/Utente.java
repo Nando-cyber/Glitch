@@ -2,6 +2,9 @@ package model;
 
 import static model.Utente.FIND_ALL;
 import static model.Utente.FIND_BY_User;
+
+import java.util.ArrayList;
+
 import static model.Utente.FIND_BY_Email;
 
 import javax.persistence.Entity;
@@ -16,6 +19,7 @@ import javax.security.enterprise.credential.Password;
         @NamedQuery(name = FIND_ALL, query = "SELECT x FROM Utente b"),
         @NamedQuery(name = FIND_BY_User, query = "SELECT b FROM Utente b WHERE b.username = :username"),
         @NamedQuery(name = FIND_BY_Email, query = "SELECT b FROM Utente b WHERE b.email = :email")
+        
 })
 public class Utente {
 
@@ -36,7 +40,7 @@ public class Utente {
 	private String citta;
 	private String via;
 	private int numero;
-	private String ruolo=null;
+	private ArrayList<String> ruolo;
 	
 	//Costruttore vuoto
 	public Utente() {}
@@ -157,14 +161,34 @@ public class Utente {
 		this.via = via;
 	}
 
-	//Restituisce il ruolo dell'utente
-	public String getRuolo() {
+	//Restituisce la lista con i ruoli dell'utente
+	public ArrayList<String> getRuolo() {
 		return ruolo;
 	}
 
-	//Modifica il ruolo dell'utente
-	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
+	//Modifica il ruolo dell'utente, ritorna false se l'utente ha più di 3 ruoli o se è già presente quel ruolo in "utente"
+	public Boolean setRuolo(String ruoloDaIns) {
+		
+		if(ruolo.size()>3)
+		{
+			return false;
+		}
+			
+		else if (ruolo.contains(ruoloDaIns))
+		{
+			return false;
+		}
+			
+		else{
+			ruolo.add(ruoloDaIns);
+			return true;
+			}
+	}
+	
+	//Rimuove il ruolo passato come argomento dalla lista di ruoli dell'utente
+	public void removeRuolo(String ruoloDaRim)
+	{
+		ruolo.remove(ruoloDaRim);
 	}
 
 	//Restituisce la carta di credito dell'utente

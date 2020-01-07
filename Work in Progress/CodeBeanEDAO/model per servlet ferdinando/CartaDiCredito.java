@@ -3,7 +3,8 @@ package model;
 import static model.CartaDiCredito.FIND_BY_NUMCARTA;
 import static model.CartaDiCredito.FIND_BY_UTENTE;
 
-import java.util.Date;
+
+import java.util.GregorianCalendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class CartaDiCredito {
 	private String utenteEmail;
 	private String nome;
 	private String cognome;
-	private Date scadenza;
+	private GregorianCalendar scadenza;
 	private int cvv;
 	
 	//Costruttore vuoto
@@ -40,7 +41,7 @@ public class CartaDiCredito {
 	
 	//Costruisce una carta di credito passando come argomento il numero della carta, 
 	//l'username dell'utente, l'email, nome, cognome, la scadenza e il cvv della carta di credito
-	public CartaDiCredito(int numeroCarta,String utenteUsername,String utenteEmail, String nome, String cognome, Date scadenza, int cvv)
+	public CartaDiCredito(int numeroCarta,String utenteUsername,String utenteEmail, String nome, String cognome, GregorianCalendar scadenza, int cvv)
 	{
 		this.numeroCarta=numeroCarta;
 		this.utenteUsername=utenteUsername;
@@ -70,12 +71,12 @@ public class CartaDiCredito {
 	}
 
 	//Restituisce la scadenza della carta di credito
-	public Date getScadenza() {
+	public GregorianCalendar getScadenza() {
 		return scadenza;
 	}
 
 	//Modfifica la scadenza della carta di credito
-	public void setScadenza(Date scadenza) {
+	public void setScadenza(GregorianCalendar scadenza) {
 		this.scadenza = scadenza;
 	}
 
