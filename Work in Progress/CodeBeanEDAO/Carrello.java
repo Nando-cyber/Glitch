@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 
 import static model.Carrello.FIND_BY_UTENTE;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -30,7 +31,7 @@ public class Carrello {
 	private String utenteEmail;
 	
 	
-	@OneToMany
+	@OneToMany (cascade = {CascadeType.ALL})
 	private LinkedHashMap<Integer, ProdottoQuantita> prodotti = new LinkedHashMap<>();
 
 	//Restituisce la Collection di prodotti nel carrello

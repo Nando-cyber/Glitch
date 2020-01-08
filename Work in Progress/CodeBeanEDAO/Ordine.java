@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class Ordine {
 	@Column(name="dataOrdinazione", nullable=false)
 	private GregorianCalendar dataOrdinazione=new GregorianCalendar(new Locale("it", "IT"));
 	
-	@OneToMany
+	@OneToMany (cascade = {CascadeType.ALL})
 	private Collection<ProdottoQuantita> prodottiAcquistati;
 	
 	@Column(name="prezzoTot", nullable=false)
