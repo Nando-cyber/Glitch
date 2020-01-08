@@ -4,6 +4,7 @@ import static model.Richiesta.FIND_BY_EMAIL_MITTENTE;
 import static model.Richiesta.FIND_BY_DESTINATARIO;
 import static model.Richiesta.FIND_BY_ID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,12 +25,23 @@ public class Richiesta {
 	public static final String FIND_BY_DESTINATARIO = "model.Richiesta.FIND_BY_DESTINATARIO";
 	
 	@Id @GeneratedValue
+	@Column(name="id", nullable=false)
 	private int id;
+	
 	@Id
+	@Column(name="utenteEmail", nullable=false)
 	private String utenteEmail;
+	
+	@Column(name="utenteUsername", nullable=false)
 	private String utenteUsername;
+	
+	@Column(name="destinatario", nullable=false)
 	private String destinatario;
+	
+	@Column(name="descrizione", nullable=false)
 	private String descrizione;
+	
+	@Column(name="stato", nullable=false)
 	private Boolean stato=false;
 	
 	//Costruttore vuoto

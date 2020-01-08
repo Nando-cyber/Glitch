@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import static model.Utente.FIND_BY_Email;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -27,19 +28,42 @@ public class Utente {
 	public static final String FIND_ALL = "model.Utente.FIND_ALL";
     public static final String FIND_BY_User = "model.Utente.FIND_BY_User";
     public static final String FIND_BY_Email = "model.Utente.FIND_BY_Email";
+    
     @Id
+    @Column(name="username", nullable=false, length=10)
 	private String username;
     @Id
+    @Column(name="email", nullable=false)
 	private String email;
+    
+    @Column(name="cartaDiCredito", nullable=true)
     private CartaDiCredito cartaDiCredito;
+    
+    @Column(name="password", nullable=false, length=15)
 	private Password password;
+    
+    @Column(name="nome", nullable=false)
 	private String nome;
+    
+    @Column(name="cognome", nullable=false)
 	private String cognome;
+    
+    @Column(name="provincia", nullable=false)
 	private String provincia;
+    
+    @Column(name="cap", nullable=false)
 	private int cap;
+    
+    @Column(name="citta", nullable=false)
 	private String citta;
+    
+    @Column(name="via", nullable=false)
 	private String via;
+    
+    @Column(name="numero", nullable=false)
 	private int numero;
+    
+    @Column(name="ruolo", nullable=true)
 	private ArrayList<String> ruolo;
 	
 	//Costruttore vuoto

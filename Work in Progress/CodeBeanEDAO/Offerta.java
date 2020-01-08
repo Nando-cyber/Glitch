@@ -4,7 +4,7 @@ import static model.Offerta.FIND_ALL;
 import static model.Offerta.FIND_BY_CODICE;
 import static model.Offerta.FIND_BY_CATEGORIA;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,9 +25,13 @@ public class Offerta {
     public static final String FIND_BY_CATEGORIA = "model.Offerta.FIND_BY_CATEGORIA";
     
     @Id @GeneratedValue
+    @Column(name="codice", nullable=false)
 	private int codice;
-    private String nome;
+    
+    @Column(name="sconto", nullable=false)
 	private int sconto;
+    
+    @Column(name="categoria", nullable=false)
 	private String categoria;
 	
 	//Costruttore vuoto
@@ -43,14 +47,6 @@ public class Offerta {
 	//Restituisce il codice identificativo dell'offerta
 	public int getCodice() {
 		return codice;
-	}
-	//restituisce il nome dell'offerta
-	public String getNome() {
-		return nome;
-	}
-	//Inserisce il nome dell'offerta
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	//Restituisce il valore dello sconto

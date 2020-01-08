@@ -5,6 +5,7 @@ import static model.Console.FIND_BY_ID;
 import static model.Console.FIND_BY_MODELLO;
 import static model.Console.FIND_BY_CASAPRODUTTRICE;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,8 +27,10 @@ public class Console extends Prodotto{
     public static final String FIND_BY_MODELLO = "model.Console.FIND_BY_MODELLO";
     public static final String FIND_BY_CASAPRODUTTRICE = "model.Console.FIND_BY_CASAPRODUTTRICE";
 	
-    
+    @Column(name="modello", nullable=false)
 	private String modello;
+    
+    @Column(name="casaProduttrice", nullable=false)
 	private String casaProduttrice;
 	
 	//Costruttore vuoto

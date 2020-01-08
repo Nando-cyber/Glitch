@@ -6,6 +6,7 @@ import static model.CartaDiCredito.FIND_BY_UTENTE;
 
 import java.util.GregorianCalendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -25,14 +26,27 @@ public class CartaDiCredito {
 	
 	
 	@Id
+	@Column(name="numeroCarta", nullable=false, length=16)
 	private int numeroCarta;
+	
 	@Id
+	@Column(name="utenteUsername", nullable=false, length=10)
 	private String utenteUsername;
+	
 	@Id
+	@Column(name="utenteEmail", nullable=false)
 	private String utenteEmail;
+	
+	@Column(name="nome", nullable=false)
 	private String nome;
+	
+	@Column(name="cognome", nullable=false)
 	private String cognome;
+	
+	@Column(name="scadenza", nullable=false)
 	private GregorianCalendar scadenza;
+	
+	@Column(name="CVV", nullable=false,length=3)
 	private int cvv;
 	
 	//Costruttore vuoto

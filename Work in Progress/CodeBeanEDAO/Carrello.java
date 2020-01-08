@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 
 import static model.Carrello.FIND_BY_UTENTE;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
@@ -22,12 +22,15 @@ public class Carrello {
 	
 	
 	@Id
+	@Column(name="utenteUsername", nullable=false)
 	private String utenteUsername;
+	
 	@Id
+	@Column(name="utenteEmail", nullable=false)
 	private String utenteEmail;
 	
-	//Fonte: Java Persistence/OneToMany Wikipedia en
-	@OneToMany(mappedBy="utenteUsername")
+	
+	@OneToMany
 	private LinkedHashMap<Integer, ProdottoQuantita> prodotti = new LinkedHashMap<>();
 
 	//Restituisce la Collection di prodotti nel carrello

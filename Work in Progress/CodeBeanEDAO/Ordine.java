@@ -9,11 +9,13 @@ import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
@@ -27,14 +29,24 @@ public class Ordine {
 	public static final String FIND_BY_ID = "model.Ordine.FIND_BY_ID";
 	
 	@Id @GeneratedValue
+	@Column(name="id", nullable=false)
 	private long id;
 	
 	@Id
+	@Column(name="carrelloUtenteUsername", nullable=false)
 	private String username;
+	
 	@Id
+	@Column(name="carrelloUtenteEmail", nullable=false)
 	private String email;
+	
+	@Column(name="dataOrdinazione", nullable=false)
 	private GregorianCalendar dataOrdinazione=new GregorianCalendar(new Locale("it", "IT"));
+	
+	@OneToMany
 	private Collection<ProdottoQuantita> prodottiAcquistati;
+	
+	@Column(name="prezzoTot", nullable=false)
 	private float prezzoTot;
 	
 	//Costruttore vuoto
