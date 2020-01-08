@@ -1,8 +1,8 @@
-package model.bean;
+package model;
 
 
-import static model.bean.Ordine.FIND_BY_USERNAME;
-import static model.bean.Ordine.FIND_BY_ID;
+import static model.Ordine.FIND_BY_USERNAME;
+import static model.Ordine.FIND_BY_ID;
 
 
 import java.util.Collection;
@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
@@ -23,8 +24,8 @@ import javax.persistence.NamedQuery;
 
 public class Ordine {
 
-	public static final String FIND_BY_USERNAME = "model.bean.Ordine.FIND_BY_USERNAME";
-	public static final String FIND_BY_ID = "model.bean.Ordine.FIND_BY_ID";
+	public static final String FIND_BY_USERNAME = "model.Ordine.FIND_BY_USERNAME";
+	public static final String FIND_BY_ID = "model.Ordine.FIND_BY_ID";
 	
 	@Id @GeneratedValue
 	private long id;
@@ -34,8 +35,9 @@ public class Ordine {
 	@Id
 	private String email;
 	private GregorianCalendar dataOrdinazione=new GregorianCalendar(new Locale("it", "IT"));
+	
+	@OneToMany
 	private Collection<ProdottoQuantita> prodottiAcquistati;
-	private float prezzoTot;
 	
 	//Costruttore vuoto
 	public Ordine() {
@@ -49,8 +51,7 @@ public class Ordine {
 		
 		//Estrae i prodotti dal carrello e li memorizza nella collection "prodottiAcquistati"
 		this.setProdottiAcquistati(cart.getProdotti());
-		
-		this.prezzoTot = Float.parseFloat(cart.getPrezzoTotProdotti());
+
 	}
 	
 	//Restituisce l'id dell'ordine
@@ -79,9 +80,7 @@ public class Ordine {
 		this.prodottiAcquistati = prodottiAcquistati;
 	}
 
-	public float getPrezzoTot() {
-		return this.prezzoTot;
-	}
+	
 
 
 }

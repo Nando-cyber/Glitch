@@ -1,9 +1,10 @@
-package model.bean;
+package model;
 
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
+
 
 public class ProdottoQuantita {
 	
@@ -11,7 +12,7 @@ public class ProdottoQuantita {
 	private long id;
 	
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	
 	private String utenteUsername;
 	private Prodotto prodotto;
 	private int quantita;
@@ -36,6 +37,14 @@ public class ProdottoQuantita {
 
 	public double getPrezzoTot() {
 		return quantita * prodotto.getPrezzo();
+	}
+
+	public String getUtenteUsername() {
+		return utenteUsername;
+	}
+
+	public void setUtenteUsername(String utenteUsername) {
+		this.utenteUsername = utenteUsername;
 	}
 
 }

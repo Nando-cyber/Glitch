@@ -1,11 +1,11 @@
-package model.bean;
+package model;
 
 
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
-import static model.bean.Carrello.FIND_BY_UTENTE;
+import static model.Carrello.FIND_BY_UTENTE;
 
 
 import javax.persistence.Entity;
@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 
 public class Carrello {
 
-	public static final String FIND_BY_UTENTE = "model.bean.Carrello.FIND_BY_UTENTE";
+	public static final String FIND_BY_UTENTE = "model.Carrello.FIND_BY_UTENTE";
 	
 	
 	@Id
@@ -27,7 +27,7 @@ public class Carrello {
 	private String utenteEmail;
 	
 	//Fonte: Java Persistence/OneToMany Wikipedia en
-	@OneToMany(mappedBy="utenteUsername")
+	@OneToMany
 	private LinkedHashMap<Integer, ProdottoQuantita> prodotti = new LinkedHashMap<>();
 
 	//Restituisce la Collection di prodotti nel carrello
