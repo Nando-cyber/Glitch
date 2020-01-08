@@ -2,14 +2,15 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Carrello;
-import model.dao.CarrelloDAO;
-import model.dao.CarrelloJPA;
+import model.dao.CarrelloDAO; 
 
 
 
@@ -19,7 +20,8 @@ import model.dao.CarrelloJPA;
 @WebServlet("/Logout")
 public class LogoutServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	private CarrelloDAO carDAO = new CarrelloJPA();
+	@EJB
+	private CarrelloDAO carDAO ;
 	
 	
 	/**

@@ -1,7 +1,11 @@
 package model.dao;
 
+import javax.ejb.Local;
+
+
 import model.bean.Carrello;
 
+@Local
 public interface CarrelloDAO {
 
 	//Rende persistente il carrello "cart"

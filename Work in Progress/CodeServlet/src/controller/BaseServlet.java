@@ -4,7 +4,7 @@ package controller;
 import java.util.List;
 import java.io.IOException;
 
-
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +27,10 @@ import model.dao.VideogiocoJPA;
 @WebServlet("/BaseServlet")
 public class BaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private VideogiocoDAO videoDAO = new VideogiocoJPA();
-    private ConsoleDAO consoleDAO = new ConsoleJPA();
+	@EJB
+	private VideogiocoDAO videoDAO;
+	@EJB
+    private ConsoleDAO consoleDAO;
 
     public BaseServlet() {
         super();

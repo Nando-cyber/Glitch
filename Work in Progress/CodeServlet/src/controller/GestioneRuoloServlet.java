@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import model.bean.Utente;
 import model.bean.ValidazioneUtente;
 import model.dao.UtenteDAO;
-import model.dao.UtenteJPA;
 
 /**
  * GestioneRuoloServlet permette di gestire l'inserimento di un ruolo 
@@ -22,7 +22,8 @@ import model.dao.UtenteJPA;
 @WebServlet("/GestioneRuoloServlet")
 public class GestioneRuoloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UtenteDAO uDAO = new UtenteJPA();
+	@EJB
+	private UtenteDAO uDAO ;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

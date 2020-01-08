@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.GregorianCalendar;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +15,7 @@ import model.bean.CartaDiCredito;
 import model.bean.Utente;
 import model.bean.ValidazioneCartaDiCredito;
 import model.dao.CartaDiCreditoDAO;
-import model.dao.CartaDiCreditoJPA;
 import model.dao.UtenteDAO;
-import model.dao.UtenteJPA;
 
 
 /**
@@ -26,8 +25,10 @@ import model.dao.UtenteJPA;
 @WebServlet("/InserimentoCartaServlet")
 public class InserimentoCartaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private CartaDiCreditoDAO cartaDAO = new CartaDiCreditoJPA();
-    private UtenteDAO uDAO = new UtenteJPA();
+	@EJB
+	private CartaDiCreditoDAO cartaDAO;
+	@EJB
+    private UtenteDAO uDAO;
     /**
      * @see HttpServlet#HttpServlet()
      */

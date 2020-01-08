@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,10 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Carrello;
 import model.bean.Utente;
-import model.dao.CarrelloDAO;
-import model.dao.CarrelloJPA;
-import model.dao.UtenteDAO;
-import model.dao.UtenteJPA;
+import model.dao.CarrelloDAO; 
+import model.dao.UtenteDAO; 
 
 /* LoginServlet gestisce l'accesso al sito. 
  * Verfifica se i dati dell'utente che vuole effettuare l'accesso siano presenti in DB
@@ -22,9 +22,10 @@ import model.dao.UtenteJPA;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private final UtenteDAO utenteDAO = new UtenteJPA();
-	private CarrelloDAO carDAO = new CarrelloJPA();
+	@EJB
+	private  UtenteDAO utenteDAO;
+	@EJB
+	private CarrelloDAO carDAO;
        
     /**
      * @see HttpServlet#HttpServlet()

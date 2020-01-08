@@ -2,9 +2,10 @@ package model.dao;
 
 import model.bean.Console;
 import java.util.List;
-import javax.ejb.Remote;
 
-@Remote
+import javax.ejb.Local; 
+
+@Local
 public interface ConsoleDAO extends ProdottoDAO{
 
 	//Restituisce una lista di tutte le console presenti nel database

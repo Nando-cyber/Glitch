@@ -4,6 +4,7 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,11 +17,8 @@ import model.bean.Offerta;
 import model.bean.ValidazioneOfferta;
 import model.bean.Videogioco;
 import model.dao.ConsoleDAO;
-import model.dao.ConsoleJPA;
 import model.dao.OffertaDAO;
-import model.dao.OffertaJPA;
 import model.dao.VideogiocoDAO;
-import model.dao.VideogiocoJPA;
 
 
 
@@ -30,9 +28,12 @@ import model.dao.VideogiocoJPA;
 @WebServlet("/GestioneOffertaServlet")
 public class GestioneOffertaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private OffertaDAO oDAO = new OffertaJPA();
-	private ConsoleDAO cDAO = new ConsoleJPA();
-	private VideogiocoDAO vDAO = new VideogiocoJPA();
+	@EJB
+	private OffertaDAO oDAO;
+	@EJB
+	private ConsoleDAO cDAO ;
+	@EJB
+	private VideogiocoDAO vDAO;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

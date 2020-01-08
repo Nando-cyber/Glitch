@@ -1,8 +1,8 @@
 package controller;
 
-import java.io.IOException;
-import java.util.List;
+import java.io.IOException; 
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.bean.Richiesta;
 import model.bean.Utente;
 import model.bean.ValidazioneRichiesta;
-import model.dao.RichiestaDAO;
-import model.dao.RichiestaJPA;
+import model.dao.RichiestaDAO; 
 
 /**
  * RichiestaAssistenzaServlet permette di gestire l'invio di una mail di richiesta di assistenza
@@ -22,7 +21,8 @@ import model.dao.RichiestaJPA;
 @WebServlet("/RichiestaAssistenzaServlet")
 public class RichiestaAssistenzaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private RichiestaDAO rDAO = new RichiestaJPA(); 
+	@EJB
+    private RichiestaDAO rDAO; 
     /**
      * @see HttpServlet#HttpServlet()
      */

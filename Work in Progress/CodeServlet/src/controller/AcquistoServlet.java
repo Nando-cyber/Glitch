@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +24,8 @@ import model.dao.RichiestaJPA;
 @WebServlet("/AcquistoServlet")
 public class AcquistoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private RichiestaDAO rDAO = new RichiestaJPA(); 
+	@EJB
+    private RichiestaDAO rDAO; 
     /**
      * @see HttpServlet#HttpServlet()
      */

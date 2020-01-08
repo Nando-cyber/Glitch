@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.security.enterprise.credential.Password;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.bean.Carrello;
 import model.bean.Utente;
 import model.bean.ValidazioneUtente;
-import model.dao.UtenteDAO;
-import model.dao.UtenteJPA;
+import model.dao.UtenteDAO; 
 
 
 
@@ -25,7 +25,8 @@ import model.dao.UtenteJPA;
 @WebServlet("/RegistrazioneServlet")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UtenteDAO utenteDAO = new UtenteJPA();
+	@EJB
+	private UtenteDAO utenteDAO;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

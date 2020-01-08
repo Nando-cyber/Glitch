@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.security.enterprise.credential.Password;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,11 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Utente;
 import model.bean.ValidazioneUtente;
-import model.dao.CarrelloDAO;
-import model.dao.CarrelloJPA;
-import model.dao.UtenteDAO;
-import model.dao.UtenteJPA;
-
+import model.dao.CarrelloDAO; 
+import model.dao.UtenteDAO; 
 
 /**
  * GestioneProfiloServlet permette la gestione della modifica dei dati profilo dell'Utente,
@@ -26,8 +24,10 @@ import model.dao.UtenteJPA;
 @WebServlet("/GestioneProfiloServlet")
 public class GestioneProfiloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UtenteDAO uDAO = new UtenteJPA();
-	private CarrelloDAO cDAO = new CarrelloJPA();
+	@EJB
+	private UtenteDAO uDAO; 
+	@EJB
+	private CarrelloDAO cDAO ;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

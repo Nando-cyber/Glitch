@@ -2,11 +2,11 @@ package model.dao;
 
 import java.util.List;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
 import model.bean.Offerta;
 
-@Remote
+@Local
 public interface OffertaDAO {
 
 	//Rende l'offerta "off" (passata come parametro) persistente

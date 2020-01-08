@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,9 +28,12 @@ import model.dao.ProdottoJPA;
 @WebServlet("/GestioneCarrelloServlet")
 public class GestioneCarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private OrdineDAO oDAO = new OrdineJPA();
-	private CarrelloDAO cDAO = new CarrelloJPA();
-	private ProdottoDAO pDAO = new ProdottoJPA();
+	@EJB
+	private OrdineDAO oDAO ;
+	@EJB
+	private CarrelloDAO cDAO;
+	@EJB
+	private ProdottoDAO pDAO ;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

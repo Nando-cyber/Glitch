@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +14,8 @@ import model.bean.Carrello;
 import model.bean.Ordine;
 import model.bean.Utente;
 import model.dao.CarrelloDAO;
-import model.dao.CarrelloJPA;
 import model.dao.OrdineDAO;
-import model.dao.OrdineJPA;
+
 
 /**
  * RiepilogoOrdineServlet gestisce l'operazione di creazione ordine dei prodotti presenti nel carrello
@@ -23,8 +23,10 @@ import model.dao.OrdineJPA;
 @WebServlet("/RiepilogoOrdineServlet")
 public class RiepilogoOrdineServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private OrdineDAO oDAO = new OrdineJPA();
-	private CarrelloDAO cDAO = new CarrelloJPA();
+	@EJB
+	private OrdineDAO oDAO;
+	@EJB
+	private CarrelloDAO cDAO;
        
     /**
      * @see HttpServlet#HttpServlet()

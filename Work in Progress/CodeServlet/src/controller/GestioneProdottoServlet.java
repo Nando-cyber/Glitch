@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,11 +16,8 @@ import model.bean.ValidazioneConsole;
 import model.bean.ValidazioneVideogioco;
 import model.bean.Videogioco;
 import model.dao.ConsoleDAO;
-import model.dao.ConsoleJPA;
 import model.dao.ProdottoDAO;
-import model.dao.ProdottoJPA;
 import model.dao.VideogiocoDAO;
-import model.dao.VideogiocoJPA;
 
 
 /**
@@ -28,9 +26,12 @@ import model.dao.VideogiocoJPA;
 @WebServlet("/GestioneProdottoServlet")
 public class GestioneProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private VideogiocoDAO vDAO = new VideogiocoJPA();
-	private ProdottoDAO pDAO = new ProdottoJPA(); 
-	private ConsoleDAO cDAO = new ConsoleJPA();
+	@EJB
+	private VideogiocoDAO vDAO;
+	@EJB
+	private ProdottoDAO pDAO; 
+	@EJB
+	private ConsoleDAO cDAO;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

@@ -2,11 +2,11 @@ package model.dao;
 
 import java.util.List;
 
-import javax.ejb.Remote;
+import javax.ejb.Local; 
 
 import model.bean.CartaDiCredito;
 
-@Remote
+@Local
 public interface CartaDiCreditoDAO{
 	
 	//Rende persistente la carta di credito "cdc"
