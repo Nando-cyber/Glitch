@@ -4,7 +4,7 @@ package model;
 import static model.Ordine.FIND_BY_USERNAME;
 import static model.Ordine.FIND_BY_ID;
 
-
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -24,8 +24,10 @@ import javax.persistence.OneToMany;
 			@NamedQuery(name = FIND_BY_ID, query = "SELECT b FROM Ordine b WHERE b.id = :id")
 })
 
-public class Ordine {
+public class Ordine implements Serializable{
 
+	
+	private static final long serialVersionUID = -8005038182957187110L;
 	public static final String FIND_BY_USERNAME = "model.Ordine.FIND_BY_USERNAME";
 	public static final String FIND_BY_ID = "model.Ordine.FIND_BY_ID";
 	

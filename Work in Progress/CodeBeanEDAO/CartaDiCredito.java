@@ -3,7 +3,7 @@ package model;
 import static model.CartaDiCredito.FIND_BY_NUMCARTA;
 import static model.CartaDiCredito.FIND_BY_UTENTE;
 
-
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
@@ -19,8 +19,10 @@ import javax.persistence.NamedQuery;
         @NamedQuery(name = FIND_BY_UTENTE, query = "SELECT b FROM CartaDiCredito b WHERE b.utenteUsername = :user")
       
 })
-public class CartaDiCredito {
+public class CartaDiCredito implements Serializable{
 
+	
+	private static final long serialVersionUID = 7257050865912234075L;
 	public static final String FIND_BY_NUMCARTA = "model.CartaDiCredito.FIND_BY_NUMCARTA";
 	public static final String FIND_BY_UTENTE = "model.CartaDiCredito.FIND_BY_UTENTE";
 	

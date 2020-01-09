@@ -2,6 +2,9 @@ package model;
 
 import static model.Offerta.FIND_ALL;
 import static model.Offerta.FIND_BY_CODICE;
+
+import java.io.Serializable;
+
 import static model.Offerta.FIND_BY_CATEGORIA;
 
 import javax.persistence.Column;
@@ -18,8 +21,12 @@ import javax.persistence.NamedQuery;
         @NamedQuery(name = FIND_BY_CATEGORIA, query = "SELECT b FROM Offerta b WHERE b.categoria = :categoria")
         
 })
-public class Offerta {
+public class Offerta implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1219194802069073185L;
 	public static final String FIND_ALL = "model.Offerta.FIND_ALL";
     public static final String FIND_BY_CODICE = "model.Offerta.FIND_BY_CODICE";
     public static final String FIND_BY_CATEGORIA = "model.Offerta.FIND_BY_CATEGORIA";

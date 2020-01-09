@@ -3,6 +3,9 @@ package model;
 import static model.Console.FIND_ALL;
 import static model.Console.FIND_BY_ID;
 import static model.Console.FIND_BY_MODELLO;
+
+import java.io.Serializable;
+
 import static model.Console.FIND_BY_CASAPRODUTTRICE;
 
 import javax.persistence.Column;

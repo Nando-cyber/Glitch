@@ -2,6 +2,7 @@ package model;
 
 
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
@@ -17,7 +18,11 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQuery(name = FIND_BY_UTENTE, query = "SELECT b FROM Carrello b WHERE b.utenteUsername = :utenteUsername")
 
-public class Carrello {
+public class Carrello implements Serializable{
+
+	
+	private static final long serialVersionUID = 6683852874421452549L;
+
 
 	public static final String FIND_BY_UTENTE = "model.Carrello.FIND_BY_UTENTE";
 	

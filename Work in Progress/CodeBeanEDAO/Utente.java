@@ -3,6 +3,7 @@ package model;
 import static model.Utente.FIND_ALL;
 import static model.Utente.FIND_BY_User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static model.Utente.FIND_BY_Email;
@@ -22,9 +23,11 @@ import javax.security.enterprise.credential.Password;
         @NamedQuery(name = FIND_BY_Email, query = "SELECT b FROM Utente b WHERE b.email = :email")
         
 })
-public class Utente {
+public class Utente implements Serializable{
 
 	
+	
+	private static final long serialVersionUID = 9137639574472324144L;
 	public static final String FIND_ALL = "model.Utente.FIND_ALL";
     public static final String FIND_BY_User = "model.Utente.FIND_BY_User";
     public static final String FIND_BY_Email = "model.Utente.FIND_BY_Email";
