@@ -2,6 +2,7 @@ package model.bean;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,11 +25,20 @@ public class Prodotto implements Serializable{
 	
 	
 	@Id @GeneratedValue
-	private Integer id;
+	@Column(name="ID", nullable=false)
+	private int id;
+	
+	@Column(name="immagine", nullable=false)
 	private String immagine;
+	
+	@Column(name="prezzo", nullable=false)
 	private double prezzo;
+	
+	@Column(name="descrizione", nullable=false)
 	private String descrizione;
 	
+	@Column(name="codiceOfferta", nullable=true)
+	private int codiceOfferta;
 	
 	//Costruttore vuoto
 	public Prodotto() {
@@ -76,6 +86,14 @@ public class Prodotto implements Serializable{
 	//Modifica il prezzo del prodotto
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
+	}
+
+	public int getCodiceOfferta() {
+		return codiceOfferta;
+	}
+
+	public void setCodiceOfferta(int codiceOfferta) {
+		this.codiceOfferta = codiceOfferta;
 	}
 	
 	

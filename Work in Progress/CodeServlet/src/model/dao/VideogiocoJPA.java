@@ -32,7 +32,7 @@ public class VideogiocoJPA extends ProdottoJPA implements VideogiocoDAO {
         return query.getSingleResult();
     }
     
-    //Restituisce una lista limitata di videogiochi compresi tra i valori "min" e "max" passati come parametri
+    //Restituisce una lista limitata di videogiochi che parte da "min" e restituisce "max" risultati
     public List<Videogioco> doRetriveVideogiocoAllRange(int min, int max)
     {
     	TypedQuery<Videogioco> query = em.createNamedQuery(Videogioco.FIND_ALL, Videogioco.class);

@@ -5,6 +5,7 @@ import static model.bean.Console.FIND_BY_ID;
 import static model.bean.Console.FIND_BY_MODELLO;
 import static model.bean.Console.FIND_BY_CASAPRODUTTRICE;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,13 +22,15 @@ public class Console extends Prodotto{
 
 	private static final long serialVersionUID = 4476139777432739883L;
 	
-	public static final String FIND_ALL = "model.bean.Console.FIND_ALL";
-    public static final String FIND_BY_ID = "model.bean.Console.FIND_BYID";
-    public static final String FIND_BY_MODELLO = "model.bean.Console.FIND_BY_MODELLO";
-    public static final String FIND_BY_CASAPRODUTTRICE = "model.bean.Console.FIND_BY_CASAPRODUTTRICE";
+	public static final String FIND_ALL = "model.Console.FIND_ALL";
+    public static final String FIND_BY_ID = "model.Console.FIND_BYID";
+    public static final String FIND_BY_MODELLO = "model.Console.FIND_BY_MODELLO";
+    public static final String FIND_BY_CASAPRODUTTRICE = "model.Console.FIND_BY_CASAPRODUTTRICE";
 	
-    
+    @Column(name="modello", nullable=false)
 	private String modello;
+    
+    @Column(name="casaProduttrice", nullable=false)
 	private String casaProduttrice;
 	
 	//Costruttore vuoto

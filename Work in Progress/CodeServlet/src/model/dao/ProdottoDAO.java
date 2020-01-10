@@ -1,10 +1,10 @@
 package model.dao;
 
-import javax.ejb.Local; 
+import javax.ejb.Remote;
 
 import model.bean.Prodotto;
 
-@Local
+@Remote
 public interface ProdottoDAO {
 
 	//Rende persistente un prodotto "pr" passato come argomento

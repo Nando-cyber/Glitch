@@ -15,9 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.bean.Console;
 import model.bean.Videogioco;
 import model.dao.ConsoleDAO;
-import model.dao.ConsoleJPA;
 import model.dao.VideogiocoDAO;
-import model.dao.VideogiocoJPA;
 
 
 /*BaseServlet permette di inizializzare il catalogo nella home del sito 

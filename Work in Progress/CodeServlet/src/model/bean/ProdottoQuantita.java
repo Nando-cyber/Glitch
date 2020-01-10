@@ -1,6 +1,7 @@
-package model;
+package model.bean;
 
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -12,9 +13,13 @@ public class ProdottoQuantita {
 	private long id;
 	
 	
-	
+	@Column(name="utenteUsername", nullable=false)
 	private String utenteUsername;
+	
+	@Column(name="prodotto", nullable=false)
 	private Prodotto prodotto;
+	
+	@Column(name="quantita", nullable=false)
 	private int quantita;
 
 	public ProdottoQuantita(Prodotto prodotto, int quantita,String utenteUsername) {

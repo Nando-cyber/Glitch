@@ -2,11 +2,8 @@ package model.dao;
 
 import java.util.List;
 
-import javax.ejb.Local;
-
 import model.bean.Ordine;
 
-@Local
 public interface OrdineDAO {
 
 	//Rende persistente un ordine

@@ -3,9 +3,10 @@ package model.bean;
 import static model.bean.CartaDiCredito.FIND_BY_NUMCARTA;
 import static model.bean.CartaDiCredito.FIND_BY_UTENTE;
 
-
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -18,21 +19,36 @@ import javax.persistence.NamedQuery;
         @NamedQuery(name = FIND_BY_UTENTE, query = "SELECT b FROM CartaDiCredito b WHERE b.utenteUsername = :user")
       
 })
-public class CartaDiCredito {
+public class CartaDiCredito implements Serializable{
 
-	public static final String FIND_BY_NUMCARTA = "model.bean.CartaDiCredito.FIND_BY_NUMCARTA";
-	public static final String FIND_BY_UTENTE = "model.bean.CartaDiCredito.FIND_BY_UTENTE";
+	
+	private static final long serialVersionUID = 7257050865912234075L;
+	public static final String FIND_BY_NUMCARTA = "model.CartaDiCredito.FIND_BY_NUMCARTA";
+	public static final String FIND_BY_UTENTE = "model.CartaDiCredito.FIND_BY_UTENTE";
 	
 	
 	@Id
+	@Column(name="numeroCarta", nullable=false, length=16)
 	private int numeroCarta;
+	
 	@Id
+	@Column(name="utenteUsername", nullable=false, length=10)
 	private String utenteUsername;
+	
 	@Id
+	@Column(name="utenteEmail", nullable=false)
 	private String utenteEmail;
+	
+	@Column(name="nome", nullable=false)
 	private String nome;
+	
+	@Column(name="cognome", nullable=false)
 	private String cognome;
+	
+	@Column(name="scadenza", nullable=false)
 	private GregorianCalendar scadenza;
+	
+	@Column(name="CVV", nullable=false,length=3)
 	private int cvv;
 	
 	//Costruttore vuoto

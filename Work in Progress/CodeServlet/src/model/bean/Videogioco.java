@@ -6,6 +6,7 @@ import static model.bean.Videogioco.FIND_BY_NOME;
 import static model.bean.Videogioco.FIND_BY_GENERE;
 import static model.bean.Videogioco.FIND_BY_PIATTAFORMA;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,15 +25,19 @@ public class Videogioco extends Prodotto{
 
 	private static final long serialVersionUID = -6046814043777851758L;
 	
-	public static final String FIND_ALL = "model.bean.Videogioco.FIND_ALL";
-    public static final String FIND_BYID = "model.bean.Videogioco.FIND_BYID";
-    public static final String FIND_BY_NOME = "model.bean.Videogioco.FIND_BY_NOME";
-    public static final String FIND_BY_GENERE = "model.bean.Videogioco.FIND_BY_GENERE";
-    public static final String FIND_BY_PIATTAFORMA = "model.bean.Videogioco.FIND_BY_PIATTAFORMA";
+	public static final String FIND_ALL = "model.Videogioco.FIND_ALL";
+    public static final String FIND_BYID = "model.Videogioco.FIND_BYID";
+    public static final String FIND_BY_NOME = "model.Videogioco.FIND_BY_NOME";
+    public static final String FIND_BY_GENERE = "model.Videogioco.FIND_BY_GENERE";
+    public static final String FIND_BY_PIATTAFORMA = "model.Videogioco.FIND_BY_PIATTAFORMA";
 
-	
+    @Column(name="nome", nullable=false)
 	private String nome;
+    
+    @Column(name="genere", nullable=false)
 	private String genere;
+    
+    @Column(name="piattaforma", nullable=false)
 	private String piattaforma;
 	
 	//Costruttore vuoto

@@ -1,14 +1,16 @@
-package model;
+package model.bean;
 
 
-import static model.Ordine.FIND_BY_USERNAME;
-import static model.Ordine.FIND_BY_ID;
+import static model.bean.Ordine.FIND_BY_USERNAME;
+import static model.bean.Ordine.FIND_BY_ID;
 
-
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,22 +24,33 @@ import javax.persistence.OneToMany;
 			@NamedQuery(name = FIND_BY_ID, query = "SELECT b FROM Ordine b WHERE b.id = :id")
 })
 
-public class Ordine {
+public class Ordine implements Serializable{
 
+	
+	private static final long serialVersionUID = -8005038182957187110L;
 	public static final String FIND_BY_USERNAME = "model.Ordine.FIND_BY_USERNAME";
 	public static final String FIND_BY_ID = "model.Ordine.FIND_BY_ID";
 	
 	@Id @GeneratedValue
+	@Column(name="id", nullable=false)
 	private long id;
 	
 	@Id
+	@Column(name="carrelloUtenteUsername", nullable=false)
 	private String username;
+	
 	@Id
+	@Column(name="carrelloUtenteEmail", nullable=false)
 	private String email;
+	
+	@Column(name="dataOrdinazione", nullable=false)
 	private GregorianCalendar dataOrdinazione=new GregorianCalendar(new Locale("it", "IT"));
 	
-	@OneToMany
+	@OneToMany (cascade = {CascadeType.ALL})
 	private Collection<ProdottoQuantita> prodottiAcquistati;
+	
+	@Column(name="prezzoTot", nullable=false)
+	private float prezzoTot;
 	
 	//Costruttore vuoto
 	public Ordine() {
@@ -51,7 +64,8 @@ public class Ordine {
 		
 		//Estrae i prodotti dal carrello e li memorizza nella collection "prodottiAcquistati"
 		this.setProdottiAcquistati(cart.getProdotti());
-
+		
+		this.prezzoTot = Float.parseFloat(cart.getPrezzoTotProdotti());
 	}
 	
 	//Restituisce l'id dell'ordine
@@ -80,7 +94,9 @@ public class Ordine {
 		this.prodottiAcquistati = prodottiAcquistati;
 	}
 
-	
+	public float getPrezzoTot() {
+		return this.prezzoTot;
+	}
 
 
 }

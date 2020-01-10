@@ -2,11 +2,11 @@ package model.dao;
 
 import java.util.List;
 
-import javax.ejb.Local; 
+import javax.ejb.Remote;
 
 import model.bean.Videogioco;
 
-@Local
+@Remote
 public interface VideogiocoDAO extends ProdottoDAO{
 	
 	//Restituisce una lista di tutti i videogiochi presenti nel database

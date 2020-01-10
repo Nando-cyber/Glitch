@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -46,7 +47,7 @@ public class ConsoleJPA extends ProdottoJPA implements ConsoleDAO{
         return query.getResultList();
     }
     
-    //Restituisce una lista limitata di console comprese tra i valori "min" e "max" passati come argomento
+    //Restituisce una lista limitata di console che parte da "min" e restituisce "max" risultati
     public List<Console> doRetriveConsoleAllRange(int min, int max)
     {
     	TypedQuery<Console> query = em.createNamedQuery(Console.FIND_ALL, Console.class);

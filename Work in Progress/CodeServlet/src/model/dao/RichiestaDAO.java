@@ -2,11 +2,11 @@ package model.dao;
 
 import java.util.List;
 
-import javax.ejb.Local; 
+import javax.ejb.Remote;
 
 import model.bean.Richiesta;
 
-@Local
+@Remote
 public interface RichiestaDAO{
 
 	//Rende persistente una richiesta "rc"

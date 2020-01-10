@@ -2,11 +2,11 @@ package model.dao;
 
 import java.util.List;
 
-import javax.ejb.Local; 
+import javax.ejb.Remote;
 
 import model.bean.Utente;
 
-@Local
+@Remote
 public interface UtenteDAO {
 
 	//Rende persistente l'utente "u" passato come argomento
