@@ -1,19 +1,16 @@
 package model.bean;
 
-
+import java.sql.Date;
 import java.util.GregorianCalendar;
 
 public class CartaDiCredito{
 
 
 	private int numeroCarta;
-	
-	
 	private String utenteUsername;
 	private String utenteEmail;
 	private String nome;
 	private String cognome;
-
 	private GregorianCalendar scadenza;
 	private int cvv;
 	
@@ -60,6 +57,14 @@ public class CartaDiCredito{
 	//Modfifica la scadenza della carta di credito
 	public void setScadenza(GregorianCalendar scadenza) {
 		this.scadenza = scadenza;
+	}
+	
+	public Date getScadenzaDate() {
+		return (Date) scadenza.getTime();
+	}
+	
+	public void setScadenzaDate(Date scadenza) {
+		this.scadenza.setTime(scadenza);
 	}
 
 	//Restituisce il nome dell'utente associato alla carta di credito

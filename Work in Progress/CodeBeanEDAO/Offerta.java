@@ -10,29 +10,28 @@ public class Offerta{
 	private String categoria;
 	private String nome;
 	
-    //Restituisce il nome dell'offerta
-	public String getNome() {
-		return nome;
-	}
-	
-	//Modifica il nome dell'offerta
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+   
 
 	//Costruttore vuoto
 	public Offerta() {}
 	
 	//Costruisce un oggetto "offerta" passando come argomento il suo codice, lo sconto e la categoria
-	public Offerta(int sconto,String categoria)
+	public Offerta(int codice,int sconto,String categoria, String nome)
 	{
+		this.codice=codice;
 		this.sconto=sconto;
 		this.categoria=categoria;
+		this.nome=nome;
 	}
 
 	//Restituisce il codice identificativo dell'offerta
 	public int getCodice() {
 		return codice;
+	}
+	
+	public void setCodice(int codice)
+	{
+		this.codice=codice;
 	}
 
 	//Restituisce il valore dello sconto
@@ -54,4 +53,16 @@ public class Offerta{
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
+	
+	 //Restituisce il nome dell'offerta
+		public String getNome() {
+			return nome;
+		}
+		
+		//Modifica il nome dell'offerta
+		public void setNome(String nome) {
+			this.nome = nome;
+		}
+	
+	
 }

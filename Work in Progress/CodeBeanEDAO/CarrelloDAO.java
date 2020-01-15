@@ -1,16 +1,22 @@
-package model;
+package model.dao;
+
+import model.bean.Carrello;
 
 public interface CarrelloDAO {
 
-	//Rende persistente il carrello "cart"
+	//Restituisce il carrello dell'utente avente come username la stringa passata come argomento
+	Carrello retriveByUtente(String user);
+	
+	//Memorizza il carrello passato come argomento nel database
 	void createCarrello(Carrello cart);
 	
-	//Rende persistenti gli aggiornamenti sul carrello
-	void updateCarrello(Carrello cart);
+	//Aggiorna la quantità dell'oggetto carrello nel database
+	void doUpdate(int prodId, String utenteUsername, String utenteEmail, int quantita);
 	
-	//Rimuove il carrello dell'utente con username "user" dal DataBase
-	void removeCarrello(String user);
+	//Rimuove l'oggetto carrello dell'utente avente come id l'intero passato come argomento 
+	void doDelete(int prodId, String utenteUsername, String utenteEmail);
 	
-	//Restituisce il carrello del utente avente come username "user"
-	Carrello retriveByUtente(String user);
+	//Rimuove tutti gli oggetti carrello dell'utente
+	void removeCarrello(String utenteUsername, String utenteEmail);
+	
 }

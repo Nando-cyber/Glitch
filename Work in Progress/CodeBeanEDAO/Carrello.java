@@ -9,11 +9,25 @@ import java.util.LinkedHashMap;
 
 public class Carrello{
 
-
+	
 	private String utenteUsername;
 	private String utenteEmail;
 	private LinkedHashMap<Integer, ProdottoQuantita> prodotti = new LinkedHashMap<>();
 
+	
+	
+	//Costruttore vuoto	
+	public Carrello() {}
+		
+	//Costruisce un carrello passando l'username e l'email dell'utente
+	public Carrello(String utenteUsername,String utenteEmail)
+	{
+		this.utenteUsername=utenteUsername;
+		this.utenteEmail=utenteEmail;
+			
+	}
+	
+	
 	//Restituisce la Collection di prodotti nel carrello
 	public Collection<ProdottoQuantita> getProdotti() {
 		return prodotti.values();
@@ -47,16 +61,7 @@ public class Carrello{
 		return String.format("%.2f", prodotti.values().stream().mapToDouble(p -> p.getPrezzoTot()).sum());
 	}
 	
-	//Costruttore vuoto	
-	public Carrello() {}
 	
-	//Costruisce un carrello passando l'username e l'email dell'utente
-	public Carrello(String utenteUsername,String utenteEmail)
-	{
-		this.utenteUsername=utenteUsername;
-		this.utenteEmail=utenteEmail;
-		
-	}
 	
 	//Restiuisce l'username dell'utente a cui è associato il carrello
 	public String getUsername() {

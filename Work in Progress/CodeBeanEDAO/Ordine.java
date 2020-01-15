@@ -1,9 +1,8 @@
 package model.bean;
 
 
-
-
-
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -11,27 +10,26 @@ import java.util.Locale;
 public class Ordine{
 
 
-	private int id;
+	
 	private String username;
 	private String email;
-	private GregorianCalendar dataOrdinazione=new GregorianCalendar(new Locale("it", "IT"));	
-	private Collection<ProdottoQuantita> prodottiAcquistati;
+	private GregorianCalendar dataOrdinazione;	
 	private float prezzoTot;
+	private ArrayList<ProdottiOrdine> prodottiAcquistati;
 	
 	//Costruttore vuoto
 	public Ordine() {
 	}
 	
 	//Costruisce l'oggetto "Ordine" passando l'username dell'utente, l'email e il suo carrello
-	public Ordine(String username, String email,Carrello cart)
+	public Ordine(String username, String email, Date dataOrdinazione, float prezzoTot,ArrayList<ProdottiOrdine> prodottiAcquistati)
 	{
-		this.setUsername(username);
-		this.setEmail(email);
+		this.username=username;
+		this.email=email;
+		this.dataOrdinazione.setTime(dataOrdinazione);
+		this.prezzoTot=prezzoTot;
+		this.prodottiAcquistati=prodottiAcquistati;
 		
-		//Estrae i prodotti dal carrello e li memorizza nella collection "prodottiAcquistati"
-		this.setProdottiAcquistati(cart.getProdotti());
-		
-		this.prezzoTot = Float.parseFloat(cart.getPrezzoTotProdotti());
 	}
 	
 	//Restituisce l'id dell'ordine
