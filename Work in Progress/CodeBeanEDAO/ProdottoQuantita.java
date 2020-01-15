@@ -1,25 +1,13 @@
-package model;
 
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
+package model.bean;
 
 
 public class ProdottoQuantita {
 	
-	@Id @GeneratedValue
+
 	private long id;
-	
-	
-	@Column(name="utenteUsername", nullable=false)
 	private String utenteUsername;
-	
-	@Column(name="prodotto", nullable=false)
 	private Prodotto prodotto;
-	
-	@Column(name="quantita", nullable=false)
 	private int quantita;
 
 	public ProdottoQuantita(Prodotto prodotto, int quantita,String utenteUsername) {
@@ -50,6 +38,14 @@ public class ProdottoQuantita {
 
 	public void setUtenteUsername(String utenteUsername) {
 		this.utenteUsername = utenteUsername;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }
