@@ -1,16 +1,15 @@
-package model;
+package model.dao;
 
 import java.util.List;
+import model.bean.Richiesta;
 
-import javax.ejb.Remote;
 
-@Remote
 public interface RichiestaDAO{
 
-	//Rende persistente una richiesta "rc"
+	//Memorizza una richiesta passata come argomento nel database
 	void createRichiesta(Richiesta rc);
 	
-	//Rimuove una richiesta avente per id l'intero passato come argomento
+	//Rimuove una richiesta avente per id l'intero passato come argomento dal database
 	void deleteRichiesta(int id);
 	
 	//Restituisce una lista di richieste avente come mittente l'email dell'utente passato come argomento

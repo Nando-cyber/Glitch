@@ -1,55 +1,21 @@
-package model;
+package model.bean;
 
 
-import static model.Ordine.FIND_BY_USERNAME;
-import static model.Ordine.FIND_BY_ID;
 
-import java.io.Serializable;
+
+
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+public class Ordine{
 
-@Entity
-@NamedQueries({
-			@NamedQuery(name = FIND_BY_USERNAME, query = "SELECT b FROM Ordine b WHERE b.username = :username"),
-			@NamedQuery(name = FIND_BY_ID, query = "SELECT b FROM Ordine b WHERE b.id = :id")
-})
 
-public class Ordine implements Serializable{
-
-	
-	private static final long serialVersionUID = -8005038182957187110L;
-	public static final String FIND_BY_USERNAME = "model.Ordine.FIND_BY_USERNAME";
-	public static final String FIND_BY_ID = "model.Ordine.FIND_BY_ID";
-	
-	@Id @GeneratedValue
-	@Column(name="id", nullable=false)
-	private long id;
-	
-	@Id
-	@Column(name="carrelloUtenteUsername", nullable=false)
+	private int id;
 	private String username;
-	
-	@Id
-	@Column(name="carrelloUtenteEmail", nullable=false)
 	private String email;
-	
-	@Column(name="dataOrdinazione", nullable=false)
-	private GregorianCalendar dataOrdinazione=new GregorianCalendar(new Locale("it", "IT"));
-	
-	@OneToMany (cascade = {CascadeType.ALL})
+	private GregorianCalendar dataOrdinazione=new GregorianCalendar(new Locale("it", "IT"));	
 	private Collection<ProdottoQuantita> prodottiAcquistati;
-	
-	@Column(name="prezzoTot", nullable=false)
 	private float prezzoTot;
 	
 	//Costruttore vuoto
@@ -59,8 +25,8 @@ public class Ordine implements Serializable{
 	//Costruisce l'oggetto "Ordine" passando l'username dell'utente, l'email e il suo carrello
 	public Ordine(String username, String email,Carrello cart)
 	{
-		this.username=username;
-		this.email=email;
+		this.setUsername(username);
+		this.setEmail(email);
 		
 		//Estrae i prodotti dal carrello e li memorizza nella collection "prodottiAcquistati"
 		this.setProdottiAcquistati(cart.getProdotti());
@@ -69,7 +35,7 @@ public class Ordine implements Serializable{
 	}
 	
 	//Restituisce l'id dell'ordine
-	public Long getId()
+	public int getId()
 	{
 		return id;
 	}
@@ -96,6 +62,22 @@ public class Ordine implements Serializable{
 
 	public float getPrezzoTot() {
 		return this.prezzoTot;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 
