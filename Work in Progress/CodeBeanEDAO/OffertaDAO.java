@@ -1,22 +1,21 @@
-package model;
+package model.dao;
 
 import java.util.List;
+import model.bean.Offerta;
 
-import javax.ejb.Remote;
 
-@Remote
 public interface OffertaDAO {
 
-	//Rende l'offerta "off" (passata come parametro) persistente
-	void createOfferta(Offerta off);
+	//Memorizza nel database l'offerta passata come argomento
+	void createOfferta(Offerta offerta);
 	
-	//Rimuove l'offerta avente come id l'intero passato come argomento, dal database
-	void deleteOfferta(int id);
+	//Rimuove l'offerta che ha come codice l'intero passato come argomento dal database
+	void deleteOfferta(int codice);
 	
 	//Restituisce l'offerta avente come id l'intero passato come argomento
-	Offerta retriveOffertaById(int id);
+	Offerta retriveOffertaById(int codice);
 	
-	//Restituisce la lista di offerte associate ad una categoria passata come argomento
+	//Restituisce la lista di offerta associate alla determinata categoria
 	List<Offerta> retriveByCategoria(String categoria);
 	
 }
