@@ -16,8 +16,7 @@ CREATE TABLE Prodotto (
   ID            int(5) NOT NULL AUTO_INCREMENT, 
   immagine      blob, 
   prezzo        double NOT NULL, 
-  descrizione   int(11), 
-  codiceOfferta blob NOT NULL, 
+  descrizione   int(11),  
   PRIMARY KEY (ID));
 CREATE TABLE Console (
   prodottoID      int(5) NOT NULL, 
