@@ -15,6 +15,8 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  	<!-- link SweetAlert2 -->
+  	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
 
@@ -76,7 +78,11 @@
 										<c:if test="${ utente.ruolo == Gestore catalogo }">
 											<a role="presentation" class="dropdown-item d-lg-flex" href="#">Gestore catalogo</a></c:if>
 										<c:if test="${ utente.ruolo == Gestore prodotti }">
-											<a role="presentation" class="dropdown-item" href="#">Gestore prodotti</a></c:if>
+											<a data-toggle="dropdown" aria-expanded="true" class="dropdown-toggle text-left" href="#">Gestore prodotti</a></c:if>
+											<div role="menu" class="dropdown-menu show">
+												<a role="presentation" class="dropdown-item" href="#">Gestione prodotti</a>
+												<a role="presentation" class="dropdown-item" href="#">Gestione offeret</a>
+											</div>
 										<c:if test="${ utente.ruolo == Gestore assistenza }">
 											<a role="presentation" class="dropdown-item" href="#">Gestore assistenza</a></c:if>
 										<a role="presentation" class="dropdown-item d-lg-flex" href="#">Logout</a>

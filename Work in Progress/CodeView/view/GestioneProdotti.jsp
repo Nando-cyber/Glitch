@@ -103,6 +103,90 @@
 			</ul>
 		</nav>
 	</div>
+	
+	<div class="container" id="paginazione">
+    <nav>
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+        </ul>
+    </nav>
+	</div>
+	
+	<div class="container-fluid">
+		<h3 style="margin: 15px; margin-top: 8%;">Nuovi prodotti</h3>
+	</div>
+	<div class="container-fluid">
+		<a class="text-left" href="#agg-console"
+			style="background-color: #ffffff; color: rgb(18, 10, 10);"><i
+			class="fa fa-plus-circle" style="color: rgb(31, 133, 54);"></i>
+			 Aggiungi console</a>
+	</div>
+	<div class="container-fluid">
+		<a class="text-left" href="#agg-videogioco"
+			style="background-color: #ffffff; color: rgb(18, 10, 10);"><i
+			class="fa fa-plus-circle" style="color: rgb(31, 133, 54);"></i>
+			 Aggiungi  videogioco</a>
+	</div>
+	<div class="container-fluid">
+		<div class="col-lg-10 offset-lg-1" id="agg-console" style="width: 100%;">
+			<form id="tex-fo">
+				<h4 class="text-center d-lg-flex justify-content-lg-center">Console</h4>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="Modello" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="Casa produttrice" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="Immagine" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="Prezzo" />
+				</div>
+				<div class="form-group" id="tex-fo">
+					<textarea class="form-control" placeholder="Descrizione"></textarea>
+				</div>
+				<div id="button-c-c">
+					<button class="btn float-right" id="button-c" type="button" 
+					style="background-color: rgb(173, 38, 220);">inserisci console</button>
+				</div>
+			</form>
+		</div>
+		<div class="col-lg-11 offset-lg-1" id="agg-videogioco" style="width: 100%;">
+			<form id="tex-fo">
+				<h4 class="text-center d-lg-flex justify-content-lg-center">Videogioco</h4>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="Nome" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="Genere" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="Piattaforma" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="Immagine" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="Prezzo" />
+				</div>
+				<div class="form-group" id="tex-fo">
+					<textarea class="form-control" placeholder="Descrizione"></textarea>
+				</div>
+				<div id="button-c-c">
+					<button class="btn float-right" id="button-c" type="button"
+						style="background-color: rgb(173, 38, 220);">inserisci Videogioco</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
 </div>
 
 
