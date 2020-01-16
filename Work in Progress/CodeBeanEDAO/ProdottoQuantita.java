@@ -5,7 +5,7 @@ package model.bean;
 public class ProdottoQuantita {
 	
 
-	private long id;
+	private int id;
 	private String utenteUsername;
 	private Prodotto prodotto;
 	private int quantita;
@@ -40,11 +40,11 @@ public class ProdottoQuantita {
 		this.utenteUsername = utenteUsername;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
