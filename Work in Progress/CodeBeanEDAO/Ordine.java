@@ -9,36 +9,57 @@ public class Ordine{
 
 
 	
-	private String username;
-	
+	private String utenteUsername;
+	private int ordineId;
 	private ArrayList<ProdottiOrdine> prodottiAcquistati;
 	
 	//Costruttore vuoto
 	public Ordine() {
 	}
 	
-	//Costruisce l'oggetto "Ordine" passando l'username dell'utente, l'email e il suo carrello
-	public Ordine(String username, ArrayList<ProdottiOrdine> prodottiAcquistati)
+	//Costruisce l'oggetto "Ordine" passando come argomento l'id ordine, l'username e la lista di prodotti acquistati
+	public Ordine(int ordineId, String utenteUsername, ArrayList<ProdottiOrdine> prodottiAcquistati)
 	{
-		this.setUsername(username);
+		this.setOrdineId(ordineId);
+		this.setUtenteUsername(utenteUsername);
 		this.setProdottiAcquistati(prodottiAcquistati);
 		
 	}
 
-	public String getUsername() {
-		return username;
+	//Costruisce l'oggetto ordine passando come argomento l'id ordine
+	public Ordine(int ordineId)
+	{
+		this.ordineId=ordineId;
 	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
+	
+	//Restituisce la lista dei prodotti acquistati
 	public ArrayList<ProdottiOrdine> getProdottiAcquistati() {
 		return prodottiAcquistati;
 	}
 
+	//Modifica la lista dei prodotti acquistati
 	public void setProdottiAcquistati(ArrayList<ProdottiOrdine> prodottiAcquistati) {
 		this.prodottiAcquistati = prodottiAcquistati;
+	}
+
+	//Restituisce l'id dell'ordine
+	public int getOrdineId() {
+		return ordineId;
+	}
+
+	//Modifica l'id dell'ordine
+	public void setOrdineId(int ordineId) {
+		this.ordineId = ordineId;
+	}
+
+	//Restituisce l'username associato all'ordine
+	public String getUtenteUsername() {
+		return utenteUsername;
+	}
+
+	//Modifica l'username associato all'ordine
+	public void setUtenteUsername(String utenteUsername) {
+		this.utenteUsername = utenteUsername;
 	}
 	
 	

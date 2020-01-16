@@ -36,7 +36,7 @@ public class CarrelloDB implements CarrelloDAO{
 			Videogioco vid = new Videogioco();
 			Console cons = new Console();
 			
-			
+			//Se il prodotto ha un id corrispondete ad una console verrà creato un oggetto Console, viceversa un oggetto Videogioco e verrà aggiunto in carrello
 			while (rs.next()) {
 				
 				if( (cons=  cDAO.findConsoleById(rs.getInt(1))) != null ) {
@@ -59,6 +59,7 @@ public class CarrelloDB implements CarrelloDAO{
 
 	
 	//Memorizza il carrello passato come argomento nel database
+	//Se il carrello già esiste lo aggiornerà altrimenti lo creerà e lo memorizzerà nel database
 	public void createCarrello(Carrello cart) {
 		try (Connection con = ConPool.getConnection()) {			
 			Collection<ProdottoQuantita> pq = cart.getProdotti();
@@ -94,7 +95,7 @@ public class CarrelloDB implements CarrelloDAO{
 					}
 					
 				}else {
-					doUpdate(p.getProdotto().getId(),cart.getUsername(),cart.getUtenteEmail(),p.getQuantita());
+					doUpdate(p);
 				}
 				
 			
@@ -105,14 +106,14 @@ public class CarrelloDB implements CarrelloDAO{
 	}
 
 	//Aggiorna la quantità dell'oggetto carrello nel database
-	public void doUpdate(int prodId, String utenteUsername, String utenteEmail, int quantita) {
+	public void doUpdate(ProdottoQuantita p) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con
-					.prepareStatement("UPDATE Carrello SET quantita=? WHERE prodottoID=? AND utenteUsername = ? AND utenteEmail = ?");
-			ps.setInt(1,quantita);
-			ps.setInt(2, prodId);
-			ps.setString(3, utenteUsername);
-			ps.setString(4, utenteEmail);
+					.prepareStatement("UPDATE Carrello SET quantita=? WHERE prodottoID=? AND utenteUsername = ?");
+			ps.setInt(1,p.getQuantita());
+			ps.setInt(2, p.getProdotto().getId());
+			ps.setString(3, p.getUtenteUsername());
+			
 			if (ps.executeUpdate() != 1 ) {
 				throw new RuntimeException("UPDATE error.");
 			
@@ -122,13 +123,12 @@ public class CarrelloDB implements CarrelloDAO{
 		}
 	}
 	
-	//Rimuove l'oggetto carrello dell'utente avente come id l'intero passato come argomento 
-	public void doDelete(int prodId, String utenteUsername, String utenteEmail) {
+	//Rimuove l'oggetto carrello avente come id l'intero passato come argomento e come username dell'utente la stringa "utenteUsername"
+	public void doDelete(int prodId, String utenteUsername) {
 		try (Connection con = ConPool.getConnection()) {
-			PreparedStatement ps = con.prepareStatement("DELETE FROM Carrello WHERE utenteUsername=? AND utenteEmail=? AND prodottoID=?");
+			PreparedStatement ps = con.prepareStatement("DELETE FROM Carrello WHERE utenteUsername=? AND prodottoID=?");
 			ps.setString(1, utenteUsername);
-			ps.setString(2, utenteEmail);
-			ps.setInt(3, prodId);
+			ps.setInt(2, prodId);
 			if (ps.executeUpdate() != 1) {
 				throw new RuntimeException("DELETE error.");
 			}
@@ -137,12 +137,12 @@ public class CarrelloDB implements CarrelloDAO{
 		}
 	}
 
-	//Rimuove tutti gli oggetti carrello dell'utente
-	public void removeCarrello(String utenteUsername, String utenteEmail ) {
+	//Rimuove tutti gli oggetti carrello associati all'utente avente come username la stringa passata per argomento
+	public void removeCarrello(String utenteUsername) {
 		try (Connection con = ConPool.getConnection()) {
-			PreparedStatement ps = con.prepareStatement("DELETE FROM Carrello WHERE utenteUsername=? AND utenteEmail=? ");
+			PreparedStatement ps = con.prepareStatement("DELETE FROM Carrello WHERE utenteUsername=?");
 			ps.setString(1, utenteUsername);
-			ps.setString(2, utenteEmail);
+		
 			
 			if (ps.executeUpdate() == 0) {
 				throw new RuntimeException("DELETE error.");

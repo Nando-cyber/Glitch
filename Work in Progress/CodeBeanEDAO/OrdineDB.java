@@ -1,130 +1,159 @@
 package model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
 import model.bean.Ordine;
+import model.bean.ProdottiOrdine;
+
 
 
 public class OrdineDB {
 
-	public void addFattura(ArrayList<ProdottoCarrello> array,String user)
+	
+	//Memorizza l'oggetto Ordine "ord" nel database
+	public void createOrdine(Ordine ord)
 	{
-		
-		try{
-			
-			String id,nome;
-			double prezzoSI,importo,prezzoFinale=0,ivaCal,importo2,calcolVarie;
-			int quantita,nOrdine=getNumeroOrdine();
-			int iva=getIva();
-			boolean calcFinal=true;
-			
-			 
-			 
-			ivaCal=(double) iva/100;
-			
-			
-			
-			if(nOrdine==-1)
-				nOrdine=0;
-			
-			
-			for(int i=0;i<array.size();i++)
-			{
-				id=array.get(i).getId();
-				nome=array.get(i).getNome();
-				prezzoSI=array.get(i).getPrezzo();
-				quantita=array.get(i).getQuantitàSelezionata();
+			try (Connection con = ConPool.getConnection()) {			
+				ArrayList<ProdottiOrdine> pq = ord.getProdottiAcquistati();
 				
-			
+				Iterator<ProdottiOrdine> prod;
 				
-			   importo=prezzoSI*quantita;	
-			
-			
-			if(calcFinal)
-			{
-				for(int j=0;j<array.size();j++)
-				{
-					importo2=array.get(j).getQuantitàSelezionata()*array.get(j).getPrezzo();
-					calcolVarie=importo2*ivaCal;
-					prezzoFinale+=importo2+calcolVarie;
+				prod = pq.iterator();
+				ProdottiOrdine p;
+				
+				//Scandisce i "ProdottiOrdine" (prodotti acquistati) contenuti nell'oggetto Ordine "ord" e li memorizza singolarmente nel database con lo stesso ordineId dell'oggetto Ordine "ord"
+				while(prod.hasNext()) {
 					
+						p= prod.next();
+						PreparedStatement ps = con.prepareStatement("INSERT INTO Ordine (ordineId, utenteUsername, utenteEmail, nome, quantita, prezzo, dataOrdinazione) VALUES(?,?,?,?,?,?,?)",
+								Statement.RETURN_GENERATED_KEYS);
+						
+						ps.setInt(1,ord.getOrdineId());
+						ps.setString(2, p.getUtenteUsername());
+						ps.setString(3, p.getUtenteEmail());
+						ps.setString(4, p.getNome());
+						ps.setInt(5, p.getQuantita());
+						ps.setFloat(6, p.getPrezzo());
+						ps.setDate(7, p.getDataOrdinazioneDate());
+						
+						if (ps.executeUpdate() != 1) {
+							
+							throw new RuntimeException("INSERT error.");
+						}
 				}
-				calcFinal=false;
-			}
-			
-			Connection conn = DB.getInstance().getConnection();
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO ordini (N_ordine,id_prodotto,username,IVA,Quantita,Nome,Prezzo,Importo,Prezzo_finale) VALUES("+nOrdine+","+id+",\'"+user+"\',"+iva+","+quantita+",\'"+nome+"\',"+prezzoSI+","+importo+","+prezzoFinale+");");
-			ps.executeUpdate();
-			
-			
-			}
-			
 			} catch (SQLException e) {
-				System.out.println("Errore durante la connessione." + e.getMessage());
+				throw new RuntimeException(e);
 			}
 		
-	}
+		}
 	
 	
-	public int getNumeroOrdine()
+	// Restituisce lo storico ordini di un utente avente come username la stringa passata per argomento
+	public List<Ordine> retriveByUtente(String user)
 	{
-		
-		try{
-			Connection conn = DB.getInstance().getConnection();
-			PreparedStatement ps = conn.prepareStatement("SELECT MAX(N_ordine) AS N_Order FROM ordini");
-	
-			ResultSet result=ps.executeQuery();
-			result.next();
+		try (Connection con = ConPool.getConnection()) {
 			
-			return result.getInt("N_Order")+1;
+			//Elenca le result query per "ordineId" in modo da distinguere i singoli ordini (ogni oggetto ordine ha un solo ordineId)
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT ordineId, utenteUsername, utenteEmail, nome, quantita, prezzo, dataOrdinazione FROM Ordine WHERE utenteUsername= ? ORDER BY ordineId");
+			
+			ps.setString(1, user);
+			
+			ArrayList<Ordine> ordini=new ArrayList<Ordine>();
+			ArrayList<ProdottiOrdine> prod = new ArrayList<ProdottiOrdine>();
+			ResultSet rs = ps.executeQuery();
 			
 			
+			rs.next();
 			
-			} catch (SQLException e) {
-				System.out.println("Errore durante la connessione." + e.getMessage());
-			}
-		
-			return -1;
+			//Costruiamo il primo oggetto ordine assegnandogli il primo "ordineId"
+			Ordine ord=new Ordine(rs.getInt(1));
+
+			
+			do {
+				//Iteriamo in base al numero di ProdottiAcquistati nel database
+				//Se la result query (e quindi il prodotto acquistato) conterrà un ordineId diverso dal precedente, si tratterà di un nuovo ordine
+				//salverà quindi i prodottiAcquistati (prelevati fino a quel punto e avente lo stesso ordineId) nell'oggetto Ordine "ord" in uso, aggiungerà "ord" all'array di Ordine "ordini" e 
+				//creerà un nuovo oggetto Ordine "ord" contenente i ProdottiAcquistati di un nuovo ordine. 
+				//Alla fine in "ordini" avremo lo storico di ordini dell'utente ordinata per "ordineId"
+				if(ord.getOrdineId()!=rs.getInt(1))
+				{
+					ord.setProdottiAcquistati(prod);
+					ordini.add(ord);
+					ord=new Ordine();
+				}
+				
+				ProdottiOrdine p = new ProdottiOrdine();
+				
+				ord.setOrdineId(rs.getInt(1));
+				ord.setUtenteUsername(rs.getString(2));
+				p.setUtenteUsername(rs.getString(2));
+				p.setUtenteEmail(rs.getString(3));
+				p.setNome(rs.getString(4));
+				p.setQuantita(rs.getInt(5));
+				p.setPrezzo(rs.getFloat(6));
+				p.setDataOrdinazioneDate(rs.getDate(7));
+				prod.add(p);
+				
+				
+			}while(rs.next());
+			
+			return ordini;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
-	public ArrayList getLastOrder(){
-		
-		try{
-			Connection conn = DB.getInstance().getConnection();
-			PreparedStatement ps = conn.prepareStatement("SELECT MAX(N_ordine) AS N_Order FROM ordini");
-	
-			ResultSet result=ps.executeQuery();
-			result.next();
-			int n_ordine=0;
-			n_ordine=result.getInt("N_Order");
+	//Restituisce l'oggetto Ordine dal database avente come ordineId l'intero passato per argomento 
+	Ordine retriveById(int id)
+	{
+			try (Connection con = ConPool.getConnection()) {
 			
-			System.out.println(n_ordine);
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT ordineId, utenteUsername, utenteEmail, nome, quantita, prezzo, dataOrdinazione FROM Ordine WHERE ordineId = ? ");
 			
-			ps = conn.prepareStatement("SELECT Nome,Quantita,Prezzo,Importo,Prezzo_finale,IVA FROM ordini WHERE N_ordine="+n_ordine);
-		
-			ArrayList arrayx=new ArrayList();
-			ResultSet result2=ps.executeQuery();
+			ps.setInt(1, id);
 			
-					while(result2.next())
-				{
-					arrayx.add(result2.getString("Nome"));
-					arrayx.add(result2.getInt("Quantita"));
-					arrayx.add(result2.getDouble("Prezzo"));
-					arrayx.add(result2.getDouble("Importo"));
-					arrayx.add(result2.getInt("IVA"));
-					arrayx.add(result2.getDouble("Prezzo_finale"));
+			
+			ArrayList<ProdottiOrdine> prod = new ArrayList<ProdottiOrdine>();
+			ResultSet rs = ps.executeQuery();
+			
+			Ordine ord=new Ordine();
+
+			//Crea i singoli "ProdottiOrdine" e li inserisce nell'arrayList "prod"
+			//A fine ciclo l'ArrayList "prod" conterrà tutti i prodotti acquistati di un ordine
+			while(rs.next()) {
 				
-				}
-			
-			return arrayx;
-			
-			} catch (SQLException e) {
-				System.out.println("Errore durante la connessione. 1 " + e.getMessage());
+				ProdottiOrdine p = new ProdottiOrdine();
+				
+				ord.setOrdineId(rs.getInt(1));
+				ord.setUtenteUsername(rs.getString(2));
+				p.setUtenteUsername(rs.getString(2));
+				p.setUtenteEmail(rs.getString(3));
+				p.setNome(rs.getString(4));
+				p.setQuantita(rs.getInt(5));
+				p.setPrezzo(rs.getFloat(6));
+				p.setDataOrdinazioneDate(rs.getDate(7));
+				prod.add(p);
 			}
-		
-			return null;
-		
+			
+			//Aggiungiamo l'array di prodotti acquistati all'ordine
+			ord.setProdottiAcquistati(prod);
+			
+			return ord;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 }
