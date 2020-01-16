@@ -1,20 +1,24 @@
-package model;
+package model.dao;
 
 import java.util.List;
 
-import javax.ejb.Remote;
 
-@Remote
+import model.bean.Utente;
+
+
 public interface UtenteDAO {
 
-	//Rende persistente l'utente "u" passato come argomento
+	//Memorizza l'utente passato come argomento nel database
 	void createUtente(Utente u);
 	
 	//Rimuove l'utente, avente come username la stringa passata come argomento, dal database
 	void deleteUtente(String user);
 	
-	//Aggiorna l'utente "u" nel database
+	//Aggiorna le informazioni anagrafiche dell'utente (Email, indirizzo) nel database
 	Utente updateUtente(Utente u);
+	
+	//Aggiorna i ruoli dell'utente nel database
+	void updateRuoloUtente(Utente u);
 	
 	//Restituisce l'utente avente come username la stringa passata come argomento
 	Utente retriveByUsername(String user);

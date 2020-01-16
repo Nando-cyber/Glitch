@@ -144,6 +144,11 @@ public class Utente {
 	public ArrayList<String> getRuolo() {
 		return ruolo;
 	}
+	
+	public void setRuoli(ArrayList<String> ruoli)
+	{
+		this.ruolo=ruoli;
+	}
 
 	//Modifica il ruolo dell'utente, ritorna false se l'utente ha più di 3 ruoli o se è già presente quel ruolo in "utente"
 	public Boolean setRuolo(String ruoloDaIns) {
