@@ -4,7 +4,9 @@ package model.bean;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 
 public class Ordine{
@@ -12,17 +14,21 @@ public class Ordine{
 
 	private String utenteUsername;
 	private int ordineId;
+	private static int counter=0;
 	private ArrayList<ProdottiOrdine> prodottiAcquistati;
 	private GregorianCalendar dataOrdinazione;
 	
 	//Costruttore vuoto
 	public Ordine() {
+		counter++;
+		ordineId=counter;
 	}
 	
 	//Costruisce l'oggetto "Ordine" passando come argomento l'id ordine, l'username e la lista di prodotti acquistati
-	public Ordine(int ordineId, String utenteUsername, ArrayList<ProdottiOrdine> prodottiAcquistati, GregorianCalendar dataOrdinazione)
+	public Ordine(String utenteUsername, ArrayList<ProdottiOrdine> prodottiAcquistati, GregorianCalendar dataOrdinazione)
 	{
-		this.setOrdineId(ordineId);
+		counter++;
+		ordineId=counter;
 		this.setUtenteUsername(utenteUsername);
 		this.setProdottiAcquistati(prodottiAcquistati);
 		this.setDataOrdinazione(dataOrdinazione);
@@ -33,6 +39,37 @@ public class Ordine{
 	public Ordine(int ordineId)
 	{
 		this.ordineId=ordineId;
+	}
+	
+	//Preleva i prodotti dal carrello (passato per argomento) e li aggiunge alla lista di prodotti acquistati
+	public void setProdottiOrdine(Carrello cart)
+	{
+		Collection<ProdottoQuantita> prod=cart.getProdotti();
+		Iterator<ProdottoQuantita> it=prod.iterator();
+		
+		while(it.hasNext())
+		{
+			ProdottoQuantita pQ=it.next();
+			Prodotto pr=pQ.getProdotto();
+			ProdottiOrdine pOut=new ProdottiOrdine();
+			
+			if(pr instanceof Console)
+			{
+				Console cons=(Console) pr;
+				pOut.setNome(cons.getModello());
+			}
+			else
+			{
+				Videogioco vd=(Videogioco) pr;
+				pOut.setNome(vd.getNome());
+			}
+			
+			pOut.setPrezzo(pQ.getPrezzoTot());
+			pOut.setQuantita(pQ.getQuantita());
+			pOut.setUtenteEmail(cart.getUtenteEmail());
+			pOut.setUtenteUsername(cart.getUsername());
+			prodottiAcquistati.add(pOut);
+		}
 	}
 	
 	//Restituisce la data di ordinazione sotto forma di oggetto "Date"
