@@ -1,9 +1,9 @@
-package model.dao;
+package com.glitch.demo.model.dao;
 
 import java.util.List;
 
 
-import model.bean.Utente;
+import com.glitch.demo.model.bean.Utente;
 
 
 public interface UtenteDAO {

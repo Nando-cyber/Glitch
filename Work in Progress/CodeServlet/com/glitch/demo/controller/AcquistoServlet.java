@@ -61,7 +61,7 @@ public class AcquistoServlet extends HttpServlet {
 			mail.setUtenteEmail("generatedAutomaticMailOrder@live.com");
 			mail.setUtenteUsername("GeneratedAutomaticOrder");
 			mail.setDescrizione("L'ordine da lei effettuato in data :" + 
-					o.getDataOrdinazione().toString() + "� andato a buon fine."
+					o.getDataOrdinazione() + "� andato a buon fine."
 					+ " Verr� avvisato della spedizione il prima possibile."
 					+ "/n Grazie di aver scelto GLITCH!"  );
 			

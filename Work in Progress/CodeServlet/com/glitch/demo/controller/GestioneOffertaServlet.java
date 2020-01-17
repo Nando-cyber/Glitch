@@ -87,9 +87,9 @@ public class GestioneOffertaServlet extends HttpServlet {
 				for( Console c: console) {
 
 					percSconto = offerta.getSconto();
-					double prezzo = c.getPrezzo();
+					float prezzo = c.getPrezzo();
 
-					double elimSconto = (prezzo * percSconto)/100;
+					float elimSconto = (prezzo * percSconto)/100;
 					prezzo = prezzo - elimSconto;
 					c.setPrezzo(prezzo);
 
@@ -152,9 +152,9 @@ public class GestioneOffertaServlet extends HttpServlet {
 				for( Videogioco v : videogioco) {
 
 					int sconto = o.getSconto();
-					double prezzo = v.getPrezzo();
+					float prezzo = v.getPrezzo();
 
-					double elimSconto = (prezzo * sconto)/100;
+					float elimSconto = (prezzo * sconto)/100;
 					prezzo = prezzo + elimSconto;
 					v.setPrezzo(prezzo);
 

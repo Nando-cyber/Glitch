@@ -1,10 +1,9 @@
-package model.bean;
+package com.glitch.demo.model.bean;
 
 
 
 
 public class ProdottiOrdine {
-
 	
 	private String utenteUsername;
 	private String utenteEmail;

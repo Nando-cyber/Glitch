@@ -1,3 +1,6 @@
+create database Glitch;
+use Glitch;
+
 CREATE TABLE Utente (
   username  varchar(10) NOT NULL, 
   email     varchar(25) NOT NULL, 
@@ -9,14 +12,14 @@ CREATE TABLE Utente (
   città     int(11), 
   via       char(20), 
   numero    int(3), 
-  ruolo     varchar(15), 
+  ruolo     ENUM("Catalogo", "Account", "Assistenza"), 
   PRIMARY KEY (username, 
   email));
 CREATE TABLE Prodotto (
   ID            int(5) NOT NULL AUTO_INCREMENT, 
   immagine      blob, 
   prezzo        double NOT NULL, 
-  descrizione   int(11),  
+  descrizione   blob,  
   PRIMARY KEY (ID));
 CREATE TABLE Console (
   prodottoID      int(5) NOT NULL, 
@@ -25,7 +28,7 @@ CREATE TABLE Console (
   PRIMARY KEY (prodottoID));
 CREATE TABLE Videogioco (
   prodottoID  int(5) NOT NULL, 
-  nome        varchar(20) NOT NULL, 
+  nome        varchar(40) NOT NULL, 
   genere      char(10) NOT NULL, 
   piattaforma varchar(15) NOT NULL, 
   PRIMARY KEY (prodottoID));

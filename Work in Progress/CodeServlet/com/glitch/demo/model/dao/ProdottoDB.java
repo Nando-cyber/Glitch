@@ -24,12 +24,17 @@ public class ProdottoDB implements ProdottoDAO{
 			ps.setInt(2, limit);
 			ArrayList<Prodotto> prod = new ArrayList<>();
 			ResultSet rs = ps.executeQuery();
+			java.sql.Blob b1; 
+			java.sql.Blob b2 ;
 			while (rs.next()) {
+				
+				b1 = rs.getBlob("immagine");
+				b2 = rs.getBlob("descrizione");
 				Prodotto p = new Prodotto();
 				p.setId(rs.getInt(1));
-				p.setImmagine(rs.getString(2));
+				p.setImmagine( new String(b1.getBytes(1l, (int) b1.length())));
 				p.setPrezzo(rs.getFloat(3));
-				p.setDescrizione(rs.getString(4));
+				p.setDescrizione( new String(b2.getBytes(1l, (int) b2.length())));
 				prod.add(p);
 			}
 			return prod;
@@ -43,12 +48,14 @@ public class ProdottoDB implements ProdottoDAO{
 			PreparedStatement ps = con.prepareStatement("SELECT id, immagine, prezzo, descrizione FROM Prodotto WHERE id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
+			java.sql.Blob b1 = rs.getBlob("immagine");
+			java.sql.Blob b2 = rs.getBlob("descrizione");
 			if (rs.next()) {
 				Prodotto p = new Prodotto();
 				p.setId(rs.getInt(1));
-				p.setImmagine(rs.getString(2));
+				p.setImmagine(new String(b1.getBytes(1l, (int) b1.length())));
 				p.setPrezzo(rs.getFloat(3));
-				p.setDescrizione(rs.getString(4));
+				p.setDescrizione(new String(b2.getBytes(1l, (int) b2.length())));
 				
 				return p;
 			}

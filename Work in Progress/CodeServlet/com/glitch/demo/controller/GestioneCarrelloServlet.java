@@ -63,7 +63,7 @@ public class GestioneCarrelloServlet extends HttpServlet {
 
 			//si settano nella sessione il Carrello si torna al catalogo
 			request.getSession().setAttribute("carrello", car );
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/Catalogo.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/Catalogo.jsp");
 			requestDispatcher.forward(request, response);
 
 		}else if( operazione.equalsIgnoreCase("rimozione")) {
@@ -78,7 +78,7 @@ public class GestioneCarrelloServlet extends HttpServlet {
 
 			//si salva il carrello modificato nella sessione e si ritorna alla pagina carrello
 			request.getSession().setAttribute("carrello", car );
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/Carrello.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/Carrello.jsp");
 			requestDispatcher.forward(request, response);
 
 		}else {
@@ -96,13 +96,13 @@ public class GestioneCarrelloServlet extends HttpServlet {
 			request.getSession().setAttribute("carrello", car );
 			
 			//Si esegue la forward alla pagina Carrello del sito
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/Carrello.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/Carrello.jsp");
 			requestDispatcher.forward(request, response);
 
 		}
 
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AcquistoCompletato.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/AcquistoCompletato.jsp");
 		requestDispatcher.forward(request, response);	
 	}
 

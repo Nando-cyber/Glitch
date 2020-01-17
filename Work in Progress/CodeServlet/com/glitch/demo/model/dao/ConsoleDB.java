@@ -1,4 +1,4 @@
-package model.dao;
+package com.glitch.demo.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,13 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.bean.Console;
-import model.bean.Prodotto;
+import com.glitch.demo.model.bean.ConPool;
+import com.glitch.demo.model.bean.Console;
+import com.glitch.demo.model.bean.Prodotto;
 
 
 
 
-public class ConsoleDB extends ProdottoDB implements ConsoleDAO{
+public class ConsoleDB implements ConsoleDAO{
 	
 	private ProdottoDAO pDAO = new ProdottoDB();
 
@@ -38,6 +39,8 @@ public class ConsoleDB extends ProdottoDB implements ConsoleDAO{
 				p.setModello(rs.getString(2));
 				p.setCasaProduttrice(rs.getString(3));
 				p.setPrezzo(prod.getPrezzo());
+				p.setDescrizione(prod.getDescrizione());
+				p.setImmagine(prod.getImmagine());
 				console.add(p);
 			}
 			return console;
@@ -61,6 +64,8 @@ public class ConsoleDB extends ProdottoDB implements ConsoleDAO{
 				p.setModello(rs.getString(2));
 				p.setCasaProduttrice(rs.getString(3));
 				p.setPrezzo(prod.getPrezzo());
+				p.setDescrizione(prod.getDescrizione());
+				p.setImmagine(prod.getImmagine());
 
 				return p;
 			}
@@ -85,6 +90,8 @@ public class ConsoleDB extends ProdottoDB implements ConsoleDAO{
 				p.setModello(rs.getString(2));
 				p.setCasaProduttrice(rs.getString(3));
 				p.setPrezzo(prod.getPrezzo());
+				p.setDescrizione(prod.getDescrizione());
+				p.setImmagine(prod.getImmagine());
 				return p;
 			}
 			return null;
@@ -112,6 +119,8 @@ public class ConsoleDB extends ProdottoDB implements ConsoleDAO{
 				p.setModello(rs.getString(2));
 				p.setCasaProduttrice(rs.getString(3));
 				p.setPrezzo(prod.getPrezzo());
+				p.setDescrizione(prod.getDescrizione());
+				p.setImmagine(prod.getImmagine());
 				array.add(p);
 				
 			}
@@ -184,6 +193,28 @@ public class ConsoleDB extends ProdottoDB implements ConsoleDAO{
 			return list;
 			}
 		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public List<Console> findAllConsole() {
+		try (Connection con = ConPool.getConnection()) {
+			PreparedStatement ps = con
+					.prepareStatement("SELECT prodottoId, modello, casaProduttrice FROM Console ");
+			ArrayList<Console> console = new ArrayList<Console>();
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
+				Console p = new Console();
+				p.setId(rs.getInt(1));
+				p.setModello(rs.getString(2));
+				p.setCasaProduttrice(rs.getString(3));
+				p.setPrezzo(prod.getPrezzo());
+				console.add(p);
+			}
+			return console;
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}

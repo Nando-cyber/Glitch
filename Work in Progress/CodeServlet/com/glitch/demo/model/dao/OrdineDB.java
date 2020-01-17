@@ -1,4 +1,4 @@
-package model.dao;
+package com.glitch.demo.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
-import model.bean.Ordine;
-import model.bean.ProdottiOrdine;
+import com.glitch.demo.model.bean.ConPool;
+import com.glitch.demo.model.bean.Ordine;
+import com.glitch.demo.model.bean.ProdottiOrdine;
 
 
 

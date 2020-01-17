@@ -1,8 +1,8 @@
-package model.dao;
+package com.glitch.demo.model.dao;
 
 import java.util.List;
 
-import model.bean.Ordine;
+import com.glitch.demo.model.bean.Ordine;
 
 public interface OrdineDAO {
 

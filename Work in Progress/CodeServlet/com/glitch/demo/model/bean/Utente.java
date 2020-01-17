@@ -1,4 +1,4 @@
-package model.bean;
+package com.glitch.demo.model.bean;
 
 import java.util.ArrayList;
 

@@ -17,8 +17,27 @@ public class VideogiocoDB  implements VideogiocoDAO{
 
 	@Override
 	public List<Videogioco> findAllVideogioco() {
-		// TODO Auto-generated method stub
-		return null;
+		try (Connection con = ConPool.getConnection()) {
+		PreparedStatement ps = con
+				.prepareStatement("SELECT prodottoId, nome, genere, piattaforma FROM Videogioco");
+		ArrayList<Videogioco> videogioco = new ArrayList<>();
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
+			Videogioco p = new Videogioco();
+			p.setId(rs.getInt(1));
+			p.setNome(rs.getString(2));
+			p.setGenere(rs.getString(3));
+			p.setPiattaforma(rs.getString(4));
+			p.setPrezzo(prod.getPrezzo());
+			p.setDescrizione(prod.getDescrizione());
+			p.setImmagine(prod.getImmagine());
+			videogioco.add(p);
+		}
+		return videogioco;
+	} catch (SQLException e) {
+		throw new RuntimeException(e);
+	}
 	}
 
 	@Override
@@ -38,6 +57,8 @@ public class VideogiocoDB  implements VideogiocoDAO{
 				p.setGenere(rs.getString(3));
 				p.setPiattaforma(rs.getString(4));
 				p.setPrezzo(prod.getPrezzo());
+				p.setDescrizione(prod.getDescrizione());
+				p.setImmagine(prod.getImmagine());
 				videogioco.add(p);
 			}
 			return videogioco;
@@ -61,7 +82,9 @@ public class VideogiocoDB  implements VideogiocoDAO{
 				p.setGenere(rs.getString(3));
 				p.setPiattaforma(rs.getString(4));
 				p.setPrezzo(prod.getPrezzo());
-
+				p.setDescrizione(prod.getDescrizione());
+				p.setImmagine(prod.getImmagine());
+				
 				return p;
 			}
 			return null;
@@ -87,6 +110,10 @@ public class VideogiocoDB  implements VideogiocoDAO{
 				p.setGenere(rs.getString(3));
 				p.setPiattaforma(rs.getString(4));
 				p.setPrezzo(prod.getPrezzo());
+				p.setPrezzo(prod.getPrezzo());
+				p.setDescrizione(prod.getDescrizione());
+				p.setImmagine(prod.getImmagine());
+				
 				array.add(p);
 				
 			}
@@ -114,6 +141,10 @@ public class VideogiocoDB  implements VideogiocoDAO{
 				p.setGenere(rs.getString(3));
 				p.setPiattaforma(rs.getString(4));
 				p.setPrezzo(prod.getPrezzo());
+				p.setPrezzo(prod.getPrezzo());
+				p.setDescrizione(prod.getDescrizione());
+				p.setImmagine(prod.getImmagine());
+				
 				array.add(p);
 				
 			}
@@ -142,6 +173,8 @@ public class VideogiocoDB  implements VideogiocoDAO{
 				p.setGenere(rs.getString(3));
 				p.setPiattaforma(rs.getString(4));
 				p.setPrezzo(prod.getPrezzo());
+				p.setDescrizione(prod.getDescrizione());
+				p.setImmagine(prod.getImmagine());
 				array.add(p);
 				
 			}
@@ -162,7 +195,7 @@ public class VideogiocoDB  implements VideogiocoDAO{
 			ps.setInt(1, prodotto.getId());
 			ps.setString(2, prodotto.getNome());
 			ps.setString(3, prodotto.getGenere());
-			ps.setString(4, prodotto.getImmagine());
+			ps.setString(4, prodotto.getPiattaforma());
 			if (ps.executeUpdate() != 1) {
 				throw new RuntimeException("INSERT error.");
 			}
