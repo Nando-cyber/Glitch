@@ -1,4 +1,4 @@
-package com.glitch.demo.model.dao;
+package model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,30 +8,36 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.glitch.demo.model.bean.ConPool;
-import com.glitch.demo.model.bean.Console;
+import model.bean.Console;
+import model.bean.Prodotto;
 
 
 
-public class ConsoleDB implements ConsoleDAO{
+
+public class ConsoleDB extends ProdottoDB implements ConsoleDAO{
 	
+	private ProdottoDAO pDAO = new ProdottoDB();
+
 	
-	public List<Console> doRetriveConsoleAllRange(int offset, int limit) {
+
+	
+	@Override
+	//Restituisce una lista limitata di console comprese tra i valori "min" e "max" passati come argomento
+	public List<Console> doRetriveConsoleAllRange(int min, int max) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con
-					.prepareStatement("SELECT prodottoID, immagine, prezzo, descrizione, codiceOfferta, modello, casaProduttrice FROM Console LIMIT ?, ?");
-			ps.setInt(1, offset);
-			ps.setInt(2, limit);
-			ArrayList<Console> console = new ArrayList<>();
+					.prepareStatement("SELECT prodottoId, modello, casaProduttrice FROM Console LIMIT ?, ?");
+			ps.setInt(1, min);
+			ps.setInt(2, max);
+			ArrayList<Console> console = new ArrayList<Console>();
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
+				Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
 				Console p = new Console();
 				p.setId(rs.getInt(1));
-				p.setImmagine(rs.getString(2));
-				p.setPrezzo(rs.getFloat(3));
-				p.setDescrizione(rs.getString(4));
-				p.setModello(rs.getString(5));
-				p.setCasaProduttrice(rs.getString(6));
+				p.setModello(rs.getString(2));
+				p.setCasaProduttrice(rs.getString(3));
+				p.setPrezzo(prod.getPrezzo());
 				console.add(p);
 			}
 			return console;
@@ -40,20 +46,45 @@ public class ConsoleDB implements ConsoleDAO{
 		}
 	}
 
+	@Override
+	//Restituisce la console che ha come id l'intero passato come argomento
 	public Console findConsoleById(int id) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con
-					.prepareStatement("SELECT prodottoID, immagine, prezzo, descrizione, modello, casaProduttrice FROM Console WHERE id=?");
+					.prepareStatement("SELECT prodottoId, modello, casaProduttrice FROM Console WHERE prodottoId=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
+				Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
 				Console p = new Console();
 				p.setId(rs.getInt(1));
-				p.setImmagine(rs.getString(2));
-				p.setPrezzo(rs.getFloat(3));
-				p.setDescrizione(rs.getString(4));
-				p.setModello(rs.getString(5));
-				p.setCasaProduttrice(rs.getString(6));
+				p.setModello(rs.getString(2));
+				p.setCasaProduttrice(rs.getString(3));
+				p.setPrezzo(prod.getPrezzo());
+
+				return p;
+			}
+			return null;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	@Override
+	//Restituisce la console avente come modello la stringa passata come argomento
+	public Console retriveByModello(String modello) {
+		try (Connection con = ConPool.getConnection()) {
+			PreparedStatement ps = con
+					.prepareStatement("SELECT prodottoId, modello, casaProduttrice FROM Console WHERE modello = ? ");
+			ps.setString(1, modello);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
+				Console p = new Console();
+				p.setId(rs.getInt(1));
+				p.setModello(rs.getString(2));
+				p.setCasaProduttrice(rs.getString(3));
+				p.setPrezzo(prod.getPrezzo());
 				return p;
 			}
 			return null;
@@ -62,86 +93,45 @@ public class ConsoleDB implements ConsoleDAO{
 		}
 	}
 
-	
-
-	public Console retriveByModello(String against) {
+	@Override
+	//Restituisce la lista di console aventi come casa produttrice la stringa passata come argomento
+	public List<Console> retriveByCasaProduttirce(String casaProduttrice) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con.prepareStatement(
-					"SELECT prodottoID, immagine, prezzo, descrizione, modello, casaProduttrice FROM Console WHERE modello=? ");
-			ps.setString(1, against);
-			Console p = new Console();
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				
-				p.setId(rs.getInt(1));
-				p.setImmagine(rs.getString(2));
-				p.setPrezzo(rs.getFloat(3));
-				p.setDescrizione(rs.getString(4));
-				p.setModello(rs.getString(5));
-				p.setCasaProduttrice(rs.getString(6));
-				return p;
-				
-			}else {
-				return null;
-			}
+					"Select prodottoId, modello, casaProduttrice FROM Console WHERE casaProduttrice = ? ");
 			
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	public List<Console> retriveByCasaProduttrice(String casaProduttrice) {
-		try (Connection con = ConPool.getConnection()) {
-			PreparedStatement ps = con.prepareStatement(
-					"SELECT id, immagine, prezzo, descrizione,modello, casaProduttrice FROM Console WHERE casaProduttrice=? ");
 			ps.setString(1, casaProduttrice);
-			
-			ArrayList<Console> console = new ArrayList<>();
 			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				Console p = new Console();
+			Console p = new Console();
+			ArrayList<Console> array = new ArrayList<Console>();
+			while (!rs.next()) {
+				
+				Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
+				p=new Console();
 				p.setId(rs.getInt(1));
-				p.setImmagine(rs.getString(2));
-				p.setPrezzo(rs.getFloat(3));
-				p.setDescrizione(rs.getString(4));
-				p.setModello(rs.getString(5));
-				p.setCasaProduttrice(rs.getString(6));
-				console.add(p);
+				p.setModello(rs.getString(2));
+				p.setCasaProduttrice(rs.getString(3));
+				p.setPrezzo(prod.getPrezzo());
+				array.add(p);
+				
 			}
-			return console;
+			return array;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-	}
-	
-
-	public ArrayList<String>  doRetrieveLike(String against) {
-		try (Connection con = ConPool.getConnection()) {
-			PreparedStatement ps = con.prepareStatement(
-					"Select modello FROM Console WHERE modello LIKE '%" + against + "%'");
-			ResultSet rs = ps.executeQuery();
-			ArrayList<String> list = new ArrayList<String>(); 
-			if(!rs.next()) {
-				return null;
-			}
-			do {
-					list.add(rs.getString("modello"));
-			}while(rs.next());			
-				
-			
-			return list;
-			}
-		catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+		
 	}
 
 	
+
+	@Override
+	//Memorizza una console nel database
 	public void createConsole(Console prodotto) {
+
 		try (Connection con = ConPool.getConnection()) {
-			
+			pDAO.createProdotto(prodotto);
 			PreparedStatement ps = con.prepareStatement(
-					"INSERT INTO Console (prodottoID, modello, casaProduttrice) VALUES(?,?,?)",
+					"INSERT INTO Console (prodottoId, modello, casaProduttrice) VALUES(?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, prodotto.getId());
 			ps.setString(2, prodotto.getModello());
@@ -156,16 +146,44 @@ public class ConsoleDB implements ConsoleDAO{
 		}
 	}
 
+	
 
-	public void removeConsole(int codice) {
+	@Override
+	//Rimuove una console avente come id "codice" dal database
+	public void removeConsole(int id) {
 		try (Connection con = ConPool.getConnection()) {
-			
-			PreparedStatement ps = con.prepareStatement("DELETE FROM Console WHERE id=?");
-			ps.setInt(1, codice);
+			pDAO.removeProdotto(id);
+			PreparedStatement ps = con.prepareStatement("DELETE FROM Console WHERE prodottoId = ?");
+			ps.setInt(1, id);
 			if (ps.executeUpdate() != 1) {
 				throw new RuntimeException("DELETE error.");
 			}
 		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+
+	//Restituisce una lista di console avente modello simile a quello passato per argomento
+	public ArrayList<String> doRetrieveLikeModello(String modello) {
+		try (Connection con = ConPool.getConnection()) {
+			PreparedStatement ps = con.prepareStatement(
+					"Select modello FROM Console WHERE modello LIKE '%" + modello + "%'");
+			ResultSet rs = ps.executeQuery();
+			ArrayList<String> list = new ArrayList<String>(); 
+			if(!rs.next()) {
+				return null;
+			}
+			
+			do {
+				
+				list.add(rs.getString("modello"));
+			
+			}while(rs.next());			
+			
+			return list;
+			}
+		catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}

@@ -1,7 +1,6 @@
-package com.glitch.demo.model.bean;
+package model.bean;
 
-import java.sql.Date;
-import java.util.GregorianCalendar;
+
 
 
 public class ProdottiOrdine {
@@ -12,14 +11,14 @@ public class ProdottiOrdine {
 	private String nome;
 	private int quantita;
 	private float prezzo;
-	private GregorianCalendar dataOrdinazione;
+	
 	
 	//Costruttore vuoto
 	public ProdottiOrdine()
 	{}
 	
 	//Costruisce ProdottiOrdine passando per argomento l'username dell'utente, l'email, il nome del prodotto, la quantità, il prezzo e la data di ordinazione
-	public ProdottiOrdine(String utenteUsername, String utenteEmail, String nome, int quantita, float prezzo, Date dataOrdinazione)
+	public ProdottiOrdine(String utenteUsername, String utenteEmail, String nome, int quantita, float prezzo)
 	{
 		
 		this.setUtenteUsername(utenteUsername);
@@ -27,20 +26,10 @@ public class ProdottiOrdine {
 		this.setNome(nome);
 		this.setQuantita(quantita);
 		this.setPrezzo(prezzo);
-		this.dataOrdinazione.setTime(dataOrdinazione);
+	
 	}
 	
-	//Restituisce la data di ordinazione sotto forma di oggetto "Date"
-	public Date getDataOrdinazioneDate()
-	{
-		return (Date) dataOrdinazione.getTime();
-	}
 	
-	//Modifica la data di ordinazione passando per argomento un oggetto "Date" contenente la nuova data
-	public void setDataOrdinazioneDate(Date ord)
-	{
-		dataOrdinazione.setTime(ord);
-	}
 
 	//Restituisce l'email dell'utente associato al prodotto acquistato
 	public String getUtenteEmail() {
@@ -92,15 +81,7 @@ public class ProdottiOrdine {
 		this.utenteUsername = utenteUsername;
 	}
 
-	//Restituisce la data di ordinazione sotto forma di "GregorianCalendar"
-	public GregorianCalendar getDataOrdinazione() {
-		return dataOrdinazione;
-	}
-
-	//Modifica la data di ordinazione passando un oggetto "GregorianCalendar"
-	public void setDataOrdinazione(GregorianCalendar dataOrdinazione) {
-		this.dataOrdinazione = dataOrdinazione;
-	}
+	
 
 	
 	

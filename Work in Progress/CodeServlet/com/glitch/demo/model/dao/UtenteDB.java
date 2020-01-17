@@ -1,4 +1,4 @@
-package com.glitch.demo.model.dao;
+package model.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.Array;
@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import com.glitch.demo.model.bean.Utente;
-import com.glitch.demo.model.bean.CartaDiCredito;
-import com.glitch.demo.model.bean.ConPool;
+import model.bean.Utente;
+import model.bean.CartaDiCredito;
 
 public class UtenteDB implements UtenteDAO{
 
