@@ -1,0 +1,24 @@
+package com.glitch.demo.model.dao;
+
+import com.glitch.demo.model.bean.Carrello;
+import com.glitch.demo.model.bean.ProdottoQuantita;
+
+public interface CarrelloDAO {
+
+	//Restituisce il carrello dell'utente avente come username la stringa passata come argomento
+	Carrello retriveByUtente(String user);
+	
+	//Memorizza il carrello passato come argomento nel database
+	//Se il carrello già esiste lo aggiornerà altrimenti lo creerà e lo memorizzerà nel database
+	void createCarrello(Carrello cart);
+	
+	//Aggiorna la quantità dell'oggetto carrello nel database
+	void doUpdate(ProdottoQuantita p);
+	
+	//Rimuove l'oggetto carrello avente come id l'intero passato come argomento e come username dell'utente la stringa "utenteUsername"
+	void doDelete(int prodId, String utenteUsername);
+	
+	//Rimuove tutti gli oggetti carrello associati all'utente avente come username la stringa passata per argomento
+	void removeCarrello(String utenteUsername);
+	
+}
