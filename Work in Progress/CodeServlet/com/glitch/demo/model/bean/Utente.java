@@ -1,12 +1,9 @@
-package com.glitch.demo.model.bean;
-
-
+package model.bean;
 
 import java.util.ArrayList;
 
 
 public class Utente {
-
 	
     private String username;
     private String email;
@@ -153,20 +150,36 @@ public class Utente {
 	//Modifica il ruolo dell'utente, ritorna false se l'utente ha più di 3 ruoli o se è già presente quel ruolo in "utente"
 	public Boolean setRuolo(String ruoloDaIns) {
 		
-		if(ruolo.size()>3)
-		{
+		if(ruolo.size() > 3){
 			return false;
 		}
 			
-		else if (ruolo.contains(ruoloDaIns))
-		{
+		else if (ruolo.contains(ruoloDaIns)){
 			return false;
 		}
 			
 		else{
 			ruolo.add(ruoloDaIns);
 			return true;
-			}
+		}
+	}
+	
+	public boolean isGestoreAccount(ArrayList<String> ruoli) {
+		if(ruoli.contains("Gestore Account"))
+			return true;
+		return false;
+	}
+	
+	public boolean isGestoreCatalogo(ArrayList<String> ruoli) {
+		if(ruoli.contains("Gestore Catalogo"))
+			return true;
+		return false;
+	}
+	
+	public boolean isGestoreAssistenza(ArrayList<String> ruoli) {
+		if(ruoli.contains("Gestore Assistenza"))
+			return true;
+		return false;
 	}
 	
 	//Rimuove il ruolo passato come argomento dalla lista di ruoli dell'utente
