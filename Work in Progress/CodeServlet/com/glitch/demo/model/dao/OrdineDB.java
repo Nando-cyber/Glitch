@@ -1,4 +1,4 @@
-package com.glitch.demo.model.dao;
+package model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.glitch.demo.model.bean.ConPool;
-import com.glitch.demo.model.bean.Ordine;
-import com.glitch.demo.model.bean.ProdottiOrdine;
+
+import model.bean.Ordine;
+import model.bean.ProdottiOrdine;
 
 
 
@@ -42,7 +42,7 @@ public class OrdineDB implements OrdineDAO{
 						ps.setString(4, p.getNome());
 						ps.setInt(5, p.getQuantita());
 						ps.setFloat(6, p.getPrezzo());
-						ps.setDate(7, p.getDataOrdinazioneDate());
+						ps.setDate(7, ord.getDataOrdinazioneDate());
 						
 						if (ps.executeUpdate() != 1) {
 							
@@ -100,7 +100,7 @@ public class OrdineDB implements OrdineDAO{
 				p.setNome(rs.getString(4));
 				p.setQuantita(rs.getInt(5));
 				p.setPrezzo(rs.getFloat(6));
-				p.setDataOrdinazioneDate(rs.getDate(7));
+				ord.setDataOrdinazioneDate(rs.getDate(7));
 				prod.add(p);
 				
 				
@@ -142,7 +142,7 @@ public class OrdineDB implements OrdineDAO{
 				p.setNome(rs.getString(4));
 				p.setQuantita(rs.getInt(5));
 				p.setPrezzo(rs.getFloat(6));
-				p.setDataOrdinazioneDate(rs.getDate(7));
+				ord.setDataOrdinazioneDate(rs.getDate(7));
 				prod.add(p);
 			}
 			
