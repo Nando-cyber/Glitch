@@ -42,7 +42,7 @@ public class OrdineDB {
 						ps.setString(4, p.getNome());
 						ps.setInt(5, p.getQuantita());
 						ps.setFloat(6, p.getPrezzo());
-						ps.setDate(7, p.getDataOrdinazioneDate());
+						ps.setDate(7, ord.getDataOrdinazioneDate());
 						
 						if (ps.executeUpdate() != 1) {
 							
@@ -100,7 +100,7 @@ public class OrdineDB {
 				p.setNome(rs.getString(4));
 				p.setQuantita(rs.getInt(5));
 				p.setPrezzo(rs.getFloat(6));
-				p.setDataOrdinazioneDate(rs.getDate(7));
+				ord.setDataOrdinazioneDate(rs.getDate(7));
 				prod.add(p);
 				
 				
@@ -142,7 +142,7 @@ public class OrdineDB {
 				p.setNome(rs.getString(4));
 				p.setQuantita(rs.getInt(5));
 				p.setPrezzo(rs.getFloat(6));
-				p.setDataOrdinazioneDate(rs.getDate(7));
+				ord.setDataOrdinazioneDate(rs.getDate(7));
 				prod.add(p);
 			}
 			

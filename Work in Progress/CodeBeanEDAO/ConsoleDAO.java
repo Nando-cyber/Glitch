@@ -1,5 +1,6 @@
 package model.dao;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,20 +13,23 @@ public interface ConsoleDAO extends ProdottoDAO{
 	void createConsole(Console prodotto);
 	
 	//Restituisce una lista limitata di console comprese tra i valori "min" e "max" passati come argomento
-	List<Console> doRetriveConsoleAllRange(int offset, int limit);
+	List<Console> doRetriveConsoleAllRange(int min, int max);
 	
 	//Restituisce la console che ha come id l'intero passato come argomento
 	Console findConsoleById(int id);
 	
 	//Restituisce la console avente come modello la stringa passata come argomento
-	Console retriveByModello(String against);
+	Console retriveByModello(String modello);
 	
 	//Restituisce la lista di console aventi come casa produttrice la stringa passata come argomento
-	List<Console> retriveByCasaProduttrice(String casaProduttrice);
+	List<Console> retriveByCasaProduttirce(String casaProduttrice);
 	
 	//Rimuove una console avente come id "codice" dal database
-	void removeConsole(int codice);
+	void removeConsole(int id);
 	
-	ArrayList<String>  doRetrieveLike(String against);
+	//Restituisce una lista di console avente modello simile a quello passato per argomento
+	ArrayList<String> doRetrieveLikeModello(String modello);
+	
+	
 	
 }
