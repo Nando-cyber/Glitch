@@ -48,11 +48,12 @@ public class ProdottoDB implements ProdottoDAO{
 			PreparedStatement ps = con.prepareStatement("SELECT id, immagine, prezzo, descrizione FROM Prodotto WHERE id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
-			java.sql.Blob b1 = rs.getBlob("immagine");
-			java.sql.Blob b2 = rs.getBlob("descrizione");
+			
 			if (rs.next()) {
 				Prodotto p = new Prodotto();
 				p.setId(rs.getInt(1));
+				java.sql.Blob b1 = rs.getBlob(2);
+				java.sql.Blob b2 = rs.getBlob(4);
 				p.setImmagine(new String(b1.getBytes(1l, (int) b1.length())));
 				p.setPrezzo(rs.getFloat(3));
 				p.setDescrizione(new String(b2.getBytes(1l, (int) b2.length())));

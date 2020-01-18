@@ -7,7 +7,7 @@ CREATE TABLE Utente (
   password  varchar(15) NOT NULL, 
   nome      char(15) NOT NULL, 
   cognome   char(15) NOT NULL, 
-  provincia char(3), 
+  provincia char(3),
   CAP       int(5), 
   città     int(11), 
   via       char(20), 

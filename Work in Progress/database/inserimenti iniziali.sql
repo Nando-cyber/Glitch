@@ -8,7 +8,7 @@ INSERT INTO Prodotto (id, immagine, prezzo, descrizione)
 VALUES(2, "https://images-na.ssl-images-amazon.com/images/I/514jjzTTaML._SX679_.jpg", 249, "PS4 500GB+DS4V2+FORTNITE VCH");
 /*Videogiochi*/
 INSERT INTO Videogioco (prodottoId, nome, genere, piattaforma) VALUES(1, "Call of Duty: Modern Warfare","FPS", "PlayStation 4");
-Delete from Prodotto where Id = 2;
+
 
 /*Console*/
 INSERT INTO Console (prodottoID, modello, casaProduttrice) VALUES(2, "PS4", "Playstation");
