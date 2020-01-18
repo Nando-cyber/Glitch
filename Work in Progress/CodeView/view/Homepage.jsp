@@ -70,7 +70,7 @@
 					<c:choose>
                  		<c:when test="${utente == null}">
 							<form>
-								<input type="hidden" name="prodId" value="${videogiochi.codice}">
+								<input type="hidden" name="prodId" value="${videogiochi.id}">
 								<input type="submit" class="bottone not-allowed" value="Aggiungi al carrello" disabled="disabled">  
                  			</form>				
 						</c:when>
@@ -78,7 +78,7 @@
                  			<form action="InsertProdotti">
                  				<label>Quantità: </label>
                  				<input type="number" class="form-control-sm d-sm-flex d-md-flex d-lg-flex" placeholder="1" min="1" max="20" value="1" /><br>
-								<input type="hidden" name="videogiocoId" value="${videogiochi.codice}"><br>
+								<input type="hidden" name="videogiocoId" value="${videogiochi.id}"><br>
 								<input type="submit" class="bottone" value="Aggiungi al carrello">  
                  			</form>	
                  		</c:otherwise>
@@ -96,7 +96,7 @@
 					<c:choose>
                  		<c:when test="${utente == null}">
 							<form>
-								<input type="hidden" name="prodId" value="${console.codice}">
+								<input type="hidden" name="prodId" value="${console.id}">
 								<input type="submit" class="bottone not-allowed" value="Aggiungi al carrello" disabled="disabled">  
                  			</form>				
 						</c:when>
@@ -104,7 +104,7 @@
                  			<form action="GestioneCarrelloServlet">
                  				<label>Quantità: </label>
                  				<input type="number" class="form-control-sm d-sm-flex d-md-flex d-lg-flex" placeholder="1" min="1" max="20" value="1" /><br>
-								<input type="hidden" name="consoleId" value="${console.codice}"><br>
+								<input type="hidden" name="consoleId" value="${console.id}"><br>
 								<input type="hidden" name="operazione" value="inserimento"><br>
 								<input type="submit" class="bottone" value="Aggiungi al carrello">  
                  			</form>	

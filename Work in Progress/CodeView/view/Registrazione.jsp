@@ -3,9 +3,6 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
 				<div class="image-holder"></div>
 				<form method="post">
 					<h2 class="text-center">Registrati</h2>

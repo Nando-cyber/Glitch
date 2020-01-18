@@ -10,8 +10,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 	<title>GLITCH</title>
 	<!-- link per i file css -->
-	<link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="footer.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/footer.css">
+	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="css/registrazione.css">
 	<!-- link per BOOTSRAP 4 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -52,7 +54,7 @@
 					<!-- Opzioni per i vari tipi di utente del sito -->
 					<c:choose>
 						<c:when test="${utente == null}">
-							<span class="navbar-text"><a class="login" href="#" data-toggle="modal" data-target="#myLogin">Accedi</a></span>
+							<span class="navbar-text"><a class="login" href="#" data-toggle="modal" data-target="#myLogin">Accedi&#160;&#160;</a></span>
 							<a class="btn btn-light action-button" role="button"
 								data-toggle="modal" data-target="#myRegistrazione">Registrati</a>
 						 </c:when>
@@ -99,5 +101,7 @@
 		</nav>
 	</div>
 
-</body>
-</html>
+
+
+<%@include file="Login.jsp" %> 
+<%@include file="Registrazione.jsp" %> 

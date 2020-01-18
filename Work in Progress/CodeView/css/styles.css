@@ -39,6 +39,14 @@ body {
   height: 200px;
 }
 
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .h1{
 	color: #000000;
 }
