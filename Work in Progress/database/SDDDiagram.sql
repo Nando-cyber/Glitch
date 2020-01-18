@@ -2,14 +2,15 @@ create database Glitch;
 use Glitch;
 
 CREATE TABLE Utente (
-  username  varchar(10) NOT NULL, 
+  username  varchar(20) NOT NULL, 
   email     varchar(25) NOT NULL, 
+  cartaDiCredito varchar(16) , 
   password  varchar(15) NOT NULL, 
   nome      char(15) NOT NULL, 
   cognome   char(15) NOT NULL, 
   provincia char(3),
   CAP       int(5), 
-  città     int(11), 
+  citta    varchar(11), 
   via       char(20), 
   numero    int(3), 
   ruolo     ENUM("Catalogo", "Account", "Assistenza"), 
@@ -64,7 +65,7 @@ CREATE TABLE Offerta (
   categoria char(10) NOT NULL, 
   PRIMARY KEY (codice));
 CREATE TABLE `Carta di credito` (
-  numeroCarta    int(16) NOT NULL, 
+  numeroCarta    varchar(16) NOT NULL, 
   utenteUsername varchar(10) NOT NULL, 
   utenteEmail    varchar(25) NOT NULL, 
   nome           char(15) NOT NULL, 
@@ -81,3 +82,4 @@ ALTER TABLE Ordine ADD INDEX FKOrdine835012 (carrelloProdottoID, carrelloUtenteU
 ALTER TABLE Richiesta ADD INDEX FKRichiesta300529 (utenteUsername, utenteEmail), ADD CONSTRAINT FKRichiesta300529 FOREIGN KEY (utenteUsername, utenteEmail) REFERENCES Utente (username, email);
 ALTER TABLE Carrello ADD INDEX FKCarrello511555 (prodottoID), ADD CONSTRAINT FKCarrello511555 FOREIGN KEY (prodottoID) REFERENCES Prodotto (ID);
 ALTER TABLE `Carta di credito` ADD INDEX `FKCarta di c550472` (utenteUsername, utenteEmail), ADD CONSTRAINT `FKCarta di c550472` FOREIGN KEY (utenteUsername, utenteEmail) REFERENCES Utente (username, email);
+ALTER TABLE Utente ADD INDEX FKUtente332323 (cartaDiCredito), ADD CONSTRAINT FKUtente332323 FOREIGN KEY (cartaDiCredito) REFERENCES `Carta di credito`  (numeroCarta);
