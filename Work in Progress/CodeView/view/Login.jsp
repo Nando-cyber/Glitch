@@ -3,7 +3,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<form method="post">
+				<form method="post" action="LoginServlet">
 					<h2 class="sr-only">Login Form</h2>
 					<div class="illustration">
 						<i class="icon ion-ios-locked-outline"></i>
@@ -17,7 +17,7 @@
 					<div class="form-group">
 						<button class="btn btn-primary btn-block" type="submit">Accedi</button>
 					</div>
-					<a class="forgot" href="#" data-toggle="modal" data-target="#myRegistrazione">Non sei ancora registrato? Registrati qui</a>
+					<a class="forgot" data-toggle="modal" data-target="#myRegistrazione">Non sei ancora registrato? Registrati qui</a>
 				</form>
 			</div>
 		</div>

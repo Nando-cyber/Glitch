@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="css/footer.css">
 	<link rel="stylesheet" href="css/login.css">
 	<link rel="stylesheet" href="css/registrazione.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> <!-- Icone social -->  
 	<!-- link per BOOTSRAP 4 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -29,29 +30,19 @@
 		<nav
 			class="navbar navbar-light navbar-expand-md navigation-clean-search">
 			<div class="container-fluid">
-				<img class="image-holder" src="GlitchLogo.png" style="width: 90px" />
+				<img class="image-holder" src="GlitchLogo.png" style="width: 100px" />
 				<button data-toggle="collapse" data-target="#navcol-3" class="navbar-toggler">
 					<span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse image-holder" id="navcol-3" src="GlitchLogo.png">
-					<ul class="nav navbar-nav">
-						<li role="presentation" class="nav-item"><a class="nav-link"
-							href="team.bsdesign">Chi siamo</a></li>
-						<li role="presentation" class="nav-item"><a class="nav-link"
-							href="#contatti">Contatti</a></li>
-					</ul>
-					<ul class="nav navbar-nav">
-						<li role="presentation" class="nav-item"></li>
-					</ul>
 					<!-- Barra di ricerca -->
 					<form class="form-inline mr-auto" target="_self">
 						<div class="form-group">
-							<label for="search-field"><span class="glyphicon glyphicon-search"></span></label>
-							<input type="search" class="form-control search-field" id="search-field" name="cerca" />
+							<input type="search" class="form-control search-field" id="search-field" name="cerca" placeholder="Cerca"/>
 						</div>
 					</form>
 					
-					<!-- Opzioni per i vari tipi di utente del sito -->
+					<!-- Opzioni da navbar specifiche per i vari tipi di utente del sito -->
 					<c:choose>
 						<c:when test="${utente == null}">
 							<span class="navbar-text"><a class="login" href="#" data-toggle="modal" data-target="#myLogin">Accedi&#160;&#160;</a></span>
@@ -92,7 +83,7 @@
 										<a role="presentation" class="dropdown-item d-lg-flex" href="#">Logout</a>
 									</div>
 								</div>
-								<a class="btn btn-light action-button" role="button" action=" "><i class="fa fa-shopping-cart"></i>Carrello</a>
+								<a class="btn btn-light action-button" role="button" action="GestioneCarrelloServlet"><i class="fa fa-shopping-cart"></i>&#160;&#160;Carrello</a>
 							</c:if>
                			</c:otherwise>
 					</c:choose>

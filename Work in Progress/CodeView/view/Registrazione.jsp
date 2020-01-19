@@ -3,9 +3,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div class="image-holder"></div>
-				<form method="post">
-					<h2 class="text-center">Registrati</h2>
+				<form method="post" action="RegistrazioneServlet">
 					<div class="form-group">
 						<input class="form-control" type="text" name="nome" placeholder="Nome" />
 					</div>
