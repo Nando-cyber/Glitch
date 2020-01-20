@@ -9,10 +9,10 @@ CREATE TABLE Utente (
   nome      char(15) NOT NULL, 
   cognome   char(15) NOT NULL, 
   provincia char(3),
-  CAP       int(5), 
+  CAP       int, 
   citta    varchar(11), 
   via       char(20), 
-  numero    int(3), 
+  numero    int, 
   ruolo     char(15), 
   PRIMARY KEY (username, 
   email));
@@ -24,45 +24,45 @@ CREATE TABLE Utente (
   nome           char(15) NOT NULL, 
   cognome        char(15) NOT NULL, 
   scadenza       date NOT NULL, 
-  CVV            int(3) NOT NULL, 
+  CVV            int NOT NULL, 
   PRIMARY KEY (numeroCarta, 
   utenteUsername, 
   utenteEmail));
 CREATE TABLE Prodotto (
-  ID            int(5) NOT NULL AUTO_INCREMENT, 
+  ID            int NOT NULL AUTO_INCREMENT, 
   immagine      blob, 
   prezzo        double NOT NULL, 
   descrizione   blob,  
   PRIMARY KEY (ID));
 CREATE TABLE Console (
-  prodottoID      int(5) NOT NULL, 
+  prodottoID      int NOT NULL, 
   modello         varchar(15) NOT NULL, 
   casaProduttrice char(15) NOT NULL, 
   PRIMARY KEY (prodottoID));
 CREATE TABLE Videogioco (
-  prodottoID  int(5) NOT NULL, 
+  prodottoID  int NOT NULL, 
   nome        varchar(40) NOT NULL, 
   genere      char(10) NOT NULL, 
   piattaforma varchar(15) NOT NULL, 
   PRIMARY KEY (prodottoID));
 CREATE TABLE Carrello (
-  prodottoID     int(5) NOT NULL, 
+  prodottoID     int NOT NULL, 
   utenteUsername varchar(20) NOT NULL, 
   utenteEmail    varchar(25) NOT NULL, 
-  quantita      int(3) NOT NULL, 
+  quantita      int NOT NULL, 
   PRIMARY KEY (prodottoID, 
   utenteUsername, 
   utenteEmail));
 CREATE TABLE Ordine (
   carrelloUtenteUsername varchar(20) NOT NULL, 
   carrelloUtenteEmail    varchar(25) NOT NULL, 
-  carrelloProdottoID     int(5) NOT NULL, 
+  carrelloProdottoID     int NOT NULL, 
   dataOrdinazione        date NOT NULL, 
   PRIMARY KEY (carrelloUtenteUsername, 
   carrelloUtenteEmail, 
   carrelloProdottoID));
 CREATE TABLE Richiesta (
-  id             int(3) NOT NULL, 
+  id             int NOT NULL, 
   utenteEmail    varchar(25) NOT NULL, 
   utenteUsername varchar(20) NOT NULL, 
   destinatario   varchar(25) NOT NULL, 
@@ -71,8 +71,8 @@ CREATE TABLE Richiesta (
   PRIMARY KEY (id, 
   utenteEmail));
 CREATE TABLE Offerta (
-  codice    int(5) NOT NULL AUTO_INCREMENT, 
-  sconto    int(3) NOT NULL, 
+  codice    int NOT NULL AUTO_INCREMENT, 
+  sconto    int NOT NULL, 
   categoria char(10) NOT NULL, 
   PRIMARY KEY (codice));
 
