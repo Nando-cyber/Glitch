@@ -46,7 +46,7 @@ public class LogoutServlet extends BaseServlet {
 		
 		//Da completare quando le servlet sono concluse
 		
-		if (dest == null || dest.contains("/Logout") || dest.contains("/AcquistoServlet") || dest.contains("/BGestioneCarrelloServlet")  
+		if (dest == null || dest.contains("/Logout") || dest.contains("/AcquistoServlet") || dest.contains("/GestioneCarrelloServlet")  
 				|| dest.contains("/GestioneOffertaServlet") || dest.contains("/RegistrazioneServlet") || dest.contains("/LoginServlet") 
 				|| dest.contains("/GestioneProdottoServlet") || dest.contains("/GestioneProfiloServlet") || dest.contains("/GestioneRuoloServlet") ||  dest.contains("/InserimentoCartaServlet") ||
 				dest.contains("/RedirectCarrello") || dest.contains("/RedirectPaginaPersonale") || dest.contains("/RichiestaAssistenzaServlet") ||

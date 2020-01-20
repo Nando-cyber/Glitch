@@ -84,7 +84,7 @@ public class CarrelloDB implements CarrelloDAO{
 				ResultSet rs = v.executeQuery();
 
 				
-				if( rs != null ) {
+				if(!rs.next()) {
 					PreparedStatement ps = con.prepareStatement("INSERT INTO Carrello (prodottoID, utenteUsername, utenteEmail, quantita) VALUES(?,?,?,?)",
 							Statement.RETURN_GENERATED_KEYS);
 
