@@ -179,7 +179,7 @@ public class CarrelloDB implements CarrelloDAO{
 			ps.setString(1, utenteUsername);
 
 
-			if (ps.executeUpdate() == 0) {
+			if (ps.executeUpdate() != 1) {
 				throw new RuntimeException("DELETE error.");
 			}
 		} catch (SQLException e) {

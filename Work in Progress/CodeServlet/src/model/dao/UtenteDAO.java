@@ -28,4 +28,7 @@ public interface UtenteDAO {
 	
 	//Restituisce la lista degli utenti presenti nel database
 	List<Utente> retriveAllUtenti();
+	
+	//Aggiorna la carta di credito dell'utente
+	void updateCartaDiCreditoUtente(Utente u);
 }

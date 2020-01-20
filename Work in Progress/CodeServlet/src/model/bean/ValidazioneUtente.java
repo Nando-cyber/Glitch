@@ -44,7 +44,7 @@ public class ValidazioneUtente {
 	//Controlla che sia rispettata la sintassi (Deve contenere caratteri alfanumerici) di "via"
 	public static boolean checkVia(String via)
 	{
-		return Pattern.matches("[A-Za-z0-9]+",via);
+		return Pattern.matches("[A-Za-z0-9\\s]+",via);
 	}
 	
 	//Controlla che sia rispettata la sintassi (Deve contenere caratteri numerici) di "numero"

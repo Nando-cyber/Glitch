@@ -6,12 +6,13 @@ import java.util.GregorianCalendar;
 public class CartaDiCredito{
 
 
-	private int numeroCarta;
+	private String numeroCarta;
 	private String utenteUsername;
 	private String utenteEmail;
 	private String nome;
 	private String cognome;
 	private GregorianCalendar scadenza;
+	private Date scadenzaDate;
 	private int cvv;
 	
 	//Costruttore vuoto
@@ -20,7 +21,7 @@ public class CartaDiCredito{
 	
 	//Costruisce una carta di credito passando come argomento il numero della carta, 
 	//l'username dell'utente, l'email, nome, cognome, la scadenza e il cvv della carta di credito
-	public CartaDiCredito(int numeroCarta,String utenteUsername,String utenteEmail, String nome, String cognome, GregorianCalendar scadenza, int cvv)
+	public CartaDiCredito(String numeroCarta,String utenteUsername,String utenteEmail, String nome, String cognome, GregorianCalendar scadenza, int cvv)
 	{
 		this.setNumeroCarta(numeroCarta);
 		this.utenteUsername=utenteUsername;
@@ -28,6 +29,7 @@ public class CartaDiCredito{
 		this.nome=nome;
 		this.cognome=cognome;
 		this.scadenza=scadenza;
+		this.scadenzaDate=new Date(scadenza.getTimeInMillis());
 		this.cvv=cvv;
 	}
 
@@ -60,11 +62,15 @@ public class CartaDiCredito{
 	}
 	
 	public Date getScadenzaDate() {
-		return (Date) scadenza.getTime();
+	//	Long time=this.scadenza.getTimeInMillis();
+	//	Date date=new Date(time);
+		return scadenzaDate;
 	}
 	
 	public void setScadenzaDate(Date scadenza) {
-		this.scadenza.setTime(scadenza);
+	//	Long time=scadenza.getTime();
+		this.scadenzaDate=scadenza;
+	//	this.scadenza.setTimeInMillis(time);
 	}
 
 	//Restituisce il nome dell'utente associato alla carta di credito
@@ -97,11 +103,11 @@ public class CartaDiCredito{
 		this.utenteEmail = email;
 	}
 
-	public int getNumeroCarta() {
+	public String getNumeroCarta() {
 		return numeroCarta;
 	}
 
-	public void setNumeroCarta(int numeroCarta) {
+	public void setNumeroCarta(String numeroCarta) {
 		this.numeroCarta = numeroCarta;
 	}
 
