@@ -41,15 +41,17 @@ body {
   margin-bottom: 0;
 }
 
+.navbar-light .navbar-text a {
+    color: #fff;
+    background: transparent;
+}
+
 .features-boxed{
 	padding-top: 5%;	/*per distanzare i button del filtraggio dal carousel*/
 }
 
 #img-catalogo {
-  margin: 3%;
-  max-width: 100%;
-  width: 300px;
-  height: 300px;
+  c
 }
 
 /*box per la descrizione dei prodotti*/
@@ -65,6 +67,13 @@ body {
 
 /*Home catalogo*/
 .home{
+	margin-left: 15%;
+	margin-right: 15%;
+	background-color: #fff;
+}
+
+/*Pagina personale*/
+#PagPersonale{
 	margin-left: 15%;
 	margin-right: 15%;
 	background-color: #fff;

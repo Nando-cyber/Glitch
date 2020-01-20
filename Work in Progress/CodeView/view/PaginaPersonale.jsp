@@ -6,7 +6,7 @@
 </jsp:include>
 
 
-<div class="article-list">
+<div class="article-list" id="PagPersonale">
 	<div class="container">
 		<div class="intro">
 			<h2 class="text-center">Pagina personale</h2>
