@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="css/footer.css">
 	<link rel="stylesheet" href="css/login.css">
 	<link rel="stylesheet" href="css/registrazione.css">
+	<link rel="stylesheet" href="css/carrello.css">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> <!-- Icone social -->  
 	<!-- link per BOOTSRAP 4 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -52,31 +53,32 @@
 						 <c:otherwise>		
 							<c:if test="${ utente != null && utente.ruolo == null }">
 								<div class="dropdown show d-lg-flex" style="margin: 0px; margin-right: 25px;">
-									<a data-toggle="dropdown" aria-expanded="true" class="dropdown-toggle text-left" href="#"><i class="fa fa-user-circle"></i>Ciao, ${utente.cognome}</a>
+									<a data-toggle="dropdown" aria-expanded="true" class="dropdown-toggle text-left" href="#"><i class="fa fa-user-circle"></i>Ciao, ${utente.nome}</a>
 									<div role="menu" class="dropdown-menu show">
-										<a role="presentation" class="dropdown-item d-lg-flex" href="#">Pagina personale</a>
+										<a role="presentation" class="dropdown-item d-lg-flex" href="RedirectPaginaPersonale">Pagina personale</a>
 										<a role="presentation" class="dropdown-item" href="#">I miei ordini</a>
 										<a role="presentation" class="dropdown-item" href="#">Le mie notifiche <span class="glyphicon glyphicon-comment"></span><span class="badge badge-notify">3</span></a>
-										<a role="presentation" class="dropdown-item d-lg-flex" href="#">Logout</a>
+										<a role="presentation" class="dropdown-item d-lg-flex" href="LogoutServlet">Logout</a>
 									</div>
 								</div>
-								<a class="btn btn-light action-button" role="button" ><i class="fa fa-shopping-cart"></i>Carrello</a>
+								<a class="btn btn-light action-button" role="button" href="RedirectCarrello" ><i class="fa fa-shopping-cart"></i>Carrello</a>
 							</c:if>
       	
 							<c:if test="${ utente.ruolo != null }">
 								<div class="dropdown show d-lg-flex" style="margin: 0px; margin-right: 25px;">
 									<a data-toggle="dropdown" aria-expanded="true" class="dropdown-toggle text-left" href="#"><i class="fa fa-user-circle"></i>Ciao, ${utente.cognome}</a>
 									<div role="menu" class="dropdown-menu show">
-										<a role="presentation" class="dropdown-item d-lg-flex" href="#">Pagina personale</a>
+										<a role="presentation" class="dropdown-item d-lg-flex" href="RedirectPaginaPersonale">Pagina personale</a>
 										<a role="presentation" class="dropdown-item" href="#">I miei ordini</a>
 										<a role="presentation" class="dropdown-item" href="#">Le mie notifiche <span class="glyphicon glyphicon-comment"></span><span class="badge badge-notify">3</span></a>
 										<c:if test="${ ruolo.isGestoreAccount }">
-											<a role="presentation" class="dropdown-item d-lg-flex" href="#">Gestore catalogo</a></c:if>
+											<a role="presentation" class="dropdown-item d-lg-flex" href="#">Gestore Account</a></c:if>
 										<c:if test="${ ruoloisGestoreCatalogo }">
 											<a data-toggle="dropdown" aria-expanded="true" class="dropdown-toggle text-left" href="#">Gestore prodotti</a></c:if>
 											<div role="menu" class="dropdown-menu show">
-												<a role="presentation" class="dropdown-item" href="#">Gestione prodotti</a>
-												<a role="presentation" class="dropdown-item" href="#">Gestione offeret</a>
+												
+												<a role="presentation" class="dropdown-item" href="RedirectGestoreProdotti">Gestione prodotti</a>
+												<a role="presentation" class="dropdown-item" href="RedirectGestoreOfferte">Gestione offerte</a>
 											</div>
 										<c:if test="${ ruolo.isGestoreAssistenza }">
 											<a role="presentation" class="dropdown-item" href="#">Gestore assistenza</a></c:if>

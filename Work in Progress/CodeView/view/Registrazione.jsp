@@ -26,7 +26,7 @@
 						<input class="form-control" type="text" name="numero" placeholder="Numero" />
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" name="cap" placeholder="CAP" />
+						<input class="form-control" type="text" name="CAP" placeholder="CAP" />
 					</div>
 					<div class="form-group">
 						<input class="form-control" type="text" name="username" placeholder="Username" />
