@@ -122,7 +122,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		}
 		else {
 
-			throw new MyServletException("Username o email giï¿½ presenti.");
+			throw new MyServletException("Username o email già presenti.");
 
 		}
 
