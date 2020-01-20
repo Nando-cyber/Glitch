@@ -4,7 +4,7 @@ use Glitch;
 CREATE TABLE Utente (
   username  varchar(20) NOT NULL, 
   email     varchar(25) NOT NULL, 
-  cartaDiCredito varchar(16) , foreign key (cartaDiCredito) references `Carta di credito` (numeroCarta),
+  cartaDiCredito varchar(16) ,
   password  varchar(15) NOT NULL, 
   nome      char(15) NOT NULL, 
   cognome   char(15) NOT NULL, 
@@ -83,3 +83,4 @@ ALTER TABLE Ordine ADD INDEX FKOrdine835012 (carrelloProdottoID, carrelloUtenteU
 ALTER TABLE Richiesta ADD INDEX FKRichiesta300529 (utenteUsername, utenteEmail), ADD CONSTRAINT FKRichiesta300529 FOREIGN KEY (utenteUsername, utenteEmail) REFERENCES Utente (username, email);
 ALTER TABLE Carrello ADD INDEX FKCarrello511555 (prodottoID), ADD CONSTRAINT FKCarrello511555 FOREIGN KEY (prodottoID) REFERENCES Prodotto (ID);
 ALTER TABLE `Carta di credito` ADD INDEX `FKCarta di c550472` (utenteUsername, utenteEmail), ADD CONSTRAINT `FKCarta di c550472` FOREIGN KEY (utenteUsername, utenteEmail) REFERENCES Utente (username, email);
+Alter table Utente Add Index fkUtente9988(cartaDiCredito), add foreign key  (cartaDiCredito) references `Carta di credito` (numeroCarta);

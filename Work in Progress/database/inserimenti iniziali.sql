@@ -15,4 +15,4 @@ INSERT INTO Console (prodottoID, modello, casaProduttrice) VALUES(2, "PS4", "Pla
 
 /*Utente*/
 INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo) 
-VALUES("Ferdinando98","nando99@libero.it",null,"ferdinando98", "Ferdinando","Napolitano", "NA", 80030, "Visciano", "Galileo Galilei", 1, null);
+VALUES("Ferdinando98","nando998@libero.it",null,"ferdinando98", "Ferdinando","Napolitano", "NA", 80030, "Visciano", "Galileo Galilei", 1, null);
