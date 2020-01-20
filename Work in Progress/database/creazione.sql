@@ -3,7 +3,7 @@ use Glitch;
 
 CREATE TABLE Utente (
   username  varchar(20) NOT NULL, 
-  email     varchar(25) NOT NULL, 
+  email     varchar(40) NOT NULL, 
   cartaDiCredito varchar(16) ,
   password  varchar(15) NOT NULL, 
   nome      char(15) NOT NULL, 
@@ -20,7 +20,7 @@ CREATE TABLE Utente (
   CREATE TABLE `Carta di credito` (
   numeroCarta    varchar(16) , 
   utenteUsername varchar(20) , 
-  utenteEmail    varchar(25) , 
+  utenteEmail    varchar(40) , 
   nome           char(15) NOT NULL, 
   cognome        char(15) NOT NULL, 
   scadenza       date NOT NULL, 
@@ -48,14 +48,14 @@ CREATE TABLE Videogioco (
 CREATE TABLE Carrello (
   prodottoID     int NOT NULL, 
   utenteUsername varchar(20) NOT NULL, 
-  utenteEmail    varchar(25) NOT NULL, 
+  utenteEmail    varchar(40) NOT NULL, 
   quantita      int NOT NULL, 
   PRIMARY KEY (prodottoID, 
   utenteUsername, 
   utenteEmail));
 CREATE TABLE Ordine (
   carrelloUtenteUsername varchar(20) NOT NULL, 
-  carrelloUtenteEmail    varchar(25) NOT NULL, 
+  carrelloUtenteEmail    varchar(40) NOT NULL, 
   carrelloProdottoID     int NOT NULL, 
   dataOrdinazione        date NOT NULL, 
   PRIMARY KEY (carrelloUtenteUsername, 
@@ -63,7 +63,7 @@ CREATE TABLE Ordine (
   carrelloProdottoID));
 CREATE TABLE Richiesta (
   id             int NOT NULL, 
-  utenteEmail    varchar(25) NOT NULL, 
+  utenteEmail    varchar(40) NOT NULL, 
   utenteUsername varchar(20) NOT NULL, 
   destinatario   varchar(25) NOT NULL, 
   descrizione    blob NOT NULL, 

@@ -1,4 +1,4 @@
-package Glitch.Test;
+package controller.Test;
 
 import java.io.BufferedReader;
 

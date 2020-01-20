@@ -1,12 +1,14 @@
-package Glitch.Test;
+package controller.Test;
+
+
 
 import static org.junit.Assert.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-
 
 import org.junit.After;
 import org.junit.Before;
@@ -16,7 +18,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import controller.LoginServlet;
 import controller.MyServletException;
-
 import model.bean.Utente;
 
 public class LoginServletTest {
@@ -26,7 +27,7 @@ public class LoginServletTest {
 	static LoginServlet servlet;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception {	
 		request= new MockHttpServletRequest();
 		response=new MockHttpServletResponse();
 		servlet= new LoginServlet();
@@ -42,9 +43,9 @@ public class LoginServletTest {
 
 	//Test (successo: user e password presenti nel database)
 	@Test
-	public void testLoginServlet() throws ServletException, IOException, MyServletException {
-		request.addParameter("username", "Sandro98");
-		request.addParameter("password", "12345678CVb");
+	public void testLoginServlet() throws ServletException, IOException {
+		request.addParameter("username", "Ferdinando98");
+		request.addParameter("password", "ferdinando98");
 
 		servlet.doPost(request, response);
 		
@@ -65,19 +66,12 @@ public class LoginServletTest {
 	public void testLoginServletFail() throws ServletException, IOException, MyServletException{
 		request.addParameter("username", "Sandro98");
 		request.addParameter("password", "12345678CVb");
-
-		servlet.doPost(request, response);
 		
-		boolean result;
-
-		Utente u=(Utente) request.getSession().getAttribute("utente");
-	
-		if(u!=null)
-			result=false;
-		else
-			result=true;
-		
-		assertEquals(result, true);
+		final String message = "Username e/o password non validi.";
+		MyServletException exceptionThrown = assertThrows(MyServletException.class, () -> {
+			servlet.doPost(request, response);
+		});
+		assertEquals(message, exceptionThrown.getMessage());	
 	}
 
 }

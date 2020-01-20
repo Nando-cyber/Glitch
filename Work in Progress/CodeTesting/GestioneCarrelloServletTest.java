@@ -1,8 +1,6 @@
-package Glitch.Test;
+package controller.Test;
 
-
-import static org.junit.Assert.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 
@@ -10,11 +8,11 @@ import javax.servlet.ServletException;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import controller.LoginServlet;
+import controller.GestioneCarrelloServlet;
 import model.bean.Carrello;
 import model.bean.ProdottoQuantita;
 import model.bean.Utente;
@@ -23,22 +21,20 @@ import model.dao.CarrelloDB;
 import model.dao.UtenteDAO;
 import model.dao.UtenteDB;
 
-public class GestioneCarrelloServletTest {
+class GestioneCarrelloServletTest {
 
 	static MockHttpServletRequest request;
 	static MockHttpServletResponse response;
-	static LoginServlet servlet;
+	static GestioneCarrelloServlet servlet;
 	
 	@Before
 	public void setUp() throws Exception {
 		request= new MockHttpServletRequest();
 		response=new MockHttpServletResponse();
-		servlet= new LoginServlet();
-		
+		servlet= new GestioneCarrelloServlet();
 		//L'utente "Ferdinando98" sarà presente nel db dopo l'inizializzazione
 		DatabaseHelper.initializeDatabase();
-	
-		
+
 	}
 
 	@After
@@ -67,7 +63,7 @@ public class GestioneCarrelloServletTest {
 		servlet.doPost(request, response);
 		
 		CarrelloDAO cartDAO=new CarrelloDB();
-		Carrello cart =cartDAO.retriveByUtente("Ferdinando98");
+		Carrello cart =cartDAO.retriveByUtente(u);
 		boolean result;
 		
 		ProdottoQuantita prod=cart.get(1);

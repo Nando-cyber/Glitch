@@ -1,7 +1,8 @@
-package Glitch.Test;
+package controller.Test;
 
 import static org.junit.Assert.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 
@@ -19,20 +20,21 @@ import model.bean.Utente;
 import model.dao.UtenteDAO;
 import model.dao.UtenteDB;
 
-
 public class RegistrazioneServletTest {
 
-	
+
 	static MockHttpServletRequest request;
 	static MockHttpServletResponse response;
 	static RegistrazioneServlet servlet;
 	
 	@Before
 	public void setUp() throws Exception {
+		
 		request= new MockHttpServletRequest();
 		response=new MockHttpServletResponse();
 		servlet= new RegistrazioneServlet();
 		DatabaseHelper.initializeDatabase();
+		
 	}
 
 	@After
@@ -42,6 +44,7 @@ public class RegistrazioneServletTest {
 		DatabaseHelper.resetDatabase();
 	}
 
+	//Test (successo)
 	@Test
 	public void testRegistrazioneServletConSuccesso() throws ServletException, IOException, MyServletException{
 		
@@ -49,16 +52,16 @@ public class RegistrazioneServletTest {
 		request.addParameter("password", "12345678Cvb");
 		request.addParameter("nome", "Sandro");
 		request.addParameter("cognome", "Mutone");
-		request.addParameter("email", "s.mutone@studenti.unisa.it");
-		request.addParameter("provincia", "Napoli");
+		request.addParameter("email", "s.mutone@outlook.it");
+		request.addParameter("provincia", "NA");
 		request.addParameter("CAP", "80033");
 		request.addParameter("citta", "Cicciano");
-		request.addParameter("via", "Cavalieri di malta");
+		request.addParameter("via", "Cavalieri");
 		request.addParameter("numero", "39");
 		servlet.doPost(request, response);
 		
 		UtenteDAO user=new UtenteDB();
-		Utente u= user.retriveByUsername("thelegends");
+		Utente u= user.retriveByUsername("Sandro98");
 		boolean result;
 		
 		if(u!=null)
@@ -66,10 +69,33 @@ public class RegistrazioneServletTest {
 		else
 			result=false;
 		
-		assertEquals(result, true);
+		assertTrue(result);
+	}
+	
+	//Test (fallito: password senza lettera maiuscola)
+	@Test 
+	public void testRegistrazioneServletFallita() throws ServletException, IOException, MyServletException{
+		
+		request.addParameter("username", "Sandro98");
+		request.addParameter("password", "12345678vb");
+		request.addParameter("nome", "Sandro");
+		request.addParameter("cognome", "Mutone");
+		request.addParameter("email", "s.mutone@outlook.it");
+		request.addParameter("provincia", "NA");
+		request.addParameter("CAP", "80033");
+		request.addParameter("citta", "Cicciano");
+		request.addParameter("via", "Cavalieri di malta");
+		request.addParameter("numero", "39");
+	
+		 final String message = "Formato Password Errata.";
+			MyServletException exceptionThrown = assertThrows(MyServletException.class, () -> {
+				servlet.doPost(request, response);
+			});
+			assertEquals(message, exceptionThrown.getMessage());	
+		
+		
 
 	}
 
-	
 
 }
