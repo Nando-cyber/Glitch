@@ -65,15 +65,16 @@ public class UtenteDB implements UtenteDAO{
 	public void updateUtente(Utente u) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con
-					.prepareStatement("UPDATE Utente SET email = ? AND password = ? AND provincia = ? AND cap = ? AND citta = ? AND via= ? AND numero = ? WHERE username = ?");
-			ps.setString(3, u.getEmail());
-			ps.setString(4, u.getPassword());
+					.prepareStatement("UPDATE Utente SET email = ? , password = ? , provincia = ? , cap = ? , citta = ? , via= ? , numero = ? WHERE username = ?");
+			
+			ps.setString(1, u.getEmail());
+			ps.setString(2, u.getPassword());
 			ps.setString(3, u.getProvincia());
 			ps.setInt(4, u.getCap());
-			ps.setString(4, u.getCitta());
-			ps.setString(4, u.getVia());
-			ps.setInt(4, u.getNumero());
-			ps.setString(4, u.getUsername());
+			ps.setString(5, u.getCitta());
+			ps.setString(6, u.getVia());
+			ps.setInt(7, u.getNumero());
+			ps.setString(8, u.getUsername());
 			if (ps.executeUpdate() != 1 ) {
 				throw new RuntimeException("UPDATE error.");
 			

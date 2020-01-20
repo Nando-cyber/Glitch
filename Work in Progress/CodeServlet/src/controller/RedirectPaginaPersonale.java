@@ -10,18 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Dispatcher
+ * Servlet implementation class RedirectPaginaPersonale
  */
-@WebServlet("/RedirectCarrello")
-public class RedirectCarrello extends HttpServlet {
+@WebServlet("/RedirectPaginaPersonale")
+public class RedirectPaginaPersonale extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RedirectCarrello() {
+    public RedirectPaginaPersonale() {
         super();
-        // TODO Auto-generated constructor stub
+       
     }
 
 	/**
@@ -29,13 +29,7 @@ public class RedirectCarrello extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*String servletPath = request.getServletPath();
-		mi restituisce il path della jsp chiamante		
-		String currentPage = servletPath.substring(servletPath.lastIndexOf("/")+1, servletPath.length());*/
-		
-		//Mi invia alla pagina Carrello.jsp
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/Carrello.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/PaginaPersonale.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
@@ -43,7 +37,7 @@ public class RedirectCarrello extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

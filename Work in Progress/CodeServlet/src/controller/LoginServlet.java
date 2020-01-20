@@ -55,14 +55,14 @@ public class LoginServlet extends HttpServlet {
 			throw new MyServletException("Username e/o password non validi.");
 		}
 		
-		System.out.println(utente.getEmail());
+		
 		
 		//Altrimenti si setta il bean Utente nella Sessione
 		request.getSession().setAttribute("utente", utente);
 		
 		//Si fa restituire il carrello dell'utente che vuole effettuare l'accesso
 		Carrello carrello = new Carrello();
-		carrello = carDAO.retriveByUtente(utente.getUsername());
+		carrello = carDAO.retriveByUtente(utente);
 		
 		//Se il carello � vuoto, lo si crea settandogli i dati dell'Utente a cui � connesso
 		if(carrello.isEmpty()) {
@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
 			carrello.setUtenteEmail(utente.getEmail());
 			
 		}
-		System.out.println(carrello.getUtenteEmail());
+		
 		//E si setta il bean Carrello nella Sessione
 		request.getSession().setAttribute("carrello", carrello);
 		

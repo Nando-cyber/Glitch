@@ -71,7 +71,7 @@ public class VideogiocoDB  implements VideogiocoDAO{
 	public Videogioco findVideogiocoById(int id) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con
-					.prepareStatement("SELECT prodottoId, nome, genere, piattaforma FROM videogioco WHERE codVideogioco=?");
+					.prepareStatement("SELECT prodottoId, nome, genere, piattaforma FROM videogioco WHERE prodottoId=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -211,7 +211,7 @@ public class VideogiocoDB  implements VideogiocoDAO{
 	public void removeProdotto(int id) {
 		try (Connection con = ConPool.getConnection()) {
 			pDAO.removeProdotto(id);
-			PreparedStatement ps = con.prepareStatement("DELETE FROM Videogioco WHERE codVideogioco=?");
+			PreparedStatement ps = con.prepareStatement("DELETE FROM Videogioco WHERE prodottoId=?");
 			ps.setInt(1, id);
 			if (ps.executeUpdate() != 1) {
 				throw new RuntimeException("DELETE error.");

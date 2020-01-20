@@ -43,18 +43,26 @@ public class GestioneCarrelloServlet extends HttpServlet {
 		//prendo il parametro "operazione" dalla rquest e controllo se corrisponde ad una rimozione,
 		//una modifica o inserimento
 		String operazione = request.getParameter("operazione");
+		System.out.println(operazione);
 		Carrello car = (Carrello) request.getSession().getAttribute("carrello");
 		if(operazione.equalsIgnoreCase("inserimento")) {
 
-			//se � un inserimetno si procede all'aggiunto di un prodotto nel carrello
-			//si prende l'id del prodotto e la quantit� da request 
+			//se e' un inserimetno si procede all'aggiunto di un prodotto nel carrello
+			//si prende l'id del prodotto e la quantita' da request 
 			//e si prende da DB il prodotto con l'id corrispondente
 			Prodotto p = pDAO.findProdottoById(Integer.parseInt(request.getParameter("prodId")));
 			int quantita = Integer.parseInt(request.getParameter("number"));
-
+			
+			//controllo se il prodotto da inserire e' gia' presente nel carrello
+			if(car.get(p.getId()) != null) {
+				// se e' presente, aggiorno la quantita'
+				car.updateQuantita(p.getId(), car.get(p.getId()).getQuantita() + quantita);
+				
+			}else {
 			//si inserisce il prodotto nel carrello
 			car.put(p, quantita);
-
+			
+			}
 			//si aggiorna il carrello dell'utente
 			cDAO.createCarrello(car);
 
@@ -63,15 +71,15 @@ public class GestioneCarrelloServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/Carrello.jsp");
 			requestDispatcher.forward(request, response);
 
-		}else if( operazione.equalsIgnoreCase("rimozione")) {
+		}else if(operazione.equalsIgnoreCase("rimozione")) {
 
-			// se è una rimozione si procede a rimuovere il prodotto indicato nel carrello
+			// se e' una rimozione si procede a rimuovere il prodotto indicato nel carrello
 
 			//si rimuove da carrello il prodotto con l'Id preso dalla request
-			car.remove( Integer.parseInt(request.getParameter("prodottoID") ));
+			car.remove( Integer.parseInt(request.getParameter("prodId") ));
 
 			//si aggiorna il carrello in DB
-			cDAO.doDelete(Integer.parseInt(request.getParameter("prodottoID")), car.getUsername());
+			cDAO.doDelete(Integer.parseInt(request.getParameter("prodId")), car.getUsername());
 
 			//si salva il carrello modificato nella sessione e si ritorna alla pagina carrello
 			request.getSession().setAttribute("carrello", car );
@@ -80,14 +88,14 @@ public class GestioneCarrelloServlet extends HttpServlet {
 
 		}else {
 
-			//se � una modifica della quantit� di un prodotto
+			//se e' una modifica della quantita' di un prodotto
 
-			//si procede ad aggiornare la quantit� del prodotto indicato dall'id preso dalla request
-			car.updateQuantita(Integer.parseInt(request.getParameter("prodottoID")), 
+			//si procede ad aggiornare la quantita' del prodotto indicato dall'id preso dalla request
+			car.updateQuantita(Integer.parseInt(request.getParameter("prodId")), 
 					Integer.parseInt( request.getParameter("quantita")));
 
 			//si aggiorna il carrello in DB
-			cDAO.doUpdate(car.get(Integer.parseInt(request.getParameter("prodottoID"))));
+			cDAO.doUpdate(car.get(Integer.parseInt(request.getParameter("prodId"))));
 
 			//si setta il carrello modificato nella sessione 
 			request.getSession().setAttribute("carrello", car );

@@ -17,7 +17,7 @@ import model.dao.CarrelloDB;
 /* LogoutServlet effettua la disconnessione dell'utente e il salvataggio dei suoi dati
  * */
 
-@WebServlet("/Logout")
+@WebServlet("/LogoutServlet")
 public class LogoutServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 	private CarrelloDAO carDAO = new CarrelloDB() ;
@@ -46,13 +46,15 @@ public class LogoutServlet extends BaseServlet {
 		
 		//Da completare quando le servlet sono concluse
 		
-		/*if (dest == null || dest.contains("/Logout") || dest.contains("/InsertProduct") || dest.contains("/AdminUtenti")  
-				|| dest.contains("/CarrelloServlet") || dest.contains("/RegistrazioneServlet") || dest.contains("/Login") 
-				|| dest.contains("/RemoveProduct") || dest.contains("/Carrello") || dest.contains("/Gestione") ||  dest.contains("/GestioneClienti") ||
-				dest.contains("/UpdateProduct") ||dest.trim().isEmpty()) {
+		if (dest == null || dest.contains("/Logout") || dest.contains("/AcquistoServlet") || dest.contains("/BGestioneCarrelloServlet")  
+				|| dest.contains("/GestioneOffertaServlet") || dest.contains("/RegistrazioneServlet") || dest.contains("/LoginServlet") 
+				|| dest.contains("/GestioneProdottoServlet") || dest.contains("/GestioneProfiloServlet") || dest.contains("/GestioneRuoloServlet") ||  dest.contains("/InserimentoCartaServlet") ||
+				dest.contains("/RedirectCarrello") || dest.contains("/RedirectPaginaPersonale") || dest.contains("/RichiestaAssistenzaServlet") ||
+				 dest.contains("/RiepilogoOrdineServlet") || dest.contains("/RispostaAssistenzaSrvlet") ||dest.contains("/VisualizzazioneEmailServlet") ||
+				dest.contains("/VisualizzazioneUtenteRuoli") ||dest.trim().isEmpty()) {
 			dest = "BaseServlet";
 		}
-		response.sendRedirect(dest);*/
+		response.sendRedirect(dest);
 	}
 
 	/**
