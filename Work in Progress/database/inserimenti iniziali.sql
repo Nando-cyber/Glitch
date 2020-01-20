@@ -18,4 +18,4 @@ INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, pr
 VALUES("Ferdinando98","nando998@libero.it",null,"ferdinando98", "Ferdinando","Napolitano", "NA", 80030, "Visciano", "Galileo Galilei", 1, null);
 
 INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo) 
-VALUES("Admin98","adminCatalogo99@glitch.com",null,"amministratore98", "Ferdinando","Napolitano", "NA", 80030, "Visciano", "Galileo Galilei", 1, "Catalogo");
+VALUES("Admin98","adminCat99@glitch.com",null,"admin98", "Ferdinando","Napolitano", "NA", 80030, "Visciano", "Galileo Galilei", 1, "Catalogo");
