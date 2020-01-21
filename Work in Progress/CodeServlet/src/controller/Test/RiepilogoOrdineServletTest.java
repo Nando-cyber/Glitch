@@ -15,6 +15,8 @@ import controller.RiepilogoOrdineServlet;
 import model.bean.Carrello;
 import model.bean.Ordine;
 import model.bean.Utente;
+import model.dao.CarrelloDAO;
+import model.dao.CarrelloDB;
 import model.dao.OrdineDAO;
 import model.dao.OrdineDB;
 import model.dao.ProdottoDAO;
@@ -49,11 +51,14 @@ public class RiepilogoOrdineServletTest {
 		UtenteDAO user=new UtenteDB();
 		Utente u=user.retriveByUsername("Ferdinando98");
 		ProdottoDAO prod=new ProdottoDB();
-
+		CarrelloDAO cartDao=new CarrelloDB();
 		Carrello carrello = new Carrello();
 		carrello.setUsername(u.getUsername());
 		carrello.setUtenteEmail(u.getEmail());
 		carrello.put(prod.findProdottoById(1), 1);
+		
+		//Inizializza e salva nel database un carrello
+		cartDao.createCarrello(carrello);
 		request.getSession().setAttribute("carrello", carrello);
 		request.getSession().setAttribute("utente", u);
 		servlet.doPost(request, response);

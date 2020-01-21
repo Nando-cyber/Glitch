@@ -54,13 +54,16 @@ CREATE TABLE Carrello (
   utenteUsername, 
   utenteEmail));
 CREATE TABLE Ordine (
-  carrelloUtenteUsername varchar(20) NOT NULL, 
-  carrelloUtenteEmail    varchar(40) NOT NULL, 
-  carrelloProdottoID     int NOT NULL, 
-  dataOrdinazione        date NOT NULL, 
-  PRIMARY KEY (carrelloUtenteUsername, 
-  carrelloUtenteEmail, 
-  carrelloProdottoID));
+   ordineId			int NOT NULL,
+   utenteUsername	varchar(20) NOT NULL,
+   utenteEmail		varchar(40) NOT NULL,
+   nome				varchar(30) NOT NULL,
+   quantita			int	NOT NULL,
+   prezzo			double	NOT NULL,
+  dataOrdinazione   date NOT NULL, 
+  PRIMARY KEY (utenteUsername, 
+  utenteEmail, 
+  ordineId));
 CREATE TABLE Richiesta (
   id             int NOT NULL, 
   utenteEmail    varchar(40) NOT NULL, 
@@ -82,8 +85,6 @@ ALTER TABLE Console ADD INDEX FKConsole133890 (prodottoID), ADD CONSTRAINT FKCon
 ALTER TABLE Videogioco ADD INDEX FKVideogioco351250 (prodottoID), ADD CONSTRAINT FKVideogioco351250 FOREIGN KEY (prodottoID) REFERENCES Prodotto (ID) on delete cascade
     on update cascade;
 ALTER TABLE Carrello ADD INDEX FKCarrello618141 (utenteUsername, utenteEmail), ADD CONSTRAINT FKCarrello618141 FOREIGN KEY (utenteUsername, utenteEmail) REFERENCES Utente (username, email) on delete cascade
-    on update cascade;
-ALTER TABLE Ordine ADD INDEX FKOrdine835012 (carrelloProdottoID, carrelloUtenteUsername, carrelloUtenteEmail), ADD CONSTRAINT FKOrdine835012 FOREIGN KEY (carrelloProdottoID, carrelloUtenteUsername, carrelloUtenteEmail) REFERENCES Carrello (prodottoID, utenteUsername, utenteEmail) on delete cascade
     on update cascade;
 ALTER TABLE Richiesta ADD INDEX FKRichiesta300529 (utenteUsername, utenteEmail), ADD CONSTRAINT FKRichiesta300529 FOREIGN KEY (utenteUsername, utenteEmail) REFERENCES Utente (username, email) on delete cascade
     on update cascade;
