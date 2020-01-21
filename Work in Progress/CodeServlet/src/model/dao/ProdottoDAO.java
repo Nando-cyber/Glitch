@@ -17,4 +17,7 @@ public interface ProdottoDAO {
 	void createProdotto(Prodotto prodotto);
 	
 	void removeProdotto(int id);
+	
+	void doUpdatePrezzo(Prodotto prodotto);
+	
 }

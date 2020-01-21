@@ -6,11 +6,7 @@ import java.util.List;
 import model.bean.Videogioco;
 
 
-
-
-
-
-public interface VideogiocoDAO {
+public interface VideogiocoDAO{
 	
 	void createVideogioco(Videogioco prodotto);
 	

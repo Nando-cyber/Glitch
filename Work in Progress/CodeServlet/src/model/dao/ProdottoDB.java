@@ -87,7 +87,7 @@ public class ProdottoDB implements ProdottoDAO{
 	public void doUpdatePrezzo(Prodotto prodotto) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con
-					.prepareStatement("UPDATE Prodotto SET prezzo=? AND codiceOfferta=? WHERE id=?");
+					.prepareStatement("UPDATE Prodotto SET prezzo=? WHERE id=?");
 	
 			ps.setFloat(1, prodotto.getPrezzo());
 			ps.setInt(2, prodotto.getId());

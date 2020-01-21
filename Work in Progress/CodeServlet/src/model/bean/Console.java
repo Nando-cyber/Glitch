@@ -18,6 +18,13 @@ public class Console extends Prodotto{
 		this.setModello(modello);
 		this.setCasaProduttrice(casaProduttrice);
 	}
+	
+	public Console(String immagine, float prezzo, String descrizione, String modello, String casaProduttrice)
+	{
+		super(immagine,prezzo,descrizione);
+		this.setModello(modello);
+		this.setCasaProduttrice(casaProduttrice);
+	}
 
 	//Restituisce il modello della console
 	public String getModello() {

@@ -5,6 +5,7 @@ package model.bean;
 
 public class Offerta{
 
+	private static int counter=0;
 	private int codice;
 	private int sconto;
 	private String categoria;
@@ -19,6 +20,15 @@ public class Offerta{
 	public Offerta(int codice,int sconto,String categoria, String nome)
 	{
 		this.codice=codice;
+		this.sconto=sconto;
+		this.categoria=categoria;
+		this.nome=nome;
+	}
+	
+	public Offerta(int sconto,String categoria, String nome)
+	{
+		counter++;
+		this.codice=counter;
 		this.sconto=sconto;
 		this.categoria=categoria;
 		this.nome=nome;

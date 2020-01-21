@@ -20,6 +20,14 @@ public class Videogioco extends Prodotto{
 		this.setGenere(genere);
 		this.setPiattaforma(piattaforma);
 	}
+	
+	public Videogioco(String immagine, float prezzo, String descrizione, String nome, String genere, String piattaforma)
+	{
+		super(immagine,prezzo,descrizione);
+		this.setNome(nome);
+		this.setGenere(genere);
+		this.setPiattaforma(piattaforma);
+	}
 
 	//Restituisce la piattaforma del videogioco
 	public String getPiattaforma() {

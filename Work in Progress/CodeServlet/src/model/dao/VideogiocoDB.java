@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.bean.Prodotto;
+import model.bean.Utente;
 import model.bean.Videogioco;
 import model.bean.ConPool;
 
@@ -39,6 +40,8 @@ public class VideogiocoDB  implements VideogiocoDAO{
 		throw new RuntimeException(e);
 	}
 	}
+	
+	
 
 	@Override
 	public List<Videogioco> doRetriveVideogiocoAllRange(int min, int max) {
@@ -97,12 +100,12 @@ public class VideogiocoDB  implements VideogiocoDAO{
 	public List<Videogioco> retriveByNome(String nome) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con.prepareStatement(
-					"Select prodottoId, nome, genere, piattaforma  FROM Videogioco WHERE nome=?  ");
+					"Select prodottoId, nome, genere, piattaforma FROM Videogioco WHERE nome = ?  ");
 			ps.setString(1, nome);
 			ResultSet rs = ps.executeQuery();
 			Videogioco p = new Videogioco();
 			ArrayList<Videogioco> array = new ArrayList<Videogioco>();
-			while (!rs.next()) {
+			while (rs.next()) {
 				Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
 				
 				p.setId(rs.getInt(1));
@@ -133,7 +136,7 @@ public class VideogiocoDB  implements VideogiocoDAO{
 			ResultSet rs = ps.executeQuery();
 			Videogioco p = new Videogioco();
 			ArrayList<Videogioco> array = new ArrayList<Videogioco>();
-			while (!rs.next()) {
+			while (rs.next()) {
 				Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
 				
 				p.setId(rs.getInt(1));
@@ -165,7 +168,7 @@ public class VideogiocoDB  implements VideogiocoDAO{
 			ResultSet rs = ps.executeQuery();
 			Videogioco p = new Videogioco();
 			ArrayList<Videogioco> array = new ArrayList<Videogioco>();
-			while (!rs.next()) {
+			while (rs.next()) {
 				Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
 				
 				p.setId(rs.getInt(1));

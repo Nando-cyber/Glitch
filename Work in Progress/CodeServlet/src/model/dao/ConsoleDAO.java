@@ -7,7 +7,7 @@ import java.util.List;
 import model.bean.Console;
 
 
-public interface ConsoleDAO {
+public interface ConsoleDAO{
 
 	//Memorizza una console nel database
 	void createConsole(Console prodotto);

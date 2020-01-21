@@ -98,14 +98,9 @@ public class GestioneProdottoServlet extends HttpServlet {
 
 				//si crea un bean Videogioco e si inseriscono i dati
 
-				Videogioco vid = new Videogioco();
+				Videogioco vid = new Videogioco(imm,Float.parseFloat(prezzo),descrizione,nome,genere,piattaforma);
 
-				vid.setNome(nome);
-				vid.setGenere(genere);
-				vid.setImmagine(imm);
-				vid.setDescrizione(descrizione);
-				vid.setPrezzo(Float.parseFloat(prezzo));
-				vid.setPiattaforma(piattaforma);
+				
 				vDAO.createVideogioco(vid); //si inserisce in DB
 
 			}else {
@@ -140,13 +135,8 @@ public class GestioneProdottoServlet extends HttpServlet {
 				
 				
 				//si crea un bean Console e si inseriscono i dati
-				Console cons = new Console();
+				Console cons = new Console(imm,Float.parseFloat(prezzo),descrizione,modello, casaProduttrice);
 
-				cons.setModello(modello);
-				cons.setCasaProduttrice(casaProduttrice);
-				cons.setImmagine(imm);
-				cons.setDescrizione(descrizione);
-				cons.setPrezzo(Float.parseFloat(prezzo));
 				cDAO.createConsole(cons); //si inserisce in DB 
 
 			}
@@ -174,7 +164,7 @@ public class GestioneProdottoServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

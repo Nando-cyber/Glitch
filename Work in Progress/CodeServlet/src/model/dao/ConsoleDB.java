@@ -111,7 +111,7 @@ public class ConsoleDB implements ConsoleDAO{
 			ResultSet rs = ps.executeQuery();
 			Console p = new Console();
 			ArrayList<Console> array = new ArrayList<Console>();
-			while (!rs.next()) {
+			while (rs.next()) {
 				
 				Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
 				p=new Console();

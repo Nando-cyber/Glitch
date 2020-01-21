@@ -5,6 +5,7 @@ package model.bean;
 public class Prodotto{
 	
 
+	private static int counter=10;
 	private int id;
 	private String immagine;
 	private float prezzo;
@@ -18,6 +19,15 @@ public class Prodotto{
 	public Prodotto(int id,String immagine, float prezzo, String descrizione)
 	{
 		this.id=id;
+		this.immagine=immagine;
+		this.prezzo=prezzo;
+		this.descrizione=descrizione;
+	}
+	
+	public Prodotto(String immagine, float prezzo, String descrizione)
+	{
+		counter++;
+		this.id=counter;
 		this.immagine=immagine;
 		this.prezzo=prezzo;
 		this.descrizione=descrizione;

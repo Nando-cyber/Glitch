@@ -19,6 +19,8 @@ import model.dao.ConsoleDAO;
 import model.dao.ConsoleDB;
 import model.dao.OffertaDAO;
 import model.dao.OffertaDB;
+import model.dao.ProdottoDAO;
+import model.dao.ProdottoDB;
 import model.dao.VideogiocoDAO;
 import model.dao.VideogiocoDB;
 
@@ -33,6 +35,7 @@ public class GestioneOffertaServlet extends HttpServlet {
 	private OffertaDAO oDAO = new OffertaDB();
 	private ConsoleDAO cDAO = new ConsoleDB();
 	private VideogiocoDAO vDAO = new VideogiocoDB();
+	private ProdottoDAO pDAO=new ProdottoDB();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -66,11 +69,8 @@ public class GestioneOffertaServlet extends HttpServlet {
 			}
 			
 			//si crea il bean Offerta e si settano i dati
-			Offerta offerta = new Offerta();
-			
-			offerta.setNome(nome);
-			offerta.setSconto(Integer.parseInt(sconto));
-			offerta.setCategoria(categoria);
+			Offerta offerta = new Offerta(Integer.parseInt(sconto),categoria,nome);
+
 
 			//si salva in DB
 			oDAO.createOfferta(offerta);
@@ -92,6 +92,8 @@ public class GestioneOffertaServlet extends HttpServlet {
 					float elimSconto = (prezzo * percSconto)/100;
 					prezzo = prezzo - elimSconto;
 					c.setPrezzo(prezzo);
+					pDAO.doUpdatePrezzo(c);
+					
 
 				}
 
@@ -109,6 +111,8 @@ public class GestioneOffertaServlet extends HttpServlet {
 					float elimSconto = (prezzo * percSconto)/100;
 					prezzo = prezzo - elimSconto;
 					v.setPrezzo(prezzo);
+					pDAO.doUpdatePrezzo(v);
+					
 
 				}
 			}
@@ -140,6 +144,7 @@ public class GestioneOffertaServlet extends HttpServlet {
 					float elimSconto = (prezzo * sconto)/100;
 					prezzo = prezzo + elimSconto;
 					c.setPrezzo(prezzo);
+					pDAO.doUpdatePrezzo(c);
 
 				}
 
@@ -157,6 +162,7 @@ public class GestioneOffertaServlet extends HttpServlet {
 					float elimSconto = (prezzo * sconto)/100;
 					prezzo = prezzo + elimSconto;
 					v.setPrezzo(prezzo);
+					pDAO.doUpdatePrezzo(v);
 
 				}
 			}
@@ -174,7 +180,7 @@ public class GestioneOffertaServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		doGet(request, response);
 	}
