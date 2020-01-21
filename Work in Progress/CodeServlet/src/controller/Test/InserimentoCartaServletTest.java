@@ -41,7 +41,7 @@ public class InserimentoCartaServletTest {
 		DatabaseHelper.resetDatabase();
 	}
 
-	//Test (successo)
+	//Test (successo: inserimento carta di credito con campi corretti)
 	@Test
 	public void testInserimentoCartaServletSuccesso() throws ServletException, IOException {
 

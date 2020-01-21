@@ -46,6 +46,7 @@ public class RiepilogoOrdineServletTest {
 		DatabaseHelper.resetDatabase();
 	}
 
+	//Test simula l'acquisto e crea un ordine
 	@Test
 	public void testRiepilogoOrdineServlet() throws ServletException, IOException {
 		UtenteDAO user=new UtenteDB();

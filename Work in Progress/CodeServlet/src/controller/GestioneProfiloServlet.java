@@ -104,7 +104,7 @@ public class GestioneProfiloServlet extends HttpServlet {
 					throw new MyServletException("Formato CAP Errato.");
 				}
 				if ( !ValidazioneUtente.checkCitta(citta)) {
-					throw new MyServletException("Formato Citt� Errata.");
+					throw new MyServletException("Formato Citta Errata.");
 				}
 				if ( !ValidazioneUtente.checkVia(strada)) {
 					throw new MyServletException("Formato Strada Errata.");

@@ -47,7 +47,7 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		String password = request.getParameter("password");
 		if ( !ValidazioneUtente.checkPassword(password)) {
-			throw new MyServletException("Formato Password Errata.");
+			throw new MyServletException("Formato Password Errato.");
 		}
 
 		String nome = request.getParameter("nome");
@@ -62,12 +62,12 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		String email = request.getParameter("email");
 		if ( !ValidazioneUtente.checkEmail(email)) {
-			throw new MyServletException("Formato E-Mail Errata.");
+			throw new MyServletException("Formato E-Mail Errato.");
 		}
 
 		String provincia = request.getParameter("provincia");
 		if ( !ValidazioneUtente.checkProvincia(provincia)) {
-			throw new MyServletException("Formato Provincia Errata.");
+			throw new MyServletException("Formato Provincia Errato.");
 		}
 
 		String CAP = request.getParameter("CAP");
@@ -77,12 +77,12 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		String citta = request.getParameter("citta");
 		if ( !ValidazioneUtente.checkCitta(citta)) {
-			throw new MyServletException("Formato Citt� Errata.");
+			throw new MyServletException("Formato Citta Errato.");
 		}
 
 		String strada = request.getParameter("via");
 		if ( !ValidazioneUtente.checkVia(strada)) {
-			throw new MyServletException("Formato Via Errata.");
+			throw new MyServletException("Formato Via Errato.");
 		}
 
 		String numero = request.getParameter("numero");

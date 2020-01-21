@@ -41,6 +41,7 @@ public class RichiestaAssistenzaServletTest {
 		DatabaseHelper.resetDatabase();
 	}
 
+	//Test inserimento richiesta nel database
 	@Test
 	public void testRichiestaAssistenzaServlet() throws ServletException, IOException {
 		

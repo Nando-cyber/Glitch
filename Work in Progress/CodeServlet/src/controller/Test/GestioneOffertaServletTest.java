@@ -41,6 +41,7 @@ public class GestioneOffertaServletTest {
 		DatabaseHelper.resetDatabase();
 	}
 
+	//Test inserimento offerta videogioco e controllo variazione di prezzo
 	@Test
 	public void testGestioneOffertaServletVideogiocoInserimento() throws ServletException, IOException {
 
@@ -71,6 +72,7 @@ public class GestioneOffertaServletTest {
 		assertTrue(result);
 	}
 	
+	//Test rimozione offerta videogiochi e controllo variazione di prezzo
 	@Test
 	public void testGestioneOffertaServletVideogiocoRimozione() throws ServletException, IOException {
 
@@ -102,6 +104,7 @@ public class GestioneOffertaServletTest {
 		assertTrue(result);
 	}
 	
+	//Test Inserimento offerta console e controllo variazione di prezzo
 	@Test
 	public void testGestioneOffertaServletConsoleInserimento() throws ServletException, IOException {
 
@@ -132,6 +135,7 @@ public class GestioneOffertaServletTest {
 		assertTrue(result);
 	}
 	
+	//Test rimozione offerta console e controllo variazione di prezzo
 	@Test
 	public void testGestioneOffertaServletConsoleRimozione() throws ServletException, IOException {
 

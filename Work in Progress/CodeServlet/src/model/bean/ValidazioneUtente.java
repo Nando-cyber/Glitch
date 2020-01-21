@@ -35,10 +35,10 @@ public class ValidazioneUtente {
 		return Pattern.matches("[0-9]+",cap);
 	}
 	
-	//Controlla che sia rispettata la sintassi (Deve contenere caratteri alfanumerici) di "citta"
+	//Controlla che sia rispettata la sintassi (Deve contenere caratteri alfabetici) di "citta"
 	public static boolean checkCitta(String citta)
 	{
-		return Pattern.matches("[A-Za-z0-9]+",citta);
+		return Pattern.matches("[A-Za-z]+",citta);
 	}
 	
 	//Controlla che sia rispettata la sintassi (Deve contenere caratteri alfanumerici) di "via"
@@ -53,10 +53,10 @@ public class ValidazioneUtente {
 		return Pattern.matches("[0-9]+",numero);
 	}
 	
-	//Controlla che sia rispettata la sintassi (Deve avere un massimo di 10 caratteri e contenere caratteri alfanumerici) di "username"
+	//Controlla che sia rispettata la sintassi (Deve avere un massimo di 20 caratteri e contenere caratteri alfanumerici) di "username"
 	public static boolean checkUsername(String username)
 	{
-		return Pattern.matches("[A-Za-z0-9]+",username) && username.length()<=10;
+		return Pattern.matches("[A-Za-z0-9]+",username) && username.length()<=20;
 	}
 	
 	//Controlla che sia rispettata la sintassi (deve avere un minimo di 8 caratteri, un massimo di 15 caratteri e

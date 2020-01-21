@@ -37,6 +37,7 @@ public class GestioneRuoloServletTest {
 		DatabaseHelper.resetDatabase();
 	}
 
+	//Test aggiunta ruolo
 	@Test
 	public void testGestioneRuoloServletAggiunta() throws ServletException, IOException {
 		request.addParameter("operazione", "aggiunta");
@@ -56,6 +57,7 @@ public class GestioneRuoloServletTest {
 		
 	}
 	
+	//Test rimozione ruolo
 	@Test
 	public void testGestioneRuoloServletRimozione() throws ServletException, IOException {
 		request.addParameter("operazione", "rimozione");

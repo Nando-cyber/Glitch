@@ -45,9 +45,9 @@ public class GestioneProdottoServletTest {
 		DatabaseHelper.resetDatabase();
 	}
 	
+	//Test (successo: Aggiunta videogiochi) 
 	@Test
 	public void testGestioneProdottoServletVideogioco() throws ServletException, IOException, MyServletException {
-
 
 		request.addParameter("operazione", "inserimento");
 		request.addParameter("Videogioco", "Battlefield");
@@ -73,9 +73,9 @@ public class GestioneProdottoServletTest {
 		assertTrue(result);	
 	}
 	
+	//Test (successo: aggiunta console)
 	@Test
 	public void testGestioneProdottoServletConsole() throws ServletException, IOException, MyServletException {
-
 
 		request.addParameter("operazione", "inserimento");
 		request.addParameter("Console", "Xbox360");
@@ -85,7 +85,6 @@ public class GestioneProdottoServletTest {
 		request.addParameter("modello", "Xbox");
 		request.addParameter("produttore", "Microsoft");
 
-		
 		servlet.doPost(request, response);
 		
 		ConsoleDAO consDao=new ConsoleDB();
@@ -101,9 +100,9 @@ public class GestioneProdottoServletTest {
 		assertTrue(result);	
 	}
 	
+	//Test (successo: rimozione prodotti)
 	@Test
 	public void testGestioneProdottoServletRimozione() throws ServletException, IOException, MyServletException {
-
 
 		request.addParameter("operazione", "rimozione");
 		request.addParameter("prodId", "1");

@@ -55,7 +55,7 @@ CREATE TABLE Carrello (
   PRIMARY KEY (prodottoID, 
   utenteUsername, 
   utenteEmail));
-CCREATE TABLE Ordine (
+CREATE TABLE Ordine (
    ordineId			int NOT NULL,
    utenteUsername	varchar(20) NOT NULL,
    utenteEmail		varchar(40) NOT NULL,

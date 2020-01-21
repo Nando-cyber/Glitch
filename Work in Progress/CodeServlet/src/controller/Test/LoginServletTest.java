@@ -41,11 +41,11 @@ public class LoginServletTest {
 		DatabaseHelper.resetDatabase();
 	}
 
-	//Test (successo: user e password presenti nel database)
+	//Test (successo: username e password presenti nel database)
 	@Test
 	public void testLoginServlet() throws ServletException, IOException {
 		request.addParameter("username", "Ferdinando98");
-		request.addParameter("password", "ferdinando98");
+		request.addParameter("password", "Ferdinando98");
 
 		servlet.doPost(request, response);
 		
@@ -61,12 +61,25 @@ public class LoginServletTest {
 		assertEquals(result, true);
 	}
 	
-	//Test (fallimento: user e password non presenti nel database)
+	//Test (fallimento: username e password non presenti nel database)
 	@Test
 	public void testLoginServletFail() throws ServletException, IOException, MyServletException{
 		request.addParameter("username", "Sandro98");
 		request.addParameter("password", "12345678CVb");
 		
+		final String message = "Username e/o password non validi.";
+		MyServletException exceptionThrown = assertThrows(MyServletException.class, () -> {
+			servlet.doPost(request, response);
+		});
+		assertEquals(message, exceptionThrown.getMessage());	
+	}
+	
+	//Test (fallimento: username presente in database e password non corrispondente ad esso)
+	@Test
+	public void testLoginServletPasswordFail() throws ServletException, IOException, MyServletException{
+		request.addParameter("username", "Ferdinando98");
+		request.addParameter("password", "12345678CVb");
+			
 		final String message = "Username e/o password non validi.";
 		MyServletException exceptionThrown = assertThrows(MyServletException.class, () -> {
 			servlet.doPost(request, response);

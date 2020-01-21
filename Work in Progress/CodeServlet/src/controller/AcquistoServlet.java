@@ -38,7 +38,6 @@ public class AcquistoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		//Si prendono dalla Session Utente e Ordine
 		Utente u  = (Utente) request.getSession().getAttribute("utente");
 		Ordine o = (Ordine) request.getSession().getAttribute("ordine");

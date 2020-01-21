@@ -44,6 +44,7 @@ public class GestioneCarrelloTest {
 		DatabaseHelper.resetDatabase();
 	}
 
+	//Test inserimento prodotto nel carrello
 	@Test
 	public void testGestioneCarrelloServlet() throws ServletException, IOException {
 	

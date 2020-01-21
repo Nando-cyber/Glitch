@@ -42,7 +42,7 @@ public class GestioneProfiloServletTest {
 		DatabaseHelper.resetDatabase();
 	}
 
-	//Test (successo)
+	//Test (successo: modifica profilo)
 	@Test
 	public void testGestioneProfiloServletTest() throws ServletException, IOException, RuntimeException {
 

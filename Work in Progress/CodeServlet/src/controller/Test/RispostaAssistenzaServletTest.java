@@ -50,10 +50,10 @@ public class RispostaAssistenzaServletTest {
 		DatabaseHelper.resetDatabase();
 	}
 
+	//Test inserimento risposta nel database
 	@Test
 	public void testRispostaAssistenzaServlet() throws ServletException, IOException {
-		
-		
+
 		UtenteDAO uDao=new UtenteDB();
 		Utente u=uDao.retriveByUsername("Ferdinando98");
 		requestInit.addParameter("destinatario", "Admin98");
