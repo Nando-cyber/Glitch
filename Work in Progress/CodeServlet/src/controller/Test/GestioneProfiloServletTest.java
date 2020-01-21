@@ -42,7 +42,7 @@ public class GestioneProfiloServletTest {
 		DatabaseHelper.resetDatabase();
 	}
 
-	//Test (successo: user e password presenti nel database)
+	//Test (successo)
 	@Test
 	public void testGestioneProfiloServletTest() throws ServletException, IOException, RuntimeException {
 
@@ -57,26 +57,62 @@ public class GestioneProfiloServletTest {
 		carrello.setUsername(u.getUsername());
 		carrello.setUtenteEmail(u.getEmail());
 		
-		request.getSession().setAttribute("carrello", carrello);
-		request.addParameter("operazione", "rimozione");
-
-		//Dopo l'inizializzazione il carrello non esiste, cattura l'eccezione
-		//Da modificare
-		RuntimeException exceptionThrown = assertThrows(RuntimeException.class, () -> {
-			servlet.doPost(request, response);
-		});
 		
+		request.getSession().setAttribute("carrello", carrello);
+		request.addParameter("operazione", "modifica");
+		request.addParameter("password", "12345678Cvb");
+		request.addParameter("email", "");
+		request.addParameter("provincia", "");
+		request.addParameter("CAP", "");
+		request.addParameter("citta", "");
+		request.addParameter("via", "");
+		request.addParameter("numero", "");
+		
+		servlet.doPost(request, response);
 		
 		boolean result;
 
 		u=user.retriveByUsername("Ferdinando98");
 	
-		if(u!=null)
-			result=false;
-		else
+		if(u.getPassword().equals("12345678Cvb"))
 			result=true;
+		else
+			result=false;
 		
 		assertTrue(result);
 	}
+	
+		//Test (Fallito: Formato password errato)
+		@Test
+		public void testGestioneProfiloServletTestFail() throws ServletException, IOException, RuntimeException {
+
+
+			UtenteDAO user=new UtenteDB();
+			Utente u=user.retriveByUsername("Ferdinando98");
+			
+			request.getSession().setAttribute("utente", u);
+			
+			
+			Carrello carrello = new Carrello();
+			carrello.setUsername(u.getUsername());
+			carrello.setUtenteEmail(u.getEmail());
+			
+			
+			request.getSession().setAttribute("carrello", carrello);
+			request.addParameter("operazione", "modifica");
+			request.addParameter("password", "12345678vb");
+			request.addParameter("email", "");
+			request.addParameter("provincia", "");
+			request.addParameter("CAP", "");
+			request.addParameter("citta", "");
+			request.addParameter("via", "");
+			request.addParameter("numero", "");
+			
+			final String message = "Formato Password Errata.";
+			MyServletException exceptionThrown = assertThrows(MyServletException.class, () -> {
+				servlet.doPost(request, response);
+			});
+			assertEquals(message, exceptionThrown.getMessage());	
+		}
 
 }
