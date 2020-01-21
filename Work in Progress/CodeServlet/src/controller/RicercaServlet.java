@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.mysql.cj.xdevapi.JsonArray;
+
 import model.dao.ConsoleDAO;
 import model.dao.ConsoleDB;
 import model.dao.VideogiocoDAO;
@@ -19,45 +24,46 @@ public class RicercaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private VideogiocoDAO vDAO = new VideogiocoDB();
 	private ConsoleDAO cDAO = new ConsoleDB();
-    private ArrayList<String> listV = new ArrayList<String>();
-    private ArrayList<String> listC = new ArrayList<String>(); 
+	private ArrayList<String> listV = new ArrayList<String>();
+	private ArrayList<String> listC = new ArrayList<String>(); 
 
-    public RicercaServlet() {
-        super();
-    }
+	public RicercaServlet() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String input = request.getParameter("input");
 		ArrayList<String> result = dammiProdotti(input);
 		response.setContentType("application/json");
-		
+		JSONObject json;
+		JSONArray list = new JSONArray();
 		if(result != null) {
 			Iterator<String> iterator = result.iterator();
-			
-			String str = "[";
+
 			while(iterator.hasNext()) {
-				String s = iterator.next();
-				str = str.concat("{\"name\":").concat("\"" + s + "\"").concat("},");
+				json = new JSONObject();
+				json.accumulate("name", iterator.next());
+				list.put(json);
 			}
-			int lastPos = str.lastIndexOf(",");
-			String finished = str.substring(0,lastPos);
-			String suggerimenti = finished.concat("]");
-			
-			response.getWriter().append(suggerimenti);			
+
+			System.out.println("lista: " +list.toString());
+			response.getWriter().append(list.toString());	
+
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
+
 	private ArrayList<String> dammiProdotti(String input){
-		listV = vDAO.doRetrieveLike(input);
 		listC = cDAO.doRetrieveLikeModello(input);
-		Iterator<String> i = listV.iterator();
-		System.out.println(i.next());
-		while(i.hasNext()) {
-			listC.add(i.next());
+		listV = vDAO.doRetrieveLike(input);
+		
+		if(listV.size() > 0) {
+			for(int i= 0; i< listV.size(); i++) {
+				listC.add(listV.get(i));
+			}
 		}
 		return listC;
 	}

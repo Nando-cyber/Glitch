@@ -33,7 +33,7 @@ public class RicercaProdotto  extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nome = request.getParameter("cerca");
 		ArrayList<Videogioco> vid = (ArrayList<Videogioco>) vDAO.retriveByNome(nome);
-		System.out.println("xxxx " +vid.get(0));
+		//System.out.println("xxxx " +vid.get(0));
 		Console cons =  cDAO.retriveByModello(nome);
 		
 		if(vid == null) {
