@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import model.dao.ConsoleDAO;
+import model.dao.ConsoleDB;
+import model.dao.VideogiocoDAO;
+import model.dao.VideogiocoDB;
 
 
 public class Ordine{
@@ -17,6 +21,7 @@ public class Ordine{
 	private static int counter=0;
 	private ArrayList<ProdottiOrdine> prodottiAcquistati;
 	private GregorianCalendar dataOrdinazione;
+	private Date ordinazioneDate;
 	
 	//Costruttore vuoto
 	public Ordine() {
@@ -32,6 +37,17 @@ public class Ordine{
 		this.setUtenteUsername(utenteUsername);
 		this.setProdottiAcquistati(prodottiAcquistati);
 		this.setDataOrdinazione(dataOrdinazione);
+		this.ordinazioneDate=new Date(dataOrdinazione.getTimeInMillis());
+		
+	}
+	
+	public Ordine(String utenteUsername, GregorianCalendar dataOrdinazione)
+	{
+		counter++;
+		ordineId=counter;
+		this.setUtenteUsername(utenteUsername);
+		this.setDataOrdinazione(dataOrdinazione);
+		this.ordinazioneDate=new Date(dataOrdinazione.getTimeInMillis());
 		
 	}
 
@@ -46,21 +62,25 @@ public class Ordine{
 	{
 		Collection<ProdottoQuantita> prod=cart.getProdotti();
 		Iterator<ProdottoQuantita> it=prod.iterator();
+		prodottiAcquistati=new ArrayList<ProdottiOrdine>();
 		
 		while(it.hasNext())
 		{
 			ProdottoQuantita pQ=it.next();
 			Prodotto pr=pQ.getProdotto();
 			ProdottiOrdine pOut=new ProdottiOrdine();
+			VideogiocoDAO vidDao=new VideogiocoDB();
+			ConsoleDAO consDao=new ConsoleDB();
+			
 			
 			if(pr instanceof Console)
 			{
-				Console cons=(Console) pr;
+				Console cons=consDao.findConsoleById(pr.getId());
 				pOut.setNome(cons.getModello());
 			}
 			else
 			{
-				Videogioco vd=(Videogioco) pr;
+				Videogioco vd=vidDao.findVideogiocoById(pr.getId());
 				pOut.setNome(vd.getNome());
 			}
 			
@@ -75,13 +95,13 @@ public class Ordine{
 	//Restituisce la data di ordinazione sotto forma di oggetto "Date"
 	public Date getDataOrdinazioneDate()
 	{
-		return (Date) dataOrdinazione.getTime();
+		return ordinazioneDate;
 	}
 		
 	//Modifica la data di ordinazione passando per argomento un oggetto "Date" contenente la nuova data		
 	public void setDataOrdinazioneDate(Date ord)
 	{
-		dataOrdinazione.setTime(ord);
+		ordinazioneDate=ord;
 	}
 	
 	//Restituisce la data di ordinazione sotto forma di "GregorianCalendar"
@@ -92,6 +112,7 @@ public class Ordine{
 	//Modifica la data di ordinazione passando un oggetto "GregorianCalendar"
 	public void setDataOrdinazione(GregorianCalendar dataOrdinazione) {
 		this.dataOrdinazione = dataOrdinazione;
+		this.ordinazioneDate=new Date(dataOrdinazione.getTimeInMillis());
 	}
 	
 	
