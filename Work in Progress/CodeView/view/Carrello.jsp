@@ -12,12 +12,15 @@
 	</div>
 	<div class="container">
 		<c:forEach items="${carrello.prodotti}" var="pc">
-		<div class="row justify-content-center features" style="background-color: rgba(255, 255, 255, 0);">
-			<div class="col d-sm-flex d-md-flex">
+		<div class="row justify-content-center features">
+			<div class="col-sm-6 col-md-6 col-lg-6 item">
 				<a href="${pc.prodotto.immagine}" data-lightbox="photos">
 					<img class="img-fluid d-lg-flex justify-content-lg-start" id="img-carrello" src="${pc.prodotto.immagine}" />
 				</a>
 				<a href="${pc.prodotto.immagine}" data-lightbox="photos"></a>
+				</div>
+				
+				<div class="col-sm-6 col-md-6 col-lg-6 item" id="infoCarrello">
 				<c:if test="${pq.prodotto.classe == 'Videogioco'}">
 					<label class="text-monospace border rounded-0 border-white d-sm-flex d-md-flex d-lg-flex justify-content-lg-center align-items-lg-start">
 					${pq.prodotto.nome}</label>
@@ -47,24 +50,20 @@
 		<hr />
 		</c:forEach>
 	</div>
-	<div class="container text-right">
-		<button class="btn btn-primary" type="button"
-			style="margin: 15px; background-color: rgb(215, 23, 104);">Acquista</button>
-	</div>
 	<!-- Carrello nel caso non vi siano inseriti prodotti -->
 	<div class="container">
  		<c:if test="${empty carrello.prodotti}">
- 			<div class="row">
-				<section class="testoCar">
+ 			<div style="padding: 20%">
+				<section>
 				<h2>Nessun articolo nel carrello</h2>
-				<a href="BaseServlet" style="font-size: 1.5vw"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&#160;&#160;Torna alla Home per continuare il tuo Shopping</a>
+				<a href="BaseServlet" style="font-size: 1.5vw">Torna alla Home per continuare il tuo Shopping</a>
 			</section>
 		</div>
  		</c:if>
  		<c:if test="${not empty carrello.prodotti}">
  			<div class="row">
 				<h2 style="font-size: 2.5vw;">Totale: <c:out value="${carrello.prezzoTotProdotti}"></c:out> &euro;</h2>		
-				<form action="CompletaAcquisto" method="get">
+				<form action="" method="get">
 					<input type="submit" value="Completa acquisto" class="btn-default bottone">
 				</form>
 			</div>

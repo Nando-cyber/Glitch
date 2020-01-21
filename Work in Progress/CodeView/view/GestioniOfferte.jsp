@@ -6,103 +6,44 @@
 </jsp:include>
 
 
-<div class="container">
-	<div class="intro">
-		<h2 class="text-center">Prodotti in evidenza</h2>
-		<p class="text-center">In anteprima per gli utenti di Glitch tutte
-			le nuove uscite del 2020 presenti sul mercato</p>
-	</div>
-	<div class="row articles">
-		<div class="col-sm-6 col-md-4 item" id="volantino">
-			<a href="DB.jpg" data-lightbox="photos"><img class="img-fluid" src="DB.jpg" /></a>
-			<h3 class="name"><br />
-				<strong>Dragon Ball Z Kakarot</strong><br /><br />
-			</h3>
-			<p class="description">	<br />
-				<strong>Piattaforme:</strong> PS4, Xbox One, PC Windows<br />
-				<strong>Uscita</strong>: 17 gennaio 2020<br /><br />
-			</p>
-		</div>
-		<div class="col-sm-6 col-md-4 item" id="volantino">
-			<a href="DG.jpg" data-lightbox="photos"><img class="img-fluid" src="DG.jpg" /></a>
-			<h3 class="name"><br />
-				<strong>Darksiders Genesis</strong><br /><br />
-			</h3>
-			<p class="description">	<br />
-				<strong>Piattaforme:</strong> PS4, Xbox One, Nintendo Switch<br />
-				<strong>Uscita</strong>: 14 febbraio 2020<br /><br />
-			</p>
-		</div>
-		<div class="col-sm-6 col-md-4 item" id="volantino">
-			<a href="FF.jpg" data-lightbox="photos"><img class="img-fluid" src="FF.jpg" /></a>
-			<h3 class="name"><br />
-				<strong>Final Fantasy VII Remake</strong><br /><br />
-			</h3>
-			<p class="description">	<br />
-				<strong>Piattaforme:</strong> PS4<br />
-				<strong>Uscita</strong>: 3 marzo 2020<br /><br />
-			</p>
-		</div>
-	</div>
-</div>
-
-<div class="features-boxed">
-	<!-- Button per filtrare i prodotti del catalogo -->
-	<div class="container text-monospace d-lg-flex justify-content-lg-center visible">
-		<div role="group" class="btn-group">
-			<button class="btn btn-primary" type="button">Catalogo</button>
-			<button class="btn btn-primary" type="button">Console</button>
-			<button class="btn btn-primary" type="button">Videogiochi</button>
-		</div>
-	</div>
-	<div id="myCatalogo" class="container">
-		<div class="intro"></div>
-		<div class="row justify-content-center features">
-		<!-- Due cicli per visualizzare sia i videogiochi sia le console -->
-		 <c:forEach items="${videogiochi}" var="videogiochi">
-			<div class="col-sm-6 col-md-5 col-lg-4 item">
-				<div class="box">
-					<img class="img-fluid" id="img-catalogo" src="${videogiochi.immagine}" />
-					<h3 class="name"><c:out value="${videogiochi.nome}" /></h3>
-					<p class="description"><c:out value="${videogiochi.genere}" /></p>
-					<p class="description"><c:out value="${videogiochi.piattaforma}" /></p>
-					<p class="description"><c:out value="${videogiochi.prezzo}" />€</p>
-               		<form action=" ">
-						<input type="hidden" name="videogiocoId" value="${videogiochi.codice}"><br>
-						<input type="submit" class="bottone" value="Rimuovi offerta">  
-               		</form>	
-				</div>
-			</div>
-		</c:forEach>
-		<c:forEach items="${console}" var="videogiochi">
-			<div class="col-sm-6 col-md-5 col-lg-4 item">
-				<div class="box">
-					<img class="img-fluid" id="img-catalogo" src="${console.immagine}" />
-					<h3 class="name"><c:out value="${console.modello}" /></h3>
-					<p class="description"><c:out value="${console.casaProduttrice}" /></p>
-					<p class="description"><c:out value="${console.prezzo}" />€</p>     
-                 	<form action=" ">
-						<input type="hidden" name="consoleId" value="${console.codice}"><br>
-						<input type="submit" class="bottone" value="Rimuovi offerta">  
-                 	</form>	
-				</div>
-			</div>
-		</c:forEach>
-		</div>
-	</div>
-	<div class="container" id="paginazione">
-		<nav>
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">4</a></li>
-				<li class="page-item"><a class="page-link" href="#">5</a></li>
-				<li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-			</ul>
-		</nav>
-	</div>
+<div id="pagina">
+	<div>
+		<h1>Gestore catalogo</h1>
+	</div><br>
+	<div>
+		<div class="table-responsive">
+    		<h3>Lista Offerte</h3>
+				<table class="table table-striped table-hover my-5">
+					<thead>
+						<tr>
+							<th>Codice</th>
+							<th>Nome/Modello</th>
+							<th>Prezzo</th>
+							<th>Offerta</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach items="${Consoles}" var="console">
+						<td><c:out value="${console.id}"/></td>
+						<td><c:out value="${console.modello}"/></td>
+		                <td><c:out value="${console.prezzo}"/></td>
+		                <td>
+		                	<button type="submit">Aggiungi</button>
+		                </td>	
+						<c:forEach items="${Videogiochi}" var="videogiochi">
+							<tr class="text-center">
+								<td><c:out value="${videogiochi.id}"/></td>
+								<td><c:out value="${videogiochi.nome}"/></td>
+		                  		<td><c:out value="${videogiochi.prezzo}"/></td>	
+		                  		<td>
+		                  			<button type="submit">Aggiungi</button>
+		                  		</td>							
+							</tr>
+						</c:forEach>
+					</c:forEach>
+					</tbody>
+				</table>
+    	</div>
 
 	<div class="container" style="background-color: #ffffff;">
 		<h2
@@ -136,30 +77,9 @@
 			</form>
 		</div>
 	</div>
-	<div class="container" style="color: rgb(255, 255, 255);">
-		<div class="col-lg-11 offset-lg-1" id="agg-videogioco" style="width: 100%;">
-			<form id="tex-fo">
-				<h4 class="text-center d-lg-flex justify-content-lg-center">Inserisci nuova offerta</h4>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Nome" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Percentuale sconto" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Categoria" />
-				</div>
-				<div id="button-c-c">
-					<button class="btn float-right" id="button-c" type="button"
-						style="background-color: rgb(173, 38, 220);">Applica offerta</button>
-				</div>
-			</form>
-		</div>
-	</div>
-	<div class="container">
-		<i class="fa fa-star" style="color: rgb(252, 253, 255);"></i>
-	</div>
-
+	
+	
+</div>
 </div>
 
 

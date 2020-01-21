@@ -10,7 +10,7 @@
  		<div class="col-sm-12 ">
  			<h1>Risultato ricerca</h1>
  			<hr>
- 				<c:if test="${ricerca.class == 'Videogioco'}">
+ 				<c:if test="${ricerca == 'Videogioco'}">
  					<div >
             		<div class="col-md-6 col-xs-6">
                			<a href="${ricerca.immagine}" target="_blank">
@@ -36,7 +36,7 @@
              		</div>
          		</div>
    				</c:if>
- 				<c:if test="${ricerca.class == 'Console'}">
+ 				<c:if test="${ricerca == 'Console'}">
  					<div class="row" style="padding-top: 40px">
             			<div class="col-md-6 col-xs-6">
                				<a href="${ricerca.immagine}" target="_blank">

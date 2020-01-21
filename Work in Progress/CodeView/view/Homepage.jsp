@@ -23,7 +23,7 @@
 			<button class="btn btn-primary" type="button" onclick="filterSelection('videogioco')">Videogiochi</button>
 		</div>
 	</div>
-	<div id="myCatalogo" class="container">
+	<div class="container">
 		<!-- Due cicli per visualizzare sia i videogiochi sia le console -->
 		 <c:forEach items="${videogiochi}" var="videogiochi">
 		 <div class="filterDiv videogioco">
@@ -92,6 +92,7 @@
 		</c:forEach>
 		</div>
 	</div>
+	<!-- Paginazione -->
 	<div class="container text-monospace d-lg-flex justify-content-lg-center visible">
 		<ul class="pagination">
 			<li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>

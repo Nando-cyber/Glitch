@@ -69,27 +69,25 @@
       	
 							<c:if test="${ utente.ruolo != null }">
 								<div class="dropdown show d-lg-flex" style="margin: 0px; margin-right: 25px;">
-									<a data-toggle="dropdown" aria-expanded="true" class="dropdown-toggle text-left" href="#"><i class="fa fa-user-circle"></i>Ciao, ${utente.cognome}</a>
+									<a data-toggle="dropdown" aria-expanded="true" class="dropdown-toggle text-left" href="#"><i class="fa fa-user-circle"></i>Ciao, ${utente.nome}</a>
 									<div role="menu" class="dropdown-menu show">
 										<a role="presentation" class="dropdown-item d-lg-flex" href="RedirectPaginaPersonale">Pagina personale</a>
 										<a role="presentation" class="dropdown-item" href="#">I miei ordini</a>
 										<a role="presentation" class="dropdown-item" href="#">Le mie notifiche <span class="glyphicon glyphicon-comment"></span><span class="badge badge-notify">3</span></a>
 										<c:if test="${ ruolo.isGestoreAccount }">
-											<a role="presentation" class="dropdown-item d-lg-flex" href="#">Gestore Account</a></c:if>
+											<a role="presentation" class="dropdown-item d-lg-flex" href="#">Gestore account</a></c:if>
 										<c:if test="${ ruoloisGestoreCatalogo }">
-											<a data-toggle="dropdown" aria-expanded="true" class="dropdown-toggle text-left" href="#">Gestore prodotti</a></c:if>
+											<a data-toggle="dropdown" aria-expanded="true" class="dropdown-toggle text-left" href="#">Gestore catalogo</a></c:if>
 											<div role="menu" class="dropdown-menu show">
-												
 												<a role="presentation" class="dropdown-item" href="RedirectGestoreProdotti">Gestione prodotti</a>
 												<a role="presentation" class="dropdown-item" href="RedirectGestoreOfferte">Gestione offerte</a>
 											</div>
 										<c:if test="${ ruolo.isGestoreAssistenza }">
 											<a role="presentation" class="dropdown-item" href="#">Gestore assistenza</a></c:if>
-										<a role="presentation" class="dropdown-item d-lg-flex" href="#">Logout</a>
+										<a role="presentation" class="dropdown-item d-lg-flex" href="LogoutServlet">Logout</a>
 									</div>
 								</div>
-								<a class="btn btn-light action-button" role="button" action="GestioneCarrelloServlet"><i class="fa fa-shopping-cart"></i>&#160;&#160;Carrello</a>
-							</c:if>
+								<a class="btn btn-light action-button" role="button" href="RedirectCarrello" ><i class="fa fa-shopping-cart"></i>Carrello</a>							</c:if>
                			</c:otherwise>
 					</c:choose>
 				</div>
