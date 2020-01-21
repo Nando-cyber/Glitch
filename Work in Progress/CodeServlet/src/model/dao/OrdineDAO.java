@@ -14,4 +14,6 @@ public interface OrdineDAO {
 	
 	//Restituisce l'oggetto Ordine dal database avente come ordineId l'intero passato per argomento
 	Ordine retriveById(int id);
+	
+	
 }

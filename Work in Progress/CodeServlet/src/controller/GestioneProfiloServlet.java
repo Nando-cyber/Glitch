@@ -48,19 +48,25 @@ public class GestioneProfiloServlet extends HttpServlet {
 		if(operazione.equalsIgnoreCase("rimozione")) {
 			// Se � una rimozione si procede a rimuovere l'utente e il suo carrello 
 			//da DB e Sessione
-			uDAO.deleteUtente(u.getUsername());
-			request.getSession().removeAttribute("utente");
-
 			cDAO.removeCarrello(u.getUsername());
 			request.getSession().removeAttribute("carrello");
 			
+			uDAO.deleteUtente(u.getUsername());
+			request.getSession().removeAttribute("utente");
+
+			
+			
+			//Si ritorna alla pagina iniziale del sito, disconnessi
+			String dest = request.getHeader("referer");
 			//Si esegue la forword alla pagina Home del sito
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/HomePage.jsp");
-			requestDispatcher.forward(request, response);
+			if (dest == null || dest.contains("/GestioneProfiloServlet") ||  dest.contains("/RedirectPaginaPersonale") ||dest.trim().isEmpty()) {
+				dest = "BaseServlet";
+			}
+			response.sendRedirect(dest);
 
 		}else {
 			
-			//Se si tratta di una mosifica si prendono i dati dalla request e si verificano se sono
+			//Se si tratta di una modifica si prendono i dati dalla request e si verificano se sono
 			//vuoti o meno. Se sono vuoti vuol dire che l'utente non voglia che vengano modificati
 			String password = request.getParameter("password");
 
@@ -104,7 +110,7 @@ public class GestioneProfiloServlet extends HttpServlet {
 					throw new MyServletException("Formato CAP Errato.");
 				}
 				if ( !ValidazioneUtente.checkCitta(citta)) {
-					throw new MyServletException("Formato Citta Errata.");
+					throw new MyServletException("Formato Citt� Errata.");
 				}
 				if ( !ValidazioneUtente.checkVia(strada)) {
 					throw new MyServletException("Formato Strada Errata.");

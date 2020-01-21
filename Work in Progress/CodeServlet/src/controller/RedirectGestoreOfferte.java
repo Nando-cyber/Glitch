@@ -10,12 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.Console;
-import model.bean.Videogioco;
-import model.dao.ConsoleDAO;
-import model.dao.ConsoleDB;
-import model.dao.VideogiocoDAO;
-import model.dao.VideogiocoDB;
+import model.bean.Offerta;
+import model.dao.OffertaDAO;
+import model.dao.OffertaDB;
+
 
 /**
  * Servlet implementation class RedirectGestoreOfferte
@@ -23,8 +21,7 @@ import model.dao.VideogiocoDB;
 @WebServlet("/RedirectGestoreOfferte")
 public class RedirectGestoreOfferte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ConsoleDAO cDAO = new ConsoleDB();
-	private VideogiocoDAO vDAO = new VideogiocoDB();
+	private OffertaDAO oDAO = new OffertaDB();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,11 +36,9 @@ public class RedirectGestoreOfferte extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Console> consoles = cDAO.findAllConsole();
-		List<Videogioco> videogiochi = vDAO.findAllVideogioco();
-		
-		request.getSession().setAttribute("Consoles", consoles);
-		request.getSession().setAttribute("Videogiochi", videogiochi);
+		List<Offerta> o = oDAO.findAllOfferta();
+
+		request.getSession().setAttribute("offerta", o);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/GestioniOfferte.jsp");
 		requestDispatcher.forward(request, response);

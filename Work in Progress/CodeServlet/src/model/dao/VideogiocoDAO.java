@@ -29,7 +29,10 @@ public interface VideogiocoDAO{
 	
 	//Restitusce una lista di videogiochi avente come piattaforma la stringa passata come argomento
 	List<Videogioco> retriveByPiattaforma(String piattaforma);
-	
+	//Restituisce i videogiochi che rispettano le caratteristiche della stringa passata per parametro
 	public ArrayList<String> doRetrieveLike(String against);
+	
+	//Restituisce i videogiochi che rispettano le caratteristiche della stringa passata per parametro
+	public Videogioco retriveByNomeAndPiattaforma(String nome, String piatt);
 	
 }

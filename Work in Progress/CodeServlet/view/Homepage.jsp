@@ -23,7 +23,7 @@
 			<button class="btn btn-primary" type="button" onclick="filterSelection('videogioco')">Videogiochi</button>
 		</div>
 	</div>
-	<div id="myCatalogo" class="container">
+	<div class="container">
 		<!-- Due cicli per visualizzare sia i videogiochi sia le console -->
 		 <c:forEach items="${videogiochi}" var="videogiochi">
 		 <div class="filterDiv videogioco">
@@ -46,9 +46,8 @@
 						</c:when>
 						<c:otherwise>           
                  			<form action="GestioneCarrelloServlet">
-                 				<label>Quantità: </label>
-                 				<input type="number" class="form-control-sm d-sm-flex d-md-flex d-lg-flex" name="number" placeholder="1" min="1" max="20" value="1" /><br>
-								<input type="hidden" name="prodId" value="${videogiochi.id}"><br>
+                 				<label>Quantità: <input type="number" class="form-control-sm d-sm-flex d-md-flex d-lg-flex" name="number" placeholder="1" min="1" max="20" value="1" /></label>
+								<input type="hidden" name="prodId" value="${videogiochi.id}">
 								<input type="hidden" name="operazione" value="inserimento"><br>
 								<input type="submit" class="bottone" value="Aggiungi al carrello">  
                  			</form>	
@@ -79,9 +78,8 @@
 						</c:when>
 						<c:otherwise>           
                  			<form action="GestioneCarrelloServlet">
-                 				<label>Quantità: </label>
-                 				<input type="number" class="form-control-sm d-sm-flex d-md-flex d-lg-flex" name="number" placeholder="1" min="1" max="20" value="1" /><br>
-								<input type="hidden" name="prodId" value="${console.id}"><br>
+                 				<label>Quantità: <input type="number" class="form-control-sm d-sm-flex d-md-flex d-lg-flex" name="number" placeholder="1" min="1" max="20" value="1" /></label><br>
+								<input type="hidden" name="prodId" value="${console.id}">
 								<input type="hidden" name="operazione" value="inserimento"><br>
 								<input type="submit" class="bottone" value="Aggiungi al carrello">  
                  			</form>	
@@ -94,14 +92,13 @@
 		</c:forEach>
 		</div>
 	</div>
+	<!-- Paginazione -->
 	<div class="container text-monospace d-lg-flex justify-content-lg-center visible">
 		<ul class="pagination">
 			<li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
 			<li class="page-item"><a class="page-link" href="#">1</a></li>
 			<li class="page-item"><a class="page-link" href="#">2</a></li>
 			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
 			<li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
 			</ul>
 	</div>

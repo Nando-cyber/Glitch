@@ -50,9 +50,9 @@ public class GestioneProdottoServletTest {
 	public void testGestioneProdottoServletVideogioco() throws ServletException, IOException, MyServletException {
 
 		request.addParameter("operazione", "inserimento");
-		request.addParameter("Videogioco", "Battlefield");
-		request.addParameter("urlImm", "test/img");
-		request.addParameter("descr", "Videogioco di guerra");
+		request.addParameter("Videogioco", "videogioco");
+		request.addParameter("immagine", "test/img");
+		request.addParameter("descrizione", "Videogioco di guerra");
 		request.addParameter("prezzo", "70.00");
 		request.addParameter("nome", "Battlefield");
 		request.addParameter("genere", "FPS");
@@ -78,11 +78,11 @@ public class GestioneProdottoServletTest {
 	public void testGestioneProdottoServletConsole() throws ServletException, IOException, MyServletException {
 
 		request.addParameter("operazione", "inserimento");
-		request.addParameter("Console", "Xbox360");
-		request.addParameter("urlImm", "test/img");
-		request.addParameter("descr", "Console potente");
+		request.addParameter("Console", "console");
+		request.addParameter("immagine", "test/img");
+		request.addParameter("descrizione", "Console potente");
 		request.addParameter("prezzo", "100.00");
-		request.addParameter("modello", "Xbox");
+		request.addParameter("modello", "Xbox360");
 		request.addParameter("produttore", "Microsoft");
 
 		servlet.doPost(request, response);

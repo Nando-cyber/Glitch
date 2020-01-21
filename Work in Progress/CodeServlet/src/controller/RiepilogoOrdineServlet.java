@@ -43,7 +43,9 @@ public class RiepilogoOrdineServlet extends HttpServlet {
 		Utente u = (Utente) request.getSession().getAttribute("utente");		
 		
 		// si procede alla creazione del bean Ordine
-		Ordine ordine = new Ordine(u.getUsername(),new GregorianCalendar(new Locale("it", "IT")));
+		Ordine ordine = new Ordine();
+		ordine.setUtenteUsername(u.getUsername());
+		ordine.setDataOrdinazione(new GregorianCalendar(new Locale("it", "IT")));
 		ordine.setProdottiOrdine(car);
 
 		//si rende persistente

@@ -6,11 +6,16 @@
 </jsp:include>
 
 
-<div class="article-list">
+<div class="article-list" id="pagina">
 	<div class="container">
 		<div class="intro">
 			<h2 class="text-center">Pagina personale</h2>
+			<p>In questa sezione potrai cambiare i campi relativi a: 
+				<i>email</i>, <i>città</i>, <i>provincia</i>, <i>via</i>, <i>numero</i>, <i>CAP</i> e <i>password</i>.<br>
+				Potrai, inoltre, decidere di eliminare il tuo profilo da Glitch.
+			</p>
 		</div>
+		<hr>
 	</div>
 	<div class="container">
 		<h3>Modifica profilo</h3>
@@ -18,7 +23,7 @@
 	<div class="container">
 		<div class="intro"></div>
 	</div>
-	<form action="GestioneProfiloServlet" method="post" style="width: 70%; padding: 20px; margin-left: 15%; background-color: #c8fcf8; margin-bottom: 5%;">
+	<form method="post" action="GestioneProfiloServlet" style="width: 70%; padding: 20px; margin-left: 15%; background-color: #c8fcf8; margin-bottom: 5%;">
 		<div class="form-group d-lg-flex justify-content-lg-start">
 			<span><c:out value="${utente.nome}" /></span>
 		</div>
@@ -50,9 +55,9 @@
 			<input class="form-control" type="password" name="password" placeholder="${utente.password}" />
 		</div>
 		<div class="container">
-		<input type="hidden" name="operazione" value="modifica">
-			<input class="btn btn-primary" type="submit"
-				style="background-color: rgb(215, 23, 104);" value="Conferma modifiche" >
+			<input type="hidden" name="operazione" value="modifica">
+			<button class="btn btn-primary" type="submit"
+				style="background-color: rgb(215, 23, 104);">Conferma modifiche</button>
 		</div>
 	</form>
 	<div class="container">
@@ -61,10 +66,10 @@
 	<div class="container">
 		<h3 style="padding-top: 8%;">Rimuovi profilo</h3>
 	</div>
-	<div class="container" style="padding: 5%;">
-	<form action="GestioneProfiloServlet" method="post" >
+	<div class="container" style="padding: 3%;">
+	<form action="GestioneProfiloServlet">
 		<input type="hidden" name="operazione" value="rimozione">
-		<input class="btn btn-primary" type="submit" value="Elimina profilo">
+		<button class="btn btn-primary" type="submit">Elimina profilo</button>
 		</form>
 	</div>
 	<div class="container">

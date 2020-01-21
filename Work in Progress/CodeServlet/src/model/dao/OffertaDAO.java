@@ -18,4 +18,7 @@ public interface OffertaDAO {
 	//Restituisce la lista di offerta associate alla determinata categoria
 	List<Offerta> retriveByCategoria(String categoria);
 	
+	//Restituisce la lista di offerte presenti in DB
+	List<Offerta> findAllOfferta();
+		
 }

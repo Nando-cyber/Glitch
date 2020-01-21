@@ -3,6 +3,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,10 +52,14 @@ public class LogoutServlet extends BaseServlet {
 				|| dest.contains("/GestioneProdottoServlet") || dest.contains("/GestioneProfiloServlet") || dest.contains("/GestioneRuoloServlet") ||  dest.contains("/InserimentoCartaServlet") ||
 				dest.contains("/RedirectCarrello") || dest.contains("/RedirectPaginaPersonale") || dest.contains("/RichiestaAssistenzaServlet") ||
 				 dest.contains("/RiepilogoOrdineServlet") || dest.contains("/RispostaAssistenzaSrvlet") ||dest.contains("/VisualizzazioneEmailServlet") ||
-				dest.contains("/VisualizzazioneUtenteRuoli") ||dest.trim().isEmpty()) {
+				dest.contains("/VisualizzazioneUtenteRuoli") || dest.contains("/RedirectAcquistoServlet") || dest.contains("/RedirectGestioneRuolo") || 
+				dest.contains("/RedirectGestoreOfferte") || dest.contains("/RedirectGestoreRuolo") ||  dest.contains("/RedirectRichiestaAssistenza") ||
+				dest.contains("/RedirectRiepilogoOrdine") || dest.contains("/RedirectVisualizzazioneEmail") || dest.contains("/RedirectVisualizzazioneUtentiRuoli") ||
+				dest.contains("/RicercaProdotto") || dest.contains("/RedirectGestoreProdotti") ||dest.trim().isEmpty()) {
 			dest = "BaseServlet";
 		}
 		response.sendRedirect(dest);
+		
 	}
 
 	/**

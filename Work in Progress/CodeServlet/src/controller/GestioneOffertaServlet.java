@@ -58,13 +58,13 @@ public class GestioneOffertaServlet extends HttpServlet {
 			String nome = request.getParameter("nome");
 			String sconto = request.getParameter("sconto");
 			String categoria =  request.getParameter("categoria");
-			if(!ValidazioneOfferta.checkNome(nome)) {
+			if(!ValidazioneOfferta.checkNome(nome)|| nome == null) {
 				throw new MyServletException("Nome offerta non corretta.");
 			}			
-			if(!ValidazioneOfferta.checkPercentualeSconto(sconto)) {
+			if(!ValidazioneOfferta.checkPercentualeSconto(sconto) || sconto == null) {
 				throw new MyServletException("Percentuale sconto non corretta.");
 			}
-			if(!ValidazioneOfferta.checkCategoria(categoria)) {
+			if(!ValidazioneOfferta.checkCategoria(categoria) || categoria == null) {
 				throw new MyServletException("Categoria offerta non corretta.");
 			}
 			

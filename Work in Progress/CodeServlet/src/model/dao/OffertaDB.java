@@ -93,4 +93,25 @@ public class OffertaDB implements OffertaDAO{
 				throw new RuntimeException(e);
 			}
 		}
+
+		@Override
+		public List<Offerta> findAllOfferta() {
+			try (Connection con = ConPool.getConnection()) {
+				PreparedStatement ps = con
+						.prepareStatement("SELECT codice, sconto, categoria, nome FROM Offerta");
+				ResultSet rs = ps.executeQuery();
+				ArrayList<Offerta> off = new ArrayList<Offerta>();
+				while(rs.next()) {
+					Offerta p = new Offerta();
+					p.setCodice(rs.getInt(1));
+					p.setSconto(rs.getInt(2));
+					p.setCategoria(rs.getString(3));
+					p.setNome(rs.getString(4));
+					off.add(p);
+				}
+				return off;
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
 }

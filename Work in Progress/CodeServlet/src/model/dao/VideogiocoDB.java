@@ -247,4 +247,37 @@ public class VideogiocoDB  implements VideogiocoDAO{
 		}
 	}
 
+
+
+	@Override
+	public Videogioco retriveByNomeAndPiattaforma(String nome, String piatt) {
+		
+		try (Connection con = ConPool.getConnection()) {
+			PreparedStatement ps = con.prepareStatement(
+					"Select prodottoId, nome, genere, piattaforma  FROM Videogioco WHERE nome=? AND piattaforma=?  ");
+			ps.setString(1, nome);
+			ps.setString(2, piatt);
+			ResultSet rs = ps.executeQuery();
+			Videogioco p = new Videogioco();
+			
+			if (rs.next()) {
+				Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
+				
+				p.setId(rs.getInt(1));
+				p.setNome(rs.getString(2));
+				p.setGenere(rs.getString(3));
+				p.setPiattaforma(rs.getString(4));
+				p.setPrezzo(prod.getPrezzo());
+				p.setDescrizione(prod.getDescrizione());
+				p.setImmagine(prod.getImmagine());
+				
+				
+			}
+			return p;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+
 }

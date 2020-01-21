@@ -18,7 +18,7 @@ import model.dao.RichiestaDB;
 
 
 /**
- *AcquistoServlet permette la gestione dell'acquisto dei prodotti inseriti nel carrello
+ *AcquistoServlet permette la gestione dell'acuisto dei prodotti inseriti nel carrello
  */
 @WebServlet("/AcquistoServlet")
 public class AcquistoServlet extends HttpServlet {
@@ -38,6 +38,7 @@ public class AcquistoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		//Si prendono dalla Session Utente e Ordine
 		Utente u  = (Utente) request.getSession().getAttribute("utente");
 		Ordine o = (Ordine) request.getSession().getAttribute("ordine");
@@ -52,11 +53,17 @@ public class AcquistoServlet extends HttpServlet {
 		else {
 			
 			//Altrimenti si procede alla compilazione automatica di una mail di conferma ordine
+			Richiesta mail = new Richiesta();
+			
 			//Si settano i dati relativi alla Richiesta
-			Richiesta mail = new Richiesta("generatedAutomaticMailOrder@live.com","GeneratedAutomaticOrder",u.getEmail(),"L'ordine da lei effettuato in data :" + 
+			mail.setDestinatario(u.getEmail());
+			mail.setStato(false);
+			mail.setUtenteEmail("generatedAutomaticMailOrder@live.com");
+			mail.setUtenteUsername("GeneratedAutomaticOrder");
+			mail.setDescrizione("L'ordine da lei effettuato in data :" + 
 					o.getDataOrdinazione() + "� andato a buon fine."
 					+ " Verr� avvisato della spedizione il prima possibile."
-					+ "/n Grazie di aver scelto GLITCH!");
+					+ "/n Grazie di aver scelto GLITCH!"  );
 			
 			//Si rende il bean persistente
 			rDAO.createRichiesta(mail);
