@@ -70,12 +70,12 @@ public class RichiestaDB implements RichiestaDAO{
 	public List<Richiesta> retriveByMittente(String mittente) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con.prepareStatement(
-					"Select id, utenteEmail, utenteUsername, destinatario, descrizione, stato FROM Richiesta WHERE mittente=?");
+					"Select id, utenteEmail, utenteUsername, destinatario, descrizione, stato FROM Richiesta WHERE utenteUsername=?");
 			ps.setString(1, mittente);
 			ResultSet rs = ps.executeQuery();
 			Richiesta p = new Richiesta();
 			ArrayList<Richiesta> array = new ArrayList<Richiesta>();
-			while (!rs.next()) {
+			while (rs.next()) {
 
 				p.setId(rs.getInt(1));
 				p.setUtenteEmail(rs.getString(2));
@@ -101,7 +101,7 @@ public class RichiestaDB implements RichiestaDAO{
 			ResultSet rs = ps.executeQuery();
 			Richiesta p = new Richiesta();
 			ArrayList<Richiesta> array = new ArrayList<Richiesta>();
-			while (!rs.next()) {
+			while (rs.next()) {
 
 				p.setId(rs.getInt(1));
 				p.setUtenteEmail(rs.getString(2));
@@ -127,7 +127,7 @@ public class RichiestaDB implements RichiestaDAO{
 			ResultSet rs = ps.executeQuery();
 			Richiesta p = new Richiesta();
 			
-			if(!rs.next() ) {
+			if(rs.next() ) {
 
 				p.setId(rs.getInt(1));
 				p.setUtenteEmail(rs.getString(2));

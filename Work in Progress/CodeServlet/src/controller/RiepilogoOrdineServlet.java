@@ -1,22 +1,16 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.Locale;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import model.bean.Carrello;
 import model.bean.Ordine;
-import model.bean.ProdottiOrdine;
-import model.bean.ProdottoQuantita;
 import model.bean.Utente;
 import model.dao.CarrelloDAO;
 import model.dao.CarrelloDB;

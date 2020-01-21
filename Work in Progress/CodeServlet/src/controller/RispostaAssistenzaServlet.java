@@ -56,12 +56,8 @@ public class RispostaAssistenzaServlet extends HttpServlet {
 		}
 		
 		//Si crea il bean Richiesta e si settano i dati
-		Richiesta rs = new Richiesta();
+		Richiesta rs = new Richiesta(u.getEmail(),u.getUsername(),destinatario,descrizione);
 		
-		rs.setDestinatario(destinatario);
-		rs.setUtenteUsername(u.getUsername());
-		rs.setUtenteEmail(u.getEmail());
-		rs.setDescrizione(descrizione);
 		rs.setStato(false);// lo stato � false finch� il destinatario non la legger�/visualizzer�
 		
 		//Si rende persistente la Richiesta
@@ -80,7 +76,7 @@ public class RispostaAssistenzaServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);
 	}

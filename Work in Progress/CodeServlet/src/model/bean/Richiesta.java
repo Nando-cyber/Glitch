@@ -3,13 +3,13 @@ package model.bean;
 
 public class Richiesta{
 
-
+	private static int counter=0;
 	private int id;
 	private String utenteEmail;
 	private String utenteUsername;
 	private String destinatario;
 	private String descrizione;
-	private Boolean stato=false;
+	private Boolean stato;
 	
 	//Costruttore vuoto
 	public Richiesta() {
@@ -19,11 +19,23 @@ public class Richiesta{
 	//Costruisce un oggetto "Richiesta" passando come argomento l'email dell'utente, l'username, il destinatario e la descrizione
 	public Richiesta(String utenteEmail,String utenteUsername, String destinatario, String descrizione)
 	{
+		counter++;
+		this.id=counter;
 		this.setUtenteEmail(utenteEmail);
 		this.setUtenteUsername(utenteUsername);
 		this.setDestinatario(destinatario);
 		this.setDescrizione(descrizione);
 	}
+	
+	//Costruisce un oggetto "Richiesta" passando come argomento l'id, l'email dell'utente, l'username, il destinatario e la descrizione
+		public Richiesta(int id,String utenteEmail,String utenteUsername, String destinatario, String descrizione)
+		{
+			this.id=id;
+			this.setUtenteEmail(utenteEmail);
+			this.setUtenteUsername(utenteUsername);
+			this.setDestinatario(destinatario);
+			this.setDescrizione(descrizione);
+		}
 
 	//Restituisce l'email dell'utente
 	public String getUtenteEmail() {

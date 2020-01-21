@@ -4,12 +4,8 @@ package controller.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.io.IOException;
-import java.util.GregorianCalendar;
-
 import javax.servlet.ServletException;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,8 +15,6 @@ import controller.InserimentoCartaServlet;
 import controller.MyServletException;
 import model.bean.CartaDiCredito;
 import model.bean.Utente;
-import model.dao.CartaDiCreditoDAO;
-import model.dao.CartaDiCreditoDB;
 import model.dao.UtenteDAO;
 import model.dao.UtenteDB;
 

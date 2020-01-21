@@ -1,15 +1,12 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import model.bean.Richiesta;
 import model.bean.Utente;
 import model.bean.ValidazioneRichiesta;
@@ -50,12 +47,8 @@ public class RichiestaAssistenzaServlet extends HttpServlet {
 		}
 		
 		//Si crea il bean Richiesta e si settano i dati
-		Richiesta r = new Richiesta();
+		Richiesta r = new Richiesta(u.getEmail(),u.getUsername(),destinatario,descrizione);
 		
-		r.setDestinatario(destinatario);
-		r.setUtenteUsername(u.getUsername());
-		r.setUtenteEmail(u.getEmail());
-		r.setDescrizione(descrizione);
 		r.setStato(false);// lo stato � folse finch� il destinatario non la legger�/visualizzer�
 		
 		//Si rende persistente la Richiesta
@@ -72,7 +65,7 @@ public class RichiestaAssistenzaServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);
 	}

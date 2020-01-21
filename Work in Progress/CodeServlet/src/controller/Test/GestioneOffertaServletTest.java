@@ -1,18 +1,13 @@
 package controller.Test;
 
 import static org.junit.Assert.*;
-
 import java.io.IOException;
-
 import javax.servlet.ServletException;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import controller.GestioneOffertaServlet;
 import model.bean.Console;
 import model.bean.Offerta;
