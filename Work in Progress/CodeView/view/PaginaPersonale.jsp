@@ -6,11 +6,16 @@
 </jsp:include>
 
 
-<div class="article-list" id="PagPersonale">
+<div class="article-list" id="pagina">
 	<div class="container">
 		<div class="intro">
 			<h2 class="text-center">Pagina personale</h2>
+			<p>In questa sezione potrai cambiare i campi relativi a: 
+				<i>email</i>, <i>città</i>, <i>provincia</i>, <i>via</i>, <i>numero</i>, <i>CAP</i> e <i>password</i>.<br>
+				Potrai, inoltre, decidere di eliminare il tuo profilo da Glitch.
+			</p>
 		</div>
+		<hr>
 	</div>
 	<div class="container">
 		<h3>Modifica profilo</h3>
@@ -60,7 +65,7 @@
 	<div class="container">
 		<h3 style="padding-top: 8%;">Rimuovi profilo</h3>
 	</div>
-	<div class="container" style="padding: 5%;">
+	<div class="container" style="padding: 3%;">
 		<button class="btn btn-primary" type="button">Elimina profilo</button>
 	</div>
 	<div class="container">

@@ -51,7 +51,7 @@ body {
 }
 
 #img-catalogo {
-  c
+  
 }
 
 /*box per la descrizione dei prodotti*/
@@ -72,11 +72,12 @@ body {
 	background-color: #fff;
 }
 
-/*Pagina personale*/
-#PagPersonale{
+/*Pagina personale, di ricerca e del carrello*/
+#pagina{
 	margin-left: 15%;
 	margin-right: 15%;
 	background-color: #fff;
+	text-align: center;
 }
 
 
@@ -137,6 +138,11 @@ a:not([href]):not([tabindex]) {
   transition: background-color 0.25s;
 }
 
+/*Suggerimenti ricerca*/
+#listaProdotti{
+	background-color: #66d7d7; 
+}
+
 /*Carousel*/
 #myVideo{
 	max-width: 100%;
@@ -162,9 +168,3 @@ a:not([href]):not([tabindex]) {
     padding: 3%;
 }
 
-/*Carrello*/
-#myCarrello{
-	background-color: #fff;
-	margin-left: 15%;
-	margin-right: 15%;
-}

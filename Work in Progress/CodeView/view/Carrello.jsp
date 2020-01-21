@@ -6,7 +6,7 @@
 </jsp:include>
 
 
-<div id="myCarrello" class="features-boxed" style="margin-top: 0px;">
+<div id="pagina" class="features-boxed" style="margin-top: 0px;">
 	<div class="container">
 		<h1 style="font-family: 'Arbutus Slab', serif; margin-top: 0px;">Carrello</h1>
 	</div>

@@ -36,24 +36,27 @@
 					<span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse image-holder" id="navcol-3" src="GlitchLogo.png">
+				
 					<!-- Barra di ricerca -->
-					<form class="form-inline mr-auto" target="_self">
+					<form class="form-inline mr-auto" target="_self" action="RicercaProdott" onkeyup="loadSuggerimenti(this.cerca.value)">
 						<div class="form-group">
-							<input type="search" class="form-control search-field" id="search-field" name="cerca" placeholder="Cerca"/>
+							<input type="search" class="form-control search-field" id="search-field" list="listaProdotti" autocomplete="off" name="cerca" placeholder="Cerca"/>
+							<datalist id="listaProdotti">
+            				</datalist>
 						</div>
 					</form>
 					
 					<!-- Opzioni da navbar specifiche per i vari tipi di utente del sito -->
 					<c:choose>
 						<c:when test="${utente == null}">
-							<span class="navbar-text"><a class="login" href="#" data-toggle="modal" data-target="#myLogin">Accedi&#160;&#160;</a></span>
+							<span class="navbar-text"><a class="login" href="#" target="_blank" data-toggle="modal" data-target="#myLogin">Accedi&#160;&#160;</a></span>
 							<a class="btn btn-light action-button" role="button"
 								data-toggle="modal" data-target="#myRegistrazione">Registrati</a>
 						 </c:when>
 						 <c:otherwise>		
 							<c:if test="${ utente != null && utente.ruolo == null }">
 								<div class="dropdown show d-lg-flex" style="margin: 0px; margin-right: 25px;">
-									<a data-toggle="dropdown" aria-expanded="true" class="dropdown-toggle text-left" href="#"><i class="fa fa-user-circle"></i>Ciao, ${utente.nome}</a>
+									<a data-toggle="dropdown" aria-expanded="true" class="dropdown-toggle text-left" href="#" target="_blank"><i class="fa fa-user-circle"></i>Ciao, ${utente.nome}</a>
 									<div role="menu" class="dropdown-menu show">
 										<a role="presentation" class="dropdown-item d-lg-flex" href="RedirectPaginaPersonale">Pagina personale</a>
 										<a role="presentation" class="dropdown-item" href="#">I miei ordini</a>
@@ -93,6 +96,31 @@
 			</div>
 		</nav>
 	</div>
+
+
+<!-- Script per la ricerca -->
+<script>
+function loadSuggerimenti(input){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.status == 200 && this.readyState == 4){
+			carica(this);
+		}
+	}
+	xhttp.open("GET", "RicercaServlet?input="+input, true);
+	xhttp.send();
+}
+
+function carica(xhttp){
+		var obj = JSON.parse(xhttp.responseText);
+		var suggerimenti;
+		for(i=0; i<obj.length;i++){
+			suggerimenti += "<option>" + obj[i].name + "</option>";
+		}
+		document.getElementById("listaProdotti").innerHTML = suggerimenti;
+}
+
+</script>
 
 
 
