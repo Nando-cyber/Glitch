@@ -73,9 +73,10 @@ CREATE TABLE Richiesta (
   PRIMARY KEY (id, 
   utenteEmail));
 CREATE TABLE Offerta (
-  codice    int NOT NULL AUTO_INCREMENT, 
+  codice    int NOT NULL, 
   sconto    int NOT NULL, 
-  categoria char(10) NOT NULL, 
+  categoria char(20) NOT NULL,
+  nome      char(15) NOT NULL,
   PRIMARY KEY (codice));
 
 ALTER TABLE Console ADD INDEX FKConsole133890 (prodottoID), ADD CONSTRAINT FKConsole133890 FOREIGN KEY (prodottoID) REFERENCES Prodotto (ID)  on delete cascade
