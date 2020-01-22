@@ -1,6 +1,5 @@
 @charset "ISO-8859-1";
 #myRegistrazione {
-  background: url(sfondo.jpg);
   padding: 80px 0;
 }
 
@@ -16,8 +15,7 @@
 
 #myRegistrazione form .form-control {
   background: none;
-  border: none;
-  border-bottom: 1px solid #434a52;
+  border-bottom: 1px solid;
   border-radius: 0;
   box-shadow: none;
   outline: none;

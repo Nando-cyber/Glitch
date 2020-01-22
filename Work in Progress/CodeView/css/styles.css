@@ -68,10 +68,34 @@ body {
 	background-color: #fff;
 }
 
+.imgFluid{
+	max-width: 70%;
+	max-height: 70%;
+	margin-left: 10%;
+}
+
+.btnGlitch{
+	background: #df0092;
+	border-color: #9205c0;
+	color: #fff;
+  	border: none;
+  	border-radius: 4px;
+  	padding: 2%;
+  	box-shadow: none;
+  	margin-top: 35px;
+  	text-shadow: none;
+  	outline: none !important;
+}
+
+.btnGlitch: hover{
+	background: #00ffc2;
+}
+
 /*Pagina personale, di ricerca e del carrello*/
 #pagina{
 	margin-left: 15%;
 	margin-right: 15%;
+	padding-top: 3%;
 	background-color: #fff;
 	text-align: center;
 }
@@ -164,3 +188,20 @@ a:not([href]):not([tabindex]) {
     padding: 3%;
 }
 
+.bottone{
+	background: aqua;
+}
+
+/*foto per la pagina ChiSiamo*/
+#foto{
+	max-width: 90%;
+}
+
+/*form di Glitch*/
+#formGlitch{
+	width: 70%; 
+	padding: 20px; 
+	margin-left: 15%; 
+	background-color: #c8fcf8; 
+	text-align: left;
+}
