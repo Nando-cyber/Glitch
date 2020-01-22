@@ -21,4 +21,10 @@ INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, pr
 VALUES("Admin98","adminCat99@glitch.com",null,"admin98", "Ferdinando","Napolitano", "NA", 80030, "Visciano", "Galileo Galilei", 1, "Catalogo");
 
 INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo) 
+VALUES("Nunzia98","adminCat99@glitch.com",null,"admin98", "Ferdinando","Napolitano", "NA", 80030, "Visciano", "Galileo Galilei", 1, "Account");
+
+INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo) 
+VALUES("Paki989","adminCat99@glitch.com",null,"admin98", "Ferdinando","Napolitano", "NA", 80030, "Visciano", "Galileo Galilei", 1, "Assistenza");
+
+INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo) 
 VALUES("botGlitch","generAutoMail@live.com",null,"botGlitch99", "bot","bot", "GL", 00000, "Glitch", "Glitch", 1, null);
