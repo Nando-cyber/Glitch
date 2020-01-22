@@ -67,7 +67,7 @@ public class RispostaAssistenzaServlet extends HttpServlet {
 		request.setAttribute("successo", true);
 		
 		//Si esegue il forward alla pagina RichiestaAssistenza
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/RispostaAssistenza.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/RispostaAssistenza.jsp");
 		requestDispatcher.forward(request, response);
 		
 		

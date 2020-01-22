@@ -3,7 +3,7 @@ package model.bean;
 
 public class Richiesta{
 
-	private static int counter=0;
+	private static int counter=1;
 	private int id;
 	private String utenteEmail;
 	private String utenteUsername;

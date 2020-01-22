@@ -22,7 +22,7 @@ public class Ordine{
 	private ArrayList<ProdottiOrdine> prodottiAcquistati;
 	private GregorianCalendar dataOrdinazione;
 	private Date ordinazioneDate;
-	private float prezzoTot;
+	private float prezzoTot = 0;
 	
 	//Costruttore vuoto
 	public Ordine() {
@@ -127,6 +127,7 @@ public class Ordine{
 	//Modifica la lista dei prodotti acquistati
 	public void setProdottiAcquistati(ArrayList<ProdottiOrdine> prodottiAcquistati) {
 		this.prodottiAcquistati = prodottiAcquistati;
+		setPrezzoTot(getPrezzoTotale());
 	}
 
 	//Restituisce l'id dell'ordine
@@ -164,7 +165,7 @@ public class Ordine{
 		this.prezzoTot = prezzoTot;
 	}
 	
-	public float getPrezzo()
+	public float getPrezzoTot()
 	{
 		return prezzoTot;
 	}

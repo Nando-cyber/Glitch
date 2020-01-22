@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.bean.Carrello;
 import model.bean.Ordine;
 import model.bean.Richiesta;
 import model.bean.Utente;
+import model.dao.CarrelloDAO;
+import model.dao.CarrelloDB;
 import model.dao.OrdineDAO;
 import model.dao.OrdineDB;
 import model.dao.RichiestaDAO;
@@ -27,7 +30,7 @@ import model.dao.RichiestaDB;
 public class AcquistoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private OrdineDAO oDAO = new OrdineDB();
-
+	private CarrelloDAO cDAO = new CarrelloDB();
 	private RichiestaDAO rDAO = new RichiestaDB(); 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -68,7 +71,11 @@ public class AcquistoServlet extends HttpServlet {
 			List<Richiesta> list = rDAO.retriveEmailNonLette(u.getEmail());
 			//Si setta un attributo "email"con il numero di email non lette
 			request.setAttribute("email", list.size());
-
+			
+			//Si svuota il carrello
+			cDAO.removeCarrello(u.getUsername());
+			Carrello c = new Carrello(u.getUsername(), u.getEmail());
+			request.getSession().setAttribute("carrello", c);
 			//Si esegue la forward alla pagina Home del sito
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("BaseServlet");
 			requestDispatcher.forward(request, response);

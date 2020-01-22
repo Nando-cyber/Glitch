@@ -48,7 +48,7 @@ public class GestioneProfiloServlet extends HttpServlet {
 		if(operazione.equalsIgnoreCase("rimozione")) {
 			// Se è una rimozione si procede a rimuovere l'utente e il suo carrello 
 			//da DB e Sessione
-			
+
 			if(!car.getProdotti().isEmpty()) {
 				cDAO.removeCarrello(u.getUsername());
 			}
@@ -81,81 +81,81 @@ public class GestioneProfiloServlet extends HttpServlet {
 
 			//Altrimenti si prosegue alla modifica del dato nell'Utente
 			if(password != null) {
-			u.setPassword(password);				
+				u.setPassword(password);				
 			}
-		
-		// si fa lo stesso anche per il campo e-mail
-		String email = request.getParameter("email");
 
-		
-			if ( !ValidazioneUtente.checkEmail(email)) {
-				throw new MyServletException("Formato E-Mail Errata.");
-			}
+			// si fa lo stesso anche per il campo e-mail
+			String email = request.getParameter("email");
+
+
+
 			if(email != null) {
-				
-			u.setEmail(email);
-			car.setUtenteEmail(email);
+				if ( !ValidazioneUtente.checkEmail(email)) {
+					throw new MyServletException("Formato E-Mail Errata.");
+				}
+				u.setEmail(email);
+				car.setUtenteEmail(email);
 
 			}
 
-		String provincia = request.getParameter("provincia");
-		String CAP = request.getParameter("CAP");
-		String citta = request.getParameter("citta");
-		String strada = request.getParameter("via");
-		String numero = request.getParameter("numero");
-		// Mentre per l'indirizzo tutti i campi devono essere compilati, in caso contrario, se
-		//anche un campo è nullo non viene modificato.
-		if(!provincia.isEmpty() && !CAP.isEmpty() && !citta.isEmpty() && !strada.isEmpty() && !numero.isEmpty()) {
+			String provincia = request.getParameter("provincia");
+			String CAP = request.getParameter("CAP");
+			String citta = request.getParameter("citta");
+			String strada = request.getParameter("via");
+			String numero = request.getParameter("numero");
+			// Mentre per l'indirizzo tutti i campi devono essere compilati, in caso contrario, se
+			//anche un campo è nullo non viene modificato.
+			if(!provincia.isEmpty() && !CAP.isEmpty() && !citta.isEmpty() && !strada.isEmpty() && !numero.isEmpty()) {
 
-			//Si procede come con i campi precedenti
-			if ( !ValidazioneUtente.checkProvincia(provincia)) {
-				throw new MyServletException("Formato Provincia Errata.");
-			}
-			if ( !ValidazioneUtente.checkCap(CAP)) {
-				throw new MyServletException("Formato CAP Errato.");
-			}
-			if ( !ValidazioneUtente.checkCitta(citta)) {
-				throw new MyServletException("Formato Cittï¿½ Errata.");
-			}
-			if ( !ValidazioneUtente.checkVia(strada)) {
-				throw new MyServletException("Formato Strada Errata.");
-			}
-			if ( !ValidazioneUtente.checkNumero(numero)) {
-				throw new MyServletException("Formato Numero Errato.");
-			}
-			u.setProvincia(provincia);
-			u.setCap(Integer.parseInt(CAP));
-			u.setCitta(citta);
-			u.setVia(strada);
-			u.setNumero(Integer.parseInt(numero));
+				//Si procede come con i campi precedenti
+				if ( !ValidazioneUtente.checkProvincia(provincia)) {
+					throw new MyServletException("Formato Provincia Errata.");
+				}
+				if ( !ValidazioneUtente.checkCap(CAP)) {
+					throw new MyServletException("Formato CAP Errato.");
+				}
+				if ( !ValidazioneUtente.checkCitta(citta)) {
+					throw new MyServletException("Formato Cittï¿½ Errata.");
+				}
+				if ( !ValidazioneUtente.checkVia(strada)) {
+					throw new MyServletException("Formato Strada Errata.");
+				}
+				if ( !ValidazioneUtente.checkNumero(numero)) {
+					throw new MyServletException("Formato Numero Errato.");
+				}
+				u.setProvincia(provincia);
+				u.setCap(Integer.parseInt(CAP));
+				u.setCitta(citta);
+				u.setVia(strada);
+				u.setNumero(Integer.parseInt(numero));
 
 
+			}
+			//Si aggiorna l'utente nel DB
+			uDAO.updateUtente(u);
+			cDAO.doUpdateEmail(u, car);
+			//Si assegna l'utente aggiornato alla sessione
+			request.getSession().setAttribute("utente", u);
+			request.getSession().setAttribute("carrello", car);
+
+			//Si esegue la forward alla pagina ProfiloUtente
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/PaginaPersonale.jsp");
+			requestDispatcher.forward(request, response);
 		}
-		//Si aggiorna l'utente nel DB
-		uDAO.updateUtente(u);
-		cDAO.doUpdateEmail(u, car);
-		//Si assegna l'utente aggiornato alla sessione
-		request.getSession().setAttribute("utente", u);
-		request.getSession().setAttribute("carrello", car);
 
-		//Si esegue la forward alla pagina ProfiloUtente
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/PaginaPersonale.jsp");
-		requestDispatcher.forward(request, response);
 	}
 
-}
 
 
 
 
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-/**
- * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
- */
-public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	doGet(request, response);
-}
+		doGet(request, response);
+	}
 
 }

@@ -75,7 +75,7 @@ public class GestioneRuoloServlet extends HttpServlet {
 		}
 
 		//Si esegue la forward alla pagina GestioneRuolo
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/GestioneRuolo.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/GestioneRuolo.jsp");
 		requestDispatcher.forward(request, response);
 
 	}

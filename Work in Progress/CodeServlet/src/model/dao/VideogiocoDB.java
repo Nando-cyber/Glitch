@@ -101,16 +101,15 @@ public class VideogiocoDB  implements VideogiocoDAO{
 					"Select prodottoId, nome, genere, piattaforma FROM Videogioco WHERE nome = ?  ");
 			ps.setString(1, nome);
 			ResultSet rs = ps.executeQuery();
-			Videogioco p = new Videogioco();
+			Videogioco p ;
 			ArrayList<Videogioco> array = new ArrayList<Videogioco>();
 			while (rs.next()) {
 				Prodotto prod = pDAO.findProdottoById(rs.getInt(1));
-				
+				p = new Videogioco();
 				p.setId(rs.getInt(1));
 				p.setNome(rs.getString(2));
 				p.setGenere(rs.getString(3));
 				p.setPiattaforma(rs.getString(4));
-				p.setPrezzo(prod.getPrezzo());
 				p.setPrezzo(prod.getPrezzo());
 				p.setDescrizione(prod.getDescrizione());
 				p.setImmagine(prod.getImmagine());

@@ -38,7 +38,8 @@ public class RedirectPaginaOrdini extends HttpServlet {
 		Utente u = (Utente) request.getSession().getAttribute("utente");
 		
 		List<Ordine> o = oDAO.retriveByUtente(u.getUsername());
-		
+		System.out.println(o.get(0).getPrezzoTot());
+		System.out.println(o.size());
 		request.setAttribute("ordini", o);
 		//Si esegue la forward alla pagina PaginaOrdini
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/PaginaOrdini.jsp");

@@ -61,7 +61,6 @@ public class GestioneProfiloServletTest {
 		request.getSession().setAttribute("carrello", carrello);
 		request.addParameter("operazione", "modifica");
 		request.addParameter("password", "12345678Cvb");
-		request.addParameter("email", "");
 		request.addParameter("provincia", "");
 		request.addParameter("CAP", "");
 		request.addParameter("citta", "");
