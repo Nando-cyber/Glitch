@@ -85,8 +85,15 @@
 	</div>
 	<hr />
 	<div class="container text-right">
-		<button class="btn btn-primary" type="button" style="margin: 15px; background-color: rgb(215, 23, 104);">Annulla ordine</button>
-		<button class="btn btn-primary" type="button" style="margin: 15px; background-color: rgb(215, 23, 104);">Conferma ordine</button>
+		<form action="AcquistoServlet">
+		<input type="hidden" name="operazione" value="annullamento">
+		
+			<button class="btn btn-primary" type="button" style="margin: 15px; background-color: rgb(215, 23, 104);">Annulla ordine</button>
+		</form>
+		<form action="AcquistoServlet">
+		<input type="hidden" name="operazione" value="conferma">
+			<button class="btn btn-primary" type="submit" style="margin: 15px; background-color: rgb(215, 23, 104);">Conferma ordine</button>
+		</form>
 	</div>
 </div>
 

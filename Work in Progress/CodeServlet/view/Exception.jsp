@@ -5,18 +5,19 @@
 </jsp:include>
 
 
-<div class="main-container">
+<div id="pagina">
 	<div class="container-fluid">
 		<div class="row">
 			<label>Errore!</label>
 			<section>
 				
-				<h4>${requestScope['javax.servlet.error.exception']}</h4>
-			</section>
-
-			<a href="BaseServlet"><span
+				<h4><%= exception.getMessage() %></h4>
+				<a href="BaseServlet"><span
 				class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&#160;&#160;Clicca
 				qui per tornare alla home!</a>
+			</section>
+
+			
 		</div>
 	</div>
 </div>
