@@ -56,7 +56,7 @@ public class RispostaAssistenzaServletTest {
 
 		UtenteDAO uDao=new UtenteDB();
 		Utente u=uDao.retriveByUsername("Ferdinando98");
-		requestInit.addParameter("destinatario", "Admin98");
+		requestInit.addParameter("destinatario", "adminCat99@glitch.com");
 		requestInit.addParameter("descrizione", "La password non si cambia");
 		requestInit.getSession().setAttribute("utente", u);
 		
@@ -68,7 +68,7 @@ public class RispostaAssistenzaServletTest {
 		u=uDao.retriveByUsername("Admin98");
 		
 		request.addParameter("richiestaid", "1");
-		request.addParameter("destinatario", "Ferdinando98");
+		request.addParameter("destinatario", "nando998@libero.it");
 		request.addParameter("descrizione", "Riavvia il computer");
 		request.getSession().setAttribute("utente", u);
 		
@@ -77,10 +77,10 @@ public class RispostaAssistenzaServletTest {
 		
 		RichiestaDAO rDao=new RichiestaDB();
 		Richiesta rc=new Richiesta();
-		rc=rDao.retriveByMittente("Admin98").get(0);
+		rc=rDao.retriveByMittente("adminCat99@glitch.com").get(0);
 		boolean result;
 		
-		if(rc.getDescrizione().equals("Riavvia il computer") && rc.getDestinatario().equals("Ferdinando98"))
+		if(rc.getDescrizione().equals("Riavvia il computer") && rc.getDestinatario().equals("nando998@libero.it"))
 			result=true;
 		else
 			result=false;
