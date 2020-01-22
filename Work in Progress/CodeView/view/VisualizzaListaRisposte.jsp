@@ -18,27 +18,18 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>E-mail utente</th>
-                        <th>Stato e-mail</th>
+                        <th>E-mail gestore</th>
                         <th>Lettura</th>
                     </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${richiesta}" var="r">
                     <tr>
-                        <td><c:out value="${r.utenteEmail}" /></td>
-                        <td>
-                        <c:choose>
-							<c:when test="${r.stato}">
-								<label>Letta</label>
-							</c:when>
-							<c:otherwise>
-								<label >Non Letta</label>
-							</c:otherwise>
-						</c:choose>
-                        </td>
+                    	<td>
+                    		<c:out value="${r.utenteEmail}"></c:out>
+                    	</td>
                          <td>
-							<form action="LeggiEmail" method="post">
+							<form action="LeggiRisposta" method="post">
 								<input type="hidden" name="email" value="${r.id}">
 								<input class="btn btn-info" type="submit" value="Leggi">
 							</form>
