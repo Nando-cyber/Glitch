@@ -146,6 +146,16 @@ public class Ordine{
 		this.utenteUsername = utenteUsername;
 	}
 	
+	public float prezzoTot()
+	{
+		float prezzo=0;
+		for(ProdottiOrdine p:prodottiAcquistati) {
+			prezzo+=p.getPrezzo() * p.getQuantita();
+		}
+		return prezzo;
+			
+	}
+	
 	
 	
 
