@@ -17,66 +17,52 @@
 					<thead>
 						<tr>
 							<th>Codice</th>
-							<th>Nome/Modello</th>
-							<th>Prezzo</th>
-							<th>Offerta</th>
+							<th>Sconto</th>
+							<th>Categoria</th>
+							<th>Nome</th>
+							<th>Rimozione</th>
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${Consoles}" var="console">
-						<td><c:out value="${console.id}"/></td>
-						<td><c:out value="${console.modello}"/></td>
-		                <td><c:out value="${console.prezzo}"/></td>
+					<c:forEach items="${offerta}" var="offerta">
+						<td><c:out value="${offerta.codice}"/></td>
+						<td><c:out value="${offerta.sconto}"/></td>
+		                <td><c:out value="${offerta.categoria}"/></td>
+		                <td><c:out value="${offerta.nome}"/></td>
 		                <td>
-		                	<button type="submit">Aggiungi</button>
+		                	<form action="GestioneOffertaServlet">
+		                		<input type="hidden" name="offertaId" value="${offerta.codice}">
+		                  		<input type="hidden" name="operazione" value="rimozione">
+		                		<button type="submit">Rimuovi</button>
+		                	</form>
 		                </td>	
-						<c:forEach items="${Videogiochi}" var="videogiochi">
-							<tr class="text-center">
-								<td><c:out value="${videogiochi.id}"/></td>
-								<td><c:out value="${videogiochi.nome}"/></td>
-		                  		<td><c:out value="${videogiochi.prezzo}"/></td>	
-		                  		<td>
-		                  			<button type="submit">Aggiungi</button>
-		                  		</td>							
-							</tr>
-						</c:forEach>
 					</c:forEach>
 					</tbody>
 				</table>
     	</div>
 
 	<div class="container" style="background-color: #ffffff;">
-		<h2
-			style="margin: 15px; margin-top: 8%; background-color: rgba(251, 251, 251, 0);">Gestione
-			offerte</h2>
+		<h2>Gestione offerte</h2>
 	</div>
-	<div class="container" style="color: rgb(255, 255, 255);">
-		<div class="col-lg-11 offset-lg-1" id="agg-videogioco"
-			style="width: 100%;">
-			<form id="tex-fo">
-				<h4 class="text-center d-lg-flex justify-content-lg-center"
-					style="color: rgb(0, 0, 0);">Inserisci nuova offerta</h4>
-				<div class="form-group">
-					<input class="form-control" type="text"
-						style="font-family: Barlow, sans-serif;" placeholder="Nome" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text"
-						style="font-family: Barlow, sans-serif;"
-						placeholder="Percentuale sconto" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text"
-						style="font-family: Barlow, sans-serif;" placeholder="Categoria" />
-				</div>
-				<div id="button-c-c">
-					<button class="btn float-right" id="button-c" type="button"
-						style="background-color: rgb(173, 38, 220);">Applica
-						offerta</button>
-				</div>
-			</form>
-		</div>
-	</div>
+	<!-- Form di inserimento Videogioco -->
+    	<div>
+    		<h5>Aggiungi offerta</h5>
+				<form action="GestioneOffertaServlet" method="post" id="formGlitch">
+                     <label class="caratteriInserisci">Nome: </label><input class="form-control" type="text" name="nome" placeholder="Nome"> <br>
+                     <label class="caratteriInserisci">Percentuale sconto: </label>
+                   	 	<input class="form-control" type="number" min="1" max="100" name="sconto" placeholder="Percentuale sconto"><br>
+                     <label class="caratteriInserisci">Categoria: </label><br>
+				     <select name="categoria" class="custom-select">
+				     	<option>Categoria</option>
+				     	<option value="console">Console</option>
+				     	<option value="videogioco">Videogioco</option>
+				     </select>
+                     <div class="form-group" style="text-align: right; margin-top: 3%">
+                     	<input type="hidden" name="operazione" value="inserimento">
+						<button class="btn btn-primary" type="submit">Aggiungi offerta</button>
+					 </div>  
+               </form>
+    	</div><br>
 	
 	
 </div>

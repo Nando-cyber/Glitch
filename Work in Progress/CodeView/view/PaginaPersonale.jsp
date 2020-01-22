@@ -13,6 +13,7 @@
 			<p>In questa sezione potrai cambiare i campi relativi a: 
 				<i>email</i>, <i>città</i>, <i>provincia</i>, <i>via</i>, <i>numero</i>, <i>CAP</i> e <i>password</i>.<br>
 				Potrai, inoltre, decidere di eliminare il tuo profilo da Glitch.
+				N.B. I campi relativi all'indirizzo vanno modificati tutti insieme
 			</p>
 		</div>
 		<hr>
@@ -23,7 +24,7 @@
 	<div class="container">
 		<div class="intro"></div>
 	</div>
-	<form method="post" style="width: 70%; padding: 20px; margin-left: 15%; background-color: #c8fcf8; margin-bottom: 5%;">
+	<form method="post" id="formGlitch">
 		<div class="form-group d-lg-flex justify-content-lg-start">
 			<span><c:out value="${utente.nome}" /></span>
 		</div>
@@ -54,28 +55,22 @@
 		<div class="form-group">
 			<input class="form-control" type="password" name="password" placeholder="${utente.password}" />
 		</div>
-		<div class="container">
-			<button class="btn btn-primary" type="button"
-				style="background-color: rgb(215, 23, 104);">Conferma modifiche</button>
+		<div class="container text-right">
+			<input type="hidden" name="operazione" value="modifica">
+			<button class="btnGlitch">Conferma modifiche</button>
 		</div>
 	</form>
 	<div class="container">
 		<hr />
 	</div>
 	<div class="container">
-		<h3 style="padding-top: 8%;">Rimuovi profilo</h3>
+		<h3 style="padding-top: 5%;">Rimuovi profilo</h3>
 	</div>
 	<div class="container" style="padding: 3%;">
-		<button class="btn btn-primary" type="button">Elimina profilo</button>
-	</div>
-	<div class="container">
-		<div class="intro"></div>
-	</div>
-	<div class="container">
-		<div class="intro"></div>
-	</div>
-	<div class="container">
-		<div class="intro"></div>
+		<form action="GestioneProfiloServlet">
+			<input type="hidden" name="operazione" value="rimozione">
+			<button class="btn btn-primary" type="submit">Elimina profilo</button>
+		</form>
 	</div>
 </div>
 

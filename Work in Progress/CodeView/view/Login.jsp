@@ -1,23 +1,16 @@
-<!-- Modal Login -->
+<!-- Modal Login che impedisce di effettuare il login se non sono compilati tutti i campi -->
 <div class="modal fade" id="myLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<form method="post" action="LoginServlet">
-					<h2 class="sr-only">Login Form</h2>
-					<div class="illustration">
-						<i class="icon ion-ios-locked-outline"></i>
+				<form action="LoginServlet" class="was-validated">
+					<div class="form-group">
+						<input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" name="username" placeholder="Username" />
+						<input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
 					</div>
-					<div class="form-group">
-						<input class="form-control" type="password" name="password" placeholder="Password" />
-					</div>
-					<div class="form-group">
-						<button class="btn btn-primary btn-block" type="submit">Accedi</button>
-					</div>
-					<a class="forgot" data-toggle="modal" data-target="#myRegistrazione">Non sei ancora registrato? Registrati qui</a>
+					<button type="submit" class="btn btn-primary btn-block">Accedi</button>
 				</form>
 			</div>
 		</div>

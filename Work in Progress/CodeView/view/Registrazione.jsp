@@ -1,48 +1,40 @@
-<!-- Modal Registrazione -->
+<!-- Modal Registrazione che impedisce di effettuare la registrazione se non sono compilati tutti i campi-->
 <div class="modal fade" id="myRegistrazione" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<form method="post" action="RegistrazioneServlet">
+				<form action="RegistrazioneServlet" class="was-validated">
 					<div class="form-group">
-						<input class="form-control" type="text" name="nome" placeholder="Nome" />
+						<input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" required>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" name="cognome" placeholder="Cognome" />
+						<input type="text" class="form-control" id="cognome" placeholder="Cognome" name="cognome" required>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="email" name="email" placeholder="Email" />
+						<input type="text" class="form-control" id="email" placeholder="E-mail" name="email" required>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" name="citta" placeholder="Città" />
+						<input type="text" class="form-control" id="citta" placeholder="Città" name="citta" required>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" name="provincia" placeholder="Provincia" />
+						<input type="text" class="form-control" id="provincia" placeholder="Provincia" name="provincia" required>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" name="via" placeholder="Via" />
+						<input type="text" class="form-control" id="via" placeholder="Via" name="via" required>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" name="numero" placeholder="Numero" />
+						<input type="text" class="form-control" id="numero" placeholder="Numero" name="numero" required>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" name="CAP" placeholder="CAP" />
+						<input type="text" class="form-control" id="CAP" placeholder="CAP" name="CAP" required>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" name="username" placeholder="Username" />
+						<input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="password" name="password" placeholder="Password" />
+						<input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
 					</div>
-					<div class="form-group">
-						<div class="form-check">
-							<label class="form-check-label"><input class="form-check-input" type="checkbox" />I agree to the license terms.</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<button class="btn btn-primary btn-block" type="submit">Registrazione</button>
-					</div>
-					<a class="already" href="#" data-toggle="modal" data-target="#myLogin">Hai già un account? Login qui.</a>
+					<button type="submit" class="btn btn-primary btn-block">Registrazione</button>
 				</form>
 			</div>
 		</div>

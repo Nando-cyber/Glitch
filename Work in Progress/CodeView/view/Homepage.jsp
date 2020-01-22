@@ -29,7 +29,7 @@
 		 <div class="filterDiv videogioco">
 		 <div class="row">
 			<div class="col-sm-6 col-md-6 col-lg-6 item">
-				<img class="img-fluid" id="img-catalogo" src="${videogiochi.immagine}" />
+				<img class="imgFluid" src="${videogiochi.immagine}" />
 			</div>
 			<div class="col-sm-6 col-md-6 col-lg-6 item">
 				<div class="box">
@@ -41,7 +41,7 @@
                  		<c:when test="${utente == null}">
 							<form>
 								<input type="hidden" name="prodId" value="${videogiochi.id}">
-								<input type="submit" class="bottone not-allowed" value="Aggiungi al carrello" disabled="disabled">  
+								<input type="submit" class="btnGlitch" value="Aggiungi al carrello" disabled="disabled">  
                  			</form>				
 						</c:when>
 						<c:otherwise>           
@@ -49,7 +49,7 @@
                  				<label>Quantità: <input type="number" class="form-control-sm d-sm-flex d-md-flex d-lg-flex" name="number" placeholder="1" min="1" max="20" value="1" /></label>
 								<input type="hidden" name="prodId" value="${videogiochi.id}">
 								<input type="hidden" name="operazione" value="inserimento"><br>
-								<input type="submit" class="bottone" value="Aggiungi al carrello">  
+								<input type="submit" class="btnGlitch" value="Aggiungi al carrello">  
                  			</form>	
                  		</c:otherwise>
 					</c:choose>
@@ -62,7 +62,7 @@
 		<div class="filterDiv console">
 		<div class="row">
 			<div class="col-sm-6 col-md-6 col-lg-6 item">
-					<img class="img-fluid" id="img-catalogo" src="${console.immagine}" />
+					<img class="imgFluid" src="${console.immagine}" />
 			</div>
 			<div class="col-sm-6 col-md-6 col-lg-6 item">
 				<div class="box">
@@ -73,7 +73,7 @@
                  		<c:when test="${utente == null}">
 							<form>
 								<input type="hidden" name="prodId" value="${console.id}">
-								<input type="submit" class="bottone not-allowed" value="Aggiungi al carrello" disabled="disabled">  
+								<input type="submit" class="btnGlitch" value="Aggiungi al carrello" disabled="disabled">  
                  			</form>				
 						</c:when>
 						<c:otherwise>           
@@ -81,7 +81,7 @@
                  				<label>Quantità: <input type="number" class="form-control-sm d-sm-flex d-md-flex d-lg-flex" name="number" placeholder="1" min="1" max="20" value="1" /></label><br>
 								<input type="hidden" name="prodId" value="${console.id}">
 								<input type="hidden" name="operazione" value="inserimento"><br>
-								<input type="submit" class="bottone" value="Aggiungi al carrello">  
+								<input type="submit" class="btnGlitch" value="Aggiungi al carrello">  
                  			</form>	
                  		</c:otherwise>
 					</c:choose>

@@ -31,7 +31,11 @@
 								<td><c:out value="${console.casaProduttrice}"/></td>
 		                  		<td><c:out value="${console.prezzo}"/></td>
 		                  		<td>
-		                  			<button type="submit">Rimuovi</button>
+		                  			<form action="GestioneProdottoServlet" method="post">
+										<input type="hidden" name="prodId" value="${console.id}">
+										<input type="hidden" name="operazione" value="rimozione">
+										<button type="submit">Rimuovi</button>
+									</form>
 		                  		</td>
 							</tr>
 					</c:forEach>
@@ -57,7 +61,12 @@
 								<td><c:out value="${videogiochi.genere}"/></td>
 		                  		<td><c:out value="${videogiochi.prezzo}"/></td>
 		                  		<td>
-		                  			<button type="submit">Rimuovi</button>
+		                  		<form action="GestioneProdottoServlet" method="post">
+									<input type="hidden" name="prodId" value="${videogiochi.id}">
+									<input type="hidden" name="operazione" value="rimozione">
+									<button type="submit">Rimuovi</button>
+								</form>
+		                  			
 		                  		</td>
 							</tr>
 					</c:forEach>
@@ -69,70 +78,39 @@
 	
 	<div class="container-fluid">
 		<h3>Nuovi prodotti</h3>
-	</div><br>
-	<div class="container-fluid">
-		<a class="text-left" href="#agg-console" style="background-color: #ffffff; color: rgb(18, 10, 10);">
-			<i class="fa fa-plus-circle" style="color: rgb(31, 133, 54);"></i> Aggiungi console</a>
 	</div>
-	<div class="container-fluid">
-		<a class="text-left" href="#agg-videogioco"
-			style="background-color: #ffffff; color: rgb(18, 10, 10);"><i
-			class="fa fa-plus-circle" style="color: rgb(31, 133, 54);"></i>
-			 Aggiungi  videogioco</a>
-	</div>
-	<div class="container-fluid">
-		<div class="col-lg-10 offset-lg-1" id="agg-console" style="width: 100%;">
-			<form id="tex-fo">
-				<h4 class="text-center d-lg-flex justify-content-lg-center">Console</h4>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Modello" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Casa produttrice" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Immagine" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Prezzo" />
-				</div>
-				<div class="form-group" id="tex-fo">
-					<textarea class="form-control" placeholder="Descrizione"></textarea>
-				</div>
-				<div id="button-c-c">
-					<button class="btn float-right" id="button-c" type="button" 
-					style="background-color: rgb(173, 38, 220);">inserisci console</button>
-				</div>
-			</form>
-		</div>
-		<div class="col-lg-11 offset-lg-1" id="agg-videogioco" style="padding-top: 5%">
-			<form id="tex-fo">
-				<h4 class="text-center d-lg-flex justify-content-lg-center">Videogioco</h4>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Nome" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Genere" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Piattaforma" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Immagine" />
-				</div>
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Prezzo" />
-				</div>
-				<div class="form-group" id="tex-fo">
-					<textarea class="form-control" placeholder="Descrizione"></textarea>
-				</div>
-				<div id="button-c-c">
-					<button class="btn float-right" id="button-c" type="button"
-						style="background-color: rgb(173, 38, 220);">inserisci Videogioco</button>
-				</div>
-			</form>
-		</div>
-	</div>
+	
+	<!-- Form di inserimento Console -->
+    	<div>
+    		<h5>Aggiungi console</h5>
+				<form action="GestioneProdottoServlet" method="post" id="formGlitch">
+                     <label class="caratteriInserisci">Modello: </label><input class="form-control" type="text" name="modello" placeholder="Modello"> <br>
+                     <label class="caratteriInserisci">Casa produttrice: </label><input class="form-control" type="text" name="casaProduttrice" placeholder="Produttore"> <br>
+                     <label class="caratteriInserisci">URL Immagine: </label><input class="form-control" type="text" name="immagine" placeholder="URL Immagine"> <br>
+                     <label class="caratteriInserisci">Prezzo: </label><input class="form-control" type="text" name="prezzo" placeholder="Prezzo"> <br> 
+                     <label class="caratteriInserisci">Descrizione: </label><textarea class="form-control" name="descrizione" placeholder="Descrizione" rows="14"></textarea><br>
+                     <div class="form-group" style="text-align: right;">
+                     	<input type="hidden" name="operazione" value="inserimento">
+						<button class="btn btn-primary" type="submit">Aggiungi console</button>
+					 </div> 
+               </form>
+    	</div><br>
+    	
+    <!-- Form di inserimento Videogioco -->
+    	<div>
+    		<h5>Aggiungi videogioco</h5>
+				<form action="GestioneProdottoServlet" method="post" id="formGlitch">
+                     <label class="caratteriInserisci">Nome: </label><input class="form-control" type="text" name="nome" placeholder="Nome"> <br>
+                     <label class="caratteriInserisci">Genere: </label><input class="form-control" type="text" name="genere" placeholder="Genere"> <br>
+                     <label class="caratteriInserisci">URL Immagine: </label><input class="form-control" type="text" name="immagine" placeholder="URL Immagine"> <br>
+                     <label class="caratteriInserisci">Prezzo: </label><input class="form-control" type="text" name="prezzo" placeholder="Prezzo"> <br> 
+                     <label class="caratteriInserisci">Descrizione: </label><textarea class="form-control" name="descrizione" placeholder="Descrizione" rows="14"></textarea><br>
+                     <div class="form-group" style="text-align: right;">
+                     <input type="hidden" name="operazione" value="inserimento">
+						<button class="btn btn-primary" type="submit">Aggiungi videogioco</button>
+					 </div>  
+               </form>
+    	</div><br>
 </div>
 
 
