@@ -12,7 +12,7 @@
 			<h2 class="text-center">Pagina personale</h2>
 			<p>In questa sezione potrai cambiare i campi relativi a: 
 				<i>email</i>, <i>città</i>, <i>provincia</i>, <i>via</i>, <i>numero</i>, <i>CAP</i> e <i>password</i>.<br>
-				Potrai, inoltre, decidere di eliminare il tuo profilo da Glitch.
+				Potrai, inoltre, decidere di eliminare il tuo profilo da Glitch.<br>
 				N.B. I campi relativi all'indirizzo vanno modificati tutti insieme
 			</p>
 		</div>
@@ -60,6 +60,9 @@
 			<button class="btnGlitch">Conferma modifiche</button>
 		</div>
 	</form>
+
+	
+	<!-- Div e form per la rimozione del profilo -->
 	<div class="container">
 		<hr />
 	</div>

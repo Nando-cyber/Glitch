@@ -17,20 +17,20 @@
 		</div>
 	</div>
 	<div id="formGlitch" class="contact-clean">
-		<form method="post">
+		<form method="post" action="RichiestaAssistenzaServlet">
 			<h2 class="text-center">Contattaci</h2>
 			<div class="form-group">
 				<label><strong>Mittente: </strong><c:out value="${utente.nome}"></c:out></label>
 			</div>
 			<div class="form-group">
-				<select>
+				<select name="destinatario">
 					<c:forEach items="${destinatario}" var="destinatario">
-						<option><c:out value="${destinatario}"></c:out></option>
+						<option ><c:out value="${destinatario}"></c:out></option>
 					</c:forEach> 
 				</select>
 			</div>
 			<div class="form-group">
-				<textarea class="form-control" name="message" placeholder="Messaggio" rows="14"></textarea>
+				<textarea class="form-control" name="descrizione" placeholder="Messaggio" rows="14"></textarea>
 			</div>
 			<div class="form-group" style="text-align: right;">
 				<c:choose>

@@ -18,6 +18,7 @@
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> <!-- Icone social -->  
 	<!-- link per BOOTSRAP 4 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<!-- JavaScript -->
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -60,7 +61,7 @@
 									<div role="menu" class="dropdown-menu show">
 										<a role="presentation" class="dropdown-item d-lg-flex" href="RedirectPaginaPersonale">Pagina personale</a>
 										<a role="presentation" class="dropdown-item" href="RedirectPaginaOrdini">I miei ordini</a>
-										<a role="presentation" class="dropdown-item" href="#">Le mie notifiche <span class="glyphicon glyphicon-comment"></span><span class="badge badge-notify">3</span></a>
+										<a role="presentation" class="dropdown-item" href="RedirectRispostaUtente">Le mie notifiche <span class="glyphicon glyphicon-comment"></span><span class="badge badge-notify">3</span></a>
 										<a role="presentation" class="dropdown-item d-lg-flex" href="LogoutServlet">Logout</a>
 									</div>
 								</div>
@@ -73,13 +74,13 @@
 									<div role="menu" class="dropdown-menu show">
 										<a role="presentation" class="dropdown-item d-lg-flex" href="RedirectPaginaPersonale">Pagina personale</a>
 										<a role="presentation" class="dropdown-item" href="RedirectPaginaOrdini">I miei ordini</a>
-										<a role="presentation" class="dropdown-item" href="#">Le mie notifiche <span class="glyphicon glyphicon-comment"></span><span class="badge badge-notify">3</span></a>
+										<a role="presentation" class="dropdown-item" href="RedirectRispostaUtente">Le mie notifiche </a>
 										<c:if test="${ utente.ruolo == 'Account' }">
 											<a role="presentation" class="dropdown-item d-lg-flex" href="RedirectGestioneRuoloServlet">Gestore account</a>
 										</c:if>
 										<c:if test="${ utente.ruolo == 'Catalogo'  }">
-												<a role="presentation" class="dropdown-item" href="RedirectGestoreProdotti">Gestore prodotti</a>
-												<a role="presentation" class="dropdown-item" href="RedirectGestoreOfferte">Gestore offerte</a>
+												<a role="presentation" class="dropdown-item" href="RedirectGestoreProdotti">Gestione prodotti</a>
+												<a role="presentation" class="dropdown-item" href="RedirectGestoreOfferte">Gestione offerte</a>
 										</c:if>
 										<c:if test="${  utente.ruolo == 'Assistenza' }">
 											<a role="presentation" class="dropdown-item" href="RedirectRispostaAssistenza">Gestore assistenza</a>
@@ -117,7 +118,6 @@ function carica(xhttp){
 		}
 		document.getElementById("listaProdotti").innerHTML = suggerimenti;
 }
-
 </script>
 
 

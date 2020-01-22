@@ -24,13 +24,15 @@
 	<div class="container d-lg-flex justify-content-lg-start">
 		<strong>2. Inserimento carta di credito</strong>
 	</div>
-	<div class="d-lg-flex justify-content-lg-start custom-control custom-radio" style="margin: 30px;">
-		<input type="radio" id="healthyes" class="custom-control-input" />
-		<label class="custom-control-label" for="healthyes">carta che termina per XXXX</label>
-	</div>
-	
+	<c:if test="${carta != null}">
+		<div class="d-lg-flex justify-content-lg-start custom-control custom-radio" style="margin: 30px;">
+			<input type="radio" id="healthyes" class="custom-control-input" name="numeroCarta"/>
+			<label class="custom-control-label" for="healthyes"> <c:out value="${carta.numeroCarta}"></c:out> </label>
+		</div>
+	</c:if>
 	
 	<!-- Div per l'inesrimento della carta di credito -->
+	<c:if test="${carta == null}">
 	<div class="row .payment-dialog-row" style="margin: 10px;">
 		<div class="col-12 col-md-6 col-lg-6">
 			<div class="card credit-card-box">
@@ -86,12 +88,14 @@
 			</div>
 		</div>
 	</div>
+	</c:if>
 	<hr />
+	
 	<div class="container text-right">
-		<form action="AcquistoServlet">
+		<!-- <form action="AcquistoServlet">
 		<input type="hidden" name="operazione" value="annullamento">
 			<button class="btnGlitch" type="button">Annulla ordine</button>
-		</form>
+		</form>  -->
 		<form action="AcquistoServlet">
 		<input type="hidden" name="operazione" value="conferma">
 			<button class="btnGlitch" type="submit">Conferma ordine</button>

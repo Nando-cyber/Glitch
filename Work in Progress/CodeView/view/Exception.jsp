@@ -7,7 +7,7 @@
 
 <div id="pagina">
  <div class="container-fluid">
- 	 <div class="col-sm-12 col-md-12 col-lg-12 item" style="padding: 20%">
+ 	 <div class="col-sm-12 col-md-12 col-lg-12 item" style="padding: 15%">
 		<section>
 			<h2><%= exception.getMessage() %></h2>
 			<img alt="gameOver" style="max-width: 100%"
