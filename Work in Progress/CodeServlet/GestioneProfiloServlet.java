@@ -46,9 +46,12 @@ public class GestioneProfiloServlet extends HttpServlet {
 		Carrello car = (Carrello) request.getSession().getAttribute("carrello");
 		//Si verifica se "operazione" ï¿½ una rimozione o modifica
 		if(operazione.equalsIgnoreCase("rimozione")) {
-			// Se ï¿½ una rimozione si procede a rimuovere l'utente e il suo carrello 
+			// Se è una rimozione si procede a rimuovere l'utente e il suo carrello 
 			//da DB e Sessione
-			cDAO.removeCarrello(u.getUsername());
+			
+			if(!car.getProdotti().isEmpty()) {
+				cDAO.removeCarrello(u.getUsername());
+			}
 			request.getSession().removeAttribute("carrello");
 
 			uDAO.deleteUtente(u.getUsername());
