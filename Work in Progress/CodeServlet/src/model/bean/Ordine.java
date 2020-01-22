@@ -26,8 +26,8 @@ public class Ordine{
 	
 	//Costruttore vuoto
 	public Ordine() {
-		counter++;
-		ordineId=counter;
+		/*counter++;
+		ordineId=counter;*/
 	}
 	
 	//Costruisce l'oggetto "Ordine" passando come argomento l'id ordine, l'username e la lista di prodotti acquistati

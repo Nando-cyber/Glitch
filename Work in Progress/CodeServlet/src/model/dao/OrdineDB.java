@@ -63,32 +63,18 @@ public class OrdineDB implements OrdineDAO{
 
 			//Elenca le result query per "ordineId" in modo da distinguere i singoli ordini (ogni oggetto ordine ha un solo ordineId)
 			PreparedStatement ps = con.prepareStatement(
-					"SELECT ordineId, utenteUsername, utenteEmail, nome, quantita, prezzo, dataOrdinazione FROM Ordine WHERE utenteUsername= ? ORDER BY ordineId");
+					"SELECT ordineId, utenteUsername, utenteEmail, nome, quantita, prezzo, dataOrdinazione FROM Ordine WHERE utenteUsername= ? GROUP BY ordineId");
 
 			ps.setString(1, user);
 
 			ArrayList<Ordine> ordini=new ArrayList<Ordine>();
 			ArrayList<ProdottiOrdine> prod = new ArrayList<ProdottiOrdine>();
 			ResultSet rs = ps.executeQuery();
-
-
-				while(rs.next()){
-					Ordine ord=new Ordine(rs.getInt(1));
-				//Iteriamo in base al numero di ProdottiAcquistati nel database
-				//Se la result query (e quindi il prodotto acquistato) conterrà un ordineId diverso dal precedente, si tratterà di un nuovo ordine
-				//salverà quindi i prodottiAcquistati (prelevati fino a quel punto e avente lo stesso ordineId) nell'oggetto Ordine "ord" in uso, aggiungerà "ord" all'array di Ordine "ordini" e 
-				//creerà un nuovo oggetto Ordine "ord" contenente i ProdottiAcquistati di un nuovo ordine. 
-				//Alla fine in "ordini" avremo lo storico di ordini dell'utente ordinata per "ordineId"
-				if(ord.getOrdineId()!=rs.getInt(1))
-				{
-					ord.setProdottiAcquistati(prod);
-					ordini.add(ord);
-					ord=new Ordine();
-				}
-
-				ProdottiOrdine p = new ProdottiOrdine();
-
-				ord.setOrdineId(rs.getInt(1));
+			Ordine ord=new Ordine();
+			ProdottiOrdine p = new ProdottiOrdine();
+			if(rs == null)
+			{
+				/*ord.setOrdineId(rs.getInt(1));
 				ord.setUtenteUsername(rs.getString(2));
 				p.setUtenteUsername(rs.getString(2));
 				p.setUtenteEmail(rs.getString(3));
@@ -96,14 +82,47 @@ public class OrdineDB implements OrdineDAO{
 				p.setQuantita(rs.getInt(5));
 				p.setPrezzo(rs.getFloat(6));
 				ord.setDataOrdinazioneDate(rs.getDate(7));
-				prod.add(p);
+				prod.add(p);*/
 
 
-			}
-			if(ordini.isEmpty()) {
+
 				return null;
 			}else {
-				System.out.println(ordini.toString());
+				p = new ProdottiOrdine();	
+				while(rs.next()){
+					//Iteriamo in base al numero di ProdottiAcquistati nel database
+					//Se la result query (e quindi il prodotto acquistato) conterrà un ordineId diverso dal precedente, si tratterà di un nuovo ordine
+					//salverà quindi i prodottiAcquistati (prelevati fino a quel punto e avente lo stesso ordineId) nell'oggetto Ordine "ord" in uso, aggiungerà "ord" all'array di Ordine "ordini" e 
+					//creerà un nuovo oggetto Ordine "ord" contenente i ProdottiAcquistati di un nuovo ordine. 
+					//Alla fine in "ordini" avremo lo storico di ordini dell'utente ordinata per "ordineId"
+					p.setUtenteUsername(rs.getString(2));
+					p.setUtenteEmail(rs.getString(3));
+					p.setNome(rs.getString(4));
+					p.setQuantita(rs.getInt(5));
+					p.setPrezzo(rs.getFloat(6));
+					ord.setDataOrdinazioneDate(rs.getDate(7));
+					prod.add(p);
+					if(ord.getOrdineId()!=rs.getInt(1))
+					{
+						ord.setOrdineId(rs.getInt(1));
+						ord.setProdottiAcquistati(prod);
+						ordini.add(ord);
+						ord = new Ordine();
+					}
+					
+
+					/*ord.setOrdineId(rs.getInt(1));
+					ord.setUtenteUsername(rs.getString(2));
+					p.setUtenteUsername(rs.getString(2));
+					p.setUtenteEmail(rs.getString(3));
+					p.setNome(rs.getString(4));
+					p.setQuantita(rs.getInt(5));
+					p.setPrezzo(rs.getFloat(6));
+					ord.setDataOrdinazioneDate(rs.getDate(7));
+					prod.add(p);*/
+					
+				}
+				System.out.println("sono qui");
 				return ordini;
 			}
 		} catch (SQLException e) {

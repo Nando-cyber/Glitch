@@ -86,10 +86,7 @@ public class Carrello{
 	
 	//Controlla se il corrello esiste
 	public boolean isEmpty() {
-		if(utenteUsername == null) {
-			return true;
-		}
-		else return false;
+		 return  prodotti != null && prodotti.isEmpty() ;
 	}
 	
 	

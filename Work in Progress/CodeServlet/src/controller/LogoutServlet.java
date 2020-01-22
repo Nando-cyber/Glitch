@@ -55,10 +55,14 @@ public class LogoutServlet extends BaseServlet {
 				dest.contains("/VisualizzazioneUtenteRuoli") || dest.contains("/RedirectAcquistoServlet") || dest.contains("/RedirectGestioneRuolo") || 
 				dest.contains("/RedirectGestoreOfferte") || dest.contains("/RedirectGestoreRuolo") ||  dest.contains("/RedirectRichiestaAssistenza") ||
 				dest.contains("/RedirectRiepilogoOrdine") || dest.contains("/RedirectVisualizzazioneEmail") || dest.contains("/RedirectVisualizzazioneUtentiRuoli") ||
-				dest.contains("/RicercaProdotto") || dest.contains("/RedirectGestoreProdotti") ||dest.trim().isEmpty()) {
+				dest.contains("/RicercaProdotto") || dest.contains("/RedirectGestoreProdotti") ||  dest.contains("/RedirectRispostaAssistenza") || dest.contains("/RedirectGestoreProdotti") ||
+				 dest.contains("/RedirectChiSiamo") ||  dest.contains("/RedirectRispostaAssistenza") ||  dest.contains("/RicercaProdotto") ||
+				 dest.contains("/RicercaServlet") ||  dest.contains("/RedirectGestoreProdotti") ||dest.trim().isEmpty()) {
 			dest = "BaseServlet";
 		}
 		response.sendRedirect(dest);
+		
+		
 		
 	}
 

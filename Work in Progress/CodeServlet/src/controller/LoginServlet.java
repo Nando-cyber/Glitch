@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 		Carrello carrello = new Carrello();
 		carrello = carDAO.retriveByUtente(utente);
 		
-		//Se il carello � vuoto, lo si crea settandogli i dati dell'Utente a cui � connesso
+		//Se il carello e' vuoto, lo si crea settandogli i dati dell'Utente a cui � connesso
 		if(carrello.isEmpty()) {
 			
 			carrello.setUsername(utente.getUsername());
@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
 		
 		//E si setta il bean Carrello nella Sessione
 		request.getSession().setAttribute("carrello", carrello);
-		
+		request.getSession().setMaxInactiveInterval(600000);
 		//Si ritorna alla pagina iniziale
 		String dest = request.getHeader("referer");
 		if (dest == null || dest.contains("/Login") || dest.trim().isEmpty()) {

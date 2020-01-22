@@ -103,7 +103,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			
 			utenteDAO.createUtente(u);
 			request.getSession().setAttribute("utente", u);
-			
+			request.getSession().setMaxInactiveInterval(600000);
 			//Creo il bean Carrello per il nuovo utente e lo aggiungo alla sessione
 			
 			Carrello carrello = new Carrello();
