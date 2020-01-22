@@ -65,17 +65,17 @@ public class Ordine{
 		Collection<ProdottoQuantita> prod=cart.getProdotti();
 		Iterator<ProdottoQuantita> it=prod.iterator();
 		prodottiAcquistati=new ArrayList<ProdottiOrdine>();
+		VideogiocoDAO vidDao=new VideogiocoDB();
+		ConsoleDAO consDao=new ConsoleDB();
 		
 		while(it.hasNext())
 		{
 			ProdottoQuantita pQ=it.next();
 			Prodotto pr=pQ.getProdotto();
 			ProdottiOrdine pOut=new ProdottiOrdine();
-			VideogiocoDAO vidDao=new VideogiocoDB();
-			ConsoleDAO consDao=new ConsoleDB();
 			
 			
-			if(pr instanceof Console)
+			if(vidDao.findVideogiocoById(pr.getId()) == null)
 			{
 				Console cons=consDao.findConsoleById(pr.getId());
 				pOut.setNome(cons.getModello());
