@@ -13,13 +13,13 @@ import model.bean.ConPool;
 
 public class UtenteDB implements UtenteDAO{
 
-	
-	
+
+
 	//Memorizza l'utente passato come argomento nel database
 	public void createUtente(Utente u) 
 	{
-			try (Connection con = ConPool.getConnection()) {
-			
+		try (Connection con = ConPool.getConnection()) {
+
 			PreparedStatement ps = con.prepareStatement(
 					"INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
@@ -35,7 +35,7 @@ public class UtenteDB implements UtenteDAO{
 			ps.setString(10, u.getVia());
 			ps.setInt(11, u.getNumero());
 			ps.setString(12,  u.getRuolo());
-			
+
 			if (ps.executeUpdate() != 1) {
 				throw new RuntimeException("INSERT error.");
 			}
@@ -43,9 +43,9 @@ public class UtenteDB implements UtenteDAO{
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-	
+
 	}
-	
+
 	//Rimuove l'utente, avente come username la stringa passata come argomento, dal database
 	public void deleteUtente(String user) {
 		try(Connection con = ConPool.getConnection()) {
@@ -58,13 +58,13 @@ public class UtenteDB implements UtenteDAO{
 			e.printStackTrace();
 		}
 	}
-	
+
 	//Aggiorna le informazioni anagrafiche dell'utente (Email, indirizzo) nel database
 	public void updateUtente(Utente u) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con
 					.prepareStatement("UPDATE Utente SET email = ? , password = ? , provincia = ? , cap = ? , citta = ? , via= ? , numero = ? WHERE username = ?");
-			
+
 			ps.setString(1, u.getEmail());
 			ps.setString(2, u.getPassword());
 			ps.setString(3, u.getProvincia());
@@ -73,49 +73,49 @@ public class UtenteDB implements UtenteDAO{
 			ps.setString(6, u.getVia());
 			ps.setInt(7, u.getNumero());
 			ps.setString(8, u.getUsername());
-			
+
 			if (ps.executeUpdate() != 1 ) {
 				throw new RuntimeException("UPDATE error.");
-			
+
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public void updateCartaDiCreditoUtente(Utente u) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con
 					.prepareStatement("UPDATE Utente SET cartaDiCredito = ? WHERE username = ?");
-			
+
 			ps.setString(1, u.getCartaDiCredito().getNumeroCarta());
 			ps.setString(2, u.getUsername());
 			if (ps.executeUpdate() != 1 ) {
 				throw new RuntimeException("UPDATE Carta Di Credito di utente error.");
-			
+
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	//Aggiorna i ruoli dell'utente nel database
 	public void updateRuoloUtente(Utente u) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con
 					.prepareStatement("UPDATE Utente SET ruolo = ? WHERE username = ?");
-			
+
 			ps.setString(1, u.getRuolo());
 			ps.setString(2, u.getUsername());
 			if (ps.executeUpdate() != 1 ) {
 				throw new RuntimeException("UPDATE Ruolo error.");
-			
+
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	//Restituisce l'utente avente come username la stringa passata come argomento
 	public Utente retriveByUsername(String user) {
 		try (Connection con = ConPool.getConnection()) {
@@ -124,17 +124,17 @@ public class UtenteDB implements UtenteDAO{
 			ps.setString(1, user);
 			ResultSet rs = ps.executeQuery();
 			CartaDiCreditoDAO cartaDAO=new CartaDiCreditoDB();
-			
+
 			if (rs.next()) {
 				Utente p = new Utente();
 				p.setUsername(rs.getString(1));
 				p.setEmail(rs.getString(2));
-				
+
 				if(rs.getString(3) != null)
 					p.setCartaDiCredito(cartaDAO.retriveByNumCarta(rs.getString(3)));
 				else
 					p.setCartaDiCredito(null);
-				
+
 				p.setPassword(rs.getString(4));
 				p.setNome(rs.getString(5));
 				p.setCognome(rs.getString(6));
@@ -148,7 +148,7 @@ public class UtenteDB implements UtenteDAO{
 					p.setRuolo( rs.getString(12));
 				else
 					p.setRuolo( null);
-				
+
 				return p;
 			}
 			return null;
@@ -156,7 +156,7 @@ public class UtenteDB implements UtenteDAO{
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	//Restituisce l'utente avete come email la stringa passata come argomento
 	public Utente retriveByEmail(String email) {
 		try (Connection con = ConPool.getConnection()) {
@@ -165,17 +165,17 @@ public class UtenteDB implements UtenteDAO{
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
 			CartaDiCreditoDAO cartaDAO=new CartaDiCreditoDB();
-			
+
 			if (rs.next()) {
 				Utente p = new Utente();
 				p.setUsername(rs.getString(1));
 				p.setEmail(rs.getString(2));
-				
+
 				if(rs.getString(3) != null)
 					p.setCartaDiCredito(cartaDAO.retriveByNumCarta(rs.getString(3)));
 				else
 					p.setCartaDiCredito(null);
-				
+
 				p.setPassword(rs.getString(4));
 				p.setNome(rs.getString(5));
 				p.setCognome(rs.getString(6));
@@ -192,8 +192,8 @@ public class UtenteDB implements UtenteDAO{
 			throw new RuntimeException(e);
 		}
 	}
-	
-	
+
+
 
 
 	//Restituisce la lista degli utenti presenti nel database
@@ -201,21 +201,21 @@ public class UtenteDB implements UtenteDAO{
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con
 					.prepareStatement("SELECT username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo FROM Utente ");
-			
+
 			ArrayList<Utente> utenti = new ArrayList<Utente>();
 			ResultSet rs = ps.executeQuery();
 			CartaDiCreditoDAO cartaDAO=new CartaDiCreditoDB();
-			
+
 			while (rs.next()) {
 				Utente p = new Utente();
 				p.setUsername(rs.getString(1));
 				p.setEmail(rs.getString(2));
-				
+
 				if(rs.getString(3) != null)
 					p.setCartaDiCredito(cartaDAO.retriveByNumCarta(rs.getString(3)));
 				else
 					p.setCartaDiCredito(null);
-				
+
 				p.setPassword(rs.getString(4));
 				p.setNome(rs.getString(5));
 				p.setCognome(rs.getString(6));
@@ -233,13 +233,38 @@ public class UtenteDB implements UtenteDAO{
 		}
 	}
 
-	
+	@Override
+	public List<String> retriveEmailByAssistenza(String ruolo) {
 
-	
+		try (Connection con = ConPool.getConnection()) {
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT email FROM Utente WHERE ruolo=?");
+			ps.setString(1, ruolo);
+			ResultSet rs = ps.executeQuery();
+			ArrayList<String> array = new ArrayList<String>();
 
-	
+			while (rs.next()) {
+				array.add(rs.getString(1));
 
-	
-	
-	
+			}
+			if(array.isEmpty()) {
+				return null;
+			}else {
+				return array;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
 }

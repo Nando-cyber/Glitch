@@ -31,4 +31,7 @@ public interface UtenteDAO {
 	
 	//Aggiorna la carta di credito dell'utente
 	void updateCartaDiCreditoUtente(Utente u);
+	
+	//Restituisce tutte le mail dei gestori Assistenza
+	List<String> retriveEmailByAssistenza(String ruolo);
 }
