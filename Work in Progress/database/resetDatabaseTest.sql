@@ -3,6 +3,9 @@ DROP DATABASE `glitch`;
 create database Glitch;
 use Glitch;
 
+create database Glitch;
+use Glitch;
+
 CREATE TABLE Utente (
   username  varchar(20) NOT NULL, 
   email     varchar(40) NOT NULL, 
@@ -63,9 +66,7 @@ CREATE TABLE Ordine (
    quantita			int	NOT NULL,
    prezzo			double	NOT NULL,
   dataOrdinazione   date NOT NULL, 
-  PRIMARY KEY (utenteUsername, 
-  utenteEmail, 
-  ordineId));
+
 CREATE TABLE Richiesta (
   id             int NOT NULL, 
   utenteEmail    varchar(40) NOT NULL, 
@@ -76,23 +77,23 @@ CREATE TABLE Richiesta (
   PRIMARY KEY (id, 
   utenteEmail));
 CREATE TABLE Offerta (
-  codice    int NOT NULL, 
+  codice    int NOT NULL,
   sconto    int NOT NULL, 
-  categoria char(20) NOT NULL,
+  categoria char(20) NOT NULL, 
   nome      char(15) NOT NULL,
   PRIMARY KEY (codice));
 
-ALTER TABLE Console ADD INDEX FKConsole133890 (prodottoID), ADD CONSTRAINT FKConsole133890 FOREIGN KEY (prodottoID) REFERENCES Prodotto (ID)  on delete cascade
+ALTER TABLE Console ADD INDEX FKConsole133890 (prodottoID), add foreign key  (prodottoID) REFERENCES Prodotto (ID)  on delete cascade
     on update cascade;
-ALTER TABLE Videogioco ADD INDEX FKVideogioco351250 (prodottoID), ADD CONSTRAINT FKVideogioco351250 FOREIGN KEY (prodottoID) REFERENCES Prodotto (ID) on delete cascade
+ALTER TABLE Videogioco ADD INDEX FKVideogioco351250 (prodottoID),add foreign key (prodottoID) REFERENCES Prodotto (ID) on delete cascade
     on update cascade;
-ALTER TABLE Carrello ADD INDEX FKCarrello618141 (utenteUsername, utenteEmail), ADD CONSTRAINT FKCarrello618141 FOREIGN KEY (utenteUsername, utenteEmail) REFERENCES Utente (username, email) on delete cascade
+ALTER TABLE Carrello ADD INDEX FKCarrello618141 (utenteUsername, utenteEmail), add foreign key (utenteUsername, utenteEmail) REFERENCES Utente (username, email) on delete cascade
     on update cascade;
-ALTER TABLE Richiesta ADD INDEX FKRichiesta300529 (utenteUsername, utenteEmail), ADD CONSTRAINT FKRichiesta300529 FOREIGN KEY (utenteUsername, utenteEmail) REFERENCES Utente (username, email) on delete cascade
+ALTER TABLE Richiesta ADD INDEX FKRichiesta300529 (utenteUsername, utenteEmail), add foreign key (utenteUsername, utenteEmail) REFERENCES Utente (username, email) on delete cascade
     on update cascade;
-ALTER TABLE Carrello ADD INDEX FKCarrello511555 (prodottoID), ADD CONSTRAINT FKCarrello511555 FOREIGN KEY (prodottoID) REFERENCES Prodotto (ID) on delete cascade
+ALTER TABLE Carrello ADD INDEX FKCarrello511555 (prodottoID), add foreign key  (prodottoID) REFERENCES Prodotto (ID) on delete cascade
     on update cascade;
-ALTER TABLE `Carta di credito` ADD INDEX `FKCarta di c550472` (utenteUsername, utenteEmail), ADD CONSTRAINT `FKCarta di c550472` FOREIGN KEY (utenteUsername, utenteEmail) REFERENCES Utente (username, email) on delete cascade
+ALTER TABLE `Carta di credito` ADD INDEX `FKCarta di c550472` (utenteUsername, utenteEmail), add foreign key  (utenteUsername, utenteEmail) REFERENCES Utente (username, email) on delete cascade
     on update cascade;
-Alter table Utente Add Index fkUtente9988(cartaDiCredito), add foreign key  (cartaDiCredito) references `Carta di credito` (numeroCarta)  on delete cascade
+Alter table Utente Add Index fkUtente9988(cartaDiCredito), add foreign key  (cartaDiCredito) references `Carta di credito` (numeroCarta)  on delete set null
     on update cascade;

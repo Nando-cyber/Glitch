@@ -61,9 +61,7 @@ CREATE TABLE Ordine (
    quantita			int	NOT NULL,
    prezzo			double	NOT NULL,
   dataOrdinazione   date NOT NULL, 
-  PRIMARY KEY (utenteUsername, 
-  utenteEmail, 
-  ordineId));
+
 CREATE TABLE Richiesta (
   id             int NOT NULL, 
   utenteEmail    varchar(40) NOT NULL, 
@@ -92,5 +90,5 @@ ALTER TABLE Carrello ADD INDEX FKCarrello511555 (prodottoID), add foreign key  (
     on update cascade;
 ALTER TABLE `Carta di credito` ADD INDEX `FKCarta di c550472` (utenteUsername, utenteEmail), add foreign key  (utenteUsername, utenteEmail) REFERENCES Utente (username, email) on delete cascade
     on update cascade;
-Alter table Utente Add Index fkUtente9988(cartaDiCredito), add foreign key  (cartaDiCredito) references `Carta di credito` (numeroCarta)  on delete cascade
+Alter table Utente Add Index fkUtente9988(cartaDiCredito), add foreign key  (cartaDiCredito) references `Carta di credito` (numeroCarta)  on delete set null
     on update cascade;
