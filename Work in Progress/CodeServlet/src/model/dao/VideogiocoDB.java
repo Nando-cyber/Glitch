@@ -271,9 +271,11 @@ public class VideogiocoDB  implements VideogiocoDAO{
 				p.setDescrizione(prod.getDescrizione());
 				p.setImmagine(prod.getImmagine());
 				
-				
+				return p;
+			}else {
+				return null;
 			}
-			return p;
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

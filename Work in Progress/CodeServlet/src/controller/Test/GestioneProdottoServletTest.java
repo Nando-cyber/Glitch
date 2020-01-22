@@ -56,7 +56,7 @@ public class GestioneProdottoServletTest {
 		request.addParameter("prezzo", "70.00");
 		request.addParameter("nome", "Battlefield");
 		request.addParameter("genere", "FPS");
-		request.addParameter("piatt", "Xbox One");
+		request.addParameter("piattaforma", "XboxOne");
 		
 		servlet.doPost(request, response);
 		
@@ -65,7 +65,7 @@ public class GestioneProdottoServletTest {
 		
 		boolean result;
 
-		if(vid.getNome().equals("Battlefield") && vid.getDescrizione().equals("Videogioco di guerra") && vid.getGenere().equals("FPS") && vid.getPiattaforma().equals("Xbox One"))
+		if(vid.getNome().equals("Battlefield") && vid.getDescrizione().equals("Videogioco di guerra") && vid.getGenere().equals("FPS") && vid.getPiattaforma().equals("XboxOne"))
 			result=true;
 		else
 			result=false;
@@ -83,12 +83,12 @@ public class GestioneProdottoServletTest {
 		request.addParameter("descrizione", "Console potente");
 		request.addParameter("prezzo", "100.00");
 		request.addParameter("modello", "Xbox360");
-		request.addParameter("produttore", "Microsoft");
+		request.addParameter("casaProduttrice", "Microsoft");
 
 		servlet.doPost(request, response);
 		
 		ConsoleDAO consDao=new ConsoleDB();
-		Console cons=consDao.retriveByModello("Xbox");
+		Console cons=consDao.retriveByModello("Xbox360");
 		
 		boolean result;
 
