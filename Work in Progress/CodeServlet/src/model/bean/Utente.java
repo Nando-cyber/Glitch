@@ -150,21 +150,24 @@ public class Utente {
 	
 	
 	public boolean isGestoreAccount(String ruoli) {
-		if(ruoli.equalsIgnoreCase("Gestore Account"))
+		if(ruoli.equalsIgnoreCase("Account"))
 			return true;
-		return false;
+		else
+			return false;
 	}
 	
-	public boolean equalsIgnoreCase(String ruoli) {
-		if(ruoli.contains("Gestore Catalogo"))
+	public boolean isGestoreCatalogo(String ruoli) {
+		if(ruoli.equalsIgnoreCase("Catalogo"))
 			return true;
-		return false;
+		else
+			return false;
 	}
 	
 	public boolean isGestoreAssistenza(String ruoli) {
-		if(ruoli.equalsIgnoreCase("Gestore Assistenza"))
+		if(ruoli.equalsIgnoreCase("Assistenza"))
 			return true;
-		return false;
+		else
+			return false;
 	}
 	
 	//Rimuove il ruolo passato come argomento dalla lista di ruoli dell'utente
