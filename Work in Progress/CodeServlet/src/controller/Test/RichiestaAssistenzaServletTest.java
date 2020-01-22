@@ -47,16 +47,16 @@ public class RichiestaAssistenzaServletTest {
 		
 		UtenteDAO uDao=new UtenteDB();
 		Utente u=uDao.retriveByUsername("Ferdinando98");
-		request.addParameter("destinatario", "Admin98");
+		request.addParameter("destinatario", "adminCat99@glitch.com");
 		request.addParameter("descrizione", "La password non si cambia");
 		request.getSession().setAttribute("utente", u);
 		servlet.doPost(request,response);
 		
 		RichiestaDAO rDao=new RichiestaDB();
-		Richiesta rc=rDao.retriveByMittente("Ferdinando98").get(0);
+		Richiesta rc=rDao.retriveByMittente("nando998@libero.it").get(0);
 		boolean result;
 		
-		if(rc.getDescrizione().equals("La password non si cambia") && rc.getDestinatario().equals("Admin98"))
+		if(rc.getDescrizione().equals("La password non si cambia") && rc.getDestinatario().equals("adminCat99@glitch.com"))
 			result=true;
 		else
 			result=false;
