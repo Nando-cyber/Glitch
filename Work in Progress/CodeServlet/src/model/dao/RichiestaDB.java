@@ -70,7 +70,7 @@ public class RichiestaDB implements RichiestaDAO{
 	public List<Richiesta> retriveByMittente(String mittente) {
 		try (Connection con = ConPool.getConnection()) {
 			PreparedStatement ps = con.prepareStatement(
-					"Select id, utenteEmail, utenteUsername, destinatario, descrizione, stato FROM Richiesta WHERE utenteUsername=?");
+					"Select id, utenteEmail, utenteUsername, destinatario, descrizione, stato FROM Richiesta WHERE utenteEmail=?");
 			ps.setString(1, mittente);
 			ResultSet rs = ps.executeQuery();
 			Richiesta p = new Richiesta();
