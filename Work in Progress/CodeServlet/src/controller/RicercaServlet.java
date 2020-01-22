@@ -8,12 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import com.mysql.cj.xdevapi.JsonArray;
-
 import model.dao.ConsoleDAO;
 import model.dao.ConsoleDB;
 import model.dao.VideogiocoDAO;
@@ -60,12 +56,18 @@ public class RicercaServlet extends HttpServlet {
 		listC = cDAO.doRetrieveLikeModello(input);
 		listV = vDAO.doRetrieveLike(input);
 		
-		if(listV.size() > 0) {
-			for(int i= 0; i< listV.size(); i++) {
-				listC.add(listV.get(i));
-			}
+		if(listC==null && listV==null)
+			return new ArrayList<String>();
+		else if(listC==null && !listV.isEmpty())
+		{
+			return listV;
 		}
-		return listC;
+		else if(listV==null && !listC.isEmpty())
+		{
+			return listC;
+		}
+		else
+			return new ArrayList<String>();
 	}
 
 }

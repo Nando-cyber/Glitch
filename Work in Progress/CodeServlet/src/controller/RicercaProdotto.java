@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,16 +33,23 @@ public class RicercaProdotto  extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nome = request.getParameter("cerca");
-		ArrayList<Videogioco> vid = (ArrayList<Videogioco>) vDAO.retriveByNome(nome);
+		
+		List<Videogioco> vid=new ArrayList<Videogioco>();
+		
+		vid = vDAO.retriveByNome(nome);
 		//System.out.println("xxxx " +vid.get(0));
 		Console cons =  cDAO.retriveByModello(nome);
 		
-		if(vid == null) {
-			request.getSession().setAttribute("ricerca", cons);
+		if(vid == null || vid.isEmpty()) {
+			request.getSession().setAttribute("ricerca", "Console");
+			request.getSession().setAttribute("itemTrovati", cons);
 		}
-		else {
-			request.getSession().setAttribute("ricerca", vid);
+		else if(cons==null){
+			request.getSession().setAttribute("ricerca", "Videogioco");
+			request.getSession().setAttribute("itemTrovati", vid);
 		}
+		else
+			request.getSession().setAttribute("ricerca", null);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/RicercaProdotto.jsp");
 		requestDispatcher.forward(request, response);
