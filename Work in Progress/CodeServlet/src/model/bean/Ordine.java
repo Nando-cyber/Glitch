@@ -41,6 +41,7 @@ public class Ordine{
 		
 	}
 	
+	//Inizializza l'ordine assegnandogli un id che si andra ad incrementale ad ogni nuova instanza
 	public Ordine(String utenteUsername, GregorianCalendar dataOrdinazione)
 	{
 		counter++;
@@ -146,6 +147,7 @@ public class Ordine{
 		this.utenteUsername = utenteUsername;
 	}
 	
+	//Restituisce il prezzo totale degli ordini acquistati
 	public float prezzoTot()
 	{
 		float prezzo=0;
