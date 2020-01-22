@@ -11,47 +11,49 @@
  			<h1>Risultato ricerca</h1>
  			<hr>
  				<c:if test="${ricerca == 'Videogioco'}">
- 					<div >
-            		<div class="col-md-6 col-xs-6">
-               			<a href="${ricerca.immagine}" target="_blank">
-               				<img src="${ricerca.immagine}" alt="${ricerca.nome}">
-               			</a>          
-            		</div>
-            		<div class="padding-txt col-md-6 col-xs-6">
-                 		<label><c:out value="${ricerca.nome}" /></label><br>
-                 		<label><c:out value="${ricerca.genere}" /></label><br>
-                 		<label><c:out value="${ricerca.prezzo}" />€</label><br>
-                 		<label><c:out value="${ricerca.descrizione}" /></label><br>
-                 		<c:choose>
-                 			<c:when test="${utente == null}">
-                 				<form>
-									<input type="hidden" name="prodId" value="${ricerca.id}">
-									<input type="submit" class="bottone not-allowed" value="Aggiungi al carrello" disabled="disabled">  
-                 				</form>
-                 			</c:when>
-                 		<c:otherwise>
-                 			
-                 		</c:otherwise>
-                 		</c:choose>           
-             		</div>
-         		</div>
+ 					<c:forEach items="${itemTrovati}" var="videogioco">
+	 					<div >
+	            		<div class="col-md-6 col-xs-6">
+	               			<a href="${videogioco.immagine}" target="_blank">
+	               				<img src="${videogioco.immagine}" alt="${videogioco.nome}">
+	               			</a>          
+	            		</div>
+	            		<div class="padding-txt col-md-6 col-xs-6">
+	                 		<label><c:out value="${videogioco.nome}" /></label><br>
+	                 		<label><c:out value="${videogioco.genere}" /></label><br>
+	                 		<label><c:out value="${videogioco.prezzo}" />€</label><br>
+	                 		<label><c:out value="${videogioco.descrizione}" /></label><br>
+	                 		<c:choose>
+	                 			<c:when test="${utente == null}">
+	                 				<form>
+										<input type="hidden" name="prodId" value="${videogioco.id}">
+										<input type="submit" class="bottone not-allowed" value="Aggiungi al carrello" disabled="disabled">  
+	                 				</form>
+	                 			</c:when>
+	                 		<c:otherwise>
+	                 			
+	                 		</c:otherwise>
+	                 		</c:choose>           
+	             		</div>
+	         		</div>
+	         		</c:forEach>
    				</c:if>
  				<c:if test="${ricerca == 'Console'}">
  					<div class="row" style="padding-top: 40px">
             			<div class="col-md-6 col-xs-6">
-               				<a href="${ricerca.immagine}" target="_blank">
-               					<img id="myImg" src="${ricerca.immagine}" alt="${ricerca.modello}">
+               				<a href="${itemTrovati.immagine}" target="_blank">
+               					<img id="myImg" src="${itemTrovati.immagine}" alt="${itemTrovati.modello}">
                				</a>
             			</div>
             			<div class="padding-txt col-md-6 col-xs-6">
-                 			<label><c:out value="${ricerca.modello}" /></label><br>
-                 			<label><c:out value="${ricerca.produttore}" /></label><br>
-                 			<label><c:out value="${ricerca.prezzo}" />€</label><br>
-                 			<label><c:out value="${ricerca.descrizione}" /></label><br>
+                 			<label><c:out value="${itemTrovati.modello}" /></label><br>
+                 			<label><c:out value="${itemTrovati.casaProduttrice}" /></label><br>
+                 			<label><c:out value="${itemTrovati.prezzo}" />€</label><br>
+                 			<label><c:out value="${itemTrovati.descrizione}" /></label><br>
                  			<c:choose>
                  			<c:when test="${utente == null}">
                  				<form>
-									<input type="hidden" name="prodId" value="${ricerca.codice}">
+									<input type="hidden" name="prodId" value="${itemTrovati.id}">
 									<input type="submit" class="bottone not-allowed" value="Aggiungi al carrello" disabled="disabled">  
                  				</form>
                  			</c:when>
