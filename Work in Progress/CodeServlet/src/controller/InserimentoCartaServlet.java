@@ -99,7 +99,7 @@ public class InserimentoCartaServlet extends HttpServlet {
 		request.getSession().setAttribute("utente", u);
 		
 		//Si esegue il forward alla pagina RiepilogoOrdine
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/RiepilogoOrdine.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/PaginaPagamento.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

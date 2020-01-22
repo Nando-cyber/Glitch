@@ -51,30 +51,30 @@ public class AcquistoServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/Carrello.jsp");
 			requestDispatcher.forward(request, response);
 		}else {//è una conferma
-				//creo il bean ordine in DB
-				oDAO.createOrdine(o);
-			
-				// si procede alla compilazione automatica di una mail di conferma ordine
-				//Si settano i dati relativi alla Richiesta
-				Richiesta mail = new Richiesta("generatedAutomaticMailOrder@live.com","GeneratedAutomaticOrder",u.getEmail(),"L'ordine da lei effettuato in data :" + 
-						o.getDataOrdinazione() + "è andato a buon fine."
-						+ " Verrà avvisato della spedizione il prima possibile."
-						+ "/n Grazie di aver scelto GLITCH!");
-				
-				
-				
-				//Si rende il bean persistente
-				rDAO.createRichiesta(mail);
-				List<Richieste> list = rDAO.
-				//Si setta un attributo "email" a true nella request per mostrare un pop up di invio email
-				request.setAttribute("email", true);
+			//creo il bean ordine in DB
+			oDAO.createOrdine(o);
 
-				//Si esegue la forward alla pagina Home del sito
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/Homepage.jsp");
-				requestDispatcher.forward(request, response);
-			}
+			// si procede alla compilazione automatica di una mail di conferma ordine
+			//Si settano i dati relativi alla Richiesta
+			Richiesta mail = new Richiesta("generAutoMail@live.com","botGlitch",u.getEmail(),"L'ordine da lei effettuato in data :" + 
+					o.getDataOrdinazione() + "è andato a buon fine."
+					+ " Verrà avvisato della spedizione il prima possibile."
+					+ "/n Grazie di aver scelto GLITCH!");
+
+
+
+			//Si rende il bean persistente
+			rDAO.createRichiesta(mail);
+			List<Richiesta> list = rDAO.retriveEmailNonLette(u.getEmail());
+			//Si setta un attributo "email"con il numero di email non lette
+			request.setAttribute("email", list.size());
+
+			//Si esegue la forward alla pagina Home del sito
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("BaseServlet");
+			requestDispatcher.forward(request, response);
 		}
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

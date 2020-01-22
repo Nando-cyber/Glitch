@@ -170,14 +170,15 @@ public class GestioneProdottoServlet extends HttpServlet {
 			//si prende da DB il prodotto con quell'id
 			Prodotto p = pDAO.findProdottoById(code);
 			
+			
+			//si rimuove da DB il prodotto
+			pDAO.removeProdotto(p.getId());	
 			//aggiorno lista console e videogiochi del catalogo
 			v = vDAO.findAllVideogioco();
 			request.setAttribute("Videogiochi", v);
 			
 			c = cDAO.findAllConsole();
 			request.setAttribute("Consoles", c);
-			//si rimuove da DB il prodotto
-			pDAO.removeProdotto(p.getId());			
 		}
 		//Si esegue la forward alla pagina GestioneProdotti del sito
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/GestioneProdotti.jsp");

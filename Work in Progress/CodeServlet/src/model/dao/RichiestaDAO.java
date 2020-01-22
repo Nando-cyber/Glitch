@@ -22,4 +22,6 @@ public interface RichiestaDAO{
 	
 	//Restituisce una lista di richieste avente per destinatario la stringa passata come argomento
 	List<Richiesta> retriveByDestinatario(String email);
+	//Restituisce le email dell'utente passato per parametro non lette
+	List<Richiesta> retriveEmailNonLette(String email);
 }

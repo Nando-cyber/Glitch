@@ -9,7 +9,7 @@ public class Richiesta{
 	private String utenteUsername;
 	private String destinatario;
 	private String descrizione;
-	private Boolean stato;
+	private Boolean stato = false;
 	
 	//Costruttore vuoto
 	public Richiesta() {

@@ -144,6 +144,32 @@ public class RichiestaDB implements RichiestaDAO{
 		
 	}
 
+	@Override
+	public List<Richiesta> retriveEmailNonLette(String email) {
+		try (Connection con = ConPool.getConnection()) {
+			PreparedStatement ps = con.prepareStatement(
+					"Select id, utenteEmail, utenteUsername, destinatario, descrizione, stato FROM Richiesta WHERE destinatario=? AND stato=?");
+			ps.setString(1, email);
+			ps.setBoolean(2, false);
+			ResultSet rs = ps.executeQuery();
+			Richiesta p = new Richiesta();
+			ArrayList<Richiesta> array = new ArrayList<Richiesta>();
+			while (rs.next()) {
+
+				p.setId(rs.getInt(1));
+				p.setUtenteEmail(rs.getString(2));
+				p.setUtenteUsername(rs.getString(3));
+				p.setDestinatario(rs.getString(4));
+				p.setDescrizione(rs.getString(5));
+				p.setStato(rs.getBoolean(6));
+				array.add(p);
+			}
+			return array;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 
 
 }

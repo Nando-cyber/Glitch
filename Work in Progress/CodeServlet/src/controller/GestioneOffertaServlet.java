@@ -74,7 +74,10 @@ public class GestioneOffertaServlet extends HttpServlet {
 
 			//si salva in DB
 			oDAO.createOfferta(offerta);
-
+			
+			//aggiorno la lista
+			List<Offerta> list = oDAO.findAllOfferta();
+			request.setAttribute("offerta", list);
 			//ora aggiungiamo l'offerta alla categoria a cui si riferisce
 			int percSconto;
 			
@@ -121,13 +124,18 @@ public class GestioneOffertaServlet extends HttpServlet {
 			//e quindi si procede alla rimozione dell'offerta
 
 			//si prende dalla request l'id dell'offerta da eliminare
-			int code = Integer.parseInt( request.getParameter("offId") );
+			int code = Integer.parseInt( request.getParameter("offertaId") );
 
 			//si prende da DB l'offerta con quell'id
 			Offerta o = oDAO.retriveOffertaById(code);
-
+			
+			
 			//si rimuove da DB il prodotto
 			oDAO.deleteOfferta(code);	
+			//Aggiorno la lista
+			
+			List<Offerta> list = oDAO.findAllOfferta();
+			request.setAttribute("offerta", list);
 
 			//ora eliminiamo l'offerta alla categoria a cui si riferiva
 			if( (o.getCategoria()).equalsIgnoreCase("Console")) {
@@ -168,7 +176,7 @@ public class GestioneOffertaServlet extends HttpServlet {
 			}
 		}
 		//Si esegue la forward alla pagina GestioneOfferte del sito
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/GestioneOfferte.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/GestioniOfferte.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

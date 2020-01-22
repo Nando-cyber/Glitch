@@ -41,7 +41,7 @@ public class RedirectRiepilogoOrdine extends HttpServlet{
 		
 		request.getSession().setAttribute("ordine", ordine);
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/PaginaPagamenti.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/PaginaPagamento.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

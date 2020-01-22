@@ -30,7 +30,7 @@
 		                <td><c:out value="${offerta.nome}"/></td>
 		                <td>
 		                	<form action="GestioneOffertaServlet">
-		                		<input type="hidden" name="offertaId" value="${offerta.id}">
+		                		<input type="hidden" name="offertaId" value="${offerta.codice}">
 		                  		<input type="hidden" name="operazione" value="rimozione">
 		                		<button type="submit">Rimuovi</button>
 		                	</form>
