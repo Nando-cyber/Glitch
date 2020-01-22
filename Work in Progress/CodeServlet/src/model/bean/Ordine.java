@@ -22,6 +22,7 @@ public class Ordine{
 	private ArrayList<ProdottiOrdine> prodottiAcquistati;
 	private GregorianCalendar dataOrdinazione;
 	private Date ordinazioneDate;
+	private float prezzoTot;
 	
 	//Costruttore vuoto
 	public Ordine() {
@@ -91,6 +92,7 @@ public class Ordine{
 			pOut.setUtenteUsername(cart.getUsername());
 			prodottiAcquistati.add(pOut);
 		}
+		setPrezzoTot(getPrezzoTotale());
 	}
 	
 	//Restituisce la data di ordinazione sotto forma di oggetto "Date"
@@ -148,7 +150,7 @@ public class Ordine{
 	}
 	
 	//Restituisce il prezzo totale degli ordini acquistati
-	public float prezzoTot()
+	private float getPrezzoTotale()
 	{
 		float prezzo=0;
 		for(ProdottiOrdine p:prodottiAcquistati) {
@@ -156,6 +158,15 @@ public class Ordine{
 		}
 		return prezzo;
 			
+	}
+
+	public void setPrezzoTot(float prezzoTot) {
+		this.prezzoTot = prezzoTot;
+	}
+	
+	public float getPrezzo()
+	{
+		return prezzoTot;
 	}
 	
 	
