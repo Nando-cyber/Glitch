@@ -75,12 +75,13 @@ public class GestioneProfiloServlet extends HttpServlet {
 
 			// si procede alla verifica del formato che in caso
 			//di non correttezza lancia un'eccezione
+			if(password != null) {
 			if ( !ValidazioneUtente.checkPassword(password)) {
 				throw new MyServletException("Formato Password Errata.");
 			}
 
 			//Altrimenti si prosegue alla modifica del dato nell'Utente
-			if(password != null) {
+			
 				u.setPassword(password);				
 			}
 
