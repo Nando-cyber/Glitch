@@ -123,18 +123,18 @@ INSERT INTO Console (prodottoID, modello, casaProduttrice) VALUES(11, "Nintendo 
 
 INSERT INTO Console (prodottoID, modello, casaProduttrice) VALUES(13, "Xbox OneX", "Nintendo");
 
-/*Utente*/
+/*Utente
 INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo) 
 VALUES("Ferdinando98","nando998@libero.it",null,"Ferdinando98", "Ferdinando","Napolitano", "NA", 80030, "Visciano", "Galileo Galilei", 1, null);
 
 INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo) 
 VALUES("Admin98","adminCat99@glitch.com",null,"admin98", "Ferdinando","Napolitano", "NA", 80030, "Visciano", "Galileo Galilei", 1, "Catalogo");
-
+*/
 INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo) 
 VALUES("botGlitch","generAutoMail@live.com",null,"botGlitch99", "bot","bot", "GL", 00000, "Glitch", "Glitch", 1, null);
-
+/*
 INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo) 
 VALUES("Nunzia98","nunzia98@libero.it",null,"Nunzia98", "Nunzia","Elefante", "NA", 80030, "Visciano", "Galileo Galilei", 1, "Assistenza");
-
+*/
 INSERT INTO Utente (username, email, cartaDiCredito, password, nome, cognome, provincia, cap, citta, via, numero, ruolo) 
 VALUES("Sandro98","sandro98@glitch.com",null,"Sandro98", "Sandro","Mutone", "NA", 80030, "Visciano", "Galileo Galilei", 1, "Account");
