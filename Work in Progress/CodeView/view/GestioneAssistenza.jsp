@@ -7,7 +7,7 @@
 
 
 <!-- Tabella che mostra la lista delle richieste di assistenza -->
-<div class="article-list">
+<div id="pagina" style="padding-bottom: 20%">
     <div class="container">
         <div class="intro">
             <h2 class="text-center">Gestione assistenza</h2>
@@ -17,35 +17,43 @@
         <div class="table-responsive">
             <table class="table">
                 <thead>
-                    <tr style="background-color: #c4fff8;">
-                        <th>E-MAIL UTENTE</th>
-                        <th>E-MAIL DESTINATARIO</th>
-                        <th>STATO E-MAIL</th>
+                    <tr>
+                        <th>E-mail utente</th>
+                        <th>Stato e-mail</th>
+                        <th>Lettura</th>
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${richiesta}" var="richiesta">
+                <c:forEach items="${richiesta}" var="r">
                     <tr>
-                        <td><c:out value="${richiesta.utenteEmail}" /></td>
-                        <td><c:out value="${richiesta.destinatario}" /></td>
-                        <td><a href="#" style="color: rgb(0,0,0);"><c:out value="${richiesta.stato}" /></a></td>
+                        <td><c:out value="${r.utenteEmail}" /></td>
+                        <td>
+                        <c:choose>
+							<c:when test="${r.stato}">
+								<label>Letta</label>
+							</c:when>
+							<c:otherwise>
+								<label >Non Letta</label>
+							</c:otherwise>
+						</c:choose>
+                        </td>
+                         <td>
+							<form action="LeggiEmail" method="post">
+								<input type="hidden" name="email" value="${r.id}">
+								<input class="btn btn-info" type="submit" value="Leggi">
+							</form>
+						</td>
                     </tr>
+                    
                  </c:forEach>  
                 </tbody>
             </table>
         </div>
     </div>
-</div>
+
 
 <!-- Form usato dal Gestore assistenza per rispondere ai clienti -->
-<div class="contact-clean">
-    <form method="post" action=" ">
-        <h2 class="text-center">Risposta</h2>
-        <div class="form-group"><input class="form-control d-lg-flex" type="text" name="utente" placeholder="Utente" style="width: 100%;" /></div>
-        <div class="form-group"><input class="form-control d-lg-flex" type="text" name="oggetto" placeholder="Oggetto" style="width: 100%;" /></div>
-        <div class="form-group"><textarea class="form-control" name="message" placeholder="Messaggio di risposta" rows="14" style="width: 100%;"></textarea></div>
-        <div class="form-group"><button class="btn btn-primary" type="submit">Invio</button></div>
-    </form>
+
 </div>
 
 

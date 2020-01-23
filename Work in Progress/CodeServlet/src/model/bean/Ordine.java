@@ -1,102 +1,177 @@
 package model.bean;
 
 
-import static model.bean.Ordine.FIND_BY_USERNAME;
-import static model.bean.Ordine.FIND_BY_ID;
 
-import java.io.Serializable;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.GregorianCalendar;
-import java.util.Locale;
+import java.util.Iterator;
+import model.dao.ConsoleDAO;
+import model.dao.ConsoleDB;
+import model.dao.VideogiocoDAO;
+import model.dao.VideogiocoDB;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
-@Entity
-@NamedQueries({
-			@NamedQuery(name = FIND_BY_USERNAME, query = "SELECT b FROM Ordine b WHERE b.username = :username"),
-			@NamedQuery(name = FIND_BY_ID, query = "SELECT b FROM Ordine b WHERE b.id = :id")
-})
+public class Ordine{
 
-public class Ordine implements Serializable{
 
-	
-	private static final long serialVersionUID = -8005038182957187110L;
-	public static final String FIND_BY_USERNAME = "model.Ordine.FIND_BY_USERNAME";
-	public static final String FIND_BY_ID = "model.Ordine.FIND_BY_ID";
-	
-	@Id @GeneratedValue
-	@Column(name="id", nullable=false)
-	private long id;
-	
-	@Id
-	@Column(name="carrelloUtenteUsername", nullable=false)
-	private String username;
-	
-	@Id
-	@Column(name="carrelloUtenteEmail", nullable=false)
-	private String email;
-	
-	@Column(name="dataOrdinazione", nullable=false)
-	private GregorianCalendar dataOrdinazione=new GregorianCalendar(new Locale("it", "IT"));
-	
-	@OneToMany (cascade = {CascadeType.ALL})
-	private Collection<ProdottoQuantita> prodottiAcquistati;
-	
-	@Column(name="prezzoTot", nullable=false)
-	private float prezzoTot;
+	private String utenteUsername;
+	private int ordineId;
+	private static int counter=0;
+	private ArrayList<ProdottiOrdine> prodottiAcquistati;
+	private GregorianCalendar dataOrdinazione;
+	private Date ordinazioneDate;
+	private float prezzoTot = 0;
 	
 	//Costruttore vuoto
 	public Ordine() {
+		/*counter++;
+		ordineId=counter;*/
 	}
 	
-	//Costruisce l'oggetto "Ordine" passando l'username dell'utente, l'email e il suo carrello
-	public Ordine(String username, String email,Carrello cart)
+	//Costruisce l'oggetto "Ordine" passando come argomento l'id ordine, l'username e la lista di prodotti acquistati
+	public Ordine(String utenteUsername, ArrayList<ProdottiOrdine> prodottiAcquistati, GregorianCalendar dataOrdinazione)
 	{
-		this.username=username;
-		this.email=email;
+		counter++;
+		ordineId=counter;
+		this.setUtenteUsername(utenteUsername);
+		this.setProdottiAcquistati(prodottiAcquistati);
+		this.setDataOrdinazione(dataOrdinazione);
+		this.ordinazioneDate=new Date(dataOrdinazione.getTimeInMillis());
 		
-		//Estrae i prodotti dal carrello e li memorizza nella collection "prodottiAcquistati"
-		this.setProdottiAcquistati(cart.getProdotti());
-		
-		this.prezzoTot = Float.parseFloat(cart.getPrezzoTotProdotti());
 	}
 	
-	//Restituisce l'id dell'ordine
-	public Long getId()
+	//Inizializza l'ordine assegnandogli un id che si andra ad incrementale ad ogni nuova instanza
+	public Ordine(String utenteUsername, GregorianCalendar dataOrdinazione)
 	{
-		return id;
+		counter++;
+		ordineId=counter;
+		this.setUtenteUsername(utenteUsername);
+		this.setDataOrdinazione(dataOrdinazione);
+		this.ordinazioneDate=new Date(dataOrdinazione.getTimeInMillis());
+		
 	}
 
-	//Restituisce la data dell'ordine effettuato
+	//Costruisce l'oggetto ordine passando come argomento l'id ordine
+	public Ordine(int ordineId)
+	{
+		this.ordineId=ordineId;
+	}
+	
+	//Preleva i prodotti dal carrello (passato per argomento) e li aggiunge alla lista di prodotti acquistati
+	public void setProdottiOrdine(Carrello cart)
+	{
+		Collection<ProdottoQuantita> prod=cart.getProdotti();
+		Iterator<ProdottoQuantita> it=prod.iterator();
+		prodottiAcquistati=new ArrayList<ProdottiOrdine>();
+		VideogiocoDAO vidDao=new VideogiocoDB();
+		ConsoleDAO consDao=new ConsoleDB();
+		
+		while(it.hasNext())
+		{
+			ProdottoQuantita pQ=it.next();
+			Prodotto pr=pQ.getProdotto();
+			ProdottiOrdine pOut=new ProdottiOrdine();
+			
+			
+			if(vidDao.findVideogiocoById(pr.getId()) == null)
+			{
+				Console cons=consDao.findConsoleById(pr.getId());
+				pOut.setNome(cons.getModello());
+			}
+			else
+			{
+				Videogioco vd=vidDao.findVideogiocoById(pr.getId());
+				pOut.setNome(vd.getNome());
+			}
+			
+			pOut.setPrezzo(pQ.getPrezzoTot());
+			pOut.setQuantita(pQ.getQuantita());
+			pOut.setUtenteEmail(cart.getUtenteEmail());
+			pOut.setUtenteUsername(cart.getUsername());
+			prodottiAcquistati.add(pOut);
+		}
+		setPrezzoTot(getPrezzoTotale());
+	}
+	
+	//Restituisce la data di ordinazione sotto forma di oggetto "Date"
+	public Date getDataOrdinazioneDate()
+	{
+		return ordinazioneDate;
+	}
+		
+	//Modifica la data di ordinazione passando per argomento un oggetto "Date" contenente la nuova data		
+	public void setDataOrdinazioneDate(Date ord)
+	{
+		ordinazioneDate=ord;
+	}
+	
+	//Restituisce la data di ordinazione sotto forma di "GregorianCalendar"
 	public GregorianCalendar getDataOrdinazione() {
 		return dataOrdinazione;
 	}
 
-	//Modifica la data dell'ordine effettuato
+	//Modifica la data di ordinazione passando un oggetto "GregorianCalendar"
 	public void setDataOrdinazione(GregorianCalendar dataOrdinazione) {
 		this.dataOrdinazione = dataOrdinazione;
+		this.ordinazioneDate=new Date(dataOrdinazione.getTimeInMillis());
 	}
-
-	//Restituisce la collezione di prodotti acquistati con le loro quantità
-	public Collection<ProdottoQuantita> getProdottiAcquistati() {
+	
+	
+	//Restituisce la lista dei prodotti acquistati
+	public ArrayList<ProdottiOrdine> getProdottiAcquistati() {
 		return prodottiAcquistati;
 	}
 
-	//Permette la modifica dei prodotti acquistati con le relative quantità
-	public void setProdottiAcquistati(Collection<ProdottoQuantita> prodottiAcquistati) {
+	//Modifica la lista dei prodotti acquistati
+	public void setProdottiAcquistati(ArrayList<ProdottiOrdine> prodottiAcquistati) {
 		this.prodottiAcquistati = prodottiAcquistati;
+		setPrezzoTot(getPrezzoTotale());
 	}
 
-	public float getPrezzoTot() {
-		return this.prezzoTot;
+	//Restituisce l'id dell'ordine
+	public int getOrdineId() {
+		return ordineId;
 	}
+
+	//Modifica l'id dell'ordine
+	public void setOrdineId(int ordineId) {
+		this.ordineId = ordineId;
+	}
+
+	//Restituisce l'username associato all'ordine
+	public String getUtenteUsername() {
+		return utenteUsername;
+	}
+
+	//Modifica l'username associato all'ordine
+	public void setUtenteUsername(String utenteUsername) {
+		this.utenteUsername = utenteUsername;
+	}
+	
+	//Restituisce il prezzo totale degli ordini acquistati
+	private float getPrezzoTotale()
+	{
+		float prezzo=0;
+		for(ProdottiOrdine p:prodottiAcquistati) {
+			prezzo+=p.getPrezzo() * p.getQuantita();
+		}
+		return prezzo;
+			
+	}
+
+	public void setPrezzoTot(float prezzoTot) {
+		this.prezzoTot = prezzoTot;
+	}
+	
+	public float getPrezzoTot()
+	{
+		return prezzoTot;
+	}
+	
+	
+	
 
 
 }

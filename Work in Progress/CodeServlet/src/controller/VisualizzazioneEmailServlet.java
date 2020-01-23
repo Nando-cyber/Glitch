@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Richiesta;
 import model.bean.Utente;
-import model.dao.RichiestaDAO; 
+import model.dao.RichiestaDAO;
+import model.dao.RichiestaDB; 
 
 /**
  *  VisualizzazioneEmailServlet restituisce alla pagina EmailRicevute
@@ -22,8 +22,7 @@ import model.dao.RichiestaDAO;
 @WebServlet("/VisualizzazioneEmailServlet")
 public class VisualizzazioneEmailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@EJB
-    private RichiestaDAO rDAO;
+    private RichiestaDAO rDAO = new RichiestaDB();
     /**
      * @see HttpServlet#HttpServlet()
      */

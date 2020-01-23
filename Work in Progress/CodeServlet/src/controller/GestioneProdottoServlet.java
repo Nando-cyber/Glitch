@@ -1,8 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
-import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +16,11 @@ import model.bean.ValidazioneConsole;
 import model.bean.ValidazioneVideogioco;
 import model.bean.Videogioco;
 import model.dao.ConsoleDAO;
+import model.dao.ConsoleDB;
 import model.dao.ProdottoDAO;
+import model.dao.ProdottoDB;
 import model.dao.VideogiocoDAO;
+import model.dao.VideogiocoDB;
 
 
 /**
@@ -26,12 +29,11 @@ import model.dao.VideogiocoDAO;
 @WebServlet("/GestioneProdottoServlet")
 public class GestioneProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@EJB
-	private VideogiocoDAO vDAO;
-	@EJB
-	private ProdottoDAO pDAO; 
-	@EJB
-	private ConsoleDAO cDAO;
+	private VideogiocoDAO vDAO = new VideogiocoDB();
+	private ProdottoDAO pDAO = new ProdottoDB(); 
+	private ConsoleDAO cDAO = new ConsoleDB();
+	private List<Videogioco> v;
+	private List<Console> c;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -47,127 +49,139 @@ public class GestioneProdottoServlet extends HttpServlet {
 
 		//Si prende il valore del parametro "operazione" e si verifica se equivale ad "inserimento"
 		String caso = request.getParameter("operazione");
+		String prod = request.getParameter("Videogioco");
+		String prod1 = request.getParameter("Console");
 		if(caso.equalsIgnoreCase("inserimento")) {
 
 			//se l'equalsIgnoreCase() restituisce true si procede all'inserimento 
 			//di un prodotto in DB
 
-			String prod = request.getParameter("Videogioco");
-			String prod1 = request.getParameter("Console");
-			String imm =  request.getParameter("urlImm");
-			String descrizione = request.getParameter("descr");
+			
+			String imm =  request.getParameter("immagine");
+			String descrizione = request.getParameter("descrizione");
 			String prezzo = request.getParameter("prezzo");
 
 
 
-			//si verifica se è una console o un videogioco ( se uno dei due parametri - "Videogioco"
-			// o "Console" - è nullo/vuoto, verrà fatto l'inserimento dell'altro
+			//si verifica se ï¿½ una console o un videogioco ( se uno dei due parametri - "Videogioco"
+			// o "Console" - ï¿½ nullo/vuoto, verrï¿½ fatto l'inserimento dell'altro
 			if(prod1 == null && prod != null) {
 
-				// in questo caso è un videogioco e si prendono i dati dalla request
+				// in questo caso ï¿½ un videogioco e si prendono i dati dalla request
 				String nome =  request.getParameter("nome");
 				String genere =  request.getParameter("genere");
-				String piattaforma = request.getParameter("piatt");
+				String piattaforma = request.getParameter("piattaforma");
 				
 				//si controlla la correttezza del formato dei dati
 				
-				if(!ValidazioneVideogioco.checkImmagine(imm)) {
+				if(!ValidazioneVideogioco.checkImmagine(imm) || imm == null) {
 
 					throw new MyServletException("Formato Url Immagine Videogioco non corretto.");
 				}
-				if(!ValidazioneVideogioco.checkDescrizione(descrizione)) {
+				if(!ValidazioneVideogioco.checkDescrizione(descrizione) || descrizione == null) {
 
 					throw new MyServletException("Descrizione Videogioco non corretto.");
 				}
-				if(!ValidazioneVideogioco.checkPrezzo(prezzo)) {
+				if(!ValidazioneVideogioco.checkPrezzo(prezzo) || prezzo == null) {
 
 					throw new MyServletException("Formato Prezzo Videogioco non corretto.");
 				}
-				if(!ValidazioneVideogioco.checkNome(nome)) {
+				if(!ValidazioneVideogioco.checkNome(nome) || nome == null) {
 
 					throw new MyServletException("Formato Nome Videogioco non corretto.");
 				}
-				if(!ValidazioneVideogioco.checkGenere(genere)) {
+				if(!ValidazioneVideogioco.checkGenere(genere) || genere == null) {
 
 					throw new MyServletException("Formato Genere Videogioco non corretto.");
 				}
-				if(!ValidazioneVideogioco.checkPiattaforma(piattaforma)) {
+				if(!ValidazioneVideogioco.checkPiattaforma(piattaforma) || piattaforma == null) {
 
 					throw new MyServletException("Formato Piattaforma Videogioco non corretto.");
 				}
 
+				//verifico che non sia già presente in DB
+				if(vDAO.retriveByNomeAndPiattaforma(nome, piattaforma) != null) {
+					throw new MyServletException("Videogioco già presente nel catalogo.");
+				
+				}
 
 				//si crea un bean Videogioco e si inseriscono i dati
 
-				Videogioco vid = new Videogioco();
+				Videogioco vid = new Videogioco(imm,Float.parseFloat(prezzo),descrizione,nome,genere,piattaforma);
 
-				vid.setNome(nome);
-				vid.setGenere(genere);
-				vid.setImmagine(imm);
-				vid.setDescrizione(descrizione);
-				vid.setPrezzo(Double.parseDouble(prezzo));
-				vid.setPiattaforma(piattaforma);
-				vDAO.createProdotto(vid); //si inserisce in DB
-
+				//aggiorno catalogo videogiochi
+				vDAO.createVideogioco(vid); //si inserisce in DB
+				v = vDAO.findAllVideogioco();
+				request.setAttribute("Videogiochi", v);
 			}else {
 
-				//in questo caso è una Console e si prendono i dati dalla request
+				//in questo caso ï¿½ una Console e si prendono i dati dalla request
 
 				String modello = request.getParameter("modello");
-				String casaProduttrice = request.getParameter("produttore");
+				String casaProduttrice = request.getParameter("casaProduttrice");
 				
 				//si controlla la correttezza del formato dei dati
 				
-				if(!ValidazioneConsole.checkImmagine(imm)) {
+				if(!ValidazioneConsole.checkImmagine(imm) || imm == null) {
 
 					throw new MyServletException("Formato Url Immagine Console non corretto.");
 				}
-				if(!ValidazioneConsole.checkDescrizione(descrizione)) {
+				if(!ValidazioneConsole.checkDescrizione(descrizione) || descrizione == null) {
 
 					throw new MyServletException("Descrizione Console non corretto.");
 				}
-				if(!ValidazioneConsole.checkPrezzo(prezzo)) {
+				if(!ValidazioneConsole.checkPrezzo(prezzo) || prezzo == null) {
 
 					throw new MyServletException("Formato Prezzo Console non corretto.");
 				}
-				if(!ValidazioneConsole.checkModello(modello)) {
+				if(!ValidazioneConsole.checkModello(modello) || modello == null) {
 
 					throw new MyServletException("Formato Modello Console non corretto.");
 				}
-				if(!ValidazioneConsole.checkCasaProduttrice(casaProduttrice)) {
+				if(!ValidazioneConsole.checkCasaProduttrice(casaProduttrice) || casaProduttrice == null) {
 
 					throw new MyServletException("Formato Casa Produttrice Console non corretto.");
 				}
 				
+				//verifico che non sia già presente in DB
+				if(cDAO.retriveByModello(modello) != null) {
+					throw new MyServletException("Console già presente nel catalogo.");
+				
+				}
 				
 				//si crea un bean Console e si inseriscono i dati
-				Console cons = new Console();
+				Console cons = new Console(imm,Float.parseFloat(prezzo),descrizione,modello, casaProduttrice);
 
-				cons.setModello(modello);
-				cons.setCasaProduttrice(casaProduttrice);
-				cons.setImmagine(imm);
-				cons.setDescrizione(descrizione);
-				cons.setPrezzo(Double.parseDouble(prezzo));
-				cDAO.createProdotto(cons); //si inserisce in DB 
-
+				//aggiorno catalogo console
+				cDAO.createConsole(cons); //si inserisce in DB 
+				c = cDAO.findAllConsole();
+				request.setAttribute("Consoles", c);
 			}
 
 
-		}else {
+		}else if(caso.equalsIgnoreCase("rimozione")){
 			//in questo caso il parametro "operazione" contiene "rimozione"
 			//e quindi si procede alla rimozione del prodotto
 
 			//si prende dalla request l'id del prootto da eliminare
 			int code = Integer.parseInt( request.getParameter("prodId") );
-
+			
+			
 			//si prende da DB il prodotto con quell'id
 			Prodotto p = pDAO.findProdottoById(code);
-
+			
+			
 			//si rimuove da DB il prodotto
-			pDAO.removeProdotto(p);			
+			pDAO.removeProdotto(p.getId());	
+			//aggiorno lista console e videogiochi del catalogo
+			v = vDAO.findAllVideogioco();
+			request.setAttribute("Videogiochi", v);
+			
+			c = cDAO.findAllConsole();
+			request.setAttribute("Consoles", c);
 		}
 		//Si esegue la forward alla pagina GestioneProdotti del sito
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/GestioneProdotti.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/GestioneProdotti.jsp");
 		requestDispatcher.forward(request, response);
 
 	}
@@ -175,7 +189,7 @@ public class GestioneProdottoServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

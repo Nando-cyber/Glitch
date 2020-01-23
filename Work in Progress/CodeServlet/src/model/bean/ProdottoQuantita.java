@@ -1,55 +1,51 @@
+
 package model.bean;
-
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 
 
 public class ProdottoQuantita {
 	
-	@Id @GeneratedValue
-	private long id;
-	
-	
-	@Column(name="utenteUsername", nullable=false)
+
 	private String utenteUsername;
-	
-	@Column(name="prodotto", nullable=false)
 	private Prodotto prodotto;
-	
-	@Column(name="quantita", nullable=false)
 	private int quantita;
 
+	//Costruisce un oggetto ProdottoQuantita passando per argomento un prodotto, la quantità e l'username dell'utente associato
 	public ProdottoQuantita(Prodotto prodotto, int quantita,String utenteUsername) {
 		this.utenteUsername=utenteUsername;
 		this.prodotto = prodotto;
 		this.quantita = quantita;
 	}
 
+	//Restituisce la quantita del prodotto
 	public int getQuantita() {
 		return quantita;
 	}
 
+	//Modifica la quantita del prodotto
 	public void setQuantita(int quantita) {
 		this.quantita = quantita;
 	}
 
+	//Restituisce il prodotto
 	public Prodotto getProdotto() {
 		return prodotto;
 	}
 
-	public double getPrezzoTot() {
+	//Restituisce il prezzo del prodotto moltiplicato per la quantità
+	public float getPrezzoTot() {
 		return quantita * prodotto.getPrezzo();
 	}
 
+	//Restituisce l'username dell'utente associato all'oggetto
 	public String getUtenteUsername() {
 		return utenteUsername;
 	}
 
+	//Modifica l'username dell'utente associato all'oggetto
 	public void setUtenteUsername(String utenteUsername) {
 		this.utenteUsername = utenteUsername;
 	}
+
+	
 
 }

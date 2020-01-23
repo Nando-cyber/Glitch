@@ -1,8 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
-import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +14,7 @@ import model.bean.Richiesta;
 import model.bean.Utente;
 import model.bean.ValidazioneRichiesta;
 import model.dao.RichiestaDAO;
-import model.dao.RichiestaJPA;
+import model.dao.RichiestaDB;
 
 
 /**
@@ -23,8 +23,7 @@ import model.dao.RichiestaJPA;
 @WebServlet("/RispostaAssistenzaServlet")
 public class RispostaAssistenzaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@EJB
-    private RichiestaDAO rDAO = new RichiestaJPA();
+    private RichiestaDAO rDAO = new RichiestaDB();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -40,12 +39,14 @@ public class RispostaAssistenzaServlet extends HttpServlet {
 		
 		//Tramite l'id passato nella request si preleva 
 		//da DB la richiesta a cui il gestore vuole risopondere
-		Richiesta rc = rDAO.retriveById(Integer.parseInt(request.getParameter("richiestaid")));
+		Richiesta rc = rDAO.retriveById(Integer.parseInt(request.getParameter("richiestId")));
 		
-		rc.setStato(true);// il suo stato ora è true perchè è stata letta
+		rc.setStato(true);// il suo stato ora e' true perche' e' stata letta
 		
-		//Si prendono dalla request l'email del destinatario e la descrizione della mail di risposta
-		String destinatario = request.getParameter("destinatario");
+		//si preleva dalla richiesta la mail dell'utente a cui il gestore vuole risopondere
+		String mail = rc.getUtenteEmail();
+				
+		//Si prende dalla request la descrizione della mail di risposta
 		String descrizione = request.getParameter("descrizione");
 		
 		Utente u = (Utente) request.getSession().getAttribute("utente");
@@ -58,13 +59,9 @@ public class RispostaAssistenzaServlet extends HttpServlet {
 		}
 		
 		//Si crea il bean Richiesta e si settano i dati
-		Richiesta rs = new Richiesta();
+		Richiesta rs = new Richiesta(u.getEmail(),u.getUsername(),mail ,descrizione);
 		
-		rs.setDestinatario(destinatario);
-		rs.setUtenteUsername(u.getUsername());
-		rs.setUtenteEmail(u.getEmail());
-		rs.setDescrizione(descrizione);
-		rs.setStato(false);// lo stato è false finchè il destinatario non la leggerà/visualizzerà
+		rs.setStato(false);// lo stato resta false finche' il destinatario non la leggera'/visualizzera'
 		
 		//Si rende persistente la Richiesta
 		rDAO.createRichiesta(rs);
@@ -72,8 +69,11 @@ public class RispostaAssistenzaServlet extends HttpServlet {
 		//di successo nella view corrispondente
 		request.setAttribute("successo", true);
 		
+		//aggiorno la lista delle mail non lette dal gestore
+		List<Richiesta> list = rDAO.retriveEmailNonLette(u.getEmail());
+		request.setAttribute("richiesta", list);
 		//Si esegue il forward alla pagina RichiestaAssistenza
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/RispostaAssistenza.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/RispostaAssistenza.jsp");
 		requestDispatcher.forward(request, response);
 		
 		
@@ -82,7 +82,7 @@ public class RispostaAssistenzaServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);
 	}

@@ -2,43 +2,32 @@ package model.bean;
 
 
 
-import java.io.Serializable;
+
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
-import static model.bean.Carrello.FIND_BY_UTENTE;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-
-@Entity
-@NamedQuery(name = FIND_BY_UTENTE, query = "SELECT b FROM Carrello b WHERE b.utenteUsername = :utenteUsername")
-
-public class Carrello implements Serializable{
+public class Carrello{
 
 	
-	private static final long serialVersionUID = 6683852874421452549L;
-
-
-	public static final String FIND_BY_UTENTE = "model.Carrello.FIND_BY_UTENTE";
-	
-	
-	@Id
-	@Column(name="utenteUsername", nullable=false)
 	private String utenteUsername;
-	
-	@Id
-	@Column(name="utenteEmail", nullable=false)
 	private String utenteEmail;
-	
-	
-	@OneToMany (cascade = {CascadeType.ALL})
 	private LinkedHashMap<Integer, ProdottoQuantita> prodotti = new LinkedHashMap<>();
 
+	
+	
+	//Costruttore vuoto	
+	public Carrello() {}
+		
+	//Costruisce un carrello passando l'username e l'email dell'utente
+	public Carrello(String utenteUsername,String utenteEmail)
+	{
+		this.utenteUsername=utenteUsername;
+		this.utenteEmail=utenteEmail;
+			
+	}
+	
+	
 	//Restituisce la Collection di prodotti nel carrello
 	public Collection<ProdottoQuantita> getProdotti() {
 		return prodotti.values();
@@ -72,16 +61,7 @@ public class Carrello implements Serializable{
 		return String.format("%.2f", prodotti.values().stream().mapToDouble(p -> p.getPrezzoTot()).sum());
 	}
 	
-	//Costruttore vuoto	
-	public Carrello() {}
 	
-	//Costruisce un carrello passando l'username e l'email dell'utente
-	public Carrello(String utenteUsername,String utenteEmail)
-	{
-		this.utenteUsername=utenteUsername;
-		this.utenteEmail=utenteEmail;
-		
-	}
 	
 	//Restiuisce l'username dell'utente a cui è associato il carrello
 	public String getUsername() {
@@ -106,10 +86,7 @@ public class Carrello implements Serializable{
 	
 	//Controlla se il corrello esiste
 	public boolean isEmpty() {
-		if(utenteUsername.isEmpty()) {
-			return true;
-		}
-		else return false;
+		 return  prodotti != null && prodotti.isEmpty() ;
 	}
 	
 	

@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.bean.Utente;
 import model.bean.ValidazioneUtente;
 import model.dao.UtenteDAO;
+import model.dao.UtenteDB;
 
 /**
  * GestioneRuoloServlet permette di gestire l'inserimento di un ruolo 
@@ -22,8 +22,7 @@ import model.dao.UtenteDAO;
 @WebServlet("/GestioneRuoloServlet")
 public class GestioneRuoloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@EJB
-	private UtenteDAO uDAO ;
+	private UtenteDAO uDAO = new UtenteDB();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -36,50 +35,47 @@ public class GestioneRuoloServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		//Si prende dalla request il parametro "operazione", l'utente dalla Sessione e
 		// il ruolo dalla request
 		String operazione = request.getParameter("operazione");
 		Utente u = uDAO.retriveByUsername(request.getParameter("userUtente"));
-		String ruolo = request.getParameter("ruolo");
 		
-		//Si verifica che il formato di ruolo sia corretto altrimenti si lancia un'eccezione
-		if(!ValidazioneUtente.checkRuolo(ruolo)) {
-			throw new MyServletException("Formato Ruolo non corretto");
-		}
-		
+
 		//si verifica che "operazione" sia un "aggiunta" o "rimozione"
 		if(operazione.equalsIgnoreCase("aggiunta")) {
-			
-			//Se è un'aggiunta, si assegna il ruolo all'utente selezionato
-			if(u.setRuolo(ruolo)) {
-				
-				//Se l'assegnamento avviene con successo si aggiorna l'utente nel DB
-				uDAO.updateUtente(u);
-				//Si ritornano da DB tutti gli utenti presenti
-				List<Utente> utenti = uDAO.retriveAllUtenti();
-				//Si settano nella request in modo da poterli mostrare nella view
-				request.getSession().setAttribute("listaUtenti", utenti);
 
-			}else {
-				//Se l'assegnamento non avviene con successo,
-				//viene l'anciata un'eccezione con relativo messaggio
-				throw new MyServletException("L'utente selezionato ha già questo ruolo.");
+			String ruolo = request.getParameter("ruolo");
+			//Si verifica che il formato di ruolo sia corretto altrimenti si lancia un'eccezione
+			if(!ValidazioneUtente.checkRuolo(ruolo)) {
+				throw new MyServletException("Formato Ruolo non corretto");
 			}
+			
+			//Se ï¿½ un'aggiunta, si assegna il ruolo all'utente selezionato
+			u.setRuolo(ruolo);
+
+			//Se l'assegnamento avviene con successo si aggiorna l'utente nel DB
+			uDAO.updateRuoloUtente(u);
+			//Si ritornano da DB tutti gli utenti presenti
+			List<Utente> utenti = uDAO.retriveAllUtenti();
+			//Si settano nella request in modo da poterli mostrare nella view
+			request.getSession().setAttribute("listaUtenti", utenti);
+
+
 		}else {
-			// Se invece è una rimozione, si procede a rimuovere il ruolo dall'utente
-			u.removeRuolo(ruolo);
+			// Se invece ï¿½ una rimozione, si procede a rimuovere il ruolo dall'utente
+			u.removeRuolo();
 			//Si aggiorna l'utente
-			uDAO.updateUtente(u);
+			uDAO.updateRuoloUtente(u);
 			//Si ritornano da DB tutti gli utenti presenti
 			List<Utente> utenti = uDAO.retriveAllUtenti();
 			//Si settano nella request in modo da poterli mostrare nella view
 			request.getSession().setAttribute("listaUtenti", utenti);
 
 		}
-		
+
 		//Si esegue la forward alla pagina GestioneRuolo
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/GestioneRuolo.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/GestioneRuolo.jsp");
 		requestDispatcher.forward(request, response);
 
 	}
@@ -87,7 +83,7 @@ public class GestioneRuoloServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		doGet(request, response);
 	}

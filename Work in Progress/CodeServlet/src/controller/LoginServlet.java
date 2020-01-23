@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Carrello;
 import model.bean.Utente;
-import model.dao.CarrelloDAO; 
-import model.dao.UtenteDAO; 
+import model.dao.CarrelloDAO;
+import model.dao.CarrelloDB;
+import model.dao.UtenteDAO;
+import model.dao.UtenteDB; 
 
 /* LoginServlet gestisce l'accesso al sito. 
  * Verfifica se i dati dell'utente che vuole effettuare l'accesso siano presenti in DB
@@ -22,10 +23,8 @@ import model.dao.UtenteDAO;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@EJB
-	private  UtenteDAO utenteDAO;
-	@EJB
-	private CarrelloDAO carDAO;
+	private  UtenteDAO utenteDAO = new UtenteDB();
+	private CarrelloDAO carDAO = new CarrelloDB();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -41,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		
 		//Si prendono i dati inseriti nel form di login
 		
-		String username = request.getParameter("login");
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		Utente utente = null;
 		
@@ -51,25 +50,31 @@ public class LoginServlet extends HttpServlet {
 			utente = utenteDAO.retriveByUsername(username);
 		}
 		
-		//Se non è presente, si lancia un'eccezione
-		if (utente == null) {
+		//Se non ï¿½ presente, si lancia un'eccezione
+		if (utente == null || !utente.getPassword().equals(password)) {
 			throw new MyServletException("Username e/o password non validi.");
 		}
+		
+		
 		
 		//Altrimenti si setta il bean Utente nella Sessione
 		request.getSession().setAttribute("utente", utente);
 		
 		//Si fa restituire il carrello dell'utente che vuole effettuare l'accesso
-		Carrello carrello = carDAO.retriveByUtente(utente.getUsername());
+		Carrello carrello = new Carrello();
+		carrello = carDAO.retriveByUtente(utente);
 		
-		//Se il carello è vuoto, lo si crea settandogli i dati dell'Utente a cui è connesso
+		//Se il carello e' vuoto, lo si crea settandogli i dati dell'Utente a cui ï¿½ connesso
 		if(carrello.isEmpty()) {
+			
 			carrello.setUsername(utente.getUsername());
+			carrello.setUtenteEmail(utente.getEmail());
+			
 		}
 		
 		//E si setta il bean Carrello nella Sessione
 		request.getSession().setAttribute("carrello", carrello);
-		
+		request.getSession().setMaxInactiveInterval(600000);
 		//Si ritorna alla pagina iniziale
 		String dest = request.getHeader("referer");
 		if (dest == null || dest.contains("/Login") || dest.trim().isEmpty()) {
@@ -82,7 +87,7 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);
 	}

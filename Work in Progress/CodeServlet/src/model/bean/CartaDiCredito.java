@@ -1,54 +1,18 @@
 package model.bean;
 
-import static model.bean.CartaDiCredito.FIND_BY_NUMCARTA;
-import static model.bean.CartaDiCredito.FIND_BY_UTENTE;
-
-import java.io.Serializable;
+import java.sql.Date;
 import java.util.GregorianCalendar;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+public class CartaDiCredito{
 
 
-@Entity
-@NamedQueries({
-        @NamedQuery(name = FIND_BY_NUMCARTA, query = "SELECT b FROM CartaDiCredito b WHERE b.numeroCarta = :numeroCarta"),
-        @NamedQuery(name = FIND_BY_UTENTE, query = "SELECT b FROM CartaDiCredito b WHERE b.utenteUsername = :user")
-      
-})
-public class CartaDiCredito implements Serializable{
-
-	
-	private static final long serialVersionUID = 7257050865912234075L;
-	public static final String FIND_BY_NUMCARTA = "model.CartaDiCredito.FIND_BY_NUMCARTA";
-	public static final String FIND_BY_UTENTE = "model.CartaDiCredito.FIND_BY_UTENTE";
-	
-	
-	@Id
-	@Column(name="numeroCarta", nullable=false, length=16)
-	private int numeroCarta;
-	
-	@Id
-	@Column(name="utenteUsername", nullable=false, length=10)
+	private String numeroCarta;
 	private String utenteUsername;
-	
-	@Id
-	@Column(name="utenteEmail", nullable=false)
 	private String utenteEmail;
-	
-	@Column(name="nome", nullable=false)
 	private String nome;
-	
-	@Column(name="cognome", nullable=false)
 	private String cognome;
-	
-	@Column(name="scadenza", nullable=false)
 	private GregorianCalendar scadenza;
-	
-	@Column(name="CVV", nullable=false,length=3)
+	private Date scadenzaDate;
 	private int cvv;
 	
 	//Costruttore vuoto
@@ -57,14 +21,15 @@ public class CartaDiCredito implements Serializable{
 	
 	//Costruisce una carta di credito passando come argomento il numero della carta, 
 	//l'username dell'utente, l'email, nome, cognome, la scadenza e il cvv della carta di credito
-	public CartaDiCredito(int numeroCarta,String utenteUsername,String utenteEmail, String nome, String cognome, GregorianCalendar scadenza, int cvv)
+	public CartaDiCredito(String numeroCarta,String utenteUsername,String utenteEmail, String nome, String cognome, GregorianCalendar scadenza, int cvv)
 	{
-		this.numeroCarta=numeroCarta;
+		this.setNumeroCarta(numeroCarta);
 		this.utenteUsername=utenteUsername;
 		this.utenteEmail=utenteEmail;
 		this.nome=nome;
 		this.cognome=cognome;
 		this.scadenza=scadenza;
+		this.scadenzaDate=new Date(scadenza.getTimeInMillis());
 		this.cvv=cvv;
 	}
 
@@ -95,6 +60,18 @@ public class CartaDiCredito implements Serializable{
 	public void setScadenza(GregorianCalendar scadenza) {
 		this.scadenza = scadenza;
 	}
+	
+	public Date getScadenzaDate() {
+	//	Long time=this.scadenza.getTimeInMillis();
+	//	Date date=new Date(time);
+		return scadenzaDate;
+	}
+	
+	public void setScadenzaDate(Date scadenza) {
+	//	Long time=scadenza.getTime();
+		this.scadenzaDate=scadenza;
+	//	this.scadenza.setTimeInMillis(time);
+	}
 
 	//Restituisce il nome dell'utente associato alla carta di credito
 	public String getCognome() {
@@ -124,6 +101,14 @@ public class CartaDiCredito implements Serializable{
 	//Modifica l'email dell'utente che ha associato alla carta di credito
 	public void setUtenteEmail(String email) {
 		this.utenteEmail = email;
+	}
+
+	public String getNumeroCarta() {
+		return numeroCarta;
+	}
+
+	public void setNumeroCarta(String numeroCarta) {
+		this.numeroCarta = numeroCarta;
 	}
 
 }

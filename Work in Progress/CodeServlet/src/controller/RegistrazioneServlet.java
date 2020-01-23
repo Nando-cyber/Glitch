@@ -2,8 +2,6 @@ package controller;
 
 import java.io.IOException;
 
-import javax.ejb.EJB;
-import javax.security.enterprise.credential.Password;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.bean.Carrello;
 import model.bean.Utente;
 import model.bean.ValidazioneUtente;
-import model.dao.UtenteDAO; 
+import model.dao.UtenteDAO;
+import model.dao.UtenteDB; 
 
 
 
@@ -25,8 +24,7 @@ import model.dao.UtenteDAO;
 @WebServlet("/RegistrazioneServlet")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@EJB
-	private UtenteDAO utenteDAO;
+	private UtenteDAO utenteDAO = new UtenteDB();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -49,7 +47,7 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		String password = request.getParameter("password");
 		if ( !ValidazioneUtente.checkPassword(password)) {
-			throw new MyServletException("Formato Password Errata.");
+			throw new MyServletException("Formato Password Errato.");
 		}
 
 		String nome = request.getParameter("nome");
@@ -64,12 +62,12 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		String email = request.getParameter("email");
 		if ( !ValidazioneUtente.checkEmail(email)) {
-			throw new MyServletException("Formato E-Mail Errata.");
+			throw new MyServletException("Formato E-Mail Errato.");
 		}
 
 		String provincia = request.getParameter("provincia");
 		if ( !ValidazioneUtente.checkProvincia(provincia)) {
-			throw new MyServletException("Formato Provincia Errata.");
+			throw new MyServletException("Formato Provincia Errato.");
 		}
 
 		String CAP = request.getParameter("CAP");
@@ -79,12 +77,12 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		String citta = request.getParameter("citta");
 		if ( !ValidazioneUtente.checkCitta(citta)) {
-			throw new MyServletException("Formato Città Errata.");
+			throw new MyServletException("Formato Citta Errato.");
 		}
 
-		String strada = request.getParameter("strada");
+		String strada = request.getParameter("via");
 		if ( !ValidazioneUtente.checkVia(strada)) {
-			throw new MyServletException("Formato Strada Errata.");
+			throw new MyServletException("Formato Via Errato.");
 		}
 
 		String numero = request.getParameter("numero");
@@ -94,31 +92,31 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		int cap = Integer.parseInt(CAP);
 		int num = Integer.parseInt(numero);
-		Password pass = new Password(password);
-				//creo il bean Utente e verifico se è già presente in DB
+				//creo il bean Utente e verifico se ï¿½ giï¿½ presente in DB
 
-		Utente u = new Utente( username, email,  pass, nome, cognome, provincia, cap, citta, strada, num);
-
+		Utente u = new Utente( username, email, password, nome, cognome, provincia, cap, citta, strada, num);
+		
 		if(utenteDAO.retriveByUsername(username) == null &&
 				utenteDAO.retriveByEmail(email) == null) {
 			
-			//Poichè non è presente, lo aggiungo in DB e alla sessione
+			//Poichï¿½ non ï¿½ presente, lo aggiungo in DB e alla sessione
 			
 			utenteDAO.createUtente(u);
 			request.getSession().setAttribute("utente", u);
-			
+			request.getSession().setMaxInactiveInterval(600000);
 			//Creo il bean Carrello per il nuovo utente e lo aggiungo alla sessione
 			
 			Carrello carrello = new Carrello();
 
 			carrello.setUsername(u.getUsername());
+			carrello.setUtenteEmail(u.getEmail());
 			
 			request.getSession().setAttribute("carrello", carrello);
 			
 			//Conclusa la registrazione, si fa la forward alla pagina Registrazionedel sito
 			//mostrando un messaggio di avvenuto successo
 			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/Registrazione.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("BaseServlet");
 			requestDispatcher.forward(request, response);
 
 		}
@@ -134,7 +132,7 @@ public class RegistrazioneServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

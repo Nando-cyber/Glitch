@@ -24,7 +24,7 @@ public class ValidazioneCartaDiCredito {
 			return Pattern.matches("[0-9]+",nI);
 	}
 	
-	//Controlla che sia rispettata la sintassi (Deve contenere 2 caratteri numerici nel formato “MM”) di "meseScadenza" (Scadenza)
+	//Controlla che sia rispettata la sintassi (Deve contenere 2 caratteri numerici nel formato â€œMMâ€�) di "meseScadenza" (Scadenza)
 	public static boolean checkMeseScadenza(String meseScadenza)
 	{
 		if(meseScadenza.length()!=2)
@@ -40,7 +40,7 @@ public class ValidazioneCartaDiCredito {
 			return false;	
 	}
 	
-	//Controlla che sia rispettata la sintassi (Deve contenere 2 caratteri numerici nel formato “AA”) di "annoScadenza" (Scadenza)
+	//Controlla che sia rispettata la sintassi (Deve contenere 2 caratteri numerici nel formato â€œAAâ€�) di "annoScadenza" (Scadenza)
 	public static boolean checkAnnoScadenza(String annoScadenza)
 	{
 		if(annoScadenza.length()!=2)

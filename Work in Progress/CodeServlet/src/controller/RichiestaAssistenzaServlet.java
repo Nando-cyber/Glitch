@@ -1,19 +1,17 @@
 package controller;
 
-import java.io.IOException; 
-
-import javax.ejb.EJB;
+import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import model.bean.Richiesta;
 import model.bean.Utente;
 import model.bean.ValidazioneRichiesta;
-import model.dao.RichiestaDAO; 
+import model.dao.RichiestaDAO;
+import model.dao.RichiestaDB; 
 
 /**
  * RichiestaAssistenzaServlet permette di gestire l'invio di una mail di richiesta di assistenza
@@ -21,8 +19,9 @@ import model.dao.RichiestaDAO;
 @WebServlet("/RichiestaAssistenzaServlet")
 public class RichiestaAssistenzaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@EJB
-    private RichiestaDAO rDAO; 
+    private RichiestaDAO rDAO = new RichiestaDB();
+		
+		
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,13 +47,9 @@ public class RichiestaAssistenzaServlet extends HttpServlet {
 		}
 		
 		//Si crea il bean Richiesta e si settano i dati
-		Richiesta r = new Richiesta();
+		Richiesta r = new Richiesta(u.getEmail(),u.getUsername(),destinatario,descrizione);
 		
-		r.setDestinatario(destinatario);
-		r.setUtenteUsername(u.getUsername());
-		r.setUtenteEmail(u.getEmail());
-		r.setDescrizione(descrizione);
-		r.setStato(false);// lo stato è folse finchè il destinatario non la leggerà/visualizzerà
+		r.setStato(false);// lo stato ï¿½ folse finchï¿½ il destinatario non la leggerï¿½/visualizzerï¿½
 		
 		//Si rende persistente la Richiesta
 		rDAO.createRichiesta(r);
@@ -63,14 +58,14 @@ public class RichiestaAssistenzaServlet extends HttpServlet {
 		request.setAttribute("successo", true);
 		
 		//Si esegue il forward alla pagina RichiestaAssistenza
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/RichiestaAssistenza.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/RichiestaAssistenza.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);
 	}

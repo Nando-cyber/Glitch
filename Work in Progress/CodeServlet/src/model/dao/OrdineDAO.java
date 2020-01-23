@@ -6,12 +6,14 @@ import model.bean.Ordine;
 
 public interface OrdineDAO {
 
-	//Rende persistente un ordine
+	//Memorizza l'ordine passato per argomento nel database
 	void createOrdine(Ordine ord);
 	
-	//Restituisce la lista di ordini effettuati dall'utente avente come username la stringa passata come argomento
+	//Restituisce lo storico ordini di un utente avente come username la stringa passata per argomento
 	List<Ordine> retriveByUtente(String user);
 	
-	//Restituisce l'ordine avente per id l'intero passato come argomento
-	Ordine retriveById(long id);
+	//Restituisce l'oggetto Ordine dal database avente come ordineId l'intero passato per argomento
+	Ordine retriveById(int id);
+	
+	
 }

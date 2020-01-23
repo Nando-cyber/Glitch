@@ -1,52 +1,15 @@
 package model.bean;
 
-import static model.bean.Richiesta.FIND_BY_EMAIL_MITTENTE;
-import static model.bean.Richiesta.FIND_BY_DESTINATARIO;
-import static model.bean.Richiesta.FIND_BY_ID;
 
-import java.io.Serializable;
+public class Richiesta{
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-
-
-@Entity
-@NamedQueries({
-        @NamedQuery(name = FIND_BY_EMAIL_MITTENTE, query = "SELECT b FROM Richiesta b WHERE b.utenteEmail = :email"),
-        @NamedQuery(name = FIND_BY_ID, query = "SELECT b FROM Richiesta b WHERE b.id = :id"),
-        @NamedQuery(name = FIND_BY_DESTINATARIO, query = "SELECT b FROM Richiesta b WHERE b.destinatario = :destinatario")
-})
-public class Richiesta implements Serializable{
-
-	
-	private static final long serialVersionUID = 1417248162916058224L;
-	public static final String FIND_BY_EMAIL_MITTENTE = "model.Richiesta.FIND_BY_EMAIL_MITTENTE";
-	public static final String FIND_BY_ID = "model.Richiesta.FIND_BY_ID";
-	public static final String FIND_BY_DESTINATARIO = "model.Richiesta.FIND_BY_DESTINATARIO";
-	
-	@Id @GeneratedValue
-	@Column(name="id", nullable=false)
+	private static int counter=10;
 	private int id;
-	
-	@Id
-	@Column(name="utenteEmail", nullable=false)
 	private String utenteEmail;
-	
-	@Column(name="utenteUsername", nullable=false)
 	private String utenteUsername;
-	
-	@Column(name="destinatario", nullable=false)
 	private String destinatario;
-	
-	@Column(name="descrizione", nullable=false)
 	private String descrizione;
-	
-	@Column(name="stato", nullable=false)
-	private Boolean stato=false;
+	private Boolean stato = false;
 	
 	//Costruttore vuoto
 	public Richiesta() {
@@ -56,11 +19,23 @@ public class Richiesta implements Serializable{
 	//Costruisce un oggetto "Richiesta" passando come argomento l'email dell'utente, l'username, il destinatario e la descrizione
 	public Richiesta(String utenteEmail,String utenteUsername, String destinatario, String descrizione)
 	{
+		counter++;
+		this.id=counter;
 		this.setUtenteEmail(utenteEmail);
 		this.setUtenteUsername(utenteUsername);
 		this.setDestinatario(destinatario);
 		this.setDescrizione(descrizione);
 	}
+	
+	//Costruisce un oggetto "Richiesta" passando come argomento l'id, l'email dell'utente, l'username, il destinatario e la descrizione
+		public Richiesta(int id,String utenteEmail,String utenteUsername, String destinatario, String descrizione)
+		{
+			this.id=id;
+			this.setUtenteEmail(utenteEmail);
+			this.setUtenteUsername(utenteUsername);
+			this.setDestinatario(destinatario);
+			this.setDescrizione(descrizione);
+		}
 
 	//Restituisce l'email dell'utente
 	public String getUtenteEmail() {
@@ -110,5 +85,13 @@ public class Richiesta implements Serializable{
 	//Modifica lo stato della richiesta
 	public void setStato(Boolean stato) {
 		this.stato = stato;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

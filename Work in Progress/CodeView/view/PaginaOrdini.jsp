@@ -6,29 +6,29 @@
 </jsp:include>
 
 
-<div class="article-list">
+<div id="pagina">
 	<div class="container">
 		<div class="intro">
 			<h2 class="text-center">I miei ordini</h2>
 		</div>
 	</div>
+	
 	<div class="container">
 		<div class="table-responsive" style="padding-bottom: 5%;">
 			<table class="table">
 				<thead>
-					<tr style="background-color: #c4fff8;">
-						<th>CODICE </th>
-						<th>DATA ACQUISTO</th>
-						<th>TOTALE </th>
-						<th>DETTAGLI</th>
+					<tr>
+						<th>Codice</th>
+						<th>Data acquisto</th>
+						<th>Totale pagato</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${ordine}" var="ordine">
+					<c:forEach items="${ordini}" var="ordini">
 						<tr>
-							<td><c:out value="${ordine.id}" /></td>
-							<td><c:out value="${ordine.dataOrdinazione}" /></td>
-							<td><c:out value="${ordine.prezzoTot}" /></td>
+							<td><c:out value="${ordini.ordineId}" /></td>
+							<td><c:out value="${ordini.dataOrdinazione}" /></td>
+							<td><c:out value="${ordini.prezzo}" /></td>
 							<td></td>
 							<td><a href="#" ><i	class="fa fa-info-circle"></i> Clicca qui</a></td>
 						</tr>
@@ -36,18 +36,6 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
-	<div class="container">
-		<div class="intro"></div>
-	</div>
-	<div class="container">
-		<div class="intro"></div>
-	</div>
-	<div class="container">
-		<div class="intro"></div>
-	</div>
-	<div class="container">
-		<div class="intro"></div>
 	</div>
 </div>
 

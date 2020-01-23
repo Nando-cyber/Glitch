@@ -1,13 +1,16 @@
 package model.dao;
 
+
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.ejb.Remote;
-
 import model.bean.Videogioco;
 
-@Remote
-public interface VideogiocoDAO extends ProdottoDAO{
+
+public interface VideogiocoDAO{
+	
+	void createVideogioco(Videogioco prodotto);
+	
+	void removeProdotto(int id);
 	
 	//Restituisce una lista di tutti i videogiochi presenti nel database
 	List<Videogioco> findAllVideogioco();
@@ -26,7 +29,10 @@ public interface VideogiocoDAO extends ProdottoDAO{
 	
 	//Restitusce una lista di videogiochi avente come piattaforma la stringa passata come argomento
 	List<Videogioco> retriveByPiattaforma(String piattaforma);
+	//Restituisce i videogiochi che rispettano le caratteristiche della stringa passata per parametro
+	public ArrayList<String> doRetrieveLike(String against);
 	
-	
+	//Restituisce i videogiochi che rispettano le caratteristiche della stringa passata per parametro
+	public Videogioco retriveByNomeAndPiattaforma(String nome, String piatt);
 	
 }

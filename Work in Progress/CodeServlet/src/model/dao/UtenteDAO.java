@@ -2,21 +2,23 @@ package model.dao;
 
 import java.util.List;
 
-import javax.ejb.Remote;
 
 import model.bean.Utente;
 
-@Remote
+
 public interface UtenteDAO {
 
-	//Rende persistente l'utente "u" passato come argomento
+	//Memorizza l'utente passato come argomento nel database
 	void createUtente(Utente u);
 	
 	//Rimuove l'utente, avente come username la stringa passata come argomento, dal database
 	void deleteUtente(String user);
 	
-	//Aggiorna l'utente "u" nel database
-	Utente updateUtente(Utente u);
+	//Aggiorna le informazioni anagrafiche dell'utente (Email, indirizzo) nel database
+	void updateUtente(Utente u);
+	
+	//Aggiorna i ruoli dell'utente nel database
+	void updateRuoloUtente(Utente u);
 	
 	//Restituisce l'utente avente come username la stringa passata come argomento
 	Utente retriveByUsername(String user);
@@ -26,4 +28,10 @@ public interface UtenteDAO {
 	
 	//Restituisce la lista degli utenti presenti nel database
 	List<Utente> retriveAllUtenti();
+	
+	//Aggiorna la carta di credito dell'utente
+	void updateCartaDiCreditoUtente(Utente u);
+	
+	//Restituisce tutte le mail dei gestori Assistenza
+	List<String> retriveEmailByAssistenza(String ruolo);
 }

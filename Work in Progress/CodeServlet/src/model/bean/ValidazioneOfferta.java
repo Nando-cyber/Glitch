@@ -8,7 +8,7 @@ public class ValidazioneOfferta {
 	//Controlla che sia rispettata la sintassi (Deve avere caratteri alfanumerici) di "nome"
 	public static boolean checkNome(String Nome)
 	{
-		return Pattern.matches("[A-Za-z0-9]+",Nome);
+		return Pattern.matches("[A-Za-z0-9\\s]+",Nome);
 	}
 	
 	//Controlla che sia rispettata la sintassi (Deve avere caratteri numerici interi) di "sconto"

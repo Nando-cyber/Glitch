@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.util.GregorianCalendar;
 
-import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +14,9 @@ import model.bean.CartaDiCredito;
 import model.bean.Utente;
 import model.bean.ValidazioneCartaDiCredito;
 import model.dao.CartaDiCreditoDAO;
+import model.dao.CartaDiCreditoDB;
 import model.dao.UtenteDAO;
+import model.dao.UtenteDB;
 
 
 /**
@@ -25,10 +26,8 @@ import model.dao.UtenteDAO;
 @WebServlet("/InserimentoCartaServlet")
 public class InserimentoCartaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@EJB
-	private CartaDiCreditoDAO cartaDAO;
-	@EJB
-    private UtenteDAO uDAO;
+	private CartaDiCreditoDAO cartaDAO = new CartaDiCreditoDB();
+    private UtenteDAO uDAO = new UtenteDB();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,6 +40,7 @@ public class InserimentoCartaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//Si prende l'Utente dalla Sessione
 		Utente u = (Utente) request.getSession().getAttribute("utente");
 		
@@ -80,9 +80,10 @@ public class InserimentoCartaServlet extends HttpServlet {
 		carta.setUtenteEmail(u.getEmail());
 		carta.setNome(nome);
 		carta.setCognome(cognome);
+		carta.setNumeroCarta(numero);
 		
-		GregorianCalendar scadenza = new GregorianCalendar();
-		scadenza.set(Integer.parseInt(scadenzaAnno), Integer.parseInt(scadenzaMese), 1);
+		GregorianCalendar scadenza = new GregorianCalendar(Integer.parseInt(scadenzaAnno), Integer.parseInt(scadenzaMese), 1);
+		
 		carta.setScadenza(scadenza);
 		
 		carta.setCvv(Integer.parseInt(CVV));
@@ -92,20 +93,20 @@ public class InserimentoCartaServlet extends HttpServlet {
 		
 		//Si setta la Carta nel bean Utente e si aggiorna quest'ultimo in DB
 		u.setCartaDiCredito(carta);
-		uDAO.updateUtente(u);
+		uDAO.updateCartaDiCreditoUtente(u);
 		
 		//Si inserisce l'utente aggiornato nella Sessione
 		request.getSession().setAttribute("utente", u);
 		
 		//Si esegue il forward alla pagina RiepilogoOrdine
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/RiepilogoOrdine.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/view/PaginaPagamento.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);
 	}

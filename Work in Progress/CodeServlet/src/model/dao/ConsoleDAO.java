@@ -1,15 +1,19 @@
 package model.dao;
 
+
+import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.Remote;
 
 import model.bean.Console;
 
-@Remote
-public interface ConsoleDAO extends ProdottoDAO{
 
-	//Restituisce una lista di tutte le console presenti nel database
-	List<Console> findAllConsole();
+public interface ConsoleDAO{
+
+	//Memorizza una console nel database
+	void createConsole(Console prodotto);
+	
+	//Rimuove una console avente come id "codice" dal database
+	void removeConsole(int id);
 	
 	//Restituisce una lista limitata di console comprese tra i valori "min" e "max" passati come argomento
 	List<Console> doRetriveConsoleAllRange(int min, int max);
@@ -21,7 +25,14 @@ public interface ConsoleDAO extends ProdottoDAO{
 	Console retriveByModello(String modello);
 	
 	//Restituisce la lista di console aventi come casa produttrice la stringa passata come argomento
-	List<Console> retriveByCasaProduttrice(String casaProduttrice);
+	List<Console> retriveByCasaProduttirce(String casaProduttrice);
+	
+	//Restituisce tutte le console presenti in db
+	List<Console> findAllConsole();
+	
+	//Restituisce una lista di console avente modello simile a quello passato per argomento
+	ArrayList<String> doRetrieveLikeModello(String modello);
+	
 	
 	
 }
