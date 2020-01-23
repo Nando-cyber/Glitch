@@ -6,7 +6,7 @@
 </jsp:include>
 
 
-<div id="pagina">
+<div id="pagina" style="padding-bottom: 15%">
 	<div class="container">
 		<div class="intro">
 			<h2 class="text-center">I miei ordini</h2>
@@ -29,9 +29,7 @@
 							<td><c:out value="${ordini.ordineId}" /></td>
 							<td><c:out value="${ordini.dataOrdinazione}" /></td>
 							<td><c:out value="${ordini.prezzoTot}" /></td>
-							<td></td>
-							<td><a href="#" ><i	class="fa fa-info-circle"></i> Clicca qui</a></td>
-						</tr>
+							</tr>
 					</c:forEach>
 				</tbody>
 			</table>
