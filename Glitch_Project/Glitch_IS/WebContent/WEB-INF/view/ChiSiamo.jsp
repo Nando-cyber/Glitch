@@ -37,19 +37,19 @@
 <h3>TEAM</h3>
 <div class="row people">
     <div class="col-md-6 col-lg-4 item">
-    	<img class="rounded-circle" src="FN.jpeg" id="foto"/>
+    	<img class="rounded-circle" src="FN.jpg" id="foto"/>
         <h3 class="name">Ferdinando Napolitano</h3>
         <p class="title">Studente di informatica</p>
         <div class="social"><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></div>
     </div>
     <div class="col-md-6 col-lg-4 item">
-    	<img class="rounded-circle" src="AE.jpeg" id="foto"/>
+    	<img class="rounded-circle" src="AE.jpg" id="foto"/>
         <h3 class="name">Annunziata Elefante</h3>
         <p class="title"><br />Studente di informatica<br /></p>
         <div class="social"><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></div>
     </div>
     <div class="col-md-6 col-lg-4 item">
-    	<img class="rounded-circle" src="SM.jpeg" id="foto"/>
+    	<img class="rounded-circle" src="SM.jpg" id="foto"/>
         <h3 class="name">Santolo Mutone</h3>
         <p class="title"><br />Studente di informatica<br /></p>
         <div class="social"><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></div>
